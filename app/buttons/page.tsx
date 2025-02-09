@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
+
+const ButtonPage = () => {
     return (
         <div className='p-4 space-y-4 flex flex-col max-w-[200px]'>
             <p className='text-green-500 font-bold'>Hello EZ-DU</p>
@@ -23,6 +24,7 @@ export default function Home() {
 
             <Button size='lg' variant='locked'>locked</Button>
         </div>
+    )
+};
 
-    );
-}
+export default ButtonPage;
