@@ -48,10 +48,10 @@ const buttonVariants = cva(
                 rounded: "rounded-full",
             },
         },
-        // defaultVariants: {
-        //   variant: "default",
-        //   size: "default",
-        // },
+        defaultVariants: {
+          variant: "default",
+          size: "default",
+        },
     }
 )
 
