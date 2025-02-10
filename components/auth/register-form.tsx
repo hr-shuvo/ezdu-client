@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../notification/form-error";
 import { FormSuccess } from "../notification/form-success";
-import { login } from "@/app/actions/auth";
+import { register } from "@/app/actions/auth";
 import { useState, useTransition } from "react";
 
 export const RegisterForm = () => {
@@ -38,7 +38,7 @@ export const RegisterForm = () => {
         setError('');
         setSuccess('');
         startTransition(() => {
-            login(values).then((data) =>{
+            register(values).then((data) =>{
                 setError(data.error);
                 setSuccess(data.success);
             });
@@ -55,9 +55,9 @@ export const RegisterForm = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-6"
+                    className="space-y-4"
                 >
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                         <FormField
                             control={form.control}
                             name="name"
@@ -125,7 +125,7 @@ export const RegisterForm = () => {
                         variant="primary"
                         disabled={isPending}
                     >
-                        Login
+                        Register
                     </Button>
                 </form>
             </Form>
