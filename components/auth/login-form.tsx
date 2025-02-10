@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../notification/form-error";
 import { FormSuccess } from "../notification/form-success";
-import { login } from "@/app/actions/login";
+import { login } from "@/app/actions/auth";
 import { useState, useTransition } from "react";
 
 export const LoginForm = () => {
