@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useRouter } from "next/navigation";
 import { Card } from "./card";
@@ -11,24 +11,25 @@ type Course = {
 };
 
 type Props = {
-    courses: Course[]
+    courses: Course[];
     activeCourseId?: string;
 };
 
-export const List = ({courses, activeCourseId}: Props) =>{
-    const router = useRouter()
+export const List = ({ courses, activeCourseId }: Props) => {
+    const router = useRouter();
     const [pending, startTransition] = useTransition();
 
     // console.log('courses: ', courses);
+    activeCourseId = "67ab7f2e3716f0a0466875b1";
 
-    const onClick = (id:string) =>{
-        if(pending) return;
+    const onClick = (id: string) => {
+        if (pending) return;
 
-        if(id === activeCourseId){
-            return router.push('/learn');
+        if (id === activeCourseId) {
+            return router.push("/learn");
         }
 
-        startTransition(() =>{
+        startTransition(() => {
             // upsertUserProgress(id).then(()=>{
             //     // revalidatePath('/courses');
             //     // revalidatePath('/learn');
@@ -36,26 +37,22 @@ export const List = ({courses, activeCourseId}: Props) =>{
             // }).catch((err) =>{
             //     console.log('Something went wrong ', err)
             // })
-        })
-    }
+        });
+    };
 
-
-    return(
+    return (
         <div className="pt-6 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-4">
-            {
-                courses.map((course) => (
-                    <Card
-                        key={course._id}
-                        id={course._id}
-                        title={course.title}
-                        imageSrc={course.imageSrc}
-                        onClick={onClick}
-                        disabled={false}
-                        active={course._id === activeCourseId}
-                    />
-                ))
-            }
-
+            {courses.map((course) => (
+                <Card
+                    key={course._id}
+                    id={course._id}
+                    title={course.title}
+                    imageSrc={course.imageSrc}
+                    onClick={onClick}
+                    disabled={false}
+                    active={course._id === activeCourseId}
+                />
+            ))}
         </div>
-    )
-}
+    );
+};
