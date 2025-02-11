@@ -4,23 +4,36 @@ import { Button } from "@/components/ui/button";
 import { userLoginStatus } from "@/store/user-auth";
 import Link from "next/link";
 import { useEffect } from "react";
-import httpClient from "../utils/httpClient";
 import Image from "next/image";
+import { getCurrentUser } from "@/services/authService";
 
 export default function Home() {
     const { isLoggedIn, login, logout } = userLoginStatus();
 
     useEffect(() => {
         const fetchCurrentUser = async () => {
-            try {
-                const response = await httpClient.get("/users/current-user");
-                if (response.status === 200) {
-                    // console.log(response.data);
+
+            const result = await getCurrentUser();
+                if (result.success) {
+                    // console.log(result);
+                    login();
+                } else {
+                    logout()
                 }
-                login();
-            } catch {
-                logout();
-            }
+
+
+            // try {
+            //     const result = await getCurrentUser();
+            //     if (result.success) {
+            //         // console.log(result);
+            //         login();
+            //     } else {
+            //         throw new Error(result.error);
+            //     }
+            // } catch (err: any) {
+            //     console.error(err?.message);
+            //     logout();
+            // }
         };
 
         fetchCurrentUser();
@@ -55,3 +68,8 @@ export default function Home() {
         </div>
     );
 }
+
+// const response = await httpClient.get("/users/current-user");
+// if (response.status === 200) {
+//     // console.log(response.data);
+// }

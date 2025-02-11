@@ -1,0 +1,20 @@
+import httpClient from "@/app/utils/httpClient";
+
+
+
+
+
+export const getCurrentUser = async () =>{
+    console.log('calling current user');
+    try{
+        const response = await httpClient.get('/users/current-user');
+
+        // console.log(response.data);
+
+        return { success: response.data };
+    }
+    catch(err: any){
+        // console.error(err)
+        return { error: err?.response?.data?.msg };
+    }
+}
