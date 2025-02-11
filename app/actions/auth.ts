@@ -35,7 +35,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
 export const logout = async() =>{
     try {
-        const response = await httpClient.get('/auth/logout');
+        await httpClient.get('/auth/logout');
 
         return { success: 'logged out' };
     } catch (err:any) {

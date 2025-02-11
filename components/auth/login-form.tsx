@@ -17,15 +17,24 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../notification/form-error";
 import { FormSuccess } from "../notification/form-success";
-import { login } from "@/app/actions/auth";
-import { useState, useTransition } from "react";
+import { login as loginUser } from "@/app/actions/auth";
+import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { userLoginStatus } from "@/store/user-auth";
 
 export const LoginForm = () => {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
+    const { isLoggedIn, login } = userLoginStatus();
+
+    useEffect(() => {
+        // console.log("is loggedIn: ", isLoggedIn);
+        if (isLoggedIn) {
+            router.push("/");
+        }
+    }, [isLoggedIn, router]);
 
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
@@ -39,9 +48,10 @@ export const LoginForm = () => {
         setError("");
         setSuccess("");
         startTransition(() => {
-            login(values).then((data) => {
+            loginUser(values).then((data) => {
                 if (data.success) {
                     setSuccess(data.success);
+                    login();
                     router.push("/");
                 } else {
                     setError(data.error);
