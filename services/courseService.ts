@@ -11,11 +11,10 @@ export const getCourses = async () => {
             }
         });
 
-        console.log(response.data);
-
-        return { success: response.data.msg };
+        return response.data ;
     }
     catch (err: any) {
-        return { error: err?.response?.data?.msg };
+        console.error(err?.response?.data?.msg);
+        return [];
     }
 }
