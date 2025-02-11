@@ -1,5 +1,8 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { logout } from "../actions/auth";
 
 export const Header = () => {
     return (
@@ -26,6 +29,17 @@ export const Header = () => {
                     >
                         
                         <Link href='/auth/login'>Register</Link>
+                    </Button>
+
+                    <Button
+                        size="sm"
+                        variant="dangerOutline"
+                        className="ms-2"
+                        onClick= {async () =>{
+                            const response = await logout();
+                        }}
+                    >
+                        Logout
                     </Button>
                 </div>
             </div>

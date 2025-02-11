@@ -19,10 +19,12 @@ import { FormError } from "../notification/form-error";
 import { FormSuccess } from "../notification/form-success";
 import { login } from "@/app/actions/auth";
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 
 export const LoginForm = () => {
-    const [error, setError] = useState<string | undefined>('');
-    const [success, setSuccess] = useState<string | undefined>('');
+    const router = useRouter();
+    const [error, setError] = useState<string | undefined>("");
+    const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -34,12 +36,16 @@ export const LoginForm = () => {
     });
 
     const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-        setError('');
-        setSuccess('');
+        setError("");
+        setSuccess("");
         startTransition(() => {
-            login(values).then((data) =>{
-                setError(data.error);
-                setSuccess(data.success);
+            login(values).then((data) => {
+                if (data.success) {
+                    setSuccess(data.success);
+                    router.push("/");
+                } else {
+                    setError(data.error);
+                }
             });
         });
     };

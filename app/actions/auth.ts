@@ -32,3 +32,13 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         return { error: err?.response?.data?.msg };
     }
 }
+
+export const logout = async() =>{
+    try {
+        const response = await httpClient.get('/auth/logout');
+
+        return { success: 'logged out' };
+    } catch (err:any) {
+        return { error: err?.response?.data?.msg };
+    }
+}
