@@ -2,25 +2,25 @@
 import { FeedWrapper } from "@/components/layout/feed-wrapper";
 import { StickyWrapper } from "@/components/layout/sticky-wrapper";
 import { UserProgress } from "@/components/layout/user-progress";
-// import {redirect} from "next/navigation";
+import {redirect} from "next/navigation";
 import { Header } from "./header";
+import { getUserProgress } from "@/services/courseService";
 
 
 const LearnPage = async () =>{
-    // const userProgressData = getUserProgress();
+    const userProgressData = getUserProgress();
 
-    // const [
-    //     userProgress
-    // ] = await Promise.all([
-    //     userProgressData
-    // ])
+    const [
+        userProgress
+    ] = await Promise.all([
+        userProgressData
+    ])
 
-    const userProgress : any = [];
 
     console.log('user progress: ', userProgress)
 
     if(!userProgress || !userProgress.activeCourse){
-        // redirect('/courses')
+        redirect('/courses')
     }
 
     return(
@@ -34,7 +34,7 @@ const LearnPage = async () =>{
                  ></UserProgress>
              </StickyWrapper>
             <FeedWrapper>
-                <Header title={'IELTS'}/>
+                <Header title={userProgress?.activeCourse?.title}/>
             </FeedWrapper>
         </div>
     )

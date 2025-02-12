@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { Card } from "./card";
 import { useTransition } from "react";
+import { upsertUserProgress } from "@/services/courseService";
+import { toast } from "sonner";
 
 type Course = {
     _id: string;
@@ -20,7 +22,7 @@ export const List = ({ courses, activeCourseId }: Props) => {
     const [pending, startTransition] = useTransition();
 
     // console.log('courses data: ', courses);
-    console.log("active course Id:  ", activeCourseId);
+    // console.log("active course Id:  ", activeCourseId);
 
     const onClick = (id: string) => {
         if (pending) return;
@@ -30,13 +32,16 @@ export const List = ({ courses, activeCourseId }: Props) => {
         }
 
         startTransition(() => {
-            // upsertUserProgress(id).then(()=>{
-            //     // revalidatePath('/courses');
-            //     // revalidatePath('/learn');
-            //     router.push('/learn');
-            // }).catch((err) =>{
-            //     console.log('Something went wrong ', err)
-            // })
+            upsertUserProgress(id).then(()=>{
+                // revalidatePath('/courses');
+                // revalidatePath('/learn');
+                // router.refresh();
+                router.push('/learn');
+                toast.success('course selected');
+            }).catch((err) =>{
+                console.log('Something went wrong ', err);
+                toast.error('Something went wrong');
+            })
         });
     };
 
@@ -49,10 +54,12 @@ export const List = ({ courses, activeCourseId }: Props) => {
                     title={course.title}
                     imageSrc={course.imageSrc}
                     onClick={onClick}
-                    disabled={false}
+                    disabled={pending}
                     active={course._id === activeCourseId}
                 />
             ))}
         </div>
     );
 };
+
+

@@ -17,19 +17,19 @@ type Props = {
 };
 
 export const UserProgress =({activeCourse, points, hearts, hasActiveSubscription}: Props) =>{
-    console.log(activeCourse)
+    // console.log(activeCourse)
     return (
         <div className='flex items-center justify-between gap-x-2 w-full'>
             <Link href='/courses'>
-                <Button variant='ghost'>
-                    {/* <Image
-                        src='/fr.svg'
+                <Button variant='default'>
+                    <Image
+                        src={activeCourse.imageSrc}
                         alt='French'
                         className='rounded-md border'
                         width={32}
                         height={32}
-                    /> */}
-                    Course Name
+                    />
+                    All Course
                 </Button>
             </Link>
             <Link href='/shop'>

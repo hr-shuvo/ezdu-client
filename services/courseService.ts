@@ -1,3 +1,5 @@
+'use server'
+
 import httpClient from "@/app/utils/httpClient";
 import { cookies } from "next/headers";
 
@@ -11,7 +13,7 @@ export const getCourses = async () => {
             }
         });
 
-        return response.data ;
+        return response.data;
     }
     catch (err: any) {
         console.error(err?.response?.data?.msg);
@@ -24,6 +26,22 @@ export const getCourses = async () => {
 export const getUserProgress = async () => {
     try {
         const response = await httpClient.get('/userProgress', {
+            headers: {
+                Cookie: (await cookies()).toString()
+            }
+        });
+
+        return response.data;
+    }
+    catch (err: any) {
+        // console.error(err);
+        return null;
+    }
+};
+
+export const upsertUserProgress = async (courseId: string) => {
+    try {
+        const response = await httpClient.post('/userProgress/selectUserCourse', { courseId }, {
             headers: {
                 Cookie: (await cookies()).toString()
             }
