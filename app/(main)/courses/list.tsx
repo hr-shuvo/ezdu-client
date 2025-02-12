@@ -19,8 +19,8 @@ export const List = ({ courses, activeCourseId }: Props) => {
     const router = useRouter();
     const [pending, startTransition] = useTransition();
 
-    // console.log('courses: ', courses);
-    activeCourseId = "67ab7f2e3716f0a0466875b1";
+    // console.log('courses data: ', courses);
+    console.log("active course Id:  ", activeCourseId);
 
     const onClick = (id: string) => {
         if (pending) return;

@@ -1,15 +1,17 @@
-import { getCourses } from "@/services/courseService";
+import { getCourses, getUserProgress } from "@/services/courseService";
 import { List } from "./list";
 
 const CoursesPage = async () => {
+    const coursesData = getCourses();
+    const userProgressdata = getUserProgress();
 
-    const courses = await getCourses();
-
-    // const [courses] = await Promise.all([
-    //     courseData
-    // ])
+    const [courses, userProgress] = await Promise.all([
+        coursesData,
+        userProgressdata,
+    ]);
 
     // console.log('courses data: ', courses);
+    // console.log("progress data: ", userProgress);
 
     return (
         <div className="h-full max-w[912px] px-3 mx-auto">
@@ -18,12 +20,11 @@ const CoursesPage = async () => {
             </h1>
 
             <List
-                courses = {courses}
-                activeCourseId=''
+                courses={courses}
+                activeCourseId={userProgress?.activeCourseId}
             />
-
         </div>
-    )
+    );
 };
 
 export default CoursesPage;

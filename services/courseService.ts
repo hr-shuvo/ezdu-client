@@ -17,4 +17,29 @@ export const getCourses = async () => {
         console.error(err?.response?.data?.msg);
         return [];
     }
-}
+};
+
+
+
+export const getUserProgress = async () => {
+    try {
+        const response = await httpClient.get('/userProgress', {
+            headers: {
+                Cookie: (await cookies()).toString()
+            }
+        });
+
+        return response.data;
+    }
+    catch (err: any) {
+        // console.error(err);
+        return null;
+    }
+};
+
+
+
+
+
+
+
