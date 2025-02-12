@@ -55,6 +55,22 @@ export const upsertUserProgress = async (courseId: string) => {
     }
 };
 
+export const getUnits = async () => {
+    try {
+        const response = await httpClient.get('/userUnits', {
+            headers: {
+                Cookie: (await cookies()).toString()
+            }
+        });
+
+        return response.data;
+    }
+    catch (err: any) {
+        // console.error(err);
+        return null;
+    }
+};
+
 
 
 
