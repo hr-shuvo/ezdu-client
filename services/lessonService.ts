@@ -1,0 +1,20 @@
+'use server'
+
+import httpClient from "@/app/utils/httpClient";
+import { cookies } from "next/headers";
+
+export const getLesson = async () => {
+    try {
+        const response = await httpClient.get('/userProgress/getLesson', {
+            headers: {
+                Cookie: (await cookies()).toString()
+            }
+        });
+
+        return response.data;
+    }
+    catch (err: any) {
+        console.error(err?.response?.data?.msg);
+        return [];
+    }
+};
