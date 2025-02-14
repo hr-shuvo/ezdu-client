@@ -19,7 +19,7 @@ const Quize = ({
     userSubscription,
 }: Props) => {
     const [hearts, setHearts] = useState(initialHearts);
-    const [percentage, setPercentage] = useState(79 || initialPercentage);
+    const [percentage, setPercentage] = useState(initialPercentage);
 
     return (
         <>
