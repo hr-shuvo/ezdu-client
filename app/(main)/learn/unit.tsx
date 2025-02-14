@@ -25,18 +25,19 @@ export const Unit = ({
 
     return (
         <>
-            <UnitBanner title={title} description={id} />
+            <UnitBanner title={title} description={description} />
 
-            <div className="flex items-center flex-col relative">
+            <div className="flex items-center flex-col relative" key={id}>
                 {lessons.map((lesson: any, index) => {
-                    const isCurrent = lesson._id === activeLesson?.id;
+                    const isCurrent = lesson._id === activeLesson?._id;
                     const isLocked = !lesson.completed && !isCurrent;
 
-                    console.log(isCurrent, activeLesson?.id)
+                    // console.log(isCurrent, activeLesson._id)
+                    console.log(order, activeLesson._id)
 
                     
                     return (
-                        <div>
+                        <div key={lesson._id}>
                             <LessonButton
                                 key={lesson._id}
                                 id={lesson._id}

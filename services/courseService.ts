@@ -71,6 +71,43 @@ export const getUnits = async () => {
     }
 };
 
+export const getCourseProgress = async () => {
+    try {
+        const response = await httpClient.get('/userProgress/courseProgress', {
+            headers: {
+                Cookie: (await cookies()).toString()
+            }
+        });
+
+        return response.data;
+    }
+    catch (err: any) {
+        // console.error(err);
+        return null;
+    }
+};
+export const getLessonPercentage = async () => {
+    try {
+        const response = await httpClient.get('/userProgress/getLessonPercentage', {
+            headers: {
+                Cookie: (await cookies()).toString()
+            }
+        });
+
+        return response.data;
+    }
+    catch (err: any) {
+        // console.error(err);
+        return null;
+    }
+};
+
+
+
+
+
+
+
 
 
 

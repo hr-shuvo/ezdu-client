@@ -54,7 +54,7 @@ export const LoginForm = () => {
                     login();
                     router.push("/");
                 } else {
-                    setError(data.error);
+                    setError(data.error || 'Something went wrong');
                 }
             });
         });
