@@ -52,10 +52,9 @@ const Quize = ({
                         <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
                             {title}
                         </h1>
-                        <div>
+                        <div >
                             {
-                                // change back to assist
-                                challenge.type === "SELECT" && (
+                                challenge.type === "ASSIST" && (
                                     <QuestionBubble
                                         question={challenge.question}
                                     />
