@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Header } from "./Header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
+import { Footer } from "./footer";
 
 type Props = {
     initialLessonId: number;
@@ -30,8 +31,18 @@ const Quize = ({
         return unCompletedIndex === -1 ? 0 : unCompletedIndex;
     });
 
+    const [selectedOption, setSelectedOpton] = useState<number>();
+    const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
+
     const challenge = challenges[activeIndex];
     const options = challenge?.options ?? [];
+
+
+    const onSelect = (id: number) => {
+        if (status != "none") return;
+
+        setSelectedOpton(id);
+    };
 
     const title =
         challenge.type === "ASSIST"
@@ -52,19 +63,15 @@ const Quize = ({
                         <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
                             {title}
                         </h1>
-                        <div >
-                            {
-                                challenge.type === "ASSIST" && (
-                                    <QuestionBubble
-                                        question={challenge.question}
-                                    />
-                                )
-                            }
+                        <div>
+                            {challenge.type === "ASSIST" && (
+                                <QuestionBubble question={challenge.question} />
+                            )}
                             <Challenge
                                 options={options}
-                                onSelect={() => {}}
-                                status="none"
-                                selectedOption={undefined}
+                                onSelect={onSelect}
+                                status={status}
+                                selectedOption={selectedOption}
                                 disabled={false}
                                 type={challenge.type}
                             />
@@ -72,6 +79,13 @@ const Quize = ({
                     </div>
                 </div>
             </div>
+
+            <Footer
+                disabled={!selectedOption}
+                status={status}
+                onCheck={() => {}}
+                // lessonId={undefined}
+            />
         </>
     );
 };
