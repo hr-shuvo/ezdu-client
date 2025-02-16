@@ -32,8 +32,8 @@ export const Unit = ({
                     const isCurrent = lesson._id === activeLesson?._id;
                     const isLocked = !lesson.completed && !isCurrent;
 
-                    // console.log(isCurrent, activeLesson._id)
-                    console.log(order, activeLesson._id)
+                    console.log('cr: ', isCurrent, 'lc: ', isLocked)
+                    // console.log(order, activeLesson._id)
 
                     
                     return (

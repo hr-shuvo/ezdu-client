@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Header } from "./Header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
+import { upsertChallengeProgress } from "@/services/challenge-progress";
+import { toast } from "sonner";
+import { error } from "console";
 
 type Props = {
     initialLessonId: number;
@@ -21,6 +24,8 @@ const Quize = ({
     initialLessonChallenges,
     userSubscription,
 }: Props) => {
+    const [isPending, startTransition] = useTransition();
+
     const [hearts, setHearts] = useState(initialHearts);
     const [percentage, setPercentage] = useState(initialPercentage);
     const [challenges] = useState(initialLessonChallenges);
@@ -64,8 +69,30 @@ const Quize = ({
         }
 
         if (correctOption && correctOption._id === selectedOption) {
-            console.log("Correct option");
+            // console.log('correct option: ', selectedOption);
+
+            startTransition(() => {
+                upsertChallengeProgress(challenge._id)
+                    .then((data) => {
+                        if (data.error) {
+                            // console.log(data.error)
+                            toast.warning(data.error);
+                            return;
+                        }
+
+                        setStatus("correct");
+                        setPercentage((prev) => prev + 100 / challenges.length);
+
+                        if (initialPercentage === 100) {
+                            setHearts((prev) => Math.min(prev + 1, 5));
+                        }
+                    })
+                    .catch(() => {
+                        toast.error("Something went wrong, please try later");
+                    });
+            });
         } else {
+            setStatus("wrong");
             console.log("Incorrect option");
         }
     };
@@ -123,3 +150,22 @@ const Quize = ({
 };
 
 export default Quize;
+
+// .then((response: any) => {
+//     if (response?.err === "hearts") {
+//         console.error("Missing hearts");
+//         return;
+//     }
+
+//     setStatus("correct");
+//     setPercentage((prev) => prev + 100 / challenges.length);
+
+//     // this is practice
+//     if (initialPercentage === 100) {
+//         setHearts((prev) => Math.min(prev + 1, 5));
+//     }
+
+// })
+// .catch(() =>
+//     toast.error("something went wrong, please try later")
+// );
