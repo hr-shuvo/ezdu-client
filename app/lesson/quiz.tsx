@@ -37,6 +37,38 @@ const Quize = ({
     const challenge = challenges[activeIndex];
     const options = challenge?.options ?? [];
 
+    const onNext = () => {
+        setActiveIndex((current) => current + 1);
+    };
+
+    const onContinue = () => {
+        if (!selectedOption) return;
+
+        if (status === "wrong") {
+            setStatus("none");
+            setSelectedOpton(undefined);
+            return;
+        }
+
+        if (status === "correct") {
+            onNext();
+            setStatus("none");
+            setSelectedOpton(undefined);
+            return;
+        }
+
+        const correctOption = options.find((option: any) => option.correct);
+
+        if (!correctOption) {
+            return;
+        }
+
+        if (correctOption && correctOption._id === selectedOption) {
+            console.log("Correct option");
+        } else {
+            console.log("Incorrect option");
+        }
+    };
 
     const onSelect = (id: number) => {
         if (status != "none") return;
@@ -83,7 +115,7 @@ const Quize = ({
             <Footer
                 disabled={!selectedOption}
                 status={status}
-                onCheck={() => {}}
+                onCheck={onContinue}
                 // lessonId={undefined}
             />
         </>
