@@ -13,7 +13,7 @@ type Props = {
 
 export const Unit = ({
     id,
-    order,
+    // order,
     title,
     description,
     lessons,
@@ -33,7 +33,7 @@ export const Unit = ({
                     const isLocked = !lesson.completed && !isCurrent;
 
                     console.log('cr: ', isCurrent, 'lc: ', isLocked)
-                    // console.log(order, activeLesson._id)
+                    console.log(lessons)
 
                     
                     return (

@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const Card = ({
-    id,
+    // id,
     imageSrc,
     audioSrc,
     text,
@@ -32,7 +32,7 @@ export const Card = ({
     // console.log(text);
     // console.log(disabled);
 
-    const [audio, _, controls] = useAudio({ src: audioSrc || "" });
+    const [audio, , controls] = useAudio({ src: audioSrc || "" });
     const handleClick = useCallback(() => {
         if (disabled) return;
 
@@ -49,12 +49,8 @@ export const Card = ({
             className={cn(
                 "h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2",
                 selected && "border-sky-300 bg-sky-100 hover:bg-sky-100",
-                selected &&
-                    status === "correct" &&
-                    "border-green-300 bg-green-100 hover:bg-green-100",
-                selected &&
-                    status === "wrong" &&
-                    "border-rose-300 bg-rose-100 hover:bg-rose-300",
+                selected && status === "correct" && "border-green-300 bg-green-100 hover:bg-green-100",
+                selected && status === "wrong" && "border-rose-300 bg-rose-100 hover:bg-rose-300",
                 disabled && "pointer-events-none hover:bg-white",
                 type === "ASSIST" && "lg:p-3 w-full"
             )}
@@ -72,7 +68,7 @@ export const Card = ({
                     type === "ASSIST" && "flex-row-reverse"
                 )}
             >
-                {type == "ASSIST" && <div></div>}
+                {type == "ASSIST" && <div/>}
 
                 <p
                     className={cn(

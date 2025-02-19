@@ -7,7 +7,6 @@ import { Challenge } from "./challenge";
 import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/services/challenge-progress";
 import { toast } from "sonner";
-import { error } from "console";
 
 type Props = {
     initialLessonId: number;
@@ -18,7 +17,7 @@ type Props = {
 };
 
 const Quize = ({
-    initialLessonId,
+    // initialLessonId,
     initialPercentage,
     initialHearts,
     initialLessonChallenges,
@@ -36,6 +35,8 @@ const Quize = ({
         return unCompletedIndex === -1 ? 0 : unCompletedIndex;
     });
 
+    console.log('challenges: ', initialLessonChallenges);
+
     const [selectedOption, setSelectedOpton] = useState<number>();
     const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
 
@@ -47,6 +48,7 @@ const Quize = ({
     };
 
     const onContinue = () => {
+        if(isPending){}
         if (!selectedOption) return;
 
         if (status === "wrong") {

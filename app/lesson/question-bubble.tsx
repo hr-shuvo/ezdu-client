@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 type Props = {
-    question: String;
+    question: string;
 };
 
 export const QuestionBubble = ({ question }: Props) => {

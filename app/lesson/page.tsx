@@ -12,7 +12,7 @@ const LessonPage = async () => {
         userProgressData,
     ]);
 
-    // console.log(userProgress);
+    // console.log(lesson);
 
     if (!lesson || !userProgress) {
         redirect("/learn");
@@ -20,7 +20,7 @@ const LessonPage = async () => {
 
     const initialPercentage =
         (lesson.challenges.filter((challenge: any) => {
-            challenge.completed;
+            return challenge.completed === true;
         }).length /
             lesson.challenges.length) *
         100;
