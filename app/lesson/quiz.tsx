@@ -7,11 +7,14 @@ import { Challenge } from "./challenge";
 import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/services/challenge-progress";
 import { toast } from "sonner";
-import { useAudio } from "react-use";
+import { useAudio, useWindowSize } from "react-use";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { ResultCard } from "./result-card";
+import Confetti from "react-confetti";
 
 type Props = {
-    initialLessonId: number;
+    initialLessonId: string;
     initialPercentage: number;
     initialHearts: number;
     initialLessonChallenges: any[];
@@ -19,22 +22,21 @@ type Props = {
 };
 
 const Quize = ({
-    // initialLessonId,
+    initialLessonId,
     initialPercentage,
     initialHearts,
     initialLessonChallenges,
     userSubscription,
 }: Props) => {
     const [isPending, startTransition] = useTransition();
+    const { width, height } = useWindowSize();
     const router = useRouter();
 
-    const [correctAudio, _c, correctControl] = useAudio({
-        src: "/correct.wav",
-    });
-    const [incorrectAudio, _i, incorrectControl] = useAudio({
-        src: "/incorrect.wav",
-    });
+    const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true });
+    const [correctAudio, _c, correctControl] = useAudio({ src: "/correct.wav", });
+    const [incorrectAudio, _i, incorrectControl] = useAudio({ src: "/incorrect.wav",  });
 
+    const [lessonId] = useState(initialLessonId);
     const [hearts, setHearts] = useState(initialHearts);
     const [percentage, setPercentage] = useState(initialPercentage);
     const [challenges] = useState(initialLessonChallenges);
@@ -45,8 +47,6 @@ const Quize = ({
         return unCompletedIndex === -1 ? 0 : unCompletedIndex;
     });
 
-    // console.log('unCompletedIndex: ', activeIndex);
-
     const [selectedOption, setSelectedOpton] = useState<number>();
     const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
 
@@ -54,30 +54,23 @@ const Quize = ({
     const options = challenge?.options ?? [];
 
     const onNext = () => {
-        setActiveIndex((current) => {
-            if (current >= challenges.length - 1) {
-                router.push("/learn");
-                return current; // Prevent state update
-            }
-            return current + 1;
-        });
+        setActiveIndex((current) => current + 1);
     };
-    
-    useEffect(() => {
-        if (activeIndex >= challenges.length) {
-            router.push("/learn");
-        }
-    }, [activeIndex, challenges.length, router]); 
 
+    const [clientWidth, setClientWidth] = useState(1920);
+    const [clientHeight, setClientHeight] = useState(1080);
+    useEffect(() => {
+        setClientWidth(width);
+        setClientHeight(height);
+    }, [width, height]);
 
     const onContinue = () => {
-        if (isPending) { }
+        if (isPending) {
+        }
         if (!selectedOption) return;
 
-
-
-        if(activeIndex === challenges.length){
-            router.push('/learn');
+        if (activeIndex === challenges.length) {
+            router.push("/learn");
         }
 
         if (status === "wrong") {
@@ -135,6 +128,55 @@ const Quize = ({
 
         setSelectedOpton(id);
     };
+
+    if (!challenge) {
+        return (
+            <>
+                {finishAudio}                
+                <Confetti
+                    recycle={false}
+                    numberOfPieces={500}
+                    tweenDuration={15000}
+                    width={clientWidth}
+                    height={clientHeight}
+                />
+                <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
+                    <Image
+                        src="/finish.svg"
+                        alt="finish"
+                        className="hidden md:block"
+                        height={100}
+                        width={100}
+                    />
+                    <Image
+                        src="/finish.svg"
+                        alt="finish"
+                        className="block md:hidden"
+                        height={50}
+                        width={50}
+                    />
+
+                    <h1 className="text-xl lg:text-3xl font-bold">
+                        Greate job! <br /> You&apos;ve completed the lesson.
+                    </h1>
+
+                    <div className="flex items-center gap-x-4 w-full">
+                        <ResultCard
+                            variant="points"
+                            value={challenges.length * 10}
+                        />
+                        <ResultCard variant="hearts" value={hearts} />
+                    </div>
+                </div>
+
+                <Footer
+                    lessonId={lessonId}
+                    status={"completed"}
+                    onCheck={() => router.push("/learn")}
+                />
+            </>
+        );
+    }
 
     const title =
         challenge.type === "ASSIST"
