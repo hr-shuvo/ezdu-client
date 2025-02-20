@@ -4,7 +4,6 @@ import httpClient from "@/app/utils/httpClient";
 import { cookies } from "next/headers";
 
 export const upsertChallengeProgress = async (challengeId: any) => {
-    console.log(challengeId)
     try {
         const response = await httpClient.post('/challengeProgress/upsert', { challengeId: challengeId }, {
             headers: {

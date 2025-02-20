@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Header } from "./Header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
 import { upsertChallengeProgress } from "@/services/challenge-progress";
 import { toast } from "sonner";
+import { useAudio } from "react-use";
+import { useRouter } from "next/navigation";
 
 type Props = {
     initialLessonId: number;
@@ -24,6 +26,14 @@ const Quize = ({
     userSubscription,
 }: Props) => {
     const [isPending, startTransition] = useTransition();
+    const router = useRouter();
+
+    const [correctAudio, _c, correctControl] = useAudio({
+        src: "/correct.wav",
+    });
+    const [incorrectAudio, _i, incorrectControl] = useAudio({
+        src: "/incorrect.wav",
+    });
 
     const [hearts, setHearts] = useState(initialHearts);
     const [percentage, setPercentage] = useState(initialPercentage);
@@ -35,7 +45,7 @@ const Quize = ({
         return unCompletedIndex === -1 ? 0 : unCompletedIndex;
     });
 
-    console.log('challenges: ', initialLessonChallenges);
+    // console.log('unCompletedIndex: ', activeIndex);
 
     const [selectedOption, setSelectedOpton] = useState<number>();
     const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
@@ -44,12 +54,31 @@ const Quize = ({
     const options = challenge?.options ?? [];
 
     const onNext = () => {
-        setActiveIndex((current) => current + 1);
+        setActiveIndex((current) => {
+            if (current >= challenges.length - 1) {
+                router.push("/learn");
+                return current; // Prevent state update
+            }
+            return current + 1;
+        });
     };
+    
+    useEffect(() => {
+        if (activeIndex >= challenges.length) {
+            router.push("/learn");
+        }
+    }, [activeIndex, challenges.length, router]); 
+
 
     const onContinue = () => {
-        if(isPending){}
+        if (isPending) { }
         if (!selectedOption) return;
+
+
+
+        if(activeIndex === challenges.length){
+            router.push('/learn');
+        }
 
         if (status === "wrong") {
             setStatus("none");
@@ -82,6 +111,7 @@ const Quize = ({
                             return;
                         }
 
+                        correctControl.play();
                         setStatus("correct");
                         setPercentage((prev) => prev + 100 / challenges.length);
 
@@ -94,8 +124,9 @@ const Quize = ({
                     });
             });
         } else {
+            incorrectControl.play();
             setStatus("wrong");
-            console.log("Incorrect option");
+            // console.log("Incorrect option");
         }
     };
 
@@ -112,6 +143,8 @@ const Quize = ({
 
     return (
         <>
+            {incorrectAudio}
+            {correctAudio}
             <Header
                 hearts={hearts}
                 percentage={percentage}
@@ -152,22 +185,3 @@ const Quize = ({
 };
 
 export default Quize;
-
-// .then((response: any) => {
-//     if (response?.err === "hearts") {
-//         console.error("Missing hearts");
-//         return;
-//     }
-
-//     setStatus("correct");
-//     setPercentage((prev) => prev + 100 / challenges.length);
-
-//     // this is practice
-//     if (initialPercentage === 100) {
-//         setHearts((prev) => Math.min(prev + 1, 5));
-//     }
-
-// })
-// .catch(() =>
-//     toast.error("something went wrong, please try later")
-// );

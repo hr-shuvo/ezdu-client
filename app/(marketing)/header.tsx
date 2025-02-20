@@ -48,7 +48,7 @@ export const Header = () => {
                                 variant="default"
                                 className="ms-2"
                             >
-                                <Link href="/auth/login">Register</Link>
+                                <Link href="/auth/register">Register</Link>
                             </Button>
                         </div>
                     )}
