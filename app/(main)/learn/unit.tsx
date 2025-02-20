@@ -21,8 +21,7 @@ export const Unit = ({
     activeLessonPercentage,
 }: Props) => {
     // console.log("unit id : ", id);
-    // console.log("unit id : ", lessons);
-
+    
     return (
         <>
             <UnitBanner title={title} description={description} />
@@ -32,8 +31,7 @@ export const Unit = ({
                     const isCurrent = lesson._id === activeLesson?._id;
                     const isLocked = !lesson.completed && !isCurrent;
 
-                    console.log('cr: ', isCurrent, 'lc: ', isLocked)
-                    console.log(lessons)
+                    // console.log('current: ', lesson._id, isCurrent, isLocked)
 
                     
                     return (

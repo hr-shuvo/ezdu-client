@@ -44,6 +44,7 @@ const LearnPage = async () => {
                     hasActiveSubscription={false}
                 ></UserProgress>
             </StickyWrapper>
+            
             <FeedWrapper>
                 <Header title={userProgress?.activeCourse?.title} />
                 {units.map((unit: any) => (
