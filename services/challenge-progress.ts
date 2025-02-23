@@ -22,6 +22,25 @@ export const upsertChallengeProgress = async (challengeId: any) => {
 
 }
 
+export const reduceHearts = async (challengeId: any) => {
+    try {
+        const response = await httpClient.post('/challengeProgress/reduceHearts', { challengeId: challengeId }, {
+            headers: {
+                Cookie: (await cookies()).toString()
+            }
+        });
+
+        if (response.data) {
+            return { success: 'upsert success ' };
+        }
+        return { error: response.data.msg };
+    }
+    catch(err:any) {
+        return { error: err.response.data.msg };
+    }
+
+}
+
 
 
 

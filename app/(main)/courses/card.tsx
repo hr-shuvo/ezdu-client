@@ -39,7 +39,7 @@ export const Card = ({
 
             <Image src={imageSrc} alt={title} height={70} width={93.33} />
             <p className="text-neutral-700 text-center font-bold mt-3">
-                {title} : {id}
+                {title}
             </p>
         </div>
     );

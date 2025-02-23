@@ -5,13 +5,17 @@ import { Header } from "./Header";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
-import { upsertChallengeProgress } from "@/services/challenge-progress";
+import {
+    reduceHearts,
+    upsertChallengeProgress,
+} from "@/services/challenge-progress";
 import { toast } from "sonner";
 import { useAudio, useWindowSize } from "react-use";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ResultCard } from "./result-card";
 import Confetti from "react-confetti";
+import { useHeartsModal } from "@/store/use-hearts-modal";
 
 type Props = {
     initialLessonId: string;
@@ -29,12 +33,15 @@ const Quize = ({
     userSubscription,
 }: Props) => {
     const [isPending, startTransition] = useTransition();
+    const { open: openHeartsModal } = useHeartsModal();
     const { width, height } = useWindowSize();
     const router = useRouter();
 
     const [finishAudio] = useAudio({ src: "/finish.mp3", autoPlay: true });
-    const [correctAudio, , correctControl] = useAudio({ src: "/correct.wav", });
-    const [incorrectAudio, , incorrectControl] = useAudio({ src: "/incorrect.wav",  });
+    const [correctAudio, , correctControl] = useAudio({ src: "/correct.wav" });
+    const [incorrectAudio, , incorrectControl] = useAudio({
+        src: "/incorrect.wav",
+    });
 
     const [lessonId] = useState(initialLessonId);
     const [hearts, setHearts] = useState(initialHearts);
@@ -100,6 +107,7 @@ const Quize = ({
                     .then((data) => {
                         if (data.error) {
                             // console.log(data.error)
+                            openHeartsModal();
                             toast.warning(data.error);
                             return;
                         }
@@ -117,9 +125,27 @@ const Quize = ({
                     });
             });
         } else {
-            incorrectControl.play();
-            setStatus("wrong");
             // console.log("Incorrect option");
+            startTransition(() => {
+                reduceHearts(challenge._id)
+                    .then((response) => {
+                        if (response.error) {
+                            openHeartsModal();
+                            // console.error("missing hearts");
+                            return;
+                        }
+
+                        incorrectControl.play();
+                        setStatus("wrong");
+
+                        if (!response.error) {
+                            setHearts((prev) => Math.max(prev - 1, 0));
+                        }
+                    })
+                    .catch(() => {
+                        toast.error("Something went wrong, please try later");
+                    });
+            });
         }
     };
 
@@ -132,7 +158,7 @@ const Quize = ({
     if (!challenge) {
         return (
             <>
-                {finishAudio}                
+                {finishAudio}
                 <Confetti
                     recycle={false}
                     numberOfPieces={500}
