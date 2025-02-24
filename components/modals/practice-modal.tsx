@@ -1,7 +1,6 @@
 "use client";
 
-import { useHeartsModal } from "@/store/use-hearts-modal";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
     Dialog,
@@ -16,7 +15,7 @@ import { Button } from "../ui/button";
 import { usePracticeModal } from "@/store/use-practice-modals";
 
 export const PracticeModal = () => {
-    const router = useRouter();
+    // const router = useRouter();
     const [isClient, setIsClient] = useState(false);
     const { isOpen, close } = usePracticeModal();
 

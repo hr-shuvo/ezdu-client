@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTransition } from "react";
-import { number } from "zod";
 
 type Props = {
     hearts: number;
@@ -15,6 +14,8 @@ const POINTS_TO_REFILL = 10;
 
 export const Items = ({ hearts, points, hasActiveSubscription }: Props) => {
     const [pending, startTransition] = useTransition();
+
+    console.log(hasActiveSubscription);
 
     const onRefillHearts = () => {
         if (pending || hearts === 5 || points < POINTS_TO_REFILL) {
