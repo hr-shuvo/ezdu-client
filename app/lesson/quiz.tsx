@@ -10,12 +10,13 @@ import {
     upsertChallengeProgress,
 } from "@/services/challenge-progress";
 import { toast } from "sonner";
-import { useAudio, useWindowSize } from "react-use";
+import { useAudio, useMount, useWindowSize } from "react-use";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ResultCard } from "./result-card";
 import Confetti from "react-confetti";
 import { useHeartsModal } from "@/store/use-hearts-modal";
+import { usePracticeModal } from "@/store/use-practice-modals";
 
 type Props = {
     initialLessonId: string;
@@ -32,8 +33,16 @@ const Quize = ({
     initialLessonChallenges,
     userSubscription,
 }: Props) => {
-    const [isPending, startTransition] = useTransition();
     const { open: openHeartsModal } = useHeartsModal();
+    const { open: openPracticeModal } = usePracticeModal();
+
+    useMount(() => {
+        if (initialPercentage === 100) {
+            openPracticeModal();
+        }
+    });
+
+    const [isPending, startTransition] = useTransition();
     const { width, height } = useWindowSize();
     const router = useRouter();
 
@@ -45,7 +54,9 @@ const Quize = ({
 
     const [lessonId] = useState(initialLessonId);
     const [hearts, setHearts] = useState(initialHearts);
-    const [percentage, setPercentage] = useState(initialPercentage);
+    const [percentage, setPercentage] = useState(() => {
+        return initialPercentage === 100 ? 0 : initialPercentage;
+    });
     const [challenges] = useState(initialLessonChallenges);
     const [activeIndex, setActiveIndex] = useState(() => {
         const unCompletedIndex = challenges.findIndex(
@@ -127,24 +138,31 @@ const Quize = ({
         } else {
             // console.log("Incorrect option");
             startTransition(() => {
-                reduceHearts(challenge._id)
-                    .then((response) => {
-                        if (response.error) {
-                            openHeartsModal();
-                            // console.error("missing hearts");
-                            return;
-                        }
+                if (challenge.completed) {
+                    incorrectControl.play();
+                    setStatus("wrong");
+                } else {
+                    reduceHearts(challenge._id)
+                        .then((response) => {
+                            if (response.error) {
+                                openHeartsModal();
+                                // console.error("missing hearts");
+                                return;
+                            }
 
-                        incorrectControl.play();
-                        setStatus("wrong");
+                            incorrectControl.play();
+                            setStatus("wrong");
 
-                        if (!response.error) {
-                            setHearts((prev) => Math.max(prev - 1, 0));
-                        }
-                    })
-                    .catch(() => {
-                        toast.error("Something went wrong, please try later");
-                    });
+                            if (!response.error) {
+                                setHearts((prev) => Math.max(prev - 1, 0));
+                            }
+                        })
+                        .catch(() => {
+                            toast.error(
+                                "Something went wrong, please try later"
+                            );
+                        });
+                }
             });
         }
     };

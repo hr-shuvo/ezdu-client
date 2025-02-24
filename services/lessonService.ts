@@ -3,11 +3,14 @@
 import httpClient from "@/app/utils/httpClient";
 import { cookies } from "next/headers";
 
-export const getLesson = async () => {
+export const getLesson = async (id?: string) => {
     try {
         const response = await httpClient.get('/userProgress/getLesson', {
             headers: {
                 Cookie: (await cookies()).toString()
+            },
+            params:{
+                id: id
             }
         });
 
