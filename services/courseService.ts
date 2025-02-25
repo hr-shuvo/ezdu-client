@@ -1,16 +1,12 @@
-'use server'
+'use server';
 
-import httpClient from "@/app/utils/httpClient";
 import { cookies } from "next/headers";
-import { toast } from "sonner";
+import httpClient from "@/app/utils/httpClient";
 
 
 
 export const getCourses = async () => {
-    try {
-        const cookieHeader = (await cookies()).toString();
-        console.log("🚀 Sending Request with Cookies:", cookieHeader);
-        
+    try {        
         const response = await httpClient.get('/courses', {
             headers: {
                 Cookie: (await cookies()).toString()

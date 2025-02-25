@@ -5,7 +5,6 @@ import httpClient from "@/app/utils/httpClient";
 
 
 export const getCurrentUser = async () =>{
-    console.log('calling current user');
     try{
         const response = await httpClient.get('/users/current-user');
 

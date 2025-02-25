@@ -21,11 +21,6 @@ const CoursesPage = async () => {
                 Select Courses
             </h1>
 
-            <h2 className="text-xl font-bold">course list</h2>
-            {courses.map((course: any) => {
-                return <div key={course._id} className="my-5">{JSON.stringify(course)}</div>;
-            })}
-
             <List
                 courses={courses}
                 activeCourseId={userProgress?.activeCourseId}
