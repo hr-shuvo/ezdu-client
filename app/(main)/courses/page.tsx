@@ -10,6 +10,8 @@ const CoursesPage = async () => {
         userProgressdata,
     ]);
 
+    const url = process.env.NEXT_PUBLIC_API_URL;
+    
     console.log('courses data: ', courses);
     console.log("progress data: ", userProgress);
 
@@ -19,6 +21,7 @@ const CoursesPage = async () => {
                 Select Courses
             </h1>
 
+            url: {url}
             courses: {JSON.stringify(courses)}
 
             <List
