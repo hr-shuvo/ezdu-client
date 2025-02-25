@@ -10,10 +10,10 @@ const CoursesPage = async () => {
         userProgressdata,
     ]);
 
-    const url = process.env.NEXT_PUBLIC_API_URL;
-    
-    // console.log('courses data: ', courses);
-    // console.log("progress data: ", userProgress);
+    // const url = process.env.NEXT_PUBLIC_API_URL;
+
+    console.warn("courses data: ", courses);
+    console.warn("progress data: ", userProgress);
 
     return (
         <div className="h-full max-w[912px] px-3 mx-auto">
@@ -21,8 +21,10 @@ const CoursesPage = async () => {
                 Select Courses
             </h1>
 
-            url: {url}
-            courses: {JSON.stringify(courses)}
+            <h2 className="text-xl font-bold">course list</h2>
+            {courses.map((course: any) => {
+                return <div key={course._id} className="my-5">{JSON.stringify(course)}</div>;
+            })}
 
             <List
                 courses={courses}
