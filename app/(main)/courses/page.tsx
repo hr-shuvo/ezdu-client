@@ -19,6 +19,8 @@ const CoursesPage = async () => {
                 Select Courses
             </h1>
 
+            courses: {JSON.stringify(courses)}
+
             <List
                 courses={courses}
                 activeCourseId={userProgress?.activeCourseId}
