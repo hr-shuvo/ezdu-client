@@ -12,8 +12,8 @@ const CoursesPage = async () => {
 
     const url = process.env.NEXT_PUBLIC_API_URL;
     
-    console.log('courses data: ', courses);
-    console.log("progress data: ", userProgress);
+    // console.log('courses data: ', courses);
+    // console.log("progress data: ", userProgress);
 
     return (
         <div className="h-full max-w[912px] px-3 mx-auto">
