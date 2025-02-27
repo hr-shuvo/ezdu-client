@@ -13,7 +13,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         const response = await httpClient.post('/auth/login', values);
 
         return { success: response.data.msg };
-    } catch (err:any) {
+    } catch (err: any) {
         return { error: err?.response?.data?.msg };
     }
 };
@@ -28,17 +28,17 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         const response = await httpClient.post('/auth/register', values);
 
         return { success: response.data.msg };
-    } catch (err:any) {
+    } catch (err: any) {
         return { error: err?.response?.data?.msg };
     }
 }
 
-export const logout = async() =>{
+export const logout = async () => {
     try {
-        await httpClient.get('/auth/logout');
+        await httpClient.post('/auth/logout', {});
 
         return { success: 'logged out' };
-    } catch (err:any) {
+    } catch (err: any) {
         return { error: err?.response?.data?.msg };
     }
 }
