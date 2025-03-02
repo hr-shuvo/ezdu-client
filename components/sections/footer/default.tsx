@@ -18,19 +18,18 @@ export default function FooterSection() {
             <FooterColumn className="col-span-2 sm:col-span-3 md:col-span-1">
               <div>
                 <Image
-                src={'/common/1.png'}
-                alt="logo"
-                height={42}
-                width={80}
-                className="mr-4 rounded-md"
+                  src={'/common/1.png'}
+                  alt="logo"
+                  height={42}
+                  width={80}
+                  className="mr-4 rounded-md"
                 />
-                {/* <h2 className="text-xl font-bold">ez du</h2> */}
               </div>
 
               <div className="flex items-center gap-2 ml-3">
-                <FaDiscord />
-                <FaTwitter />
-                <FaFacebookF />
+                <Link href='https://discord.gg/kRZa3WmwSM' target="_blank"> <FaDiscord /></Link>
+                <Link href='#'><FaTwitter /></Link>
+                <Link href='#'><FaFacebookF /></Link>
               </div>
             </FooterColumn>
 
@@ -49,7 +48,7 @@ export default function FooterSection() {
 
             <FooterColumn>
               <h2 className="text-md pt-1 font-semibold">Contact</h2>
-              <Link href="#" className="text-sm text-muted-foreground">Discord</Link>
+              <Link href='https://discord.gg/kRZa3WmwSM' target="_blank" className="text-sm text-muted-foreground ">Discord</Link>
               <Link href="#" className="text-sm text-muted-foreground">Twitter</Link>
               <Link href="#" className="text-sm text-muted-foreground">Facebook</Link>
             </FooterColumn>
