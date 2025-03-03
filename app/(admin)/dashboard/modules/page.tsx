@@ -1,115 +1,120 @@
+import { loadModules } from "@/app/_services/modules-services";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableFooter,
     TableHead,
     TableHeader,
     TableRow
 } from "@/components/ui/table";
+import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
+import Link from "next/link";
 
-const DashbordModulesPage = () => {
-    const modules: any[] = [
-        {
-            title: 'BCS',
-            subTitle: 'previous questions',
-            // description: 'A collection of past BCS exam questions',
-            totalCourse: 9,
-            duration: 0,
-            isPopular: true,
+const DashbordModulesPage = async () => {
+
+    const moduleData = loadModules();
+
+    const [
+        modules
+    ] = await Promise.all([
+        moduleData
+    ])
+
+    // console.log(modules);
 
 
-        },
-        {
-            title: 'BCS',
-            subTitle: 'complete preparation',
-            // description: 'Complete preparation course for BCS exams.',
-            totalCourse: 17,
-            duration: 0,
-            isPopular: true,
-        },
-        {
-            title: 'Bank Jobs',
-            subTitle: 'complete preparation',
-            // description: 'Complete preparation course for BCS exams.',
-            totalCourse: 17,
-            duration: 0,
-            isPopular: true,
-        },
-        {
-            title: 'Govment Jobs',
-            subTitle: 'complete preparation',
-            // description: 'Complete preparation course for BCS exams.',
-            totalCourse: 17,
-            duration: 0,
-            isPopular: true,
-        },
-        {
-            title: 'Class 6,7,8',
-            subTitle: 'complete preparation',
-            // description: 'Complete preparation course for BCS exams.',
-            totalCourse: 17,
-            duration: 0,
-            isPopular: true,
-        },
-        {
-            title: 'Class 9,10',
-            subTitle: 'complete preparation',
-            // description: 'Complete preparation course for BCS exams.',
-            totalCourse: 14,
-            duration: 0,
-            isPopular: true,
-        },
-        {
-            title: 'Class 11,12',
-            subTitle: 'complete preparation',
-            // description: 'Complete preparation course for BCS exams.',
-            totalCourse: 16,
-            duration: 0,
-            isPopular: true,
-        },
-    ];
 
     return (
         <>
 
-            <div>
-                <Table>
-                    <TableCaption>Module List</TableCaption>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Title</TableHead>
-                            <TableHead>Subtitle</TableHead>
-                            <TableHead>Total course</TableHead>
-                        </TableRow>
-                    </TableHeader>
+            <div className="w-full my-5 p-5 border">
+
+                <div className="my-5">
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <Link href="/" className="text-blue-500 hover:underline">Home</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>Modules</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+                </div>
 
 
-                    <TableBody>
-                        {
-                            modules.map((module) => (
-                                <TableRow key={module.id}>
-                                    <TableCell>{module.title}</TableCell>
-                                    <TableCell>{module.subTitle}</TableCell>
-                                    <TableCell>{module.totalCourse}</TableCell>
+                <div className="flex justify-between">
+                    <div>
+                        <h1 className="text-lg">Module List</h1>
+                    </div>
+                    <div>
+                        <Button size='sm' className="flex items-center gap-2"><PlusCircle /><span> Add</span></Button>
 
-                                </TableRow>
+                    </div>
+                </div>
 
-                            ))
-                        }
-                    </TableBody>
+                <div className="w-full ">
+                    <Table className="">
 
-                    <TableFooter>
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
 
-                        </TableRow>
-                    </TableFooter>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Title</TableHead>
+                                <TableHead>Subtitle</TableHead>
+                                <TableHead>Total course</TableHead>
+                                <TableHead>Actiion</TableHead>
+                            </TableRow>
+                        </TableHeader>
 
-                </Table>
+
+                        <TableBody >
+                            {
+                                modules.map((module) => (
+                                    <TableRow key={module._id}>
+                                        <TableCell>{module.title}</TableCell>
+                                        <TableCell>{module.subTitle}</TableCell>
+                                        <TableCell>{module.totalCourse}</TableCell>
+                                        <TableCell>
+                                            <div className="flex justify-center gap-1">
+                                                <Link href={`./modules/${module._id}`}><Button variant='default' size='sm'><Eye /></Button></Link>
+                                                
+                                                <Link href={'#'}><Button variant='default' size='sm'><span><Pencil /></span></Button></Link>
+                                                <Link href={'#'}><Button variant='destructiveOutline' size='sm'><span><Trash /></span></Button></Link>
+                                                
+                                                
+                                            </div>
+                                        </TableCell>
+
+                                    </TableRow>
+
+                                ))
+                            }
+                        </TableBody>
+
+                        <TableFooter>
+                            <TableRow>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+
+                            </TableRow>
+                        </TableFooter>
+
+                    </Table>
+                </div>
+
+
+
+
             </div>
 
 
