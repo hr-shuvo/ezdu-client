@@ -1,6 +1,12 @@
-import { loadModules } from "@/app/_services/modules-services";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
+import {loadModules} from "@/app/_services/modules-services";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
+} from "@/components/ui/breadcrumb";
+import {Button} from "@/components/ui/button";
 import {
     Table,
     TableBody,
@@ -10,10 +16,10 @@ import {
     TableHeader,
     TableRow
 } from "@/components/ui/table";
-import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
+import {Eye, Pencil, PlusCircle, Trash} from "lucide-react";
 import Link from "next/link";
 
-const DashbordModulesPage = async () => {
+const DashboardModulesPage = async () => {
 
     const moduleData = loadModules();
 
@@ -24,7 +30,6 @@ const DashbordModulesPage = async () => {
     ])
 
     // console.log(modules);
-
 
 
     return (
@@ -38,11 +43,11 @@ const DashbordModulesPage = async () => {
                             <BreadcrumbItem>
                                 <Link href="/" className="text-blue-500 hover:underline">Home</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator />
+                            <BreadcrumbSeparator/>
                             <BreadcrumbItem>
                                 <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator />
+                            <BreadcrumbSeparator/>
                             <BreadcrumbItem>
                                 <BreadcrumbPage>Modules</BreadcrumbPage>
                             </BreadcrumbItem>
@@ -56,7 +61,11 @@ const DashbordModulesPage = async () => {
                         <h1 className="text-lg">Module List</h1>
                     </div>
                     <div>
-                        <Button size='sm' className="flex items-center gap-2"><PlusCircle /><span> Add</span></Button>
+                        <Link href="./modules/form">
+                            <Button size='sm'>
+                                <PlusCircle/><span> Add</span>
+                            </Button>
+                        </Link>
 
                     </div>
                 </div>
@@ -75,7 +84,7 @@ const DashbordModulesPage = async () => {
                         </TableHeader>
 
 
-                        <TableBody >
+                        <TableBody>
                             {
                                 modules.map((module) => (
                                     <TableRow key={module._id}>
@@ -84,12 +93,15 @@ const DashbordModulesPage = async () => {
                                         <TableCell>{module.totalCourse}</TableCell>
                                         <TableCell>
                                             <div className="flex justify-center gap-1">
-                                                <Link href={`./modules/${module._id}`}><Button variant='default' size='sm'><Eye /></Button></Link>
-                                                
-                                                <Link href={'#'}><Button variant='default' size='sm'><span><Pencil /></span></Button></Link>
-                                                <Link href={'#'}><Button variant='destructiveOutline' size='sm'><span><Trash /></span></Button></Link>
-                                                
-                                                
+                                                <Link href={`./modules/${module._id}`}><Button variant='default'
+                                                                                               size='sm'><Eye/></Button></Link>
+
+                                                <Link href={`./modules/form/${module._id}`}><Button variant='default'
+                                                                         size='sm'><span><Pencil/></span></Button></Link>
+                                                <Link href={'#'}><Button variant='destructiveOutline'
+                                                                         size='sm'><span><Trash/></span></Button></Link>
+
+
                                             </div>
                                         </TableCell>
 
@@ -113,14 +125,11 @@ const DashbordModulesPage = async () => {
                 </div>
 
 
-
-
             </div>
-
 
 
         </>
     )
 };
 
-export default DashbordModulesPage;
+export default DashboardModulesPage;
