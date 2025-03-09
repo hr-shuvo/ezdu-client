@@ -14,7 +14,7 @@ const ModuleDetailsPage = async ({ params }: any) => {
 
 
     const [
-        module
+        data
     ] = await Promise.all([
         moduleData
     ]);
@@ -57,12 +57,12 @@ const ModuleDetailsPage = async ({ params }: any) => {
 
                 <div className="my-5">
                     <div className="my-5">
-                        <h1 className="text-4xl font-bold">{module.title}</h1>
-                        <h3>{module.subTitle}</h3>
+                        <h1 className="text-4xl font-bold">{data.title}</h1>
+                        <h3>{data.subTitle}</h3>
                     </div>
                     <div className="flex justify-start text-xl gap-2">
                         <div>2348 learner</div>
-                        <div className="flex justify-between gap-2"><Table /> {module.totalCourse} courses</div>
+                        <div className="flex justify-between gap-2"><Table /> {data.totalCourse} courses</div>
 
                     </div>
 
