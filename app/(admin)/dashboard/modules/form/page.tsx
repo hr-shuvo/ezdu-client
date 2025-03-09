@@ -16,7 +16,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ModuleSchema} from "@/schemas/moduleSchema";
 import {Input} from "@/components/ui/input";
-import {useState, useTransition} from "react";
+import {useTransition} from "react";
 import {toast} from "sonner";
 import {useRouter} from "next/navigation";
 import {upsertModule} from "@/app/_services/modules-services";

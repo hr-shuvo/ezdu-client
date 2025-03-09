@@ -1,4 +1,7 @@
-import {loadModules} from "@/app/_services/modules-services";
+'use client ';
+
+import { loadModules } from "@/app/_services/modules-services";
+import { PaginatedList } from "@/app/utils/pagination";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -6,30 +9,24 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
     Table,
     TableBody,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow
 } from "@/components/ui/table";
-import {Eye, Pencil, PlusCircle, Trash} from "lucide-react";
+import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
 import Link from "next/link";
 
 const DashboardModulesPage = async () => {
 
-    const moduleData = loadModules();
+    const { data: modules, totalCount, totalPage, currentPage }: PaginatedList = await loadModules();
 
-    const [
-        modules
-    ] = await Promise.all([
-        moduleData
-    ])
-
-    // console.log(modules);
+    console.log(totalPage, currentPage);
 
 
     return (
@@ -43,11 +40,11 @@ const DashboardModulesPage = async () => {
                             <BreadcrumbItem>
                                 <Link href="/" className="text-blue-500 hover:underline">Home</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator/>
+                            <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator/>
+                            <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <BreadcrumbPage>Modules</BreadcrumbPage>
                             </BreadcrumbItem>
@@ -63,65 +60,99 @@ const DashboardModulesPage = async () => {
                     <div>
                         <Link href="./modules/form">
                             <Button size='sm'>
-                                <PlusCircle/><span> Add</span>
+                                <PlusCircle /><span> Add</span>
                             </Button>
                         </Link>
 
                     </div>
                 </div>
 
-                <div className="w-full ">
-                    <Table className="">
+                <div className="w-full">
+                    <div className="flex items-center py-4">
+                        <Input placeholder="Search" className="max-w-sm" />
 
 
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Title</TableHead>
-                                <TableHead>Subtitle</TableHead>
-                                <TableHead>Total course</TableHead>
-                                <TableHead>Actiion</TableHead>
-                            </TableRow>
-                        </TableHeader>
+                    </div>
+
+                    <div className="rounded-md border">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Title</TableHead>
+                                    <TableHead>Subtitle</TableHead>
+                                    <TableHead>Total course</TableHead>
+                                    <TableHead>Actiion</TableHead>
+                                </TableRow>
+                            </TableHeader>
+
+                            <TableBody>
+                                {
+                                    modules.length ?
+                                        (modules.map((module: any) => (
+                                            <TableRow key={module._id}>
+                                                <TableCell>{module.title}</TableCell>
+                                                <TableCell>{module.subTitle}</TableCell>
+                                                <TableCell>{module.totalCourse}</TableCell>
+                                                <TableCell>
+                                                    <div className="flex justify-center gap-1">
+                                                        <Link href={`./modules/${module._id}`}><Button variant='default'
+                                                            size='sm'><Eye /></Button></Link>
+
+                                                        <Link href={`./modules/form/${module._id}`}><Button variant='default'
+                                                            size='sm'><span><Pencil /></span></Button></Link>
+                                                        <Link href={'#'}><Button variant='destructiveOutline'
+                                                            size='sm'><span><Trash /></span></Button></Link>
 
 
-                        <TableBody>
-                            {
-                                modules.map((module) => (
-                                    <TableRow key={module._id}>
-                                        <TableCell>{module.title}</TableCell>
-                                        <TableCell>{module.subTitle}</TableCell>
-                                        <TableCell>{module.totalCourse}</TableCell>
-                                        <TableCell>
-                                            <div className="flex justify-center gap-1">
-                                                <Link href={`./modules/${module._id}`}><Button variant='default'
-                                                                                               size='sm'><Eye/></Button></Link>
+                                                    </div>
+                                                </TableCell>
 
-                                                <Link href={`./modules/form/${module._id}`}><Button variant='default'
-                                                                         size='sm'><span><Pencil/></span></Button></Link>
-                                                <Link href={'#'}><Button variant='destructiveOutline'
-                                                                         size='sm'><span><Trash/></span></Button></Link>
+                                            </TableRow>
+
+                                        ))) :
+                                        (
+                                            <TableRow>
+                                                <TableCell
+                                                    colSpan={4}
+                                                    className="h-24 text-center"
+                                                >
+                                                    No results.
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                }
+                            </TableBody>
 
 
-                                            </div>
-                                        </TableCell>
+                        </Table>
 
-                                    </TableRow>
+                    </div>
 
-                                ))
-                            }
-                        </TableBody>
+                    <div className="flex items-center justify-end space-x-2 py-4">
+                        <div className="flex-1 text-sm text-muted-foreground">
+                            {totalCount} items found
+                        </div>
 
-                        <TableFooter>
-                            <TableRow>
-                                <TableCell></TableCell>
-                                <TableCell></TableCell>
-                                <TableCell></TableCell>
-                                <TableCell></TableCell>
+                        <div className="space-x-2">
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                disabled={false}
+                            >
+                                Previous
+                            </Button>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                disabled={false}
+                            >
+                                Next
+                            </Button>
+                        </div>
+                    </div>
 
-                            </TableRow>
-                        </TableFooter>
 
-                    </Table>
+
                 </div>
 
 
