@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Card } from "./card";
 import { useTransition } from "react";
-import { upsertUserProgress } from "@/services/courseService";
+import { upsertUserProgress } from "@/services/progressService";
 import { toast } from "sonner";
 
 type Course = {

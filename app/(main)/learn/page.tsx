@@ -8,7 +8,7 @@ import {
     getLessonPercentage,
     getUnits,
     getUserProgress,
-} from "@/services/courseService";
+} from "@/services/progressService";
 import { Unit } from "./unit";
 
 const LearnPage = async () => {

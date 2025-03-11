@@ -5,21 +5,7 @@ import httpClient from "@/app/utils/httpClient";
 
 
 
-export const getCourses = async () => {
-    try {        
-        const response = await httpClient.get('/courses', {
-            headers: {
-                Cookie: (await cookies()).toString()
-            }
-        });
 
-        return response.data;
-    }
-    catch (err: any) {
-        console.error(err?.response?.data?.msg);
-        return [];
-    }
-};
 
 
 

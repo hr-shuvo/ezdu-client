@@ -1,7 +1,7 @@
 import { FeedWrapper } from "@/components/layout/feed-wrapper";
 import { StickyWrapper } from "@/components/layout/sticky-wrapper";
 import { UserProgress } from "@/components/layout/user-progress";
-import { getUserProgress } from "@/services/courseService";
+import { getUserProgress } from "@/services/progressService";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { Items } from "./items";

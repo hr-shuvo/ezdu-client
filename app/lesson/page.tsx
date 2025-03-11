@@ -1,4 +1,4 @@
-import { getUserProgress } from "@/services/courseService";
+import { getUserProgress } from "@/services/progressService";
 import { getLesson } from "@/services/lessonService";
 import { redirect } from "next/navigation";
 import Quiz from "./quiz";
