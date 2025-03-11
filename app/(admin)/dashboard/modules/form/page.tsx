@@ -9,37 +9,37 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import * as z from "zod";
-import {Button} from "@/components/ui/button";
-import {BiArrowBack} from "react-icons/bi";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {ModuleSchema} from "@/schemas/moduleSchema";
-import {Input} from "@/components/ui/input";
-import {useTransition} from "react";
-import {toast} from "sonner";
-import {useRouter} from "next/navigation";
-import {upsertModule} from "@/app/_services/modules-services";
+import { Button } from "@/components/ui/button";
+import { BiArrowBack } from "react-icons/bi";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ModuleSchema } from "@/schemas/moduleSchema";
+import { Input } from "@/components/ui/input";
+import { useTransition } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { upsertModule } from "@/app/_services/modules-services";
 
 const ModuleCreatePage = () => {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
 
-
     const form = useForm<z.infer<typeof ModuleSchema>>({
         resolver: zodResolver(ModuleSchema),
         defaultValues: {
-            title: '',
-            subTitle: '',
+            title: "",
+            subTitle: "",
             totalCourse: 0
         }
-    })
+    });
 
-    const onSubmit = (values: z.infer<typeof ModuleSchema>) => {
-        startTransition(() => {
-            upsertModule(values).then(res => {
-                if(res.success){
-                    toast.success('Module created successfully',{
+    const onSubmit = async (values: z.infer<typeof ModuleSchema>) => {
+
+        startTransition(async () => {
+            await upsertModule(values).then(res => {
+                if (res.success) {
+                    toast.success(res.success, {
                         duration: 5000,
                         style: {
                             background: 'green',
@@ -49,8 +49,8 @@ const ModuleCreatePage = () => {
 
                     router.push('/dashboard/modules');
                 }
-                else{
-                    toast.error('Something went wrong',{
+                else {
+                    toast.error('Something went wrong', {
                         duration: 5000,
                         style: {
                             background: 'red',
@@ -59,8 +59,7 @@ const ModuleCreatePage = () => {
                     });
                 }
             });
-
-        })
+        });
 
     }
 
@@ -74,15 +73,15 @@ const ModuleCreatePage = () => {
                             <BreadcrumbItem>
                                 <Link href="/" className="text-blue-500 hover:underline">Home</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator/>
+                            <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator/>
+                            <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <Link href="./" className="text-blue-500 hover:underline">Modules</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator/>
+                            <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <BreadcrumbPage>Create</BreadcrumbPage>
                             </BreadcrumbItem>
@@ -95,9 +94,9 @@ const ModuleCreatePage = () => {
                         <h1 className="text-lg">Module Create</h1>
                     </div>
                     <div>
-                        <Link href=".">
+                        <Link href="../">
                             <Button size='sm' variant='sidebarOutline'>
-                                <BiArrowBack/><span> Back</span>
+                                <BiArrowBack /><span> Back</span>
                             </Button>
                         </Link>
 
@@ -105,7 +104,6 @@ const ModuleCreatePage = () => {
                 </div>
 
                 <div className="w-full">
-
 
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -171,10 +169,11 @@ const ModuleCreatePage = () => {
 
                                 <div className="col-span-2 mt-5 flex justify-end gap-2">
                                     <Button
-                                        type="submit"
+                                        type="button"
                                         className="w-3/6"
                                         variant="super"
                                         disabled={isPending}
+                                        onClick={() => router.push('../')}
                                     >
                                         Cancel
                                     </Button>
@@ -184,11 +183,9 @@ const ModuleCreatePage = () => {
                                         variant="secondary"
                                         disabled={isPending}
                                     >
-                                        Add
+                                        Update
                                     </Button>
                                 </div>
-
-
 
 
                             </div>
@@ -200,15 +197,11 @@ const ModuleCreatePage = () => {
 
 
 
-
-
-
-
-
-
             </div>
         </>
-)
+    )
+
+
 }
 
 export default ModuleCreatePage;
