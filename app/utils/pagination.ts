@@ -1,7 +1,7 @@
 
 
 export interface PaginatedList {
-    data: any[],
+    data: [],
     totalCount: number,
     totalPage: number,
     currentPage: number

@@ -8,9 +8,14 @@ type Module = {
   totalCourse?: number;
 };
 
-export const loadModules = async (): Promise<PaginatedList> => {
+export const loadModules = async (page: number, size:number): Promise<PaginatedList> => {
   try {
-    const response = await httpClient.get<PaginatedList>("/modules");
+    const params = {
+      pg: page,
+      sz: size
+    };
+
+    const response = await httpClient.get<PaginatedList>("/modules", {params:params});
 
     return response.data;
   } catch (err: any) {

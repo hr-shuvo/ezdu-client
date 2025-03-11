@@ -1,7 +1,8 @@
-'use client ';
+'use client';
 
 import { loadModules } from "@/app/_services/modules-services";
 import { PaginatedList } from "@/app/utils/pagination";
+import CustomPagination from "@/components/common/pagination";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -11,6 +12,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
     Table,
     TableBody,
@@ -21,18 +23,46 @@ import {
 } from "@/components/ui/table";
 import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
-const DashboardModulesPage = async () => {
+const DashboardModulesPage = () => {
 
-    const { data: modules, totalCount, totalPage, currentPage }: PaginatedList = await loadModules();
+    // const { data: modules, totalCount, totalPage, currentPage }: PaginatedList = await loadModules();
+    // const [_, setCurrentPage] = useState(currentPage);
+    // console.log(totalPage, currentPage);
 
-    console.log(totalPage, currentPage);
+    const [modules, setModules] = useState([]);
+    const [totalCount, setTotalCount] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+
+
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const response: PaginatedList = await loadModules(currentPage, pageSize);
+                setModules(response.data);
+                setTotalCount(response.totalCount);
+                setTotalPage(response.totalPage);
+                setCurrentPage(response.currentPage);
+            }
+            catch {
+                toast.error('error')
+            }
+        }
+
+        loadData();
+    }, [currentPage, pageSize]);
+
+
 
 
     return (
         <>
 
-            <div className="w-full my-5 p-5 border">
+            <div className="w-full  p-5 border">
 
                 <div className="my-5">
                     <Breadcrumb>
@@ -128,28 +158,35 @@ const DashboardModulesPage = async () => {
 
                     </div>
 
-                    <div className="flex items-center justify-end space-x-2 py-4">
-                        <div className="flex-1 text-sm text-muted-foreground">
-                            {totalCount} items found
+
+
+                    <div className="flex items-center justify-between space-x-2 py-4">
+                        <div className="flex items-center text-sm text-muted-foreground gap-2">
+                            <div>{totalCount} items found</div>
+                            <div>
+                                <Select value={pageSize.toString()} onValueChange={(value) => setPageSize(Number(value))}>
+                                    <SelectTrigger className="w-[100px]">
+                                        <SelectValue placeholder="Theme" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="5">5</SelectItem>
+                                        <SelectItem value="10">10</SelectItem>
+                                        <SelectItem value="20">20</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
 
                         <div className="space-x-2">
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                disabled={false}
-                            >
-                                Previous
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                disabled={false}
-                            >
-                                Next
-                            </Button>
+                            <CustomPagination
+                                totalPage={totalPage}
+                                currentPage={currentPage}
+                                onPageChange={setCurrentPage}
+                            />
                         </div>
                     </div>
+
+
 
 
 
