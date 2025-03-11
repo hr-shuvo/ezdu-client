@@ -23,24 +23,21 @@ import {
 } from "@/components/ui/table";
 import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
+import Loading from "./loading";
 
 const DashboardModulesPage = () => {
-
-    // const { data: modules, totalCount, totalPage, currentPage }: PaginatedList = await loadModules();
-    // const [_, setCurrentPage] = useState(currentPage);
-    // console.log(totalPage, currentPage);
-
     const [modules, setModules] = useState([]);
-    const [totalCount, setTotalCount] = useState(1);
-    const [totalPage, setTotalPage] = useState(1);
+    const [totalCount, setTotalCount] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5);
+    const [isPending, startTransition] = useTransition();
 
 
     useEffect(() => {
-        const loadData = async () => {
+        startTransition(async () => {
             try {
                 const response: PaginatedList = await loadModules(currentPage, pageSize);
                 setModules(response.data);
@@ -51,13 +48,14 @@ const DashboardModulesPage = () => {
             catch {
                 toast.error('error')
             }
-        }
+        });
 
-        loadData();
     }, [currentPage, pageSize]);
 
 
-
+    if (isPending) {
+        return <Loading />;
+    }
 
     return (
         <>
