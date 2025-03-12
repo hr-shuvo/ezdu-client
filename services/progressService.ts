@@ -20,7 +20,7 @@ export const getUserProgress = async () => {
         return response.data;
     }
     catch (err: any) {
-        // console.error(err);
+        console.error(err);
         return null;
     }
 };
@@ -36,14 +36,14 @@ export const upsertUserProgress = async (courseId: string) => {
         return response.data;
     }
     catch (err: any) {
-        // console.error(err);
+        console.error(err);
         return null;
     }
 };
 
 export const getUnits = async () => {
     try {
-        const response = await httpClient.get('/userUnits', {
+        const response = await httpClient.get('/units/userUnits', {
             headers: {
                 Cookie: (await cookies()).toString()
             }
@@ -52,7 +52,7 @@ export const getUnits = async () => {
         return response.data;
     }
     catch (err: any) {
-        // console.error(err);
+        console.error(err);
         return null;
     }
 };
@@ -68,7 +68,7 @@ export const getCourseProgress = async () => {
         return response.data;
     }
     catch (err: any) {
-        // console.error(err);
+        console.error(err);
         return null;
     }
 };
@@ -83,7 +83,7 @@ export const getLessonPercentage = async () => {
         return response.data;
     }
     catch (err: any) {
-        // console.error(err);
+        console.error(err);
         return null;
     }
 };
