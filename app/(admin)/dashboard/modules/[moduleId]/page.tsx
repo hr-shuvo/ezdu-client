@@ -94,7 +94,7 @@ const ModuleDetailsPage = () => {
                         </div>
                         <div className="flex justify-start text-xl gap-2">
                             <div>2348 learner</div>
-                            <div className="flex justify-between gap-2"><Table /> {module?.totalCourse} courses</div>
+                            <div className="flex justify-between gap-2"> {module?.totalCourse} courses</div>
 
                         </div>
 
@@ -168,10 +168,10 @@ const ModuleDetailsPage = () => {
                                                     </TableCell>
                                                     <TableCell>
                                                         <div className="flex justify-center gap-1">
-                                                            <Link href={`./modules/${module._id}`}><Button variant='default'
+                                                            <Link href={`../courses/${course._id}`}><Button variant='default'
                                                                 size='sm'><Eye /></Button></Link>
 
-                                                            <Link href={`./modules/form/${module._id}`}><Button variant='default'
+                                                            <Link href={`./modules/form/${course._id}`}><Button variant='default'
                                                                 size='sm'><span><Pencil /></span></Button></Link>
                                                             <Link href={'#'}><Button variant='destructiveOutline'
                                                                 size='sm'><span><Trash /></span></Button></Link>

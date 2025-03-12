@@ -22,3 +22,17 @@ export const loadCourses = async (page: number, size:number, moduleId?:string): 
     return {} as PaginatedList;
   }
 };
+
+export const getCourse = async (courseId?: any): Promise<any> => {
+  try {
+    const response = await httpClient.get<any>(`/courses/${courseId}`);
+    // console.log(response)
+
+    return response.data;
+  } catch (err: any) {
+    // console.error(err.message);
+    console.error(err);
+
+    return null!;
+  }
+};
