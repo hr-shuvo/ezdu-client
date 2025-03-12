@@ -59,7 +59,6 @@ const DashboardModulesPage = () => {
 
     return (
         <>
-
             <div className="w-full  p-5 border">
 
                 <div className="my-5">
@@ -87,7 +86,7 @@ const DashboardModulesPage = () => {
                     </div>
                     <div>
                         <Link href="./modules/form">
-                            <Button size='sm'>
+                            <Button size='sm' variant='sidebarOutline'>
                                 <PlusCircle /><span> Add</span>
                             </Button>
                         </Link>
