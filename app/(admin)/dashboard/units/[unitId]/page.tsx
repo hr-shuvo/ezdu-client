@@ -1,51 +1,27 @@
 'use client';
 
-import { getCourse } from "@/app/_services/course-services";
-import { useParams } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
-import Loading from "../../modules/loading";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { IoArrowBack } from "react-icons/io5";
-import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
+import { getUnit } from "@/app/_services/unit-service";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { loadUnits } from "@/app/_services/unit-service";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import CustomPagination from "@/components/common/pagination";
+import { Button } from "@/components/ui/button";
+import { Pencil } from "lucide-react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { startTransition, useEffect, useState } from "react";
+import { IoArrowBack } from "react-icons/io5";
 
-const CourseDetailsPage = () => {
+const UnitDetailsPage = () => {
     const params = useParams();
-    const [course, setCourse] = useState<any>();
-
-    const [units, setUnits] = useState([]);
-    const [totalCount, setTotalCount] = useState(0);
-    const [totalPage, setTotalPage] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
-    const [isPending, startTransition] = useTransition();
-
+    const [unit, setUnit] = useState<any>();
 
     useEffect(() => {
         startTransition(async () => {
-            const courseId = Array.isArray(params.courseId) ? params.courseId[0] : params.courseId;
-            const course = await getCourse(courseId);
-            setCourse(course);
+            const unitId = Array.isArray(params.unitId) ? params.unitId[0] : params.unitId;
+            const unit = await getUnit(unitId);
+            setUnit(unit);
 
-            const response = await loadUnits(currentPage, pageSize, courseId);
-            setUnits(response.data);
-            setTotalCount(response.totalCount);
-            setTotalPage(response.totalPage);
-            setCurrentPage(response.currentPage);
 
         })
-    }, [currentPage, pageSize, params.courseId]);
-
-
-    if (isPending) {
-        return <Loading />
-    }
+    }, [params.unitId]);
 
 
     return (
@@ -56,10 +32,10 @@ const CourseDetailsPage = () => {
                     <div className="flex justify-between">
                         <h1 className="text-4xl">Course Details</h1>
                         <div className="gap-2 flex">
-                            <Link href={`../modules/${course?.moduleId}`}>
+                            <Link href={`../modules/${unit?.moduleId}`}>
                                 <Button size='sm'> <IoArrowBack /> <span>Back</span></Button>
                             </Link>
-                            <Link href={`./form/${course?._id}`}>
+                            <Link href={`./form/${unit?._id}`}>
                                 <Button variant='sidebarOutline' size='sm'> <Pencil /> <span>Edit</span></Button>
                             </Link>
                         </div>
@@ -89,8 +65,8 @@ const CourseDetailsPage = () => {
 
                     <div className="my-5">
                         <div className="my-5">
-                            <h1 className="text-4xl font-bold">{course?.title}</h1>
-                            {/* <h3>{course?.subTitle}</h3> */}
+                            <h1 className="text-4xl font-bold">{unit?.title}</h1>
+                            <h3>{unit?.description}</h3>
                         </div>
                         <div className="flex justify-start text-xl gap-2">
                             <div>2348 learner</div>
@@ -103,7 +79,7 @@ const CourseDetailsPage = () => {
 
                 </div>
 
-                <div className="w-full my-5 p-5 border">
+                {/* <div className="w-full my-5 p-5 border">
                     <div className="flex justify-between">
                         <div>
                             <h1 className="text-lg">Unit List</h1>
@@ -205,13 +181,13 @@ const CourseDetailsPage = () => {
                     </div>
 
 
-                </div>
+                </div> */}
 
 
             </div>
         </>
-
     )
-};
+}
 
-export default CourseDetailsPage;
+
+export default UnitDetailsPage;
