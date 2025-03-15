@@ -26,3 +26,18 @@ export const loadLessons = async (
     return {} as PaginatedList;
   }
 };
+
+
+export const getLesson = async (lessonId?: any): Promise<any> => {
+  try {
+    const response = await httpClient.get<any>(`/lessons/${lessonId}`);
+    // console.log(response)
+
+    return response.data;
+  } catch (err: any) {
+    // console.error(err.message);
+    console.error(err);
+
+    return null!;
+  }
+};

@@ -52,7 +52,7 @@ const UnitDetailsPage = () => {
                 <div className="w-full my-5 p-5 border">
 
                     <div className="flex justify-between">
-                        <h1 className="text-4xl">Course Details</h1>
+                        <h1 className="text-4xl">Unit Details</h1>
                         <div className="gap-2 flex">
                             <Link href={`../modules/${unit?.moduleId}`}>
                                 <Button size='sm'> <IoArrowBack /> <span>Back</span></Button>
@@ -104,7 +104,7 @@ const UnitDetailsPage = () => {
                 <div className="w-full my-5 p-5 border">
                     <div className="flex justify-between">
                         <div>
-                            <h1 className="text-lg">Unit List</h1>
+                            <h1 className="text-lg">Lesson List</h1>
                         </div>
                         <div>
                             <Link href="./modules/form">
@@ -135,16 +135,16 @@ const UnitDetailsPage = () => {
                                     {
                                         lessons.length ? (
 
-                                            lessons.map((unit: any) => (
-                                                <TableRow key={unit._id}>
-                                                    <TableCell>{unit.title}</TableCell>
-                                                    <TableCell>{unit.description}</TableCell>
+                                            lessons.map((lesson: any) => (
+                                                <TableRow key={lesson._id}>
+                                                    <TableCell>{lesson.title}</TableCell>
+                                                    <TableCell>{lesson.description}</TableCell>
                                                     <TableCell>
                                                         <div className="flex justify-center gap-1">
-                                                            <Link href={`../units/${unit._id}`}><Button variant='default'
+                                                            <Link href={`../lessons/${lesson._id}`}><Button variant='default'
                                                                 size='sm'><Eye /></Button></Link>
 
-                                                            <Link href={`./modules/form/${unit._id}`}><Button variant='default'
+                                                            <Link href={`./modules/form/${lesson._id}`}><Button variant='default'
                                                                 size='sm'><span><Pencil /></span></Button></Link>
                                                             <Link href={'#'}><Button variant='destructiveOutline'
                                                                 size='sm'><span><Trash /></span></Button></Link>
