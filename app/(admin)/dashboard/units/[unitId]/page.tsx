@@ -1,17 +1,30 @@
 'use client';
 
+import Link from "next/link";
 import { getUnit } from "@/app/_services/unit-service";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
-import Link from "next/link";
+import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
 import { useParams } from "next/navigation";
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { IoArrowBack } from "react-icons/io5";
+import { loadLessons } from "@/app/_services/lesson-service";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import CustomPagination from "@/components/common/pagination";
+import Loading from "../../modules/loading";
 
 const UnitDetailsPage = () => {
     const params = useParams();
     const [unit, setUnit] = useState<any>();
+
+    const [lessons, setLessons] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
         startTransition(async () => {
@@ -19,11 +32,20 @@ const UnitDetailsPage = () => {
             const unit = await getUnit(unitId);
             setUnit(unit);
 
+            const response = await loadLessons(currentPage, pageSize, unitId);
+            setLessons(response.data);
+            setTotalCount(response.totalCount);
+            setTotalPage(response.totalPage);
+            setCurrentPage(response.currentPage);
 
         })
-    }, [params.unitId]);
+    }, [currentPage, pageSize, params.unitId]);
 
 
+    if (isPending) {
+        return <Loading />
+    }
+    
     return (
         <>
             <div className="w-full flex-col">
@@ -79,7 +101,7 @@ const UnitDetailsPage = () => {
 
                 </div>
 
-                {/* <div className="w-full my-5 p-5 border">
+                <div className="w-full my-5 p-5 border">
                     <div className="flex justify-between">
                         <div>
                             <h1 className="text-lg">Unit List</h1>
@@ -111,9 +133,9 @@ const UnitDetailsPage = () => {
 
                                 <TableBody>
                                     {
-                                        units.length ? (
+                                        lessons.length ? (
 
-                                            units.map((unit: any) => (
+                                            lessons.map((unit: any) => (
                                                 <TableRow key={unit._id}>
                                                     <TableCell>{unit.title}</TableCell>
                                                     <TableCell>{unit.description}</TableCell>
@@ -181,7 +203,7 @@ const UnitDetailsPage = () => {
                     </div>
 
 
-                </div> */}
+                </div>
 
 
             </div>
