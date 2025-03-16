@@ -105,7 +105,7 @@ const LessonDetailsPage = () => {
                 <div className="w-full my-5 p-5 border">
                     <div className="flex justify-between">
                         <div>
-                            <h1 className="text-lg">Unit List</h1>
+                            <h1 className="text-lg">Challenge List</h1>
                         </div>
                         <div>
                             <Link href="./modules/form">
@@ -137,17 +137,17 @@ const LessonDetailsPage = () => {
                                     {
                                         challenges.length ? (
 
-                                            challenges.map((unit: any) => (
-                                                <TableRow key={unit._id}>
-                                                    <TableCell>{unit.question}</TableCell>
-                                                    <TableCell>{unit.type}</TableCell>
+                                            challenges.map((data: any) => (
+                                                <TableRow key={data._id}>
+                                                    <TableCell>{data.question}</TableCell>
+                                                    <TableCell>{data.type}</TableCell>
                                                     <TableCell>{'optionns'}</TableCell>
                                                     <TableCell>
                                                         <div className="flex justify-center gap-1">
-                                                            <Link href={`../units/${unit._id}`}><Button variant='default'
+                                                            <Link href={`../challenges/${data._id}`}><Button variant='default'
                                                                 size='sm'><Eye /></Button></Link>
 
-                                                            <Link href={`./modules/form/${unit._id}`}><Button variant='default'
+                                                            <Link href={`./modules/form/${data._id}`}><Button variant='default'
                                                                 size='sm'><span><Pencil /></span></Button></Link>
                                                             <Link href={'#'}><Button variant='destructiveOutline'
                                                                 size='sm'><span><Trash /></span></Button></Link>
