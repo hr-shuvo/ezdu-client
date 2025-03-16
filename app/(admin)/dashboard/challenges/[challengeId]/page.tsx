@@ -34,9 +34,9 @@ const ChallengeDetailsPage = () => {
             <div className="w-full my-5 p-5 border">
 
                 <div className="flex justify-between">
-                    <h1 className="text-4xl">Lesson Details</h1>
+                    <h1 className="text-4xl">Challenge Details</h1>
                     <div className="gap-2 flex">
-                        <Link href={`../modules/${challenge?.moduleId}`}>
+                        <Link href={`./form${challenge?.moduleId}`}>
                             <Button size='sm'> <IoArrowBack /> <span>Back</span></Button>
                         </Link>
                         <Link href={`./form/${challenge?._id}`}>
@@ -54,10 +54,22 @@ const ChallengeDetailsPage = () => {
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
-                            </BreadcrumbItem>
+                            </BreadcrumbItem>                            
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <Link href="./" className="text-blue-500 hover:underline">Courses</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <Link href="/dashboard" className="text-blue-500 hover:underline">Units</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <Link href="/dashboard" className="text-blue-500 hover:underline">Lessons</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <Link href="/dashboard" className="text-blue-500 hover:underline">Challenges</Link>
                             </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
