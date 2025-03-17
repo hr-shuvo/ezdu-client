@@ -1,10 +1,21 @@
+'use client';
+
 import {Sidebar} from "@/components/layout/admin/sidebar";
+import { userLoginStatus } from "@/store/user-auth";
+import { redirect } from "next/navigation";
 
 type Props = {
     children: React.ReactNode
 }
 
 const AdminLayout = ({children}: Props) => {
+    const { isLoggedIn } = userLoginStatus();
+
+    if(!isLoggedIn){
+        redirect('/auth/login');
+    }
+
+
     return (
         <>
             <Sidebar className='hidden 2xl:flex'/>
