@@ -38,7 +38,7 @@ const ChallengeDetailsPage = () => {
                 <div className="flex justify-between">
                     <h1 className="text-4xl">Challenge Details</h1>
                     <div className="gap-2 flex">
-                        <Link href={`./form${challenge?.moduleId}`}>
+                        <Link href={`../lessons/${challenge?.lessonId}`}>
                             <Button size='sm'> <IoArrowBack /> <span>Back</span></Button>
                         </Link>
                         <Link href={`./form/${challenge?._id}`}>
@@ -104,10 +104,8 @@ const ChallengeDetailsPage = () => {
                         <h1 className="text-lg">Course List</h1>
                     </div>
                     <div>
-                        <Link href="./modules/form">
-                            <Button size='sm' variant='sidebarOutline'>
-                                <Pencil /><span> Edit</span>
-                            </Button>
+                        <Link href={`./form/${challenge?._id}`}>
+                            <Button variant='sidebarOutline' size='sm'> <Pencil /> <span>Edit</span></Button>
                         </Link>
 
                     </div>
