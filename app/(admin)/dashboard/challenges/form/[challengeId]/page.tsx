@@ -26,6 +26,7 @@ const ChallengeEditPage = () => {
         resolver: zodResolver(ChallengeSchema),
         defaultValues: {
             question: "",
+            type:'SELECT',
             _id: ""
         }
     });
@@ -165,14 +166,14 @@ const ChallengeEditPage = () => {
                                                     control={form.control}
                                                     name={`optionList.${index}.correct`}
                                                     render={({ field }) => (
-                                                        <FormItem className="flex items-center gap-2">
+                                                        <FormItem className="flex items-center gap-2 p-1">
                                                             <FormControl>
                                                                 <Checkbox
                                                                     checked={field.value}
                                                                     onCheckedChange={(checked:boolean) => field.onChange(checked)}
                                                                 />
                                                             </FormControl>
-                                                            <FormLabel className="text-sm">Correct</FormLabel>
+                                                            <FormLabel className="">Correct</FormLabel>
                                                         </FormItem>
                                                     )}
                                                 />

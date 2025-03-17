@@ -5,6 +5,7 @@ export const ChallengeSchema = z.object({
   question: z.string().min(1, {
     message: "Question is required",
   }),
+  type:z.string(),
 
   optionList: z
     .array(

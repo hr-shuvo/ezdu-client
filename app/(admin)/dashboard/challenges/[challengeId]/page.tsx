@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { IoArrowBack } from "react-icons/io5";
 import { Pencil } from "lucide-react";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const ChallengeDetailsPage = () => {
     const params = useParams();
@@ -54,7 +56,7 @@ const ChallengeDetailsPage = () => {
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
-                            </BreadcrumbItem>                            
+                            </BreadcrumbItem>
                             <BreadcrumbSeparator />
                             <BreadcrumbItem>
                                 <Link href="./" className="text-blue-500 hover:underline">Courses</Link>
@@ -89,6 +91,82 @@ const ChallengeDetailsPage = () => {
                         <div className="flex justify-between gap-2"> 22 courses</div>
 
                     </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div className="w-full my-5 p-5 border">
+                <div className="flex justify-between">
+                    <div>
+                        <h1 className="text-lg">Course List</h1>
+                    </div>
+                    <div>
+                        <Link href="./modules/form">
+                            <Button size='sm' variant='sidebarOutline'>
+                                <Pencil /><span> Edit</span>
+                            </Button>
+                        </Link>
+
+                    </div>
+                </div>
+
+                <div className="w-full">
+                    <div className="flex items-center py-4">
+                        <Input placeholder="Search" className="max-w-sm" />
+                    </div>
+
+                    <div className="rounded-md border">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Text</TableHead>
+                                    <TableHead>Correct</TableHead>
+                                </TableRow>
+                            </TableHeader>
+
+                            <TableBody>
+                                {
+                                    challenge?.optionList?.length ? (
+
+                                        challenge.optionList.map((option: any, index: number) => (
+                                            <TableRow key={index}>
+                                                <TableCell>{option.text}</TableCell>
+                                                <TableCell>
+                                                    {option.correct ?
+                                                        <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">
+                                                            True
+                                                        </span>
+                                                        :
+                                                        <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">
+                                                            False
+                                                        </span>
+                                                    }
+                                                </TableCell>
+
+                                            </TableRow>
+                                        ))
+                                    ) : (
+                                        <TableRow>
+                                            <TableCell
+                                                colSpan={3}
+                                                className="h-24 text-center"
+                                            >
+                                                No results.
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                                }
+
+
+
+                            </TableBody>
+                        </Table>
+                    </div>
+
+
 
                 </div>
 
