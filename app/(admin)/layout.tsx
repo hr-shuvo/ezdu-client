@@ -1,36 +1,94 @@
 'use client';
 
-import {Sidebar} from "@/components/layout/admin/sidebar";
-import { userLoginStatus } from "@/store/user-auth";
-import { redirect } from "next/navigation";
+import {userLoginStatus} from "@/store/user-auth";
+import {SidebarInset, SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
+import {AppSidebar} from "@/components/layout/admin/app-sidebar";
+import {Separator} from "@/components/ui/separator";
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList, BreadcrumbPage,
+    BreadcrumbSeparator
+} from "@/components/ui/breadcrumb";
+import {useEffect, useTransition} from "react";
+import {getCurrentUser} from "@/services/authService";
+import Loading from "@/app/auth/login/loading";
 
 type Props = {
     children: React.ReactNode
 }
 
 const AdminLayout = ({children}: Props) => {
-    const { isLoggedIn } = userLoginStatus();
+    const {isLoggedIn, login, logout} = userLoginStatus();
+    const [isPending, startTransition] = useTransition();
 
-    if(!isLoggedIn){
-        redirect('/auth/login');
+
+    useEffect(() => {
+
+        startTransition(async () => {
+            const result = await getCurrentUser();
+            if (result.success) {
+                // console.log('result: ', result);
+                login();
+            } else {
+                logout()
+            }
+        })
+
+    }, [login, logout]);    
+
+    if(isPending) {
+        return <Loading/>
     }
 
 
-    return (
-        <>
-            <Sidebar className='hidden 2xl:flex'/>
-            <main className='lg:p-[256px] h-full pt-[50px] lg:pt-0'>
-                <div className='h-full mx-w-[1056px] mx-auto pt-6  '>
-                    <div
-                        className="max-auto w-full flex-1  flex flex-col lg:flex-row items-center justify-center p-4 gap-2 my-10">
+    if(!isLoggedIn){
+        <div>
+            <h1>You dont have access</h1>
+        </div>
+    }
 
-                        {children}
+    return (
+        <SidebarProvider>
+            <AppSidebar/>
+
+            <SidebarInset>
+                <header
+                    className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+                    <div className="flex items-center gap-2 px-4">
+                        <SidebarTrigger className="-ml-1"/>
+                        <Separator orientation="vertical" className="mr-2 h-4"/>
+
+                        <Breadcrumb>
+                            <BreadcrumbList>
+                                <BreadcrumbItem className="hidden md:block">
+                                    <BreadcrumbLink href="#">
+                                        Building Your Application
+                                    </BreadcrumbLink>
+                                </BreadcrumbItem>
+                                <BreadcrumbSeparator className="hidden md:block"/>
+                                <BreadcrumbItem>
+                                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                                </BreadcrumbItem>
+                            </BreadcrumbList>
+                        </Breadcrumb>
+
+
                     </div>
+                </header>
+
+                <div className="p-4 pt-0">
+                    {children}
+
                 </div>
 
-            </main>
-        </>
+
+            </SidebarInset>
+
+        </SidebarProvider>
     )
+
 }
 
 export default AdminLayout;
