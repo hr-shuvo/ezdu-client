@@ -59,7 +59,7 @@ const CourseDetailsPage = () => {
                             <Link href={`../modules/${course?.moduleId}`}>
                                 <Button size='sm'> <IoArrowBack /> <span>Back</span></Button>
                             </Link>
-                            <Link href={`./form/${course?._id}`}>
+                            <Link href={`../modules/${course?.moduleId}/courses/form/${course?._id}`}>
                                 <Button variant='sidebarOutline' size='sm'> <Pencil /> <span>Edit</span></Button>
                             </Link>
                         </div>
@@ -109,7 +109,7 @@ const CourseDetailsPage = () => {
                             <h1 className="text-lg">Unit List</h1>
                         </div>
                         <div>
-                            <Link href="./modules/form">
+                            <Link href={`./${course?._id}/units/form`}>
                                 <Button size='sm' variant='sidebarOutline'>
                                     <PlusCircle /><span> Add</span>
                                 </Button>
@@ -129,7 +129,8 @@ const CourseDetailsPage = () => {
                                     <TableRow>
                                         <TableHead>Title</TableHead>
                                         <TableHead>Description</TableHead>
-                                        <TableHead>Actiion</TableHead>
+                                        <TableHead>Order</TableHead>
+                                        <TableHead>Action</TableHead>
                                     </TableRow>
                                 </TableHeader>
 
@@ -141,12 +142,13 @@ const CourseDetailsPage = () => {
                                                 <TableRow key={unit._id}>
                                                     <TableCell>{unit.title}</TableCell>
                                                     <TableCell>{unit.description}</TableCell>
+                                                    <TableCell>{unit.order}</TableCell>
                                                     <TableCell>
                                                         <div className="flex justify-center gap-1">
                                                             <Link href={`../units/${unit._id}`}><Button variant='default'
                                                                 size='sm'><Eye /></Button></Link>
 
-                                                            <Link href={`./modules/form/${unit._id}`}><Button variant='default'
+                                                            <Link href={`./${course?._id}/units/form/${unit._id}`}><Button variant='default'
                                                                 size='sm'><span><Pencil /></span></Button></Link>
                                                             <Link href={'#'}><Button variant='destructiveOutline'
                                                                 size='sm'><span><Trash /></span></Button></Link>

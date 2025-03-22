@@ -42,3 +42,20 @@ export const getUnit = async (unitId?: any): Promise<any> => {
     return null!;
   }
 };
+
+
+export const upsertUnit = async (unit: any) => {
+  try {
+    const response = await httpClient.post(`/units/create`, unit);
+
+    if (response.status === 201 || response.status === 200) {
+      return { success: response.data };
+    }
+    return { error: response?.data?.msg };
+  } catch (err: any) {
+    // console.error(err.message);
+    // console.error(err);
+
+    return { error: err.response?.data?.msg };
+  }
+};
