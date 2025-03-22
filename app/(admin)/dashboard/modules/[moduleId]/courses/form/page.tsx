@@ -1,10 +1,10 @@
 "use client";
 
 
+import * as z from "zod";
 import {useParams, useRouter} from "next/navigation";
 import {useEffect, useState, useTransition} from "react";
 import {useForm} from "react-hook-form";
-import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {CourseSchema} from "@/schemas/courseSchema";
 import {toast} from "sonner";
@@ -22,7 +22,7 @@ import {BiArrowBack} from "react-icons/bi";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 
-const CourseCreatePage = () =>{
+const CourseCreatePage = () => {
     const router = useRouter();
     const params = useParams();
     const [isPending, startTransition] = useTransition();
@@ -33,7 +33,7 @@ const CourseCreatePage = () =>{
         defaultValues: {
             title: "",
             subTitle: "",
-            imageSrc: "",
+            imageSrc: "/globe.svg",
             moduleId: undefined,
         }
     });
@@ -44,7 +44,7 @@ const CourseCreatePage = () =>{
         const _moduleId = Array.isArray(params.moduleId) ? params.moduleId[0] : params.moduleId;
         setModuleId(_moduleId);
 
-        if(moduleId){
+        if (moduleId) {
             setValue('moduleId', moduleId);
         }
     }, [moduleId, setValue]);
@@ -64,9 +64,9 @@ const CourseCreatePage = () =>{
                     });
 
                     router.push(`/dashboard/modules/${moduleId}`);
-                }
-                else {
-                    toast.error('Something went wrong', {
+                } else {
+                    console.error("Error while creating course", res.error);
+                    toast.error(res.error, {
                         duration: 5000,
                         style: {
                             background: 'red',
@@ -79,9 +79,7 @@ const CourseCreatePage = () =>{
     }
 
 
-
-
-    return(
+    return (
         <>
             <div className="w-full my-5 p-5 border">
 
@@ -91,15 +89,15 @@ const CourseCreatePage = () =>{
                             <BreadcrumbItem>
                                 <Link href="/" className="text-blue-500 hover:underline">Home</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator />
+                            <BreadcrumbSeparator/>
                             <BreadcrumbItem>
                                 <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator />
+                            <BreadcrumbSeparator/>
                             <BreadcrumbItem>
                                 <Link href="./" className="text-blue-500 hover:underline">Modules</Link>
                             </BreadcrumbItem>
-                            <BreadcrumbSeparator />
+                            <BreadcrumbSeparator/>
                             <BreadcrumbItem>
                                 <BreadcrumbPage>Create</BreadcrumbPage>
                             </BreadcrumbItem>
@@ -114,7 +112,7 @@ const CourseCreatePage = () =>{
                     <div>
                         <Link href="../">
                             <Button size='sm' variant='sidebarOutline'>
-                                <BiArrowBack /><span> Back</span>
+                                <BiArrowBack/><span> Back</span>
                             </Button>
                         </Link>
 
@@ -129,7 +127,7 @@ const CourseCreatePage = () =>{
                                 <FormField
                                     control={form.control}
                                     name="title"
-                                    render={({ field }) => (
+                                    render={({field}) => (
                                         <FormItem>
                                             <FormLabel>Title</FormLabel>
                                             <FormControl>
@@ -140,7 +138,7 @@ const CourseCreatePage = () =>{
                                                     disabled={isPending}
                                                 />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage/>
                                         </FormItem>
                                     )}
                                 />
@@ -148,7 +146,7 @@ const CourseCreatePage = () =>{
                                 <FormField
                                     control={form.control}
                                     name="subTitle"
-                                    render={({ field }) => (
+                                    render={({field}) => (
                                         <FormItem>
                                             <FormLabel>SubTitle</FormLabel>
                                             <FormControl>
@@ -159,7 +157,7 @@ const CourseCreatePage = () =>{
                                                     disabled={isPending}
                                                 />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage/>
                                         </FormItem>
                                     )}
                                 />
@@ -167,7 +165,7 @@ const CourseCreatePage = () =>{
                                 <FormField
                                     control={form.control}
                                     name="imageSrc"
-                                    render={({ field }) => (
+                                    render={({field}) => (
                                         <FormItem>
                                             <FormLabel>Image Src</FormLabel>
                                             <FormControl>
@@ -178,7 +176,7 @@ const CourseCreatePage = () =>{
                                                     disabled={isPending}
                                                 />
                                             </FormControl>
-                                            <FormMessage />
+                                            <FormMessage/>
                                         </FormItem>
                                     )}
                                 />
@@ -211,7 +209,6 @@ const CourseCreatePage = () =>{
 
                     </Form>
                 </div>
-
 
 
             </div>

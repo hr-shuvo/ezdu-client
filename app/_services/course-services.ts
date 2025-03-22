@@ -44,11 +44,11 @@ export const upsertCourse = async (module: any) => {
     if (response.status === 201 || response.status === 200) {
       return { success: response.data };
     }
-    return { error: response.data };
+    return { error: response?.data?.msg };
   } catch (err: any) {
     // console.error(err.message);
-    console.error(err);
+    // console.error(err);
 
-    return { error: "error" };
+    return { error: err.response?.data?.msg };
   }
 };

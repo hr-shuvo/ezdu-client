@@ -44,7 +44,7 @@ const ModuleEditPage = () => {
             async function loadData() {
                 const moduleData = await getModule(params.moduleId);
                 reset(moduleData);
-            };
+            }
 
             await loadData();
         });

@@ -6,7 +6,9 @@ export const CourseSchema = z.object({
         message: 'Title is required'
     }),
     subTitle: z.string().optional(),
-    imageSrc: z.string().optional(),
+    imageSrc: z.string().min(1, {
+        message: 'Image Src is required'
+    }),
 
     moduleId: z.string().optional(),
 
