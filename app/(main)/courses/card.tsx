@@ -19,6 +19,10 @@ export const Card = ({
     disabled,
     active,
 }: Props) => {
+    if(!imageSrc.startsWith('/')){
+        imageSrc = `/${imageSrc}`;
+    }
+
     return (
         <div
             onClick={() => {

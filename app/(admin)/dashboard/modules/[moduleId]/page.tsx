@@ -114,7 +114,7 @@ const ModuleDetailsPage = () => {
                             <h1 className="text-lg">Course List</h1>
                         </div>
                         <div>
-                            <Link href="./modules/form">
+                            <Link href={`./${module?._id}/courses/form`}>
                                 <Button size='sm' variant='sidebarOutline'>
                                     <PlusCircle /><span> Add</span>
                                 </Button>
