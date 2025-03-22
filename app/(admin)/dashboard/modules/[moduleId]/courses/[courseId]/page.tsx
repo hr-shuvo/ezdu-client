@@ -3,8 +3,8 @@
 import { getCourse } from "@/app/_services/course-services";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
-import Loading from "../../modules/loading";
 import Link from "next/link";
+import Loading from "../../../loading";
 import { Button } from "@/components/ui/button";
 import { IoArrowBack } from "react-icons/io5";
 import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";

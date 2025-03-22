@@ -132,7 +132,7 @@ const DashboardCoursePage = () => {
                                                             <Link href={`../courses/${course._id}`}><Button variant='default'
                                                                 size='sm'><Eye /></Button></Link>
 
-                                                            <Link href={`./modules/form/${course._id}`}><Button variant='default'
+                                                            <Link href={`./courses/form/${course._id}`}><Button variant='default'
                                                                 size='sm'><span><Pencil /></span></Button></Link>
                                                             <Link href={'#'}><Button variant='destructiveOutline'
                                                                 size='sm'><span><Trash /></span></Button></Link>

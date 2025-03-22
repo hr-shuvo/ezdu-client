@@ -1,5 +1,14 @@
 "use client";
 
+
+import {useParams, useRouter} from "next/navigation";
+import {useEffect, useState, useTransition} from "react";
+import {useForm} from "react-hook-form";
+import * as z from "zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {CourseSchema} from "@/schemas/courseSchema";
+import {toast} from "sonner";
+import {getCourse, upsertCourse} from "@/app/_services/course-services";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -8,57 +17,50 @@ import {
     BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import { BiArrowBack } from "react-icons/bi";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ModuleSchema } from "@/schemas/moduleSchema";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { useParams, useRouter } from "next/navigation";
-import { getModule, upsertModule } from "@/app/_services/modules-services";
-import React, { useEffect, useTransition } from "react";
+import {Button} from "@/components/ui/button";
+import {BiArrowBack} from "react-icons/bi";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {Input} from "@/components/ui/input";
 
-const ModuleEditPage = () => {
-    const params = useParams();
 
+const CourseCreatePage = () =>{
     const router = useRouter();
+    const params = useParams();
     const [isPending, startTransition] = useTransition();
+    const [moduleId, setModuleId] = useState<string>();
 
-    const form = useForm<z.infer<typeof ModuleSchema>>({
-        resolver: zodResolver(ModuleSchema),
+    const form = useForm<z.infer<typeof CourseSchema>>({
+        resolver: zodResolver(CourseSchema),
         defaultValues: {
             title: "",
             subTitle: "",
-            totalCourse: 0,
-            _id: ""
+            imageSrc: "",
+            moduleId: undefined,
         }
     });
 
-    const { reset } = form;
+    const {setValue, reset} = form;
 
     useEffect(() => {
-        startTransition(async () => {
-            async function loadData() {
-                const moduleData = await getModule(params.moduleId);
-                reset(moduleData);
-            };
+        const _moduleId = Array.isArray(params.moduleId) ? params.moduleId[0] : params.moduleId;
+        setModuleId(_moduleId);
 
-            await loadData();
+        if(moduleId){
+            setValue('moduleId', moduleId);
+        }
+
+        startTransition(async () => {
+            const moduleData = await getCourse(params.courseId);
+            reset(moduleData);
         });
 
-    }, [params.moduleId, reset]);
-
-    // console.log(module)
+    }, [moduleId, setValue]);
 
 
-    const onSubmit = async (values: z.infer<typeof ModuleSchema>) => {
-
+    const onSubmit = async (values: z.infer<typeof CourseSchema>) => {
 
         startTransition(async () => {
-            await upsertModule(values).then(res => {
+            await upsertCourse(values).then(res => {
                 if (res.success) {
                     toast.success(res.success, {
                         duration: 5000,
@@ -68,7 +70,7 @@ const ModuleEditPage = () => {
                         }
                     });
 
-                    // router.push('/dashboard/modules');
+                    router.push(`/dashboard/modules/${moduleId}`);
                 }
                 else {
                     toast.error('Something went wrong', {
@@ -81,10 +83,12 @@ const ModuleEditPage = () => {
                 }
             });
         });
-
     }
 
-    return (
+
+
+
+    return(
         <>
             <div className="w-full my-5 p-5 border">
 
@@ -112,10 +116,10 @@ const ModuleEditPage = () => {
 
                 <div className="flex justify-between">
                     <div>
-                        <h1 className="text-lg">Module Create</h1>
+                        <h1 className="text-lg">Course Create</h1>
                     </div>
                     <div>
-                        <Link href="../">
+                        <Link href="../../">
                             <Button size='sm' variant='sidebarOutline'>
                                 <BiArrowBack /><span> Back</span>
                             </Button>
@@ -125,7 +129,6 @@ const ModuleEditPage = () => {
                 </div>
 
                 <div className="w-full">
-
 
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
@@ -170,17 +173,16 @@ const ModuleEditPage = () => {
 
                                 <FormField
                                     control={form.control}
-                                    name="totalCourse"
+                                    name="imageSrc"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Total Course</FormLabel>
+                                            <FormLabel>Image Src</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     {...field}
-                                                    placeholder="Enter Total Course"
-                                                    type="number"
+                                                    placeholder="Enter Image Path / Name"
+                                                    type="text"
                                                     disabled={isPending}
-                                                    onChange={(e) => field.onChange(Number(e.target.value))}
                                                 />
                                             </FormControl>
                                             <FormMessage />
@@ -210,8 +212,6 @@ const ModuleEditPage = () => {
                                 </div>
 
 
-
-
                             </div>
 
                         </form>
@@ -221,15 +221,11 @@ const ModuleEditPage = () => {
 
 
 
-
-
-
-
-
-
             </div>
         </>
     )
-}
 
-export default ModuleEditPage;
+};
+
+
+export default CourseCreatePage;

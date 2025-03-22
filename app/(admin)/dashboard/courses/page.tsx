@@ -1,25 +1,20 @@
 'use client';
 
-import { getCourse } from "@/app/_services/course-services";
-import { useParams } from "next/navigation";
+import { loadCourses } from "@/app/_services/course-services";
 import { useEffect, useState, useTransition } from "react";
+import Loading from "../modules/loading";
 import Link from "next/link";
-import Loading from "../../modules/loading";
 import { Button } from "@/components/ui/button";
-import { IoArrowBack } from "react-icons/io5";
 import { Eye, Pencil, PlusCircle, Trash } from "lucide-react";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
-import { loadUnits } from "@/app/_services/unit-service";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import CustomPagination from "@/components/common/pagination";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
-const CourseDetailsPage = () => {
-    const params = useParams();
-    const [course, setCourse] = useState<any>();
+const DashboardCoursePage = () => {
 
-    const [units, setUnits] = useState([]);
+    const [courses, setCourses] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -29,19 +24,14 @@ const CourseDetailsPage = () => {
 
     useEffect(() => {
         startTransition(async () => {
-            const courseId = Array.isArray(params.courseId) ? params.courseId[0] : params.courseId;
-            const course = await getCourse(courseId);
-            setCourse(course);
 
-            const response = await loadUnits(currentPage, pageSize, courseId);
-            setUnits(response.data);
+            const response = await loadCourses(currentPage, pageSize);
+            setCourses(response.data);
             setTotalCount(response.totalCount);
             setTotalPage(response.totalPage);
             setCurrentPage(response.currentPage);
-
         })
-    }, [currentPage, pageSize, params.courseId]);
-
+    }, [currentPage, pageSize]);
 
     if (isPending) {
         return <Loading />
@@ -51,62 +41,34 @@ const CourseDetailsPage = () => {
     return (
         <>
             <div className="w-full flex-col">
-                <div className="w-full my-5 p-5 border">
-
-                    <div className="flex justify-between">
-                        <h1 className="text-4xl">Course Details</h1>
-                        <div className="gap-2 flex">
-                            <Link href={`../modules/${course?.moduleId}`}>
-                                <Button size='sm'> <IoArrowBack /> <span>Back</span></Button>
-                            </Link>
-                            <Link href={`./form/${course?._id}`}>
-                                <Button variant='sidebarOutline' size='sm'> <Pencil /> <span>Edit</span></Button>
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className="my-5">
-                        <Breadcrumb>
-                            <BreadcrumbList>
-                                <BreadcrumbItem>
-                                    <Link href="/" className="text-blue-500 hover:underline">Home</Link>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator />
-                                <BreadcrumbItem>
-                                    <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator />
-                                <BreadcrumbItem>
-                                    <Link href="./" className="text-blue-500 hover:underline">Courses</Link>
-                                </BreadcrumbItem>
-                                <BreadcrumbSeparator />
-                                <BreadcrumbItem>
-                                    <BreadcrumbPage>Details</BreadcrumbPage>
-                                </BreadcrumbItem>
-                            </BreadcrumbList>
-                        </Breadcrumb>
-                    </div>
-
-                    <div className="my-5">
-                        <div className="my-5">
-                            <h1 className="text-4xl font-bold">{course?.title}</h1>
-                            {/* <h3>{course?.subTitle}</h3> */}
-                        </div>
-                        <div className="flex justify-start text-xl gap-2">
-                            <div>2348 learner</div>
-                            <div className="flex justify-between gap-2"> 22 courses</div>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
 
                 <div className="w-full my-5 p-5 border">
-                    <div className="flex justify-between">
+
+                    <Breadcrumb>
+                        <BreadcrumbList>
+                            <BreadcrumbItem>
+                                <Link href="/" className="text-blue-500 hover:underline">Home</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <Link href="/dashboard" className="text-blue-500 hover:underline">Dashboard</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <Link href="./" className="text-blue-500 hover:underline">Modules</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbSeparator />
+                            <BreadcrumbItem>
+                                <BreadcrumbPage>Details</BreadcrumbPage>
+                            </BreadcrumbItem>
+                        </BreadcrumbList>
+                    </Breadcrumb>
+
+
+
+                    <div className="flex justify-between mt-5">
                         <div>
-                            <h1 className="text-lg">Unit List</h1>
+                            <h1 className="text-lg">Course List</h1>
                         </div>
                         <div>
                             <Link href="./modules/form">
@@ -128,25 +90,45 @@ const CourseDetailsPage = () => {
                                 <TableHeader>
                                     <TableRow>
                                         <TableHead>Title</TableHead>
-                                        <TableHead>Description</TableHead>
+                                        <TableHead>Modified At</TableHead>
                                         <TableHead>Actiion</TableHead>
                                     </TableRow>
                                 </TableHeader>
 
                                 <TableBody>
                                     {
-                                        units.length ? (
+                                        courses.length ? (
 
-                                            units.map((unit: any) => (
-                                                <TableRow key={unit._id}>
-                                                    <TableCell>{unit.title}</TableCell>
-                                                    <TableCell>{unit.description}</TableCell>
+                                            courses.map((course: any) => (
+                                                <TableRow key={course._id}>
+                                                    <TableCell>{course.title}</TableCell>
+                                                    <TableCell>
+                                                        <div className="flex-col flex">
+                                                            <span>{new Date(course.createdAt).toLocaleString('en', {
+                                                                year: "numeric",
+                                                                month: "short",
+                                                                day: "2-digit",
+                                                                hour: "2-digit",
+                                                                minute: "2-digit",
+                                                            })}</span>
+                                                            {course.createdAt === course.updatedAt ? <></> : (
+                                                                <span>{new Date(course.updatedAt).toLocaleString('en', {
+                                                                    year: "numeric",
+                                                                    month: "short",
+                                                                    day: "2-digit",
+                                                                    hour: "2-digit",
+                                                                    minute: "2-digit",
+                                                                })}</span>
+                                                            )}
+
+                                                        </div>
+                                                    </TableCell>
                                                     <TableCell>
                                                         <div className="flex justify-center gap-1">
-                                                            <Link href={`../units/${unit._id}`}><Button variant='default'
+                                                            <Link href={`../courses/${course._id}`}><Button variant='default'
                                                                 size='sm'><Eye /></Button></Link>
 
-                                                            <Link href={`./modules/form/${unit._id}`}><Button variant='default'
+                                                            <Link href={`./courses/form/${course._id}`}><Button variant='default'
                                                                 size='sm'><span><Pencil /></span></Button></Link>
                                                             <Link href={'#'}><Button variant='destructiveOutline'
                                                                 size='sm'><span><Trash /></span></Button></Link>
@@ -209,9 +191,12 @@ const CourseDetailsPage = () => {
 
 
             </div>
+
         </>
+    );
 
-    )
-};
 
-export default CourseDetailsPage;
+}
+
+
+export default DashboardCoursePage;

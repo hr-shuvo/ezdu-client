@@ -36,3 +36,19 @@ export const getCourse = async (courseId?: any): Promise<any> => {
     return null!;
   }
 };
+
+export const upsertCourse = async (module: any) => {
+  try {
+    const response = await httpClient.post(`/courses/create`, module);
+
+    if (response.status === 201 || response.status === 200) {
+      return { success: response.data };
+    }
+    return { error: response.data };
+  } catch (err: any) {
+    // console.error(err.message);
+    console.error(err);
+
+    return { error: "error" };
+  }
+};

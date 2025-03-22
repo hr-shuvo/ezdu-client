@@ -29,7 +29,7 @@ const AdminLayout = ({children}: Props) => {
         startTransition(async () => {
             const result = await getCurrentUser();
             if (result.success) {
-                console.log('result: ', result);
+                // console.log('result: ', result);
                 login();
             } else {
                 logout()
