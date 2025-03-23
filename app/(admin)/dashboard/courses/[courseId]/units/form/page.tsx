@@ -147,7 +147,7 @@ const UnitCreatePage = () =>{
                                     name="description"
                                     render={({field}) => (
                                         <FormItem>
-                                            <FormLabel>SubTitle</FormLabel>
+                                            <FormLabel>Description</FormLabel>
                                             <FormControl>
                                                 <Input
                                                     {...field}
@@ -173,6 +173,7 @@ const UnitCreatePage = () =>{
                                                     placeholder="order"
                                                     type="number"
                                                     disabled={isPending}
+                                                    onChange={(e) => field.onChange(Number(e.target.value))}
                                                 />
                                             </FormControl>
                                             <FormMessage/>
