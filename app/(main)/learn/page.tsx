@@ -14,7 +14,7 @@ import { Unit } from "./unit";
 const LearnPage = async () => {
     const userProgressData = getUserProgress();
     const courseProgressData = getCourseProgress();
-    const lessonPercentagedata = getLessonPercentage();
+    const lessonPercentageData = getLessonPercentage();
     const unitsData = getUnits();
 
     const [userProgress, units, courseProgress, lessonPercentage] =
@@ -22,7 +22,7 @@ const LearnPage = async () => {
             userProgressData,
             unitsData,
             courseProgressData,
-            lessonPercentagedata,
+            lessonPercentageData,
         ]);
 
     // console.log("user units: ", units);
