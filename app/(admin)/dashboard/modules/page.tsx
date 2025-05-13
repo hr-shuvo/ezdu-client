@@ -27,7 +27,7 @@ import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
 import Loading from "./loading";
 
-const DashboardModulesPage = () => {
+const ModulesPage = () => {
     const [modules, setModules] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
@@ -197,4 +197,4 @@ const DashboardModulesPage = () => {
     )
 };
 
-export default DashboardModulesPage;
+export default ModulesPage;
