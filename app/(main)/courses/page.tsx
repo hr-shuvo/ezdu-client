@@ -43,8 +43,8 @@ const CoursesPage = () => {
 
 
 
-    console.warn("courses data: ", courses);
-    console.warn("progress data: ", userProgress);
+    // console.warn("courses data: ", courses);
+    // console.warn("progress data: ", userProgress);
 
     return (
         <div className="h-full max-w[912px] px-3 mx-auto">

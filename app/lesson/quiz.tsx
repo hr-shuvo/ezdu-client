@@ -69,7 +69,8 @@ const Quize = ({
     const [status, setStatus] = useState<"correct" | "wrong" | "none">("none");
 
     const challenge = challenges[activeIndex];
-    const options = challenge?.options ?? [];
+    const options = challenge?.optionList ?? [];
+    // console.log(challenge);
 
     const onNext = () => {
         setActiveIndex((current) => current + 1);

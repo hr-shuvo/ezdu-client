@@ -6,7 +6,7 @@ export const getUserProgress = async (): Promise<any> => {
 
     return response.data;
   } catch (err: any) {
-    console.error('err: ', err?.response?.data.msg);
+    // console.error('err: ', err?.response?.data.msg);
     return null;
   }
 };
