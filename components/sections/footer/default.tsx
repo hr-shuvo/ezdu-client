@@ -1,4 +1,4 @@
-import { FaDiscord, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import {
   Footer,
   FooterColumn,
@@ -27,9 +27,9 @@ export default function FooterSection() {
               </div>
 
               <div className="flex items-center gap-2 ml-3">
-                <Link href='https://discord.gg/kRZa3WmwSM' target="_blank"> <FaDiscord /></Link>
-                <Link href='#'><FaTwitter /></Link>
+                {/*<Link href='https://discord.gg/kRZa3WmwSM' target="_blank"> <FaDiscord /></Link>*/}
                 <Link href='#'><FaFacebookF /></Link>
+                <Link href='#'><FaTwitter /></Link>
               </div>
             </FooterColumn>
 
@@ -48,7 +48,7 @@ export default function FooterSection() {
 
             <FooterColumn>
               <h2 className="text-md pt-1 font-semibold">Contact</h2>
-              <Link href='https://discord.gg/kRZa3WmwSM' target="_blank" className="text-sm text-muted-foreground ">Discord</Link>
+              {/*<Link href='https://discord.gg/kRZa3WmwSM' target="_blank" className="text-sm text-muted-foreground ">Discord</Link>*/}
               <Link href="#" className="text-sm text-muted-foreground">Twitter</Link>
               <Link href="#" className="text-sm text-muted-foreground">Facebook</Link>
             </FooterColumn>
