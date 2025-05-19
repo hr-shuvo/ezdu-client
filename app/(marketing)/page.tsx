@@ -8,6 +8,7 @@ import Image from "next/image";
 import { getCurrentUser } from "@/services/authService";
 import { CourseModule } from "./course-module";
 import { CoolMode } from "@/components/magicui/cool-mode";
+import { SchoolBanner } from "@/app/(marketing)/banner/school-banner";
 
 export default function Home() {
     const { isLoggedIn, login, logout } = userLoginStatus();
@@ -29,9 +30,9 @@ export default function Home() {
 
     return (
 
-        <div className="">
+        <div className="w-full flex flex-col items-center">
 
-            <div className="max-w-[988px] max-auto w-full flex-1  flex flex-col lg:flex-row items-center justify-center p-4 gap-2 my-10">
+            <div className="w-full max-w-[988px] flex flex-col lg:flex-row items-center justify-center p-4 gap-2">
                 <div className="relative w-[380px] h-[380px] lg:w[424px] lg:h-[424px mb-8 lg:mb-0">
                     <Image src="/logo/logo_bgw.gif" alt="hero" fill />
                 </div>
@@ -62,7 +63,13 @@ export default function Home() {
 
             </div>
 
-            <div className="max-w-[988px] max-auto w-full flex-1  flex flex-col lg:flex-row items-center justify-center p-4 gap-2">
+
+
+            <div className="flex justify-center w-full max-w-[1228px] mb-8">
+                <SchoolBanner/>
+            </div>
+
+            <div className="w-full max-w-[988px] flex flex-col lg:flex-row items-center justify-center p-4 gap-2">
                 <CourseModule />
             </div>
 

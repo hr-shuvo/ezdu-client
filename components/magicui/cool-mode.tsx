@@ -30,7 +30,7 @@ export interface CoolParticleOptions extends BaseParticleOptions {
 
 const getContainer = () => {
   const id = "_coolMode_effect";
-  let existingContainer = document.getElementById(id);
+  const existingContainer = document.getElementById(id);
 
   if (existingContainer) {
     return existingContainer;
@@ -227,8 +227,20 @@ interface CoolModeProps {
   options?: CoolParticleOptions;
 }
 
+// export const CoolMode: React.FC<CoolModeProps> = ({ children, options }) => {
+//   const ref = useRef<HTMLElement>(null);
+//
+//   useEffect(() => {
+//     if (ref.current) {
+//       return applyParticleEffect(ref.current, options);
+//     }
+//   }, [options]);
+//
+//   return React.cloneElement(children as React.ReactElement, { ref });
+// };
+
 export const CoolMode: React.FC<CoolModeProps> = ({ children, options }) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (ref.current) {
@@ -236,5 +248,5 @@ export const CoolMode: React.FC<CoolModeProps> = ({ children, options }) => {
     }
   }, [options]);
 
-  return React.cloneElement(children as React.ReactElement, { ref });
+  return <div ref={ref}>{children}</div>;
 };
