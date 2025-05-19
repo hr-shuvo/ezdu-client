@@ -50,9 +50,12 @@ export const Header = () => {
         <header className="h-20 w-full border-b-2 border-slate-200 px-4">
             <div className="lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
                 <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
-                    <h1 className="text-2xl font-extrabold text-sky-400 tracking-wide">
-                        e<span className="text-sky-400">z </span>du
-                    </h1>
+                    <Link href="/">
+                        <h1 className="text-2xl font-extrabold text-sky-400 tracking-wide">
+                            e<span className="text-sky-400">z </span>du
+                        </h1>
+                    </Link>
+
                 </div>
 
                 <div>
@@ -64,7 +67,7 @@ export const Header = () => {
                                     <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                                         <li className="row-span-3">
                                             <NavigationMenuLink asChild>
-                                                <a
+                                                <Link
                                                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                                                     href="/"
                                                 >
@@ -77,7 +80,7 @@ export const Header = () => {
                                                         paste into your apps. Accessible. Customizable. Open
                                                         Source.
                                                     </p>
-                                                </a>
+                                                </Link>
                                             </NavigationMenuLink>
                                         </li>
                                         <ListItem href="/docs" title="Introduction">

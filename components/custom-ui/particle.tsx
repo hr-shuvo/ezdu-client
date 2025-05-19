@@ -12,8 +12,8 @@ type Props = {
 
 export const Particle = ({
                              title,
-                             height = '450px',
-                             textSize = 'text-6xl',
+                             // height = '450px',
+                             // textSize = 'text-6xl',
                          }: Props) => {
     const {resolvedTheme} = useTheme();
     const [color, setColor] = useState("#ffffff");

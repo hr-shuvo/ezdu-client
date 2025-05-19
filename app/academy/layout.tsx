@@ -1,5 +1,6 @@
 import React from "react";
 import { Header } from "@/app/academy/header";
+import { Footer } from "@/app/academy/footer";
 
 type Props = {
     children: React.ReactNode
@@ -16,6 +17,7 @@ const AcademyLayout = ({children}:Props) =>{
                     {children}
                 </div>
             </main>
+            <Footer/>
         </>
     )
 };
