@@ -12,7 +12,7 @@ type Props = {
 
 export const Particle = ({
                              title,
-                             height = '150px',
+                             height = '450px',
                              textSize = 'text-6xl',
                          }: Props) => {
     const {resolvedTheme} = useTheme();
@@ -24,14 +24,13 @@ export const Particle = ({
 
     return (
         <div
-            className={`relative flex h-[${height}] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background`}>
-                      <span
-                          className={`pointer-events-none z-10 whitespace-pre-wrap text-center ${textSize} font-semibold leading-none`}>
-                        {title}
-                      </span>
+            className={`relative flex h-[150px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background`}>
+      <span className="pointer-events-none z-10 whitespace-pre-wrap text-center text-7xl font-semibold leading-none">
+        {title}
+      </span>
             <Particles
                 className="absolute inset-0 z-0"
-                quantity={500}
+                quantity={100}
                 ease={80}
                 color={color}
                 refresh
