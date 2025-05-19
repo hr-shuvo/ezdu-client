@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { getCurrentUser } from "@/services/authService";
 import { CourseModule } from "./course-module";
+import { CoolMode } from "@/components/magicui/cool-mode";
 
 export default function Home() {
     const { isLoggedIn, login, logout } = userLoginStatus();
@@ -42,14 +43,16 @@ export default function Home() {
 
                     {isLoggedIn ? (
                         <div>
-                            <Button
-                                size="lg"
-                                variant="primary"
-                                className="w-full"
-                                asChild
-                            >
-                                <Link href="/learn">Continue Learning</Link>
-                            </Button>
+                            <CoolMode>
+                                <Button
+                                    size="lg"
+                                    variant="primary"
+                                    className="w-full"
+                                    asChild
+                                >
+                                    <Link href="/learn">Continue Learning</Link>
+                                </Button>
+                            </CoolMode>
                         </div>
                     ) : (
                         <div></div>
