@@ -18,9 +18,9 @@ const AcademyPage = () =>{
     }
 
     const toggleItems = [
-        { value: "bold", title:"Bangla 1st Paper", icon: <Bold className="h-4 w-4" /> },
-        { value: "italic", title:"Bangla Secong Paper", icon: <Italic className="h-4 w-4" /> },
-        { value: "underline", title:"General Math", icon: <Underline className="h-4 w-4" /> },
+        { value: "bold", title:"Class 9", icon: <Bold className="h-4 w-4" /> },
+        { value: "italic", title:"Class 10", icon: <Italic className="h-4 w-4" /> },
+        { value: "underline", title:"Class 11", icon: <Underline className="h-4 w-4" /> },
     ]
 
     useEffect(() => {
