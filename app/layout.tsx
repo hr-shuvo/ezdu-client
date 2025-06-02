@@ -12,7 +12,7 @@ const font = Nunito({
 
 export const metadata: Metadata = {
     title: "eZducation",
-    description: "Learn, parctice and master with Ez Du",
+    description: "Learn, parctice and master with EzDu",
 };
 
 export default function RootLayout({
