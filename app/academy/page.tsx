@@ -3,25 +3,33 @@
 import { Particle } from "@/components/custom-ui/particle";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Bold, Italic, Underline } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
+import { loadAcademicClass } from "../_services/academy/academyService";
 
-const AcademyPage = () =>{
+const AcademyPage = () => {
+    const[isPending, startTransition] = useTransition();
 
     const [selectedItems, setSelectedItems] = useState<string[]>([])
+    // const [selectedItem, setSelectedItem] = useState<string>()
+
+    const [classes, setClasses] = useState<any>([])
 
     const handleToggleChange = (values: string[]) => {
         setSelectedItems(values)
     }
 
-    const toggleItems = [
-        { value: "bold", title:"Class 9", icon: <Bold className="h-4 w-4" /> },
-        { value: "italic", title:"Class 10", icon: <Italic className="h-4 w-4" /> },
-        { value: "underline", title:"Class 11", icon: <Underline className="h-4 w-4" /> },
-    ]
+    useEffect(() => {
+        startTransition(async() =>{
+            const _classes = await loadAcademicClass(1, 1000);
+            setClasses(_classes.data);
+        });
+    },[]);
+
+
 
     useEffect(() => {
         console.log("Selected:", selectedItems)
@@ -52,11 +60,11 @@ const AcademyPage = () =>{
                             value={selectedItems}
                         >
                             {
-                                toggleItems.map((item, index) => (
+                                classes.map((item:{_id:string, title:string}, index:number) => (
                                     <ToggleGroupItem
                                         key={index}
-                                        value={item.value}
-                                        aria-label={`Toggle ${item.value}`}
+                                        value={item._id}
+                                        aria-label={`Toggle ${item._id}`}
                                         className='w-full'
                                     >
                                         <h1 className='font-bold'>{item.title}</h1>
@@ -71,7 +79,7 @@ const AcademyPage = () =>{
 
                 </div>
 
-                <Separator orientation='vertical' className="h-auto w-[1px]"/>
+                <Separator orientation='vertical' className="h-auto w-[1px]" />
 
                 <div className=' md:w-3/4 w-full p-4'>
                     <div className='mb-2'>
@@ -83,8 +91,8 @@ const AcademyPage = () =>{
 
                             <TableBody>
                                 {
-                                    toggleItems.length > 0 && (
-                                        toggleItems.map((item, index) => (
+                                    classes.length > 0 && (
+                                        classes.map((item:any, index:number) => (
                                             <TableRow key={index}>
                                                 <TableCell>
                                                     <div>
@@ -131,3 +139,5 @@ const AcademyPage = () =>{
 };
 
 export default AcademyPage;
+
+
