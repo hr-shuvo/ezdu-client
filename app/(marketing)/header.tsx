@@ -5,6 +5,7 @@ import Link from "next/link";
 import { logout as logoutUser } from "../actions/auth";
 import { userLoginStatus } from "@/store/user-auth";
 import React from "react";
+import { NavMenu } from "@/components/layout/nav/nav-menu";
 
 export const Header = () => {
     const { isLoggedIn, logout } = userLoginStatus();
@@ -18,6 +19,10 @@ export const Header = () => {
                             e<span className="text-sky-400">z </span>du
                         </h1>
                     </Link>
+                </div>
+
+                <div>
+                    <NavMenu/>
                 </div>
 
                 <div>

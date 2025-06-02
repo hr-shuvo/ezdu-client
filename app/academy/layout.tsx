@@ -6,10 +6,8 @@ type Props = {
     children: React.ReactNode
 }
 
-
-
-const AcademyLayout = ({children}:Props) =>{
-    return(
+const AcademyLayout = ({ children }: Props) => {
+    return (
         <>
             <Header />
             <main className='h-full pt-[50px] lg:pt-0 px-48'>
@@ -17,7 +15,7 @@ const AcademyLayout = ({children}:Props) =>{
                     {children}
                 </div>
             </main>
-            <Footer/>
+            <Footer />
         </>
     )
 };
