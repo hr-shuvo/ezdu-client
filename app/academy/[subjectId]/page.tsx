@@ -16,6 +16,7 @@ import { Column } from 'primereact/column';
 import { classNames } from "primereact/utils";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { TreeNode } from "primereact/treenode";
 
 
 const AcademySubjectPage = () => {
@@ -25,7 +26,10 @@ const AcademySubjectPage = () => {
     const [subject, setSubject] = useState<any>();
     const [lessons, setLessons] = useState<any>([]);
 
+    const [expandedKeys, setExpandedKeys] = useState({});
+
     useEffect(() => {
+        setExpandedKeys({});
         startTransition(async () => {
             const subjectId = Array.isArray(params.subjectId) ? params.subjectId[0] : params.subjectId;
             const _subject = await getAcademicSubject(subjectId);
@@ -40,17 +44,33 @@ const AcademySubjectPage = () => {
     }, [params.subjectId]);
 
 
-    const toPrimeReactTree = (list: any) => {
-        return list.map((node: any) => ({
-            key: node._id,
-            name: node.title,
-            data: {
-                title: node.title,
-                subTitle: node.subTitle,
-                description: node.description
-            },
-            children: node.children ? toPrimeReactTree(node.children) : []
-        }));
+    const toPrimeReactTree = (list: any[]): TreeNode[] => {
+        const _expandedKeys: { [key: string]: boolean } = {};
+
+
+        const tree = list.map((node: any) => {
+
+            const hasChildren = node.children && node.children.length > 0;
+
+            if(hasChildren){
+                _expandedKeys[node._id] = true;
+            }
+
+            return {
+                key: node._id,
+                name: node.title,
+                data: {
+                    title: node.title,
+                    subTitle: node.subTitle,
+                    description: node.description
+                },
+                children: node.children ? toPrimeReactTree(node.children) : []
+            }
+        });
+
+        setExpandedKeys(_expandedKeys);
+
+        return tree;
     };
 
 
@@ -81,6 +101,7 @@ const AcademySubjectPage = () => {
                         <TreeTable
                             value={lessons}
                             tableStyle={{ minWidth: '' }}
+                            expandedKeys={expandedKeys}
                             rowClassName={() => ({ 'h-24 hover:shadow-lg hover:bg-gray-100 border-b border-gray-300': true })}
                         >
                             <Column expander
@@ -107,7 +128,8 @@ const AcademySubjectPage = () => {
                                             !rowData.children?.length && (
                                                 <div className='flex justify-around gap-3 mt-5'>
 
-                                                    <Button variant='primaryOutline' size={'xsm'}>tag</Button>
+                                                    <Button variant='primaryOutline' size={'xsm'}>MCQ</Button>
+                                                    <Button variant='superOutline' size={'xsm'}>Model Test</Button>
 
                                                 </div>
                                             )
@@ -121,52 +143,6 @@ const AcademySubjectPage = () => {
                             <Column field="subTitle" header="Subtitle" />
                         </TreeTable>
                     </div>
-
-
-
-
-                    <div className="mt-5">
-                        <Table className='w-full  [&>tbody>tr:nth-child(even)]:bg-gray-50'>
-                            <TableBody>
-                                {
-                                    lessons.length > 0 && (
-                                        lessons.map((item: any, index: number) => (
-                                            <TableRow key={index}>
-                                                <TableCell>
-                                                    <div>
-                                                        <div>
-                                                            <h1 className='text-3xl font-bold'>{item.title}</h1>
-
-                                                        </div>
-
-                                                        <div className='flex justify-around gap-3 mt-5'>
-
-                                                            <Button variant='primaryOutline' size={'xsm'}>tag</Button>
-
-                                                        </div>
-                                                    </div>
-                                                </TableCell>
-
-                                                <TableCell>
-                                                    {item.hasSubjectPaper ? (
-                                                        <Button variant='primaryOutline' size={'xsm'}>True</Button>
-
-                                                    ) : (
-                                                        <Button variant='primaryOutline' size={'xsm'}>False</Button>
-
-                                                    )}
-
-                                                </TableCell>
-
-                                            </TableRow>
-                                        ))
-                                    )
-                                }
-
-                            </TableBody>
-                        </Table>
-                    </div>
-
 
                 </div>
 
