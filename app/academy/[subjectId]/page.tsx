@@ -11,6 +11,13 @@ import { Search } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 
+import { TreeTable } from 'primereact/treetable';
+import { Column } from 'primereact/column';
+import { classNames } from "primereact/utils";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+
+
 const AcademySubjectPage = () => {
     const params = useParams();
     const [isPending, startTransition] = useTransition();
@@ -25,13 +32,29 @@ const AcademySubjectPage = () => {
             setSubject(_subject);
 
             const _lessons = await loadAcademicLesson(1, 1000, subjectId)
-            setLessons(_lessons.data);
+            setLessons(toPrimeReactTree(_lessons.data));
 
             console.log(_lessons.data);
         });
 
-
     }, [params.subjectId]);
+
+
+    const toPrimeReactTree = (list: any) => {
+        return list.map((node: any) => ({
+            key: node._id,
+            name: node.title,
+            data: {
+                title: node.title,
+                subTitle: node.subTitle,
+                description: node.description
+            },
+            children: node.children ? toPrimeReactTree(node.children) : []
+        }));
+    };
+
+
+
 
     if (isPending) {
         return (
@@ -55,6 +78,54 @@ const AcademySubjectPage = () => {
                     </div>
 
                     <div>
+                        <TreeTable
+                            value={lessons}
+                            tableStyle={{ minWidth: '' }}
+                            rowClassName={() => ({ 'h-24 hover:shadow-lg hover:bg-gray-100 border-b border-gray-300': true })}
+                        >
+                            <Column expander
+                                style={{ width: '3rem', minWidth: '3rem', textAlign: 'center' }}
+                            />
+                            <Column
+                                field="title"
+                                header="Title"
+                                className=""
+                                body={(rowData) => (
+                                    <div>
+                                        <div>
+                                            <Link href={'#'}>
+                                                <h1 className="font-bold text-3xl">{rowData.name}</h1>
+                                                {
+                                                    rowData.children?.length > 0 && (
+                                                        <Badge className="">{rowData.children?.length} items</Badge>
+                                                    )
+                                                }
+                                            </Link>
+                                        </div>
+
+                                        {
+                                            !rowData.children?.length && (
+                                                <div className='flex justify-around gap-3 mt-5'>
+
+                                                    <Button variant='primaryOutline' size={'xsm'}>tag</Button>
+
+                                                </div>
+                                            )
+                                        }
+
+
+                                    </div>
+
+                                )}
+                            />
+                            <Column field="subTitle" header="Subtitle" />
+                        </TreeTable>
+                    </div>
+
+
+
+
+                    <div className="mt-5">
                         <Table className='w-full  [&>tbody>tr:nth-child(even)]:bg-gray-50'>
                             <TableBody>
                                 {
