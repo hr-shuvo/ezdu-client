@@ -22,12 +22,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${font.className} `}>
+            <body className={`${font.className} flex flex-col min-h-screen`}>
+                <main className="flex-grow">
+                    {children}
+                </main>
                 <Toaster />
                 <ExitModal />
                 <HeartsModal />
                 <PracticeModal />
-                {children}
             </body>
         </html>
     );

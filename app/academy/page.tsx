@@ -9,6 +9,9 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { loadAcademicClass } from "../_services/academy/academyService";
+import { loadAcademicSubject } from "../_services/academy/academySubjectService";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import CustomPagination from "@/components/common/pagination";
 
 const AcademyPage = () => {
     const[isPending, startTransition] = useTransition();
@@ -16,7 +19,13 @@ const AcademyPage = () => {
     const [selectedItems, setSelectedItems] = useState<string[]>([])
     // const [selectedItem, setSelectedItem] = useState<string>()
 
-    const [classes, setClasses] = useState<any>([])
+    const [classes, setClasses] = useState<any>([]);
+    const [subjects, setSubjects] = useState<any>([]);
+
+    const [totalCount, setTotalCount] = useState(0);
+    const [totalPage, setTotalPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
     const handleToggleChange = (values: string[]) => {
         setSelectedItems(values)
@@ -28,6 +37,16 @@ const AcademyPage = () => {
             setClasses(_classes.data);
         });
     },[]);
+
+    useEffect(() =>{
+        startTransition(async () =>{
+            const response = await loadAcademicSubject("", currentPage, pageSize, undefined, selectedItems);
+            setSubjects(response.data);
+            setTotalCount(response.totalCount);
+            setTotalPage(response.totalPage);
+            setCurrentPage(response.currentPage);
+        });
+    }, [currentPage, pageSize]);
 
 
 
@@ -91,8 +110,8 @@ const AcademyPage = () => {
 
                             <TableBody>
                                 {
-                                    classes.length > 0 && (
-                                        classes.map((item:any, index:number) => (
+                                    subjects.length > 0 && (
+                                        subjects.map((item:any, index:number) => (
                                             <TableRow key={index}>
                                                 <TableCell>
                                                     <div>
@@ -131,6 +150,33 @@ const AcademyPage = () => {
                         </Table>
 
                     </div>
+
+                    <div className="flex items-center justify-between space-x-2 py-4">
+                            <div className="flex items-center text-sm text-muted-foreground gap-2">
+                                <div>{totalCount} items found</div>
+                                <div>
+                                    <Select value={pageSize.toString()}
+                                            onValueChange={(value) => setPageSize(Number(value))}>
+                                        <SelectTrigger className="w-[100px]">
+                                            <SelectValue placeholder="Theme"/>
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="5">5</SelectItem>
+                                            <SelectItem value="10">10</SelectItem>
+                                            <SelectItem value="20">20</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            </div>
+
+                            <div className="space-x-2">
+                                <CustomPagination
+                                    totalPage={totalPage}
+                                    currentPage={currentPage}
+                                    onPageChange={setCurrentPage}
+                                />
+                            </div>
+                        </div>
 
                 </div>
             </div>
