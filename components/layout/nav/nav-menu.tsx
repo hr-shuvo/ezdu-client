@@ -16,26 +16,26 @@ export const NavMenu = () => {
                                 <li className="row-span-3">
                                     <NavigationMenuLink asChild>
                                         <Link
-                                            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                                            className="hover:shadow flex h-full w-full select-none flex-col justify-center rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                                             href="/academy/quiz"
                                         >
                                             <div className="mb-2 text-lg font-medium">
                                                 Mock/Test
                                             </div>
                                             <p className="text-sm leading-tight text-muted-foreground">
-                                                Comprehensive mock exams replicating real test environments to build confidence and precision.
+                                                Take real-style exams with instant results and performance review.
                                             </p>
                                         </Link>
                                     </NavigationMenuLink>
                                 </li>
                                 <ListItem href="/academy" title="Study Practice">
-                                    Chapter-wise lessons and exercises directly aligned with textbook content for focused learning.
+                                    Read from the book, get solutions, and practice similar questions
                                 </ListItem>
                                 <ListItem href="/academy/quiz" title="Quick Test & Quiz">
-                                    Rapid quizzes and short tests to reinforce understanding and boost retention.
+                                    Short MCQs and quizzes to test your topic understanding.
                                 </ListItem>
                                 <ListItem href="/academy/model-test" title="Model Test">
-                                    Full-length exam simulations designed to reflect actual test formats and build exam readiness.
+                                    Full-length tests to practice in real exam style
                                 </ListItem>
                             </ul>
                         </NavigationMenuContent>

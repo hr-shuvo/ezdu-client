@@ -29,3 +29,18 @@ export const loadAcademicSubject = async (query: string, page: number, size: num
         return {} as PaginatedList;
     }
 };
+
+
+export const getAcademicSubject = async (id?: any): Promise<any> => {
+    try {
+        const response = await httpClient.get<any>(`/academy/subjects/${id}`);
+        // console.log(response)
+
+        return response.data;
+    } catch (err: any) {
+        // console.error(err.message);
+        console.error(err);
+
+        return null!;
+    }
+};

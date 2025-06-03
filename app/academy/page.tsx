@@ -14,6 +14,7 @@ import CustomPagination from "@/components/common/pagination";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import ADSense from "@/components/Ads/AdSense";
+import Link from "next/link";
 
 const AcademyPage = () => {
     const [isPending, startTransition] = useTransition();
@@ -134,7 +135,9 @@ const AcademyPage = () => {
 
                                                 <TableCell>
                                                     <div>
-                                                        <InteractiveHoverButton>Read</InteractiveHoverButton>
+                                                        <Link href={`./academy/${item._id}`}>
+                                                            <InteractiveHoverButton>Read</InteractiveHoverButton>
+                                                        </Link>
                                                     </div>
 
                                                 </TableCell>
