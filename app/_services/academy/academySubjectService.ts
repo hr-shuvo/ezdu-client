@@ -2,16 +2,14 @@ import httpClient from "@/app/utils/httpClient";
 import { PaginatedList } from "@/app/utils/pagination";
 
 
-
-
-export const loadAcademicSubject = async (query:string, page: number, size: number, classId?: string, classIds?: string[]): Promise<PaginatedList> => {
+export const loadAcademicSubject = async (query: string, page: number, size: number, classId?: string, classIds?: string[]): Promise<PaginatedList> => {
     try {
         const params: Record<string, any> = {
             pg: page,
             sz: size
         };
 
-        if(query){
+        if (query) {
             params.query = query;
         }
 
@@ -19,11 +17,11 @@ export const loadAcademicSubject = async (query:string, page: number, size: numb
             params.classId = classId;
         }
 
-        if (classIds?.length  && classIds) {
+        if (classIds?.length && classIds) {
             params.classIds = classIds;
         }
 
-        const response = await httpClient.get<PaginatedList>("/academy/subjects", {params: params});
+        const response = await httpClient.get<PaginatedList>("/academy/subjects", { params: params });
 
         return response.data;
     } catch (err: any) {

@@ -2,7 +2,6 @@
 
 import { Particle } from "@/components/custom-ui/particle";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Bold, Italic, Underline } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
@@ -12,9 +11,12 @@ import { loadAcademicClass } from "../_services/academy/academyService";
 import { loadAcademicSubject } from "../_services/academy/academySubjectService";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import CustomPagination from "@/components/common/pagination";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import ADSense from "@/components/Ads/AdSense";
 
 const AcademyPage = () => {
-    const[isPending, startTransition] = useTransition();
+    const [isPending, startTransition] = useTransition();
 
     const [selectedItems, setSelectedItems] = useState<string[]>([])
     // const [selectedItem, setSelectedItem] = useState<string>()
@@ -32,34 +34,29 @@ const AcademyPage = () => {
     }
 
     useEffect(() => {
-        startTransition(async() =>{
+        startTransition(async () => {
             const _classes = await loadAcademicClass(1, 1000);
             setClasses(_classes.data);
         });
-    },[]);
+    }, []);
 
-    useEffect(() =>{
-        startTransition(async () =>{
+    useEffect(() => {
+        startTransition(async () => {
             const response = await loadAcademicSubject("", currentPage, pageSize, undefined, selectedItems);
             setSubjects(response.data);
             setTotalCount(response.totalCount);
             setTotalPage(response.totalPage);
             setCurrentPage(response.currentPage);
         });
-    }, [currentPage, pageSize]);
+    }, [currentPage, pageSize, selectedItems]);
 
 
-
-    useEffect(() => {
-        console.log("Selected:", selectedItems)
-
-    }, [selectedItems])
 
 
     return (
         <>
             <div>
-                <Particle title={'Courses'} />
+                <Particle title={'Subjects'} />
             </div>
 
 
@@ -77,9 +74,10 @@ const AcademyPage = () => {
                             className='flex flex-col'
                             onValueChange={handleToggleChange}
                             value={selectedItems}
+                            disabled={isPending}
                         >
                             {
-                                classes.map((item:{_id:string, title:string}, index:number) => (
+                                classes.map((item: { _id: string, title: string }, index: number) => (
                                     <ToggleGroupItem
                                         key={index}
                                         value={item._id}
@@ -101,8 +99,9 @@ const AcademyPage = () => {
                 <Separator orientation='vertical' className="h-auto w-[1px]" />
 
                 <div className=' md:w-3/4 w-full p-4'>
-                    <div className='mb-2'>
-                        Search and others
+                    <div className='mb-2 flex gap-2'>
+                        <Input placeholder="search" />
+                        <Button variant={'outline'} className="w-5"><Search className="" /></Button>
                     </div>
 
                     <div>
@@ -111,7 +110,7 @@ const AcademyPage = () => {
                             <TableBody>
                                 {
                                     subjects.length > 0 && (
-                                        subjects.map((item:any, index:number) => (
+                                        subjects.map((item: any, index: number) => (
                                             <TableRow key={index}>
                                                 <TableCell>
                                                     <div>
@@ -152,33 +151,40 @@ const AcademyPage = () => {
                     </div>
 
                     <div className="flex items-center justify-between space-x-2 py-4">
-                            <div className="flex items-center text-sm text-muted-foreground gap-2">
-                                <div>{totalCount} items found</div>
-                                <div>
-                                    <Select value={pageSize.toString()}
-                                            onValueChange={(value) => setPageSize(Number(value))}>
-                                        <SelectTrigger className="w-[100px]">
-                                            <SelectValue placeholder="Theme"/>
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="5">5</SelectItem>
-                                            <SelectItem value="10">10</SelectItem>
-                                            <SelectItem value="20">20</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                            </div>
-
-                            <div className="space-x-2">
-                                <CustomPagination
-                                    totalPage={totalPage}
-                                    currentPage={currentPage}
-                                    onPageChange={setCurrentPage}
-                                />
+                        <div className="flex items-center text-sm text-muted-foreground gap-2">
+                            <div>{totalCount} items found</div>
+                            <div>
+                                <Select value={pageSize.toString()}
+                                    onValueChange={(value) => setPageSize(Number(value))}>
+                                    <SelectTrigger className="w-[100px]">
+                                        <SelectValue placeholder="Theme" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="5">5</SelectItem>
+                                        <SelectItem value="10">10</SelectItem>
+                                        <SelectItem value="20">20</SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
                         </div>
 
+                        <div className="space-x-2">
+                            <CustomPagination
+                                totalPage={totalPage}
+                                currentPage={currentPage}
+                                onPageChange={setCurrentPage}
+                            />
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+
+
+
+
+            <div className="mt-5 w-full">
+                <ADSense />
             </div>
         </>
     )

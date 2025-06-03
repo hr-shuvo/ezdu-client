@@ -15,11 +15,11 @@ export const loadAcademicClass = async (page: number, size: number, level?: stri
             params.version = version;
         }
 
-        if (level && level !='all') {
+        if (level && level != 'all') {
             params.level = level;
         }
 
-        const response = await httpClient.get<PaginatedList>("/academy/classes", {params: params});
+        const response = await httpClient.get<PaginatedList>("/academy/classes", { params: params });
 
         return response.data;
     } catch (err: any) {
