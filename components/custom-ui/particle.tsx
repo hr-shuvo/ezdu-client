@@ -25,7 +25,7 @@ export const Particle = ({
     return (
         <div
             className={`relative flex h-[150px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background`}>
-      <span className="pointer-events-none z-10 whitespace-pre-wrap text-center text-7xl font-semibold leading-none">
+      <span className="pointer-events-none  whitespace-pre-wrap text-center text-7xl font-semibold leading-none">
         {title}
       </span>
             <Particles

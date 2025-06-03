@@ -21,7 +21,7 @@ export const Header = () => {
                     </Link>
                 </div>
 
-                <div>
+                <div className="z-20">
                     <NavMenu/>
                 </div>
 
