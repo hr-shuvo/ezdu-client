@@ -175,7 +175,7 @@ const AcademySubjectPage = () => {
                             {subjects.length > 0 &&
                                 subjects.map((item: { _id: string, title: string }, index: number) => (
 
-                                    <div className="flex flex-col gap-2 mb-2 hover:border-b-4" key={item._id}>
+                                    <div className="flex flex-col gap-2 mb-2 hover:border-b-4" key={index}>
 
                                         <div className="flex item-center justify-between">
                                             <Link href={'#'} className="p-2">
