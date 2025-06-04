@@ -1,6 +1,7 @@
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
 import { Card } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 
@@ -43,7 +44,7 @@ export const SchoolBanner = () => {
 
                 <div className='px-10 text-green-900 font-bold'>
                     <h1 className='flex justify-center'>
-                        <a href="/academy" className='hover:underline hover:cursor-pointer'>Complete Class 6 to 12 Study Material and Solutions</a><ArrowRight/>
+                        <Link href="/academy" className='hover:underline hover:cursor-pointer'>Complete Class 6 to 12 Study Material and Solutions</Link><ArrowRight/>
                     </h1>
                 </div>
 
@@ -79,7 +80,7 @@ export const SchoolBanner = () => {
 
                 <div className='px-10 text-green-900 font-bold'>
                     <h1 className='flex justify-center'>
-                        <a href="#" className='hover:underline hover:cursor-pointer'>Effective SSC and HSC Exam Practice and Revision</a><ArrowRight/>
+                        <Link href="#" className='hover:underline hover:cursor-pointer'>Effective SSC and HSC Exam Practice and Revision</Link><ArrowRight/>
                     </h1>
                 </div>
 

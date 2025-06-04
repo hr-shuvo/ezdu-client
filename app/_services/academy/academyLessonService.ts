@@ -3,12 +3,12 @@ import { PaginatedList } from "@/app/utils/pagination";
 
 
 
-export const loadAcademicLesson = async (page: number, size: number, subjectId?: string): Promise<PaginatedList> => {
+export const loadAcademicLesson = async (page: number, size: number, subjectId?: string, isTree=true): Promise<PaginatedList> => {
     try {
         const params: Record<string, any> = {
             pg: page,
             sz: size,
-            isTree:true
+            isTree:isTree
         };
 
         if (subjectId) {
