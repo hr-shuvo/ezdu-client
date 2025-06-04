@@ -59,6 +59,7 @@ const AcademySubjectPage = () => {
                 key: node._id,
                 name: node.title,
                 data: {
+                    id: node._id,
                     title: node.title,
                     subTitle: node.subTitle,
                     description: node.description
@@ -113,7 +114,7 @@ const AcademySubjectPage = () => {
                                                 <h1 className="text-3xl">{rowData.name}</h1>
                                                 {
                                                     rowData.children?.length > 0 && (
-                                                        <Badge className="">{rowData.children?.length} items</Badge>
+                                                        <Badge className="" variant={'secondary'}>{rowData.children?.length} items</Badge>
                                                     )
                                                 }
                                             </Link>
@@ -136,6 +137,25 @@ const AcademySubjectPage = () => {
                                 )}
                             />
                             <Column field="subTitle" header="Subtitle" />
+                            <Column
+                                field="id"
+                                style={{ textAlign: 'end' }}
+                                body={(rowData) => (
+
+                                    <div className="">
+                                        {
+                                            !rowData.children?.length && (
+                                                <Link href={`./c/${rowData.key}`}>
+                                                <Button>Read</Button>
+                                                </Link>
+                                            )
+                                        }
+
+                                    </div>
+
+
+                                )
+                                } />
                         </TreeTable>
                     </div>
 
