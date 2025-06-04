@@ -2,21 +2,20 @@
 
 import Loading from "@/app/(main)/courses/loading";
 import { loadAcademicLesson } from "@/app/_services/academy/academyLessonService";
-import { getAcademicSubject } from "@/app/_services/academy/academySubjectService";
+import { getAcademicSubject, loadAcademicSubject } from "@/app/_services/academy/academySubjectService";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Search } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 
 import { TreeTable } from 'primereact/treetable';
 import { Column } from 'primereact/column';
-import { classNames } from "primereact/utils";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { TreeNode } from "primereact/treenode";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
 
 const AcademySubjectPage = () => {
@@ -24,6 +23,7 @@ const AcademySubjectPage = () => {
     const [isPending, startTransition] = useTransition();
 
     const [subject, setSubject] = useState<any>();
+    const [subjects, setSubjects] = useState<any>([]);
     const [lessons, setLessons] = useState<any>([]);
 
     const [expandedKeys, setExpandedKeys] = useState({});
@@ -34,6 +34,8 @@ const AcademySubjectPage = () => {
             const subjectId = Array.isArray(params.subjectId) ? params.subjectId[0] : params.subjectId;
             const _subject = await getAcademicSubject(subjectId);
             setSubject(_subject);
+            const _subjects = await loadAcademicSubject('', 1, 100, _subject.classId);
+            setSubjects(_subjects.data);
 
             const _lessons = await loadAcademicLesson(1, 1000, subjectId)
             setLessons(toPrimeReactTree(_lessons.data));
@@ -47,12 +49,9 @@ const AcademySubjectPage = () => {
     const toPrimeReactTree = (list: any[]): TreeNode[] => {
         const _expandedKeys: { [key: string]: boolean } = {};
 
-
         const tree = list.map((node: any) => {
-
             const hasChildren = node.children && node.children.length > 0;
-
-            if(hasChildren){
+            if (hasChildren) {
                 _expandedKeys[node._id] = true;
             }
 
@@ -69,11 +68,8 @@ const AcademySubjectPage = () => {
         });
 
         setExpandedKeys(_expandedKeys);
-
         return tree;
     };
-
-
 
 
     if (isPending) {
@@ -82,16 +78,15 @@ const AcademySubjectPage = () => {
         )
     }
 
-
     return (
         <>
-            <div>
-                Academy suject - {lessons?.length}
+            <div className="px-6 my-5">
+                <h1 className="text-3xl">Subject - {subject?.title}</h1>
             </div>
 
             <div className='flex flex-col md:flex-row gap-2 px-6'>
 
-                <div className=' md:w-4/5 w-full p-4'>
+                <div className=' md:w-3/4 w-full'>
                     <div className='mb-2 flex gap-2'>
                         <Input placeholder="search" />
                         <Button variant={'outline'} className="w-5"><Search className="" /></Button>
@@ -115,7 +110,7 @@ const AcademySubjectPage = () => {
                                     <div>
                                         <div>
                                             <Link href={'#'}>
-                                                <h1 className="font-bold text-3xl">{rowData.name}</h1>
+                                                <h1 className="text-3xl">{rowData.name}</h1>
                                                 {
                                                     rowData.children?.length > 0 && (
                                                         <Badge className="">{rowData.children?.length} items</Badge>
@@ -149,7 +144,39 @@ const AcademySubjectPage = () => {
 
                 <Separator orientation='vertical' className="h-auto w-[1px]" />
 
-                <div className='md:w-1/5 w-full p-4 pb-10'>
+                <div className='md:w-1/4 w-full pb-10'>
+                    <Card>
+                        <CardTitle><div className="m-3 text-center">
+                            <h1 className="text-2xl font-bold">{subject?.academyClass?.title}</h1>
+                        </div>
+
+                        </CardTitle>
+                        <CardContent>
+                            {subjects.length > 0 &&
+                                subjects.map((item: { _id: string, title: string }, index: number) => (
+
+                                    <div className="flex flex-col gap-2 mb-2 hover:border-b-4" key={item._id}>
+
+                                        <div className="flex item-center justify-between">
+                                            <Link href={'#'} className="p-2">
+                                                <h1 className='text-xl'>{item.title}</h1>
+                                            </Link>
+
+                                            <Link href={'#'}>
+                                                <Badge className="h-5 rounded-full" variant={'secondary'}>mcq</Badge>
+                                            </Link>
+
+                                        </div>
+                                    </div>
+                                ))
+                            }
+
+                        </CardContent>
+
+                    </Card>
+
+
+
                 </div>
 
 
