@@ -124,7 +124,8 @@ const AcademySubjectPage = () => {
                                             !rowData.children?.length && (
                                                 <div className='flex justify-around gap-3 mt-5'>
 
-                                                    <Button variant='primaryOutline' size={'xsm'}>MCQ</Button>
+                                                    <Link href={`./c/mcq?l=${rowData.key}&s=${subject._id}`}><Button variant='primaryOutline' size={'xsm'}>MCQ</Button></Link>
+
                                                     <Button variant='superOutline' size={'xsm'}>Model Test</Button>
 
                                                 </div>
@@ -146,7 +147,7 @@ const AcademySubjectPage = () => {
                                         {
                                             !rowData.children?.length && (
                                                 <Link href={`./c/${rowData.key}`}>
-                                                <Button>Read</Button>
+                                                    <Button>Read</Button>
                                                 </Link>
                                             )
                                         }
@@ -182,7 +183,7 @@ const AcademySubjectPage = () => {
                                                 <h1 className='text-xl'>{item.title}</h1>
                                             </Link>
 
-                                            <Link href={'#'}>
+                                            <Link href={`#`}>
                                                 <Badge className="h-5 rounded-full" variant={'secondary'}>mcq</Badge>
                                             </Link>
 
