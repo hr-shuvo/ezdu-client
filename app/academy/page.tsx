@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import ADSense from "@/components/Ads/AdSense";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AcademyPage = () => {
     const [isPending, startTransition] = useTransition();
@@ -56,9 +57,23 @@ const AcademyPage = () => {
 
     return (
         <>
-            <div>
-                <Particle title={'Subjects'} />
+            <div className="px-6 my-5">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100">
+                    <h1 className="text-3xl font-bold text-blue-800">Subjects</h1>
+
+                    <p className="mt-3 text-gray-700">
+                        Choose a subject to explore chapters, take quizzes, or access curated study materials. Stay consistent and keep learning!
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-3">
+                        <Button variant="primary">Explore All Chapters</Button>
+                        <Button variant="secondary">Recommended Quizzes</Button>
+                        <Button variant="super">Top Rated Notes</Button>
+                    </div>
+                </div>
             </div>
+
+
 
 
             <div className='flex flex-col md:flex-row gap-2 px-6'>
@@ -107,77 +122,111 @@ const AcademyPage = () => {
 
                     <div>
                         <Table className='w-full  [&>tbody>tr:nth-child(even)]:bg-gray-50'>
+                            {
+                                isPending ? (
+                                    <TableBody>
+                                        <TableRow>
+                                            <div className="flex flex-col space-y-3">
+                                                <Skeleton className="h-[125px] rounded-xl" />
+                                                <div className="space-y-2">
+                                                    <Skeleton className="h-4" />
+                                                    <Skeleton className="h-4" />
+                                                </div>
+                                            </div>
+                                        </TableRow>
+                                        <TableRow>
+                                            <div className="flex flex-col space-y-3">
+                                                <Skeleton className="h-[125px] rounded-xl" />
+                                                <div className="space-y-2">
+                                                    <Skeleton className="h-4" />
+                                                    <Skeleton className="h-4" />
+                                                </div>
+                                            </div>
+                                        </TableRow>
 
-                            <TableBody>
-                                {
-                                    subjects.length > 0 && (
-                                        subjects.map((item: any, index: number) => (
-                                            <TableRow key={index}>
-                                                <TableCell>
-                                                    <div>
-                                                        <div>
-                                                            <h1 className='text-3xl font-bold'>{item.title}</h1>
+                                    </TableBody>
 
-                                                        </div>
+                                ) : (
+                                    <TableBody>
+                                        {
+                                            subjects.length > 0 && (
+                                                subjects.map((item: any, index: number) => (
+                                                    <TableRow key={index}>
+                                                        <TableCell>
+                                                            <div>
+                                                                <div>
+                                                                    <h1 className='text-3xl font-bold'>{item.title}</h1>
 
-                                                        <div className='flex justify-around gap-3 mt-5'>
+                                                                </div>
 
-                                                            <Button variant='primaryOutline' size={'xsm'}>tag</Button>
-                                                            <Button variant='secondaryOutline' size={'xsm'}>MCQ</Button>
-                                                            <Button variant='superOutline' size={'xsm'}>Written</Button>
-                                                            <Button variant='secondaryOutline' size={'xsm'}>Board Question</Button>
-                                                            <Button variant='primaryOutline' size={'xsm'}>Model Test</Button>
-                                                            <Button variant='superOutline' size={'xsm'}>Quiz</Button>
+                                                                <div className='flex justify-around gap-3 mt-5'>
 
-                                                        </div>
-                                                    </div>
-                                                </TableCell>
+                                                                    <Button variant='primaryOutline' size={'xsm'}>tag</Button>
+                                                                    <Button variant='secondaryOutline' size={'xsm'}>MCQ</Button>
+                                                                    <Button variant='superOutline' size={'xsm'}>Written</Button>
+                                                                    <Button variant='secondaryOutline' size={'xsm'}>Board Question</Button>
+                                                                    <Button variant='primaryOutline' size={'xsm'}>Model Test</Button>
+                                                                    <Button variant='superOutline' size={'xsm'}>Quiz</Button>
 
-                                                <TableCell>
-                                                    <div>
-                                                        <Link href={`./academy/${item._id}`}>
-                                                            <InteractiveHoverButton>Read</InteractiveHoverButton>
-                                                        </Link>
-                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </TableCell>
 
-                                                </TableCell>
+                                                        <TableCell>
+                                                            <div>
+                                                                <Link href={`./academy/${item._id}`}>
+                                                                    <InteractiveHoverButton>Read</InteractiveHoverButton>
+                                                                </Link>
+                                                            </div>
 
-                                            </TableRow>
-                                        ))
-                                    )
-                                }
+                                                        </TableCell>
 
-                            </TableBody>
+                                                    </TableRow>
+                                                ))
+                                            )
+                                        }
+
+                                    </TableBody>
+
+                                )
+                            }
 
                         </Table>
 
                     </div>
 
                     <div className="flex items-center justify-between space-x-2 py-4">
-                        <div className="flex items-center text-sm text-muted-foreground gap-2">
-                            <div>{totalCount} items found</div>
-                            <div>
-                                <Select value={pageSize.toString()}
-                                    onValueChange={(value) => setPageSize(Number(value))}>
-                                    <SelectTrigger className="w-[100px]">
-                                        <SelectValue placeholder="Theme" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="5">5</SelectItem>
-                                        <SelectItem value="10">10</SelectItem>
-                                        <SelectItem value="20">20</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        </div>
+                        {
+                            !isPending && (
+                                <>
+                                    <div className="flex items-center text-sm text-muted-foreground gap-2">
+                                        <div>{totalCount} items found</div>
+                                        <div>
+                                            <Select value={pageSize.toString()}
+                                                onValueChange={(value) => setPageSize(Number(value))}>
+                                                <SelectTrigger className="w-[100px]">
+                                                    <SelectValue placeholder="Theme" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="5">5</SelectItem>
+                                                    <SelectItem value="10">10</SelectItem>
+                                                    <SelectItem value="20">20</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </div>
+                                    </div>
 
-                        <div className="space-x-2">
-                            <CustomPagination
-                                totalPage={totalPage}
-                                currentPage={currentPage}
-                                onPageChange={setCurrentPage}
-                            />
-                        </div>
+                                    <div className="space-x-2">
+                                        <CustomPagination
+                                            totalPage={totalPage}
+                                            currentPage={currentPage}
+                                            onPageChange={setCurrentPage}
+                                        />
+                                    </div>
+                                </>
+                            )
+                        }
+
                     </div>
 
                 </div>
