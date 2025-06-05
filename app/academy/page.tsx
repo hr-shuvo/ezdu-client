@@ -159,11 +159,13 @@ const AcademyPage = () => {
 
                                                                 </div>
 
-                                                                <div className='flex justify-around gap-3 mt-5'>
+                                                                <div className='flex justify-center gap-3 mt-5'>
 
-                                                                    <Button variant='primaryOutline' size={'xsm'}>tag</Button>
-                                                                    <Button variant='secondaryOutline' size={'xsm'}>MCQ</Button>
-                                                                    <Button variant='superOutline' size={'xsm'}>Written</Button>
+                                                                    {/* <Button variant='primaryOutline' size={'xsm'}>tag</Button> */}
+
+                                                                    <Link href={`./academy/c/mcq?s=${item._id}`}><Button variant='superOutline' size={'xsm'}>MCQ</Button></Link>
+                                                                    
+                                                                    {/* <Button variant='superOutline' size={'xsm'}>Written</Button> */}
                                                                     <Button variant='secondaryOutline' size={'xsm'}>Board Question</Button>
                                                                     <Button variant='primaryOutline' size={'xsm'}>Model Test</Button>
                                                                     <Button variant='superOutline' size={'xsm'}>Quiz</Button>

@@ -15,7 +15,7 @@ import { Column } from 'primereact/column';
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { TreeNode } from "primereact/treenode";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 
 const AcademySubjectPage = () => {
@@ -166,35 +166,60 @@ const AcademySubjectPage = () => {
                 <Separator orientation='vertical' className="h-auto w-[1px]" />
 
                 <div className='md:w-1/4 w-full pb-10'>
-                    <Card>
-                        <CardTitle><div className="m-3 text-center">
-                            <h1 className="text-2xl font-bold">{subject?.academyClass?.title}</h1>
-                        </div>
+                    <div className="">
+                        <Card>
+                            <CardTitle><div className="m-3 text-center">
+                                <h1 className="text-2xl font-bold">{subject?.academyClass?.title}</h1>
+                            </div>
 
-                        </CardTitle>
-                        <CardContent>
-                            {subjects.length > 0 &&
-                                subjects.map((item: { _id: string, title: string }, index: number) => (
+                            </CardTitle>
+                            <CardContent>
+                                {subjects.length > 0 &&
+                                    subjects.map((item: { _id: string, title: string }, index: number) => (
 
-                                    <div className="flex flex-col gap-2 mb-2 hover:border-b-4" key={index}>
+                                        <div className="flex flex-col gap-2 mb-2 hover:border-b-4" key={index}>
 
-                                        <div className="flex item-center justify-between">
-                                            <Link href={'#'} className="p-2">
-                                                <h1 className='text-xl'>{item.title}</h1>
-                                            </Link>
+                                            <div className="flex item-center justify-between">
+                                                <Link href={'#'} className="p-2">
+                                                    <h1 className='text-xl'>{item.title}</h1>
+                                                </Link>
 
-                                            <Link href={`#`}>
-                                                <Badge className="h-5 rounded-full" variant={'secondary'}>mcq</Badge>
-                                            </Link>
+                                                <Link href={`#`}>
+                                                    <Badge className="h-5 rounded-full" variant={'secondary'}>mcq</Badge>
+                                                </Link>
 
+                                            </div>
                                         </div>
+                                    ))
+                                }
+
+                            </CardContent>
+
+                        </Card>
+                    </div>
+
+                    <div className="mt-2">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>
+                                    <div className="text-center">
+                                        Practice Book
                                     </div>
-                                ))
-                            }
+                                </CardTitle>
+                                <CardDescription>
+                                    <p>practice MCQ & questions</p>
+                                </CardDescription>
+                            </CardHeader>
 
-                        </CardContent>
+                            <CardContent>
 
-                    </Card>
+                            </CardContent>
+                            <CardFooter>
+                                <Button variant={'primary'} className="w-full">Solve</Button>
+                            </CardFooter>
+
+                        </Card>
+                    </div>
 
 
 
