@@ -33,18 +33,36 @@ const AcademyContentDetailsPage = () => {
 
 
 
-    if(isPending){
-        return <Loading/>
+    if (isPending) {
+        return <Loading />
     }
 
     return (
         <>
-            <div className="lg:px-6">
 
-                <div className="text-center md:my-5 mb-2">
-                    <h1 className="text-3xl">{lesson?.title}</h1>
+            <div className="px-6 my-5">
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100">
+                    <h1 className="text-3xl font-bold text-blue-800">{lesson?.title}</h1>
 
+                    <p className="mt-3 text-gray-700">
+                        Ready to test your knowledge? Try the quiz or explore more materials below!
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-3">
+                        <Button variant={'primary'}>
+                            Take Quiz
+                        </Button>
+                        <Button variant={'secondary'}>
+                            View More MCQs
+                        </Button>
+                        <Button variant={'super'}>
+                            Download Notes
+                        </Button>
+                    </div>
                 </div>
+            </div>
+
+            <div className="lg:px-6">
 
 
                 <div className="flex flex-col md:flex-row gap-2">
