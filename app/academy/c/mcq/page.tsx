@@ -30,15 +30,17 @@ const ContentMcqPage = () => {
     const [subjects, setSubjects] = useState<any>([]);
     const [mcqList, setMcqList] = useState<any[]>([]);
 
-    const subjectId = searchParams.get('s');
-    const lessonId = searchParams.get('l');
 
     const [totalCount, setTotalCount] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
 
-    useEffect(() => {
+    useEffect(() => {        
+    const subjectId = searchParams.get('s');
+    const lessonId = searchParams.get('l');
+
+
         startTransition(async () => {
             const _subject = await getAcademicSubject(subjectId);
             setSubject(_subject);
@@ -52,7 +54,7 @@ const ContentMcqPage = () => {
 
         });
 
-    }, []);
+    }, [useSearchParams]);
 
     if(isPending){
         return <Loading/>
@@ -62,7 +64,7 @@ const ContentMcqPage = () => {
     return (
         <>
 
-
+            
             <div className="px-6 my-5">
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100">
                     <h1 className="text-3xl font-bold text-blue-800">{subject?.title}</h1>
@@ -235,6 +237,8 @@ const ContentMcqPage = () => {
 
 
             </div>
+
+
         </>
     )
 };
