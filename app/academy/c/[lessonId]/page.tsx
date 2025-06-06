@@ -107,20 +107,31 @@ const AcademyContentDetailsPage = () => {
                                     <Card>
                                         <CardHeader>
                                             <CardTitle>
-                                                {data.title}
+                                                <h1>{data.title}</h1>
                                             </CardTitle>
+                                            <CardDescription>
+                                                <h1>{data.subTitle}</h1>
+                                            </CardDescription>
+                                        </CardHeader>
 
+
+
+                                        <CardContent>
                                             <CardDescription>
                                                 {data.description}
                                             </CardDescription>
-
-                                        </CardHeader>
-
-                                        <CardContent>
-                                            {data.content}
                                         </CardContent>
 
-                                        <CardFooter>
+                                        {
+                                            data.content && (
+                                                <CardContent>
+                                                    {data.content}
+                                                </CardContent>
+                                            )
+                                        }
+
+
+                                        {/* <CardContent>
                                             <div className="flex flex-col w-full">
                                                 {
                                                     data.text1 && (
@@ -137,7 +148,11 @@ const AcademyContentDetailsPage = () => {
 
                                                 }
                                             </div>
+                                        </CardContent> */}
 
+                                        <CardFooter>
+                                            <Link href={`#`}><Button variant='primaryOutline' size={'xsm'}>MCQ</Button></Link>
+                                            <Link href={`#`}><Button variant='superOutline' size={'xsm'}>Board Question</Button></Link>
                                         </CardFooter>
                                     </Card>
                                 </div>
