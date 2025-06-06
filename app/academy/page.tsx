@@ -1,6 +1,5 @@
 "use client";
 
-import { Particle } from "@/components/custom-ui/particle";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useEffect, useState, useTransition } from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
