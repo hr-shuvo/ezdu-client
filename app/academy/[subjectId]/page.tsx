@@ -129,7 +129,7 @@ const AcademySubjectPage = () => {
                                     <div>
                                         <div>
                                             <Link href={'#'}>
-                                                <h1 className="text-3xl">{rowData.name}</h1>
+                                                <h1 className="text-3xl w-full">{rowData.name}</h1>
                                                 {
                                                     rowData.children?.length > 0 && (
                                                         <Badge className="" variant={'secondary'}>{rowData.children?.length} items</Badge>
@@ -140,7 +140,7 @@ const AcademySubjectPage = () => {
 
                                         {
                                             !rowData.children?.length && (
-                                                <div className='flex justify-around gap-3 mt-5'>
+                                                <div className='flex justify-center gap-3 mt-5'>
 
                                                     <Link href={`./c/mcq?l=${rowData.key}&s=${subject._id}`}><Button variant='primaryOutline' size={'xsm'}>MCQ</Button></Link>
 
@@ -155,10 +155,10 @@ const AcademySubjectPage = () => {
 
                                 )}
                             />
-                            <Column field="subTitle" header="Subtitle" />
+                            {/* <Column field="subTitle" header="Subtitle" /> */}
                             <Column
                                 field="id"
-                                style={{ textAlign: 'end' }}
+                                style={{ textAlign: 'end', width:'20%' }}
                                 body={(rowData) => (
 
                                     <div className="">
@@ -198,7 +198,7 @@ const AcademySubjectPage = () => {
                                         <div className="flex flex-col gap-2 mb-2 hover:border-b-4" key={index}>
 
                                             <div className="flex item-center justify-between">
-                                                <Link href={'#'} className="p-2">
+                                                <Link href={`./${item._id}`} className="p-2">
                                                     <h1 className='text-xl'>{item.title}</h1>
                                                 </Link>
 
