@@ -151,7 +151,7 @@ const AcademyContentDetailsPage = () => {
                                         </CardContent> */}
 
                                         <CardFooter>
-                                            <Link href={`#`}><Button variant='primaryOutline' size={'xsm'}>MCQ</Button></Link>
+                                            <Link href={`./mcq?l=${lesson._id}&s=${lesson.subjectId}`}><Button variant='primaryOutline' size={'xsm'}>MCQ</Button></Link>
                                             <Link href={`#`}><Button variant='superOutline' size={'xsm'}>Board Question</Button></Link>
                                         </CardFooter>
                                     </Card>
@@ -177,10 +177,11 @@ const AcademyContentDetailsPage = () => {
                                 </CardHeader>
 
                                 <CardContent>
-
                                 </CardContent>
                                 <CardFooter>
-                                    <Button variant={'primary'} className="w-full">Solve</Button>
+                                    <Link href={`./mcq?l=${lesson?._id}&s=${lesson?.subjectId}`}  className="w-full">
+                                        <Button variant={'primary'}  className="w-full">Solve</Button>
+                                    </Link>
                                 </CardFooter>
 
                             </Card>
