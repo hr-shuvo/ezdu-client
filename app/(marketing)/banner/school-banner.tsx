@@ -1,5 +1,5 @@
 import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -9,86 +9,68 @@ export const SchoolBanner = () => {
     // const neonColors = {firstColor: "#91143e", secondColor: "#2c8787"};
 
     return (
+        <>
+            <div className="w-full mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-        <div className='flex flex-col lg:flex-row items-center justify-between w-full gap-x-2'>
+                {/* Academic Levels Section */}
+                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300">
+                    <CardContent className="p-6 flex flex-col justify-between gap-4">
+                        <h2 className="text-xl font-bold text-indigo-600 text-center">
+                            Class 6–12 Study Materials
+                        </h2>
 
-            <NeonGradientCard className="w-full lg:w-1/2 items-center justify-center">
-                <div className='flex justify-around gap-2 text-xl p-3'>
+                        <div className="grid grid-cols-3 gap-4 text-center">
+                            {["Class 6–8", "Class 9–10", "Class 11–12"].map((label, i) => (
+                                <Card
+                                    key={i}
+                                    className="bg-indigo-50 hover:bg-indigo-100 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition text-indigo-700 font-semibold text-lg"
+                                    onClick={() => redirect('/academy')}
+                                >
+                                    {label}
+                                </Card>
+                            ))}
+                        </div>
 
-                    <Card
-                        onClick={() => redirect('/academy')}
-                          className='p-3 h-[100px] w-1/3 flex items-center justify-center text-center cursor-pointer hover:shadow-xl transition-all duration-150 transform'>
-                        <h1 className="pointer-events-none z-10  whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-2xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                            Class 6,7,8
-                        </h1>
-                    </Card>
+                        <div className="text-center text-green-800 font-medium pt-2">
+                            <Link href="/academy" className="hover:underline flex justify-center items-center gap-1">
+                                Complete materials and solutions <ArrowRight className="w-4 h-4" />
+                            </Link>
+                        </div>
+                    </CardContent>
+                </Card>
 
-                    <Card
-                        onClick={() => redirect('/academy')}
-                        className='p-3 h-[100px] w-1/3 flex items-center justify-center text-center cursor-pointer hover:shadow-xl transition-all duration-150 transform'>
-                        <h1 className="pointer-events-none z-10  whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-2xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                            Class 9,10
-                        </h1>
-                    </Card>
+                {/* Exam Prep Section */}
+                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300">
+                    <CardContent className="p-6 flex flex-col justify-between gap-4">
+                        <h2 className="text-xl font-bold text-indigo-600 text-center">
+                            SSC & HSC Exam Practice
+                        </h2>
 
-                    <Card
-                        onClick={() => redirect('/academy')}
-                        className='p-3 h-[100px] w-1/3 flex items-center justify-center text-center cursor-pointer hover:shadow-xl transition-all duration-150 transform'>
-                        <h1 className="pointer-events-none z-10  whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-2xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                            Class 11,12
-                        </h1>
+                        <div className="grid grid-cols-3 gap-4 text-center">
+                            {[
+                                { label: "SSC 25" },
+                                { label: "HSC 25,26" },
+                                { label: "MCQ & Quizzes" }
+                            ].map(({ label }, i) => (
+                                <Card
+                                    key={i}
+                                    className="bg-pink-50 hover:bg-pink-100 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg text-pink-700"
+                                    onClick={() => redirect('/academy')}
+                                >
+                                    {label}
+                                </Card>
+                            ))}
+                        </div>
 
-                    </Card>
-
-                </div>
-
-                <div className='px-10 text-green-900 font-bold'>
-                    <h1 className='flex justify-center'>
-                        <Link href="/academy" className='hover:underline hover:cursor-pointer'>Complete Class 6 to 12 Study Material and Solutions</Link><ArrowRight/>
-                    </h1>
-                </div>
-
-
-            </NeonGradientCard>
-
-
-            <NeonGradientCard className="w-full lg:w-1/2 items-center justify-center">
-                <div className='flex justify-around gap-2 text-xl p-3'>
-
-                    <Card className='p-3 h-[100px] w-1/3 flex items-center justify-center text-center cursor-pointer hover:shadow-xl transition-all duration-150 transform'>
-                        <h1 className="pointer-events-none z-10  whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-2xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                            <span>SSC</span>
-                            <span> 25</span>
-                        </h1>
-                    </Card>
-
-                    <Card className='p-3 h-[100px] w-1/3 flex items-center justify-center text-center cursor-pointer hover:shadow-xl transition-all duration-150 transform'>
-                        <h1 className="pointer-events-none z-10  whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-2xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                            <span>HSC</span>
-                            <span> 25,26</span>
-                        </h1>
-                    </Card>
-
-                    <Card className='p-3 h-[100px] w-1/3 flex items-center justify-center text-center cursor-pointer hover:shadow-xl transition-all duration-150 transform'>
-                        <h1 className="pointer-events-none z-10  whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-2xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
-                            MCQ, Quiz, Test
-                        </h1>
-
-                    </Card>
-
-                </div>
-
-                <div className='px-10 text-green-900 font-bold'>
-                    <h1 className='flex justify-center'>
-                        <Link href="#" className='hover:underline hover:cursor-pointer'>Effective SSC and HSC Exam Practice and Revision</Link><ArrowRight/>
-                    </h1>
-                </div>
-
-
-            </NeonGradientCard>
-
-
-        </div>
+                        <div className="text-center text-green-800 font-medium pt-2">
+                            <Link href="#" className="hover:underline flex justify-center items-center gap-1">
+                                Effective SSC & HSC Revision <ArrowRight className="w-4 h-4" />
+                            </Link>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        </>
 
     )
 
