@@ -2,10 +2,9 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 
-type Props = {
-}
 
-export const RecentTest = ({ }: Props) => {
+
+export const RecentTest = () => {
 
     const recentTests = [
         { subject: "গণিত", score: "8/10", date: "আজ" },

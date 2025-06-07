@@ -3,7 +3,7 @@
 
 import { LeaderboardSummary } from "@/components/layout/leaderboard/leaderboard-summary";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpenCheck, Bot, Flame, ListChecks, Trophy } from "lucide-react";
+import { BookOpenCheck, Bot, ListChecks, Trophy } from "lucide-react";
 import Link from "next/link";
 import { StreakCount } from "./_components/streak-count";
 import { SubjectProgress } from "./_components/subject-progress";

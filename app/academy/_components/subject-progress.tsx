@@ -2,10 +2,8 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 
-type Props = {
-}
 
-export const SubjectProgress = ({ }: Props) => {
+export const SubjectProgress = () => {
 
     const subjects = [
         { title: "গণিত", percentage: 70, color: "bg-blue-500", bgColor: "" },
