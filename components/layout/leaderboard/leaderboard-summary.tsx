@@ -33,7 +33,7 @@ export const LeaderboardSummary = () =>{
         <Card className="shadow-lg lg:row-span-2">
                     <CardContent className="p-5">
                         <h2 className="text-xl font-bold mb-4">🏆 লিডারবোর্ড</h2>
-                        <div className="space-y-3 max-h-[350px] overflow-y-auto pr-2">
+                        <div className="space-y-3 max-h-[450px] overflow-y-auto pr-2">
                             {leaderboard.map((user) => (
                                 <div
                                     key={user.rank}

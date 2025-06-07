@@ -25,11 +25,11 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
     return (
 
 
-        <div className="w-full  mx-auto mb-12">
+        <div className="w-full  mx-auto my-8">
 
             {/* Always visible: Horizontal Leaderboard */}
             <section>
-                <h2 className="text-xl font-bold text-indigo-600 mb-4 text-center">Top Learners Leaderboard</h2>
+                <h1 className="text-2xl font-bold text-indigo-600 mb-4 text-center">Top Learners Leaderboard</h1>
                 <div className="flex overflow-x-auto space-x-6 pb-4">
                     {topUsers.map((user, i) => (
                         <Card

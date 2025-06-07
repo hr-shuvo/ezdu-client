@@ -1,248 +1,140 @@
-"use client";
+'use client';
 
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useEffect, useState, useTransition } from "react";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
-import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
-import { loadAcademicClass } from "../_services/academy/academyService";
-import { loadAcademicSubject } from "../_services/academy/academySubjectService";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import CustomPagination from "@/components/common/pagination";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
-import ADSense from "@/components/Ads/AdSense";
+
+import { LeaderboardSummary } from "@/components/layout/leaderboard/leaderboard-summary";
+import { Card, CardContent } from "@/components/ui/card";
+import { BookOpenCheck, Bot, Flame, ListChecks, Trophy } from "lucide-react";
 import Link from "next/link";
-import { Skeleton } from "@/components/ui/skeleton";
 
-const AcademyPage = () => {
-    const [isPending, startTransition] = useTransition();
 
-    const [selectedItems, setSelectedItems] = useState<string[]>([])
-    // const [selectedItem, setSelectedItem] = useState<string>()
 
-    const [classes, setClasses] = useState<any>([]);
-    const [subjects, setSubjects] = useState<any>([]);
+const AcademyDashboard = () => {
+    const recentTests = [
+        { subject: "গণিত", score: "8/10", date: "আজ" },
+        { subject: "বিজ্ঞান", score: "6/10", date: "গতকাল" },
+        { subject: "বাংলা", score: "9/10", date: "২ দিন আগে" },
+    ];
 
-    const [totalCount, setTotalCount] = useState(0);
-    const [totalPage, setTotalPage] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    const recommended = [
+        "গণিত - অমৌলিক সংখ্যা",
+        "বিজ্ঞান - পদার্থ ও শক্তি",
+        "ইংরেজি - Sentence Correction",
+    ];
 
-    const handleToggleChange = (values: string[]) => {
-        setSelectedItems(values)
-    }
-
-    useEffect(() => {
-        startTransition(async () => {
-            const _classes = await loadAcademicClass(1, 1000);
-            setClasses(_classes.data);
-        });
-    }, []);
-
-    useEffect(() => {
-        startTransition(async () => {
-            const response = await loadAcademicSubject("", currentPage, pageSize, undefined, selectedItems);
-            setSubjects(response.data);
-            setTotalCount(response.totalCount);
-            setTotalPage(response.totalPage);
-            setCurrentPage(response.currentPage);
-        });
-    }, [currentPage, pageSize, selectedItems]);
+    const links = [
+        { title: "Mock / Quiz", icon: Trophy, color: "bg-[#DFF3FD]", href: "./academy/mock" },
+        { title: "বই রিভিউ", icon: BookOpenCheck, color: "bg-[#FFF3C7]", href: "./academy/subjects" },
+        { title: "প্রাকটিস প্রশ্ন", icon: ListChecks, color: "bg-[#DAF7DC]", href: "./academy/practice" },
+        { title: "প্রশ্নব্যাংক", icon: Bot, color: "bg-[#FFD6D6]", href: "./academy/qb" },
+    ];
 
 
 
 
     return (
-        <>
-            <div className="px-6 my-5">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100">
-                    <h1 className="text-3xl font-bold text-blue-800">Subjects</h1>
-
-                    <p className="mt-3 text-gray-700">
-                        Choose a subject to explore chapters, take quizzes, or access curated study materials. Stay consistent and keep learning!
-                    </p>
-
-                    <div className="mt-5 flex flex-wrap gap-3">
-                        <Button variant="primary">Explore All Chapters</Button>
-                        <Button variant="secondary">Recommended Quizzes</Button>
-                        <Button variant="super">Top Rated Notes</Button>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div className='flex flex-col md:flex-row gap-2 px-6'>
-                <div className='md:w-1/4 w-full p-4 pb-10'>
-
-                    <div className='py-2 text-green-900 text-xl'>
-                        Select Class
-                    </div>
-
-                    <div>
-                        <ToggleGroup
-                            variant="primary"
-                            type="multiple"
-                            className='flex flex-col'
-                            onValueChange={handleToggleChange}
-                            value={selectedItems}
-                            disabled={isPending}
-                        >
-                            {
-                                classes.map((item: { _id: string, title: string }, index: number) => (
-                                    <ToggleGroupItem
-                                        key={index}
-                                        value={item._id}
-                                        aria-label={`Toggle ${item._id}`}
-                                        className='w-full'
-                                    >
-                                        <h1 className='font-bold'>{item.title}</h1>
-                                    </ToggleGroupItem>
-
-                                ))
-                            }
-
-                        </ToggleGroup>
-                    </div>
-
-
+        <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
+            <div className="lg:col-span-4 space-y-6">
+                
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+                    {links.map(({ title, icon: Icon, color, href }, index) => (
+                        <Link key={index} href={href}>
+                            <Card className={`h-32 ${color} hover:scale-105 transition-transform cursor-pointer shadow-md`}>
+                                <CardContent className="p-4 flex flex-col items-start justify-between h-full">
+                                    <Icon className="w-8 h-8 text-gray-700" />
+                                    <h3 className="text-lg font-semibold text-gray-800 mt-2">{title}</h3>
+                                </CardContent>
+                            </Card>
+                        </Link>
+                    ))}
                 </div>
 
-                <Separator orientation='vertical' className="h-auto w-[1px]" />
+                {/* Daily Goal */}
+                <Card className="shadow-lg">
+                    <CardContent className="p-5">
+                        <h2 className="text-xl font-bold mb-2">🎯 আজকের লক্ষ্য</h2>
+                        <p className="text-base">গণিত অধ্যায়ের ১০টি প্রশ্ন সমাধান করুন এবং ৫০ XP অর্জন করুন!</p>
+                        <div className="mt-3 bg-green-200 h-3 w-full rounded-full">
+                            <div className="bg-green-500 h-3 rounded-full" style={{ width: "40%" }}></div>
+                        </div>
+                        <p className="text-sm text-right mt-1 text-muted-foreground">40% সম্পন্ন</p>
+                    </CardContent>
+                </Card>
 
-                <div className=' md:w-3/4 w-full p-4'>
-                    <div className='mb-2 flex gap-2'>
-                        <Input placeholder="search" />
-                        <Button variant={'outline'} className="w-5"><Search className="" /></Button>
+                {/* Recommended Subjects */}
+                <Card className="shadow-lg">
+                    <CardContent className="p-5">
+                        <h2 className="text-xl font-bold mb-4">🎯 সাজেস্টেড টেস্ট</h2>
+                        <ul className="list-disc ml-5 space-y-2">
+                            {recommended.map((topic, idx) => (
+                                <li key={idx} className="text-sm">{topic}</li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                </Card>
+            </div>
+
+            {/* Right Side Info Panel */}
+            <div className="lg:col-span-2 space-y-6">
+                {/* XP & Streak Tracker */}
+                <div className="bg-white rounded-xl p-4 shadow-md">
+                    <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-2">
+                            <Flame className="text-orange-500" />
+                            <span className="font-semibold text-base">4 দিন স্ট্রিক</span>
+                        </div>
+                        <p className="text-sm">XP: <span className="font-bold">3870</span></p>
                     </div>
-
-                    <div>
-                        <Table className='w-full  [&>tbody>tr:nth-child(even)]:bg-gray-50'>
-                            {
-                                isPending ? (
-                                    <TableBody>
-                                        <TableRow>
-                                            <div className="flex flex-col space-y-3">
-                                                <Skeleton className="h-[125px] rounded-xl" />
-                                                <div className="space-y-2">
-                                                    <Skeleton className="h-4" />
-                                                    <Skeleton className="h-4" />
-                                                </div>
-                                            </div>
-                                        </TableRow>
-                                        <TableRow>
-                                            <div className="flex flex-col space-y-3">
-                                                <Skeleton className="h-[125px] rounded-xl" />
-                                                <div className="space-y-2">
-                                                    <Skeleton className="h-4" />
-                                                    <Skeleton className="h-4" />
-                                                </div>
-                                            </div>
-                                        </TableRow>
-
-                                    </TableBody>
-
-                                ) : (
-                                    <TableBody>
-                                        {
-                                            subjects.length > 0 && (
-                                                subjects.map((item: any, index: number) => (
-                                                    <TableRow key={index}>
-                                                        <TableCell>
-                                                            <div>
-                                                                <div>
-                                                                    <h1 className='text-3xl font-bold'>{item.title}</h1>
-
-                                                                </div>
-
-                                                                <div className='flex justify-center gap-3 mt-5'>
-
-                                                                    {/* <Button variant='primaryOutline' size={'xsm'}>tag</Button> */}
-
-                                                                    <Link href={`./academy/c/mcq?s=${item._id}`}><Button variant='superOutline' size={'xsm'}>MCQ</Button></Link>
-                                                                    
-                                                                    {/* <Button variant='superOutline' size={'xsm'}>Written</Button> */}
-                                                                    <Button variant='secondaryOutline' size={'xsm'}>Board Question</Button>
-                                                                    <Button variant='primaryOutline' size={'xsm'}>Model Test</Button>
-                                                                    <Button variant='superOutline' size={'xsm'}>Quiz</Button>
-
-                                                                </div>
-                                                            </div>
-                                                        </TableCell>
-
-                                                        <TableCell>
-                                                            <div>
-                                                                <Link href={`./academy/${item._id}`}>
-                                                                    <InteractiveHoverButton>Read</InteractiveHoverButton>
-                                                                </Link>
-                                                            </div>
-
-                                                        </TableCell>
-
-                                                    </TableRow>
-                                                ))
-                                            )
-                                        }
-
-                                    </TableBody>
-
-                                )
-                            }
-
-                        </Table>
-
-                    </div>
-
-                    <div className="flex items-center justify-between space-x-2 py-4">
-                        {
-                            !isPending && (
-                                <>
-                                    <div className="flex items-center text-sm text-muted-foreground gap-2">
-                                        <div>{totalCount} items found</div>
-                                        <div>
-                                            <Select value={pageSize.toString()}
-                                                onValueChange={(value) => setPageSize(Number(value))}>
-                                                <SelectTrigger className="w-[100px]">
-                                                    <SelectValue placeholder="Theme" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="5">5</SelectItem>
-                                                    <SelectItem value="10">10</SelectItem>
-                                                    <SelectItem value="20">20</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-x-2">
-                                        <CustomPagination
-                                            totalPage={totalPage}
-                                            currentPage={currentPage}
-                                            onPageChange={setCurrentPage}
-                                        />
-                                    </div>
-                                </>
-                            )
-                        }
-
-                    </div>
-
                 </div>
+
+                {/* Topic Progress */}
+                <Card className="shadow-lg">
+                    <CardContent className="p-5">
+                        <h2 className="text-xl font-bold mb-2">📘 বিষয়ভিত্তিক অগ্রগতি</h2>
+                        <div className="space-y-2">
+                            <div>
+                                <p className="font-medium">গণিত - 70%</p>
+                                <div className="h-2 bg-gray-200 rounded-full">
+                                    <div className="h-2 bg-blue-500 rounded-full" style={{ width: "70%" }}></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p className="font-medium">বাংলা - 40%</p>
+                                <div className="h-2 bg-gray-200 rounded-full">
+                                    <div className="h-2 bg-pink-500 rounded-full" style={{ width: "40%" }}></div>
+                                </div>
+                            </div>
+                            <div>
+                                <p className="font-medium">বিজ্ঞান - 10%</p>
+                                <div className="h-2 bg-gray-200 rounded-full">
+                                    <div className="h-2 bg-yellow-500 rounded-full" style={{ width: "10%" }}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <LeaderboardSummary />
+
+
+
+                {/* Recent Test Results */}
+                <Card className="shadow-lg">
+                    <CardContent className="p-5">
+                        <h2 className="text-xl font-bold mb-4">📊 সাম্প্রতিক টেস্ট</h2>
+                        {recentTests.map((test, idx) => (
+                            <div key={idx} className="mb-4">
+                                <p className="text-base font-medium">{test.subject}</p>
+                                <p className="text-sm text-muted-foreground">
+                                    স্কোর: {test.score} ({test.date})
+                                </p>
+                            </div>
+                        ))}
+                    </CardContent>
+                </Card>
             </div>
+        </div>
+    );
 
+}
 
-
-
-            <div className="mt-5 w-full">
-                <ADSense />
-            </div>
-        </>
-    )
-};
-
-export default AcademyPage;
-
-
+export default AcademyDashboard;

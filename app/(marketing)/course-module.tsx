@@ -3,14 +3,7 @@
 export const CourseModule = () => {
 
     const modules: any[] = [
-        {
-            title: 'BCS',
-            subTitle: 'previous questions',
-            totalCourse: 9,
-            duration: 0,
-            isPopular: true,
-            emoji: '🎓',
-        },
+        
         {
             title: 'BCS',
             subTitle: 'complete preparation',
