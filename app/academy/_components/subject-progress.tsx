@@ -20,8 +20,8 @@ export const SubjectProgress = ({ }: Props) => {
                     <h2 className="text-xl font-bold mb-2">📘 বিষয়ভিত্তিক অগ্রগতি</h2>
                     <div className="space-y-2">
                         {
-                            subjects.map(item => (
-                                <div>
+                            subjects.map((item, index) => (
+                                <div key={index}>
                                     <p className="font-medium">{item.title} - {item.percentage}%</p>
                                     <div className="h-2 bg-gray-200 rounded-full">
                                         <div className={`h-2 ${item.color} rounded-full`} style={{ width: `${item.percentage}%` }}></div>
