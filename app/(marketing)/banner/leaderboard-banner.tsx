@@ -68,7 +68,7 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
                         <CardContent className="p-6 flex flex-col gap-4">
                             <h2 className="text-xl font-bold text-green-600 text-center">Daily Challenge</h2>
                             <p className="text-center text-gray-700">
-                                Complete today's challenge to earn extra points and badges!
+                                Complete today&apos;s challenge to earn extra points and badges!
                             </p>
                             <div className="text-center">
                                 <button className="bg-green-600 text-white rounded-md px-6 py-2 font-semibold hover:bg-green-700 transition">

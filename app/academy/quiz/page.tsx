@@ -2,7 +2,7 @@
 
 import { LeaderboardSummary } from "@/components/layout/leaderboard/leaderboard-summary";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpenCheck, Bot, Flame, ListChecks, ShieldCheck, Trophy, Zap } from "lucide-react";
+import { BookOpenCheck, Bot, Flame, ListChecks, Trophy } from "lucide-react";
 import Link from "next/link";
 
 

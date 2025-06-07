@@ -1,4 +1,3 @@
-import { NeonGradientCard } from "@/components/magicui/neon-gradient-card";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";

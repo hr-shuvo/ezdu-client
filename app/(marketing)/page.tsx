@@ -42,7 +42,7 @@ export default function Home() {
 
                 <div className="flex flex-col items-center text-center gap-y-6">
                     <h1 className="text-3xl font-bold text-neutral-700">
-                        Learn, Practice, and Master with <strong>Ez Du</strong>.
+                        Learn, Practice, and Master with <strong>EzDu</strong>.
                     </h1>
                     <p className="text-neutral-500 max-w-md">
                         Small steps every day lead to big results
