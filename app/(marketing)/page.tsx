@@ -51,7 +51,7 @@ export default function Home() {
                     {isLoggedIn ? (
                         <CoolMode>
                             <Button size="lg" variant="primary" className="w-full" asChild>
-                                <Link href="/learn">Continue Learning</Link>
+                                <Link href="/academy">Continue Learning</Link>
                             </Button>
                         </CoolMode>
                     ) : (
