@@ -1,14 +1,28 @@
 'use client';
 
 import { Button } from "@/components/ui/button";
-import { BookOpenCheck, Flame } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArrowLeft, BookOpenCheck, BookOpenText, Clock, Flame, Lightbulb, ListChecks } from "lucide-react";
+import { useState } from "react";
+
+
 
 type Props = {
-    lessons: []
+    lessons: any[]
+    onBack: (data:'topic') => void;
+    onStart: (type:string, duration:number) => void;
+    onCancel: () => void;
+};
 
-}
+export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) => {
+    const [quizType, setQuizType] = useState<'mcq' | 'cq'>('mcq');
+    const [quizDuration, setQuizDuration] = useState<number>(15);
+    const durationOptions = [15, 20, 30, 35, 40];
 
-export const ShowQuizSummary = ({ lessons }: Props) => {
+
+
     return (
 
         <div className="px-6 my-5">
@@ -23,25 +37,120 @@ export const ShowQuizSummary = ({ lessons }: Props) => {
                 </p>
 
                 <div className="mt-5 flex flex-wrap gap-3">
-                        <Button variant="primary">Explore All Chapters</Button>
-                        <Button variant="secondary">Recommended Quizzes</Button>
-                        <Button variant="super">Top Rated Notes</Button>
+                    <Button variant="primary">Explore All Chapters</Button>
+                    <Button variant="secondary">Recommended Quizzes</Button>
+                    <Button variant="super">Top Rated Notes</Button>
+                </div>
+
+            </div>
+
+
+
+            <div className="relative py-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
+
+                <div >
+
+
+                    <div className="flex justify-between items-center  py-4  mb-4 border-b">
+
+                        {/* Back Button */}
+                        <Button variant="ghost" onClick={() =>onBack('topic')} className="flex items-center gap-2 text-blue-500 hover:text-blue-800">
+                            <ArrowLeft className="w-6 h-6" />
+                            <span className="text-base font-medium">Back</span>
+                        </Button>
+
+                        {/* Title */}
+                        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3 justify-center">
+                            <ListChecks className="w-7 h-7 text-blue-500" />
+                            <h2 className="text-2xl font-extrabold tracking-tight text-blue-700">
+                                Your Selected Lessons
+                            </h2>
+                        </div>
+
+                        {/* Clock & Select */}
+                        <div className="flex items-center gap-4">
+                            {/* Select List for Quiz Type */}
+                            <div className="flex flex-col gap-1 w-[120px]">
+                                <label className="text-sm font-medium text-blue-800">🎯 Quiz Type</label>
+                                <Select
+                                    value={quizType}
+                                    onValueChange={(val: 'mcq' | 'cq') => setQuizType(val)}
+                                >
+                                    <SelectTrigger className="rounded-xl border border-blue-300 text-blue-800 font-semibold shadow-sm focus:ring-blue-400">
+                                        <SelectValue placeholder="Select type" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="mcq">MCQ</SelectItem>
+                                        <SelectItem value="cq">CQ</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
+
+                            {/* Duration Clock */}
+                            <div className="flex flex-col gap-1 w-40">
+                                <label className="text-sm font-medium text-blue-800">⏱ Duration (minutes)</label>
+                                <Select
+                                    value={quizDuration.toString()}
+                                    onValueChange={(val) => setQuizDuration(Number(val))}
+                                >
+                                    <SelectTrigger className="rounded-xl border border-blue-300 text-blue-800 font-semibold shadow-sm focus:ring-blue-400">
+                                        <SelectValue placeholder="Select time" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {durationOptions.map((min) => (
+                                            <SelectItem key={min} value={min.toString()}>
+                                                {min} minutes
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                            </div>
+                        </div>
+
                     </div>
 
+                </div>
+
+
+                <div>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                        {lessons.length > 0 ? (
+                            lessons.map((lesson) => (
+                                <Card
+                                    key={lesson._id}
+                                    className="rounded-2xl shadow-md border border-blue-100 bg-white hover:shadow-lg transition"
+                                >
+                                    <CardContent className="p-5 flex flex-col gap-2">
+                                        <div className="text-blue-900 font-semibold text-lg flex items-center gap-2">
+                                            <BookOpenText className="w-5 h-5 text-blue-800" />
+                                            <span>{lesson.title}</span>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            ))
+                        ) : (
+                            <p className="text-gray-500 text-center col-span-full">No lessons selected.</p>
+                        )}
+                    </ul>
+                </div>
+
+
+                <div className="mt-8">
+                    <div className="mt-8 w-full gap-2 flex">
+                        <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" >Cancel</Button>
+                        <Button variant={'secondary'} size={'lg'} className="w-1/2 font-bold" onClick={() => onStart(quizType, quizDuration)}><Lightbulb /> Start Quiz</Button>
+                    </div>
+
+                </div>
+
+
+
+
+
             </div>
 
 
 
-            <div>
-                {
-                    lessons.map((lesson: any, index: number) => (
-                        <div key={index}>
-                            <div>{lesson.title}</div>
-
-                        </div>
-                    ))
-                }
-            </div>
         </div>
     )
 }

@@ -1,49 +1,45 @@
 'use client';
 
 import { useEffect, useState, useTransition } from "react";
-import { RecentTest } from "../_components/recent-test";
-import { StreakCount } from "../_components/streak-count";
-import { SubjectProgress } from "../_components/subject-progress";
-import { loadAcademicClass } from "@/app/_services/academy/academyService";
-import { loadAcademicSubject } from "@/app/_services/academy/academySubjectService";
-import { loadAcademicLesson } from "@/app/_services/academy/academyLessonService";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ChooseQuizTopic } from "./choose-quiz-topic";
 import { ShowQuizSummary } from "./show-quiz.summary";
+import { AcademyQuiz } from "./AcademyQuiz";
 
 
 const AcademyQuizPage = () => {
     const [isPending, startTransition] = useTransition();
-
-
     const [selectedLessons, setSelectedLessons] = useState<[]>([]);
-
     const [quizView, setQuizView] = useState<'topic' | 'summary' | 'quiz'>('topic');
 
-    const handleChooseTopicClick = (event: 'summary' | 'cancel', lessons:[]) => {
-        console.log("Data from child:", event);
-        console.log('lessons: ', lessons);
+    const handleChooseTopicClick = (event: 'summary' | 'cancel', lessons: []) => {
+        // console.log("Data from child:", event);
+        // console.log('lessons: ', lessons);
 
-        if(event == 'summary'){            
+        if (event == 'summary') {
             setSelectedLessons(lessons);
             setQuizView('summary');
         }
-        else{
+        else {
             setSelectedLessons([]);
             setQuizView('topic');
         }
-
-
     };
 
-
-
-    function startQuiz(): void {
-        console.log('start quiz with: ', selectedLessons)
+    function handleBackFromSummary(data: "topic"): void {
+        if (data == 'topic') {
+            setQuizView('topic')
+        }
+        // console.log('selected lessons: ', selectedLessons);
     }
+
+    function handleStartQuizFromSummary(type: string, duration: number): void {
+        console.log(type, duration, selectedLessons);
+    }
+
+    useEffect(() => {
+
+    }, [])
+
 
     return (
         <>
@@ -51,25 +47,30 @@ const AcademyQuizPage = () => {
             <div>
                 {
                     quizView == 'topic' && (
-                        <ChooseQuizTopic onClickItem={handleChooseTopicClick } />
+                        <ChooseQuizTopic onClickItem={handleChooseTopicClick} />
                     )
                 }
 
                 {
                     quizView == 'summary' && (
-                        <ShowQuizSummary lessons={selectedLessons}/>
+                        <ShowQuizSummary
+                            lessons={selectedLessons}
+                            onBack={handleBackFromSummary}
+                            onStart={handleStartQuizFromSummary}
+                            onCancel={() => { }}
+                        />
+                    )
+                }
+
+                {
+                    quizView == 'quiz' &&(
+                        <AcademyQuiz/>
                     )
                 }
             </div>
 
-
-
         </>
     )
-
-
-
-
 
 };
 
