@@ -3,6 +3,9 @@
 import { upsertQuiz } from "@/app/_services/academy/academy-quiz-service";
 import { useEffect, useState } from "react";
 import { AcademyQuizFinishPage } from "./academy-quiz-finish";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Flag, MoveLeft, MoveRight } from "lucide-react";
 
 type Quiz = {
     _id: string
@@ -71,7 +74,7 @@ export const AcademyQuiz = ({ quiz }: Props) => {
 
     if (finished) {
         return (
-            <AcademyQuizFinishPage quiz={quiz}/>
+            <AcademyQuizFinishPage quiz={quiz} />
         )
     }
 
@@ -123,26 +126,32 @@ export const AcademyQuiz = ({ quiz }: Props) => {
             </div>
 
             <div className="flex justify-between mt-6">
-                <button
+
+                <Button variant='default'
                     disabled={current === 0}
-                    onClick={() => setCurrent((prev) => prev - 1)}
-                    className="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-                >
-                    ⬅️ Back
-                </button>
-                <button
+                    onClick={() => setCurrent((prev) => prev - 1)}><MoveLeft /> Back</Button>
+
+                <Button variant='primary'
                     onClick={() => {
                         if (current < questions.length - 1) {
                             setCurrent((prev) => prev + 1)
                         } else {
-                            setFinished(true)
-                            alert("🎉 Quiz completed!")
+                            setFinished(true);
+                            toast.message("Quiz completed!");
                         }
                     }}
-                    className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
                 >
-                    {current < questions.length - 1 ? "Next ➡️" : "Finish 🏁"}
-                </button>
+                    {current < questions.length - 1 ? (
+                        <span className="flex items-center gap-2">
+                            Next <MoveRight className="w-4 h-4" />
+                        </span>
+                    ) : (
+                        <span className="flex items-center gap-2">
+                            Finish <Flag className="w-4 h-4" />
+                        </span>
+                    )}
+
+                </Button>
             </div>
         </div>
     )

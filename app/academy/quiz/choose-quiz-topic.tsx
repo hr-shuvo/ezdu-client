@@ -209,7 +209,12 @@ export const ChooseQuizTopic = ({ onClickItem }: Props) => {
 
                     <div className="mt-8 w-full gap-2 flex">
                         <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" onClick={() => onClickItem('cancel', [])}>Cancel</Button>
-                        <Button variant={'secondary'} size={'lg'} className="w-1/2 font-bold" onClick={() => onClickItem('summary', selectedLessons)}>Confirm</Button>
+                        <Button 
+                        variant={'secondary'} 
+                        size={'lg'} className="w-1/2 font-bold" 
+                        onClick={() => onClickItem('summary', selectedLessons)}
+                        disabled={!lessons.length}
+                        >Confirm</Button>
                     </div>
 
 
