@@ -28,7 +28,9 @@ export const AcademyQuiz = ({ quiz }: Props) => {
     const [remainingTime, setRemainingTime] = useState(
         Math.max(0, Math.floor((new Date(quiz.end).getTime() - Date.now()) / 1000))
     )
-    const [finished, setFinished] = useState(false)
+    const [finished, setFinished] = useState(false);
+    // console.log(quiz)
+
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -69,7 +71,7 @@ export const AcademyQuiz = ({ quiz }: Props) => {
 
     if (finished) {
         return (
-            <AcademyQuizFinishPage/>
+            <AcademyQuizFinishPage quiz={quiz}/>
         )
     }
 

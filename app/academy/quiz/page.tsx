@@ -19,7 +19,7 @@ const AcademyQuizPage = () => {
     useEffect(() => {
         startTransition(async () => {
             const _quiz = await getOngoingQuiz();
-            if (_quiz) {
+            if (_quiz && _quiz.data) {
                 setQuiz(_quiz.data);
                 setQuizView("quiz");
             }
@@ -59,8 +59,6 @@ const AcademyQuizPage = () => {
                 setQuiz(_quiz);
                 setQuizView('quiz');
             }
-
-            console.log(_quiz);
         });
     }
 
