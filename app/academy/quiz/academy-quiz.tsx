@@ -1,0 +1,147 @@
+'use client';
+
+import { upsertQuiz } from "@/app/_services/academy/academy-quiz-service";
+import { useEffect, useState } from "react";
+import { AcademyQuizFinishPage } from "./academy-quiz-finish";
+
+type Quiz = {
+    _id: string
+    duration: number
+    end: string
+    questions: {
+        lessonId: string;
+        question: string;
+        passage: string | null;
+        optionList: { text: string; correct: boolean }[];
+        selectedOption: { text: string; correct: boolean } | null;
+    }[]
+}
+
+type Props = {
+    quiz: Quiz;
+}
+
+
+export const AcademyQuiz = ({ quiz }: Props) => {
+    const [questions, setQuestions] = useState(quiz.questions)
+    const [current, setCurrent] = useState(0)
+    const [remainingTime, setRemainingTime] = useState(
+        Math.max(0, Math.floor((new Date(quiz.end).getTime() - Date.now()) / 1000))
+    )
+    const [finished, setFinished] = useState(false)
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            const secs = Math.floor(
+                (new Date(quiz.end).getTime() - Date.now()) / 1000
+            )
+            setRemainingTime(Math.max(0, secs))
+
+            if (secs <= 0) {
+                clearInterval(timer);
+                setFinished(true);
+                // alert("⏰ Time's up! Quiz is over.")
+            }
+        }, 1000)
+
+        return () => clearInterval(timer)
+    }, [quiz.end])
+
+    const handleOptionClick = async (selected: { text: string; correct: boolean }) => {
+        const updatedQuestions = [...questions]
+        updatedQuestions[current].selectedOption = selected
+        setQuestions(updatedQuestions)
+
+        try {
+            quiz.questions = updatedQuestions;
+            const updatedQuiz = await upsertQuiz(quiz);
+            console.log('fter update: ', updatedQuiz.data);
+        } catch (err) {
+            console.error("Failed to update answer", err)
+        }
+    }
+
+    const formatTime = (secs: number) => {
+        const m = Math.floor(secs / 60)
+        const s = secs % 60
+        return `${m}:${s.toString().padStart(2, "0")}`
+    }
+
+    if (finished) {
+        return (
+            <AcademyQuizFinishPage/>
+        )
+    }
+
+    const q = questions[current]
+
+    return (
+        <div className="relative max-w-xl mx-auto mt-10 bg-white shadow-xl rounded-2xl p-6 space-y-6 text-gray-800">
+            {/* Countdown in top-right */}
+            <div className="absolute top-4 right-4 bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-semibold shadow">
+                ⏱ {formatTime(remainingTime)}
+            </div>
+
+            {q.passage && (
+                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-sm rounded">
+                    <strong>Passage:</strong> {q.passage}
+                </div>
+            )}
+
+            <div className="flex justify-between items-center">
+                <h2 className="text-xl font-bold">
+                    Question {current + 1}/{questions.length}
+                </h2>
+            </div>
+
+            <div>
+                <p className="text-lg font-medium">{q.question}</p>
+            </div>
+
+            <div className="space-y-3">
+                {q.optionList.map((option, idx) => {
+                    const isSelected =
+                        q.selectedOption?.text === option.text &&
+                        q.selectedOption?.correct === option.correct
+
+                    return (
+                        <button
+                            key={idx}
+                            onClick={() => handleOptionClick(option)}
+                            className={`w-full text-left px-4 py-2 rounded-xl border transition-all duration-200
+                ${isSelected
+                                    ? "bg-green-100 border-green-500"
+                                    : "bg-gray-50 border-gray-200 hover:bg-gray-100"
+                                }`}
+                        >
+                            {option.text}
+                        </button>
+                    )
+                })}
+            </div>
+
+            <div className="flex justify-between mt-6">
+                <button
+                    disabled={current === 0}
+                    onClick={() => setCurrent((prev) => prev - 1)}
+                    className="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+                >
+                    ⬅️ Back
+                </button>
+                <button
+                    onClick={() => {
+                        if (current < questions.length - 1) {
+                            setCurrent((prev) => prev + 1)
+                        } else {
+                            setFinished(true)
+                            alert("🎉 Quiz completed!")
+                        }
+                    }}
+                    className="px-4 py-2 rounded-xl bg-blue-500 text-white hover:bg-blue-600"
+                >
+                    {current < questions.length - 1 ? "Next ➡️" : "Finish 🏁"}
+                </button>
+            </div>
+        </div>
+    )
+}

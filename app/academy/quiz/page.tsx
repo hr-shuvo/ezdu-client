@@ -3,13 +3,28 @@
 import { useEffect, useState, useTransition } from "react";
 import { ChooseQuizTopic } from "./choose-quiz-topic";
 import { ShowQuizSummary } from "./show-quiz.summary";
-import { AcademyQuiz } from "./AcademyQuiz";
+import { AcademyQuiz } from "./academy-quiz";
+import { getOngoingQuiz, loadOrCreateQuize } from "@/app/_services/academy/academy-quiz-service";
+import Loading from "@/app/(main)/learn/loading";
 
 
 const AcademyQuizPage = () => {
     const [isPending, startTransition] = useTransition();
-    const [selectedLessons, setSelectedLessons] = useState<[]>([]);
     const [quizView, setQuizView] = useState<'topic' | 'summary' | 'quiz'>('topic');
+    const [quiz, setQuiz] = useState();
+    const [selectedLessons, setSelectedLessons] = useState<[]>([]);
+    // const [duration, setDuration] = useState<number>(15);
+    const [quizTtpe, setQuizType] = useState<"cq" | "mcq">("mcq");
+
+    useEffect(() => {
+        startTransition(async () => {
+            const _quiz = await getOngoingQuiz();
+            if (_quiz) {
+                setQuiz(_quiz.data);
+                setQuizView("quiz");
+            }
+        })
+    }, []);
 
     const handleChooseTopicClick = (event: 'summary' | 'cancel', lessons: []) => {
         // console.log("Data from child:", event);
@@ -32,14 +47,26 @@ const AcademyQuizPage = () => {
         // console.log('selected lessons: ', selectedLessons);
     }
 
-    function handleStartQuizFromSummary(type: string, duration: number): void {
-        console.log(type, duration, selectedLessons);
+    function handleStartQuizFromSummary(type: "cq" | "mcq", duration: number): void {
+        // setDuration(duration);
+        setQuizType(type);
+
+        const _lessonIds = selectedLessons.map((lesson: { _id: string }) => lesson._id);
+
+        startTransition(async () => {
+            const _quiz = await loadOrCreateQuize(duration, _lessonIds, quizTtpe);
+            if (_quiz) {
+                setQuiz(_quiz);
+                setQuizView('quiz');
+            }
+
+            console.log(_quiz);
+        });
     }
 
-    useEffect(() => {
-
-    }, [])
-
+    if(isPending){
+        return <Loading/>
+    }
 
     return (
         <>
@@ -63,8 +90,8 @@ const AcademyQuizPage = () => {
                 }
 
                 {
-                    quizView == 'quiz' &&(
-                        <AcademyQuiz/>
+                    quizView == 'quiz' && (
+                        <AcademyQuiz quiz={quiz!}/>
                     )
                 }
             </div>

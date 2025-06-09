@@ -2,9 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, BookOpenCheck, BookOpenText, Clock, Flame, Lightbulb, ListChecks } from "lucide-react";
+import { ArrowLeft, BookOpenText, Flame, Lightbulb, ListChecks } from "lucide-react";
 import { useState } from "react";
 
 
@@ -12,7 +11,7 @@ import { useState } from "react";
 type Props = {
     lessons: any[]
     onBack: (data:'topic') => void;
-    onStart: (type:string, duration:number) => void;
+    onStart: (type:"cq" | "mcq", duration:number) => void;
     onCancel: () => void;
 };
 
@@ -137,7 +136,7 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
 
                 <div className="mt-8">
                     <div className="mt-8 w-full gap-2 flex">
-                        <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" >Cancel</Button>
+                        <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" onClick={() => onCancel}>Cancel</Button>
                         <Button variant={'secondary'} size={'lg'} className="w-1/2 font-bold" onClick={() => onStart(quizType, quizDuration)}><Lightbulb /> Start Quiz</Button>
                     </div>
 

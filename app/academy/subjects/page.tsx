@@ -175,7 +175,7 @@ const AcademyPage = () => {
 
                                                         <TableCell>
                                                             <div>
-                                                                <Link href={`./academy/${item._id}`}>
+                                                                <Link href={`./subjects/${item._id}`}>
                                                                     <InteractiveHoverButton>Read</InteractiveHoverButton>
                                                                 </Link>
                                                             </div>
