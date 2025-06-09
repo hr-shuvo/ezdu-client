@@ -48,10 +48,10 @@ export const AcademyQuizFinishPage = ({ quiz }: Props) => {
                     { date: today.subtract(2, 'day').format("YYYY-MM-DD"), xp: 70 },
                     // { date:today.subtract(4, 'day').format("YYYY-MM-DD"), xp: 60 },
                 ],
-                total: earnedXP,
+                total: 360,
             };
             setXPStats(data.last7Days);
-            setTotalXP(data.total);
+            setTotalXP(data.total + earnedXP);
         } catch (err: any) {
             console.error(err?.response?.data?.msg || err.message);
         }

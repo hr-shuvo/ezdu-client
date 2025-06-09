@@ -45,7 +45,6 @@ export const AcademyQuiz = ({ quiz }: Props) => {
             if (secs <= 0) {
                 clearInterval(timer);
                 setFinished(true);
-                // alert("⏰ Time's up! Quiz is over.")
             }
         }, 1000)
 

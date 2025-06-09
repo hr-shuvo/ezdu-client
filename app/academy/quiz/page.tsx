@@ -14,7 +14,7 @@ const AcademyQuizPage = () => {
     const [quiz, setQuiz] = useState();
     const [selectedLessons, setSelectedLessons] = useState<[]>([]);
     // const [duration, setDuration] = useState<number>(15);
-    const [quizTtpe, setQuizType] = useState<"cq" | "mcq">("mcq");
+    const [quizType, setQuizType] = useState<"cq" | "mcq">("mcq");
 
     useEffect(() => {
         startTransition(async () => {
@@ -54,9 +54,9 @@ const AcademyQuizPage = () => {
         const _lessonIds = selectedLessons.map((lesson: { _id: string }) => lesson._id);
 
         startTransition(async () => {
-            const _quiz = await loadOrCreateQuize(duration, _lessonIds, quizTtpe);
+            const _quiz = await loadOrCreateQuize(duration, _lessonIds, type);
             if (_quiz) {
-                setQuiz(_quiz);
+                setQuiz(_quiz.data);
                 setQuizView('quiz');
             }
         });
@@ -88,8 +88,8 @@ const AcademyQuizPage = () => {
                 }
 
                 {
-                    quizView == 'quiz' && (
-                        <AcademyQuiz quiz={quiz!}/>
+                    quizView == 'quiz' && quiz && !isPending &&(
+                        <AcademyQuiz quiz={quiz}/>
                     )
                 }
             </div>
