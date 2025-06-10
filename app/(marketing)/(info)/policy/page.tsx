@@ -1,8 +1,9 @@
 // app/policy/page.tsx
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata : Metadata = {
     title: "Privacy Policy",
     description: "Read about how we collect, use, and protect your information.",
 };

@@ -12,9 +12,50 @@ const font = Nunito({
 });
 
 export const metadata: Metadata = {
-    title: "eZducation",
-    description: "Learn, parctice and master with EzDu",
+    title: {
+        default: "EzDu - Practice for Class 6-8, SSC, HSC, BCS & Govt Job Exams",
+        template: "%s | EzDu"
+    },
+    description: "EzDu is Bangladesh’s smart learning platform for SSC, HSC, school (Class 6-8), and job exam preparation. Practice MCQs, get instant feedback, and track your daily progress – all for free.",
+    keywords: [
+        "SSC exam preparation",
+        "HSC model test",
+        "Class 6 MCQ practice",
+        "Class 7 exam",
+        "Class 8 questions",
+        "BCS preparation",
+        "Bank job preparation",
+        "Govt job preparation",
+        "SSC HSC previous questions",
+        "IELTS Preparation",
+        "IELTS Mock Test"
+    ],
+    openGraph: {
+        title: "EzDu - Practice for SSC, HSC, Class 6-8, BCS & Govt Job Exams",
+        description: "EzDu is Bangladesh’s smart learning platform for SSC, HSC, school (Class 6-8), and job exam preparation. Practice MCQs, get instant feedback, and track your daily progress – all for free.",
+        url: "https://ezduonline.com",
+        siteName: "EzDu",
+        images: [
+            {
+                url: "https://ibb.co/sX1qKGz",
+                width: 1200,
+                height: 630,
+                alt: "EzDu - SSC, HSC & Job Exam Practice"
+            }
+        ],
+        type: "website"
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "EzDu - Practice for SSC, HSC, Class 6-8, BCS & Govt Job Exams",
+        description: "EzDu is Bangladesh’s smart learning platform for SSC, HSC, school (Class 6-8), and job exam preparation. Practice MCQs, get instant feedback, and track your daily progress – all for free.",
+        images: ["https://ibb.co/sX1qKGz"]
+    },
+    metadataBase: new URL("https://ezduonline.com")
 };
+
+
+
 
 export default function RootLayout({
     children,

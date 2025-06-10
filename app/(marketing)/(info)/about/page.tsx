@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata : Metadata = {
     title: "About Us",
     description: "Learn about our mission, values, and the team behind our platform.",
 };

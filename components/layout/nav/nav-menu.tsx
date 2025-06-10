@@ -34,7 +34,7 @@ export const NavMenu = () => {
                                 <ListItem href="/academy/quiz" title="Quick Test & Quiz">
                                     Short MCQs and quizzes to test your topic understanding.
                                 </ListItem>
-                                <ListItem href="/academy/model-test" title="Model Test">
+                                <ListItem href="/academy/mt" title="Model Test">
                                     Full-length tests to practice in real exam style
                                 </ListItem>
                             </ul>
