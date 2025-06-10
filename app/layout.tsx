@@ -37,7 +37,7 @@ export const metadata: Metadata = {
         siteName: "EzDu",
         images: [
             {
-                url: "https://www.ezduonline.com/logo/logo.png",
+                url: "https://www.ezduonline.com/logo/logo_og.svg",
                 width: 1200,
                 height: 630,
                 alt: "EzDu - SSC, HSC & Job Exam Practice"
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "EzDu - Practice for SSC, HSC, Class 6-8, BCS & Govt Job Exams",
         description: "EzDu is Bangladesh’s smart learning platform for SSC, HSC, school (Class 6-8), and job exam preparation. Practice MCQs, get instant feedback, and track your daily progress – all for free.",
-        images: ["https://www.ezduonline.com/logo/logo.png"]
+        images: ["https://www.ezduonline.com/logo/logo_og.svg"]
     },
     metadataBase: new URL("https://ezduonline.com")
 };
