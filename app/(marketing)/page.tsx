@@ -2,9 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useEffect } from "react";
 import Image from "next/image";
-import { getCurrentUser } from "@/services/authService";
 import { CourseModule } from "./course-module";
 import { CoolMode } from "@/components/magicui/cool-mode";
 import { SchoolBanner } from "@/app/(marketing)/banner/school-banner";
@@ -13,7 +11,7 @@ import { FeatureBanner } from "./banner/feature-banner";
 import { useSecure } from "@/context/SecureContext";
 
 export default function Home() {
-    const { isLoggedIn, login, logout } = useSecure();
+    const { isLoggedIn } = useSecure();
 
     return (
 

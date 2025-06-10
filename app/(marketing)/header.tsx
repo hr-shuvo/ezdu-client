@@ -3,13 +3,11 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { logout as logoutUser } from "../_services/auth";
-// import { userLoginStatus } from "@/store/user-auth";
 import React from "react";
 import { NavMenu } from "@/components/layout/nav/nav-menu";
 import { useSecure } from "@/context/SecureContext";
 
 export const Header = () => {
-    // const { isLoggedIn, logout } = userLoginStatus();
     const { isLoggedIn, logout } = useSecure();
 
     return (

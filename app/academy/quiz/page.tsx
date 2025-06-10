@@ -14,7 +14,7 @@ const AcademyQuizPage = () => {
     const [quiz, setQuiz] = useState();
     const [selectedLessons, setSelectedLessons] = useState<[]>([]);
     // const [duration, setDuration] = useState<number>(15);
-    const [quizType, setQuizType] = useState<"cq" | "mcq">("mcq");
+    // const [quizType, setQuizType] = useState<"cq" | "mcq">("mcq");
 
     useEffect(() => {
         startTransition(async () => {
@@ -49,8 +49,7 @@ const AcademyQuizPage = () => {
 
     function handleStartQuizFromSummary(type: "cq" | "mcq", duration: number): void {
         // setDuration(duration);
-        setQuizType(type);
-
+        // setQuizType(type);
         const _lessonIds = selectedLessons.map((lesson: { _id: string }) => lesson._id);
 
         startTransition(async () => {
