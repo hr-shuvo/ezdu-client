@@ -80,78 +80,84 @@ export const AcademyQuiz = ({ quiz }: Props) => {
     const q = questions[current]
 
     return (
-        <div className="relative max-w-xl mx-auto mt-10 bg-white shadow-xl rounded-2xl p-6 space-y-6 text-gray-800">
-            {/* Countdown in top-right */}
-            <div className="absolute top-4 right-4 bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-semibold shadow">
-                ⏱ {formatTime(remainingTime)}
-            </div>
+        <>
+            <div className="p-6 gap-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
 
-            {q.passage && (
-                <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-sm rounded">
-                    <strong>Passage:</strong> {q.passage}
-                </div>
-            )}
+                <div className="relative max-w-xl mx-auto mt-10 bg-white shadow-xl rounded-2xl p-6 space-y-6 text-gray-800">
+                    {/* Countdown in top-right */}
+                    <div className="absolute top-4 right-4 bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-semibold shadow">
+                        ⏱ {formatTime(remainingTime)}
+                    </div>
 
-            <div className="flex justify-between items-center">
-                <h2 className="text-xl font-bold">
-                    Question {current + 1}/{questions.length}
-                </h2>
-            </div>
-
-            <div>
-                <p className="text-lg font-medium">{q.question}</p>
-            </div>
-
-            <div className="space-y-3">
-                {q.optionList.map((option, idx) => {
-                    const isSelected =
-                        q.selectedOption?.text === option.text &&
-                        q.selectedOption?.correct === option.correct
-
-                    return (
-                        <button
-                            key={idx}
-                            onClick={() => handleOptionClick(option)}
-                            className={`w-full text-left px-4 py-2 rounded-xl border transition-all duration-200
-                ${isSelected
-                                    ? "bg-green-100 border-green-500"
-                                    : "bg-gray-50 border-gray-200 hover:bg-gray-100"
-                                }`}
-                        >
-                            {option.text}
-                        </button>
-                    )
-                })}
-            </div>
-
-            <div className="flex justify-between mt-6">
-
-                <Button variant='default'
-                    disabled={current === 0}
-                    onClick={() => setCurrent((prev) => prev - 1)}><MoveLeft /> Back</Button>
-
-                <Button variant='primary'
-                    onClick={() => {
-                        if (current < questions.length - 1) {
-                            setCurrent((prev) => prev + 1)
-                        } else {
-                            setFinished(true);
-                            toast.message("Quiz completed!");
-                        }
-                    }}
-                >
-                    {current < questions.length - 1 ? (
-                        <span className="flex items-center gap-2">
-                            Next <MoveRight className="w-4 h-4" />
-                        </span>
-                    ) : (
-                        <span className="flex items-center gap-2">
-                            Finish <Flag className="w-4 h-4" />
-                        </span>
+                    {q.passage && (
+                        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 text-sm rounded">
+                            <strong>Passage:</strong> {q.passage}
+                        </div>
                     )}
 
-                </Button>
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-xl font-bold">
+                            Question {current + 1}/{questions.length}
+                        </h2>
+                    </div>
+
+                    <div>
+                        <p className="text-lg font-medium">{q.question}</p>
+                    </div>
+
+                    <div className="space-y-3">
+                        {q.optionList.map((option, idx) => {
+                            const isSelected =
+                                q.selectedOption?.text === option.text &&
+                                q.selectedOption?.correct === option.correct
+
+                            return (
+                                <button
+                                    key={idx}
+                                    onClick={() => handleOptionClick(option)}
+                                    className={`w-full text-left px-4 py-2 rounded-xl border transition-all duration-200
+                ${isSelected
+                                            ? "bg-green-100 border-green-500"
+                                            : "bg-gray-50 border-gray-200 hover:bg-gray-100"
+                                        }`}
+                                >
+                                    {option.text}
+                                </button>
+                            )
+                        })}
+                    </div>
+
+                    <div className="flex justify-between mt-6">
+
+                        <Button variant='default'
+                            disabled={current === 0}
+                            onClick={() => setCurrent((prev) => prev - 1)}><MoveLeft /> Back</Button>
+
+                        <Button variant='primary'
+                            onClick={() => {
+                                if (current < questions.length - 1) {
+                                    setCurrent((prev) => prev + 1)
+                                } else {
+                                    setFinished(true);
+                                    toast.message("Quiz completed!");
+                                }
+                            }}
+                        >
+                            {current < questions.length - 1 ? (
+                                <span className="flex items-center gap-2">
+                                    Next <MoveRight className="w-4 h-4" />
+                                </span>
+                            ) : (
+                                <span className="flex items-center gap-2">
+                                    Finish <Flag className="w-4 h-4" />
+                                </span>
+                            )}
+
+                        </Button>
+                    </div>
+                </div>
             </div>
-        </div>
+
+        </>
     )
 }

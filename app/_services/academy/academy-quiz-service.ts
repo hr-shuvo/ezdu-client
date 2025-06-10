@@ -3,7 +3,6 @@ import httpClient from "@/app/utils/httpClient";
 
 export const getOngoingQuiz = async () => {
     try {
-
         const response = await httpClient.get("/academy/quiz/ongoing");
 
         return response.data;
@@ -44,7 +43,7 @@ export const upsertQuiz = async (quiz: any) => {
     try {
 
         const response = await httpClient.post("/academy/quiz/upsert", quiz);
-        console.log('post quiz: ', quiz);
+        // console.log('post quiz: ', quiz);
 
         return response.data;
 
