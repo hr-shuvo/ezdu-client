@@ -1,4 +1,4 @@
-import httpClient from "../utils/httpClient";
+import httpClient from "../../lib/httpClient";
 import { PaginatedList } from "../utils/pagination";
 
 export const loadChallenges = async (

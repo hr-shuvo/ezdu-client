@@ -1,7 +1,7 @@
 'use server';
 
 import { cookies } from "next/headers";
-import httpClient from "@/app/utils/httpClient";
+import httpClient from "@/lib/httpClient";
 
 
 

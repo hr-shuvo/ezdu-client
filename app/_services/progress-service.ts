@@ -1,4 +1,4 @@
-import httpClient from "../utils/httpClient";
+import httpClient from "../../lib/httpClient";
 
 export const getUserProgress = async (): Promise<any> => {
   try {

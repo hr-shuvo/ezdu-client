@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { logout as logoutUser } from "../actions/auth";
+import { logout as logoutUser } from "../_services/auth";
 import { userLoginStatus } from "@/store/user-auth";
 import React from "react";
 import { NavMenu } from "@/components/layout/nav/nav-menu";

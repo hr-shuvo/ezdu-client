@@ -1,6 +1,6 @@
 'use server'
 
-import httpClient from "@/app/utils/httpClient";
+import httpClient from "@/lib/httpClient";
 import { cookies } from "next/headers";
 
 export const getLesson = async (id?: string) => {

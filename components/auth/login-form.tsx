@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../notification/form-error";
 import { FormSuccess } from "../notification/form-success";
-import { login as loginUser } from "@/app/actions/auth";
+import { login as loginUser } from "@/app/_services/auth";
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { userLoginStatus } from "@/store/user-auth";

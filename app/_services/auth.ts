@@ -1,7 +1,7 @@
 // 'ues server';
 import { LoginSchema, RegisterSchema } from '@/schemas/auth';
 import * as z from 'zod';
-import httpClient from '../utils/httpClient';
+import httpClient from '../../lib/httpClient';
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
     const validateFields = LoginSchema.safeParse(values);

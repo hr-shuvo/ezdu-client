@@ -1,4 +1,4 @@
-import httpClient from "@/app/utils/httpClient";
+import httpClient from "@/lib/httpClient";
 import { PaginatedList } from "@/app/utils/pagination";
 
 
