@@ -31,13 +31,13 @@ export const metadata: Metadata = {
         "IELTS Mock Test"
     ],
     openGraph: {
-        title: "EzDu - Practice for SSC, HSC, Class 6-8, BCS & Govt Job Exams",
+        title: "Practice for SSC, HSC, Class 6-8, BCS & Job",
         description: "EzDu is Bangladesh’s smart learning platform for SSC, HSC, school (Class 6-8), and job exam preparation. Practice MCQs, get instant feedback, and track your daily progress – all for free.",
         url: "https://ezduonline.com",
         siteName: "EzDu",
         images: [
             {
-                url: "https://ibb.co/sX1qKGz",
+                url: "https://www.ezduonline.com/logo/logo.png",
                 width: 1200,
                 height: 630,
                 alt: "EzDu - SSC, HSC & Job Exam Practice"
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "EzDu - Practice for SSC, HSC, Class 6-8, BCS & Govt Job Exams",
         description: "EzDu is Bangladesh’s smart learning platform for SSC, HSC, school (Class 6-8), and job exam preparation. Practice MCQs, get instant feedback, and track your daily progress – all for free.",
-        images: ["https://ibb.co/sX1qKGz"]
+        images: ["https://www.ezduonline.com/logo/logo.png"]
     },
     metadataBase: new URL("https://ezduonline.com")
 };
