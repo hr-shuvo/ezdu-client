@@ -5,4 +5,27 @@ const httpClient = axios.create({
     withCredentials: true,
 });
 
+
+let errorHandler: ((msg: string) => void) | null = null;
+
+export const setGlobalErrorHandler = (handler: (msg: string) => void) => {
+    errorHandler = handler;
+};
+
+httpClient.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const status = error.response?.status;
+        const message = error.response?.data?.message || error.message;
+
+        console.log(error);
+
+        if (errorHandler) {
+            errorHandler(`${status}: ${message}`);
+        }
+
+        return Promise.reject(error);
+    }
+)
+
 export default httpClient;

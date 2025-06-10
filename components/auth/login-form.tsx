@@ -17,17 +17,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { FormError } from "../notification/form-error";
 import { FormSuccess } from "../notification/form-success";
-import { login as loginUser } from "@/app/_services/auth";
+import { loginUser } from "@/app/_services/auth";
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { userLoginStatus } from "@/store/user-auth";
+import { useSecure } from "@/context/SecureContext";
 
 export const LoginForm = () => {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [isPending, startTransition] = useTransition();
-    const { isLoggedIn, login } = userLoginStatus();
+    const { isLoggedIn, login } = useSecure();
 
     useEffect(() => {
         // console.log("is loggedIn: ", isLoggedIn);
@@ -48,6 +48,8 @@ export const LoginForm = () => {
         setError("");
         setSuccess("");
         startTransition(() => {
+            // login(values.email, values.password)
+
             loginUser(values).then((data) => {
                 if (data.success) {
                     setSuccess(data.success);

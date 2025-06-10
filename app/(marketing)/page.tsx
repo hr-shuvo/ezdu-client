@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { userLoginStatus } from "@/store/user-auth";
 import Link from "next/link";
 import { useEffect } from "react";
 import Image from "next/image";
@@ -11,24 +10,10 @@ import { CoolMode } from "@/components/magicui/cool-mode";
 import { SchoolBanner } from "@/app/(marketing)/banner/school-banner";
 import { LeaderboardBanner } from "./banner/leaderboard-banner";
 import { FeatureBanner } from "./banner/feature-banner";
+import { useSecure } from "@/context/SecureContext";
 
 export default function Home() {
-    const { isLoggedIn, login, logout } = userLoginStatus();
-
-    useEffect(() => {
-        const fetchCurrentUser = async () => {
-
-            const result = await getCurrentUser();
-            if (result.success) {
-                // console.log(result);
-                login();
-            } else {
-                logout()
-            }
-        };
-
-        fetchCurrentUser();
-    }, [login, logout]);
+    const { isLoggedIn, login, logout } = useSecure();
 
     return (
 

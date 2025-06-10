@@ -3,7 +3,7 @@ import { LoginSchema, RegisterSchema } from '@/schemas/auth';
 import * as z from 'zod';
 import httpClient from '../../lib/httpClient';
 
-export const login = async (values: z.infer<typeof LoginSchema>) => {
+export const loginUser = async (values: z.infer<typeof LoginSchema>) => {
     const validateFields = LoginSchema.safeParse(values);
 
     if (!validateFields.success)
@@ -11,10 +11,11 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
     try {
         const response = await httpClient.post('/auth/login', values);
+        // console.log('auth service: ', response.data);
 
-        return { success: response.data.msg };
+        return { success: response.data.message };
     } catch (err: any) {
-        return { error: err?.response?.data?.msg };
+        return { error: err?.response?.data?.message };
     }
 };
 

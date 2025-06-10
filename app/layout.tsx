@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import { ExitModal } from "@/components/modals/exit-modal";
 import { HeartsModal } from "@/components/modals/hearts-modal";
 import { PracticeModal } from "@/components/modals/practice-modal";
+import { SecureProvider } from "@/context/SecureContext";
 
 const font = Nunito({
     subsets: ["latin"],
@@ -23,13 +24,16 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${font.className} flex flex-col min-h-screen`}>
-                <main className="flex-grow">
-                    {children}
-                </main>
-                <Toaster />
-                <ExitModal />
-                <HeartsModal />
-                <PracticeModal />
+                <SecureProvider>
+                    <main className="flex-grow">
+                        {children}
+                    </main>
+                    <Toaster />
+                    <ExitModal />
+                    <HeartsModal />
+                    <PracticeModal />
+                </SecureProvider>
+
             </body>
         </html>
     );
