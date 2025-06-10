@@ -6,6 +6,10 @@ import { Metadata } from "next";
 export const metadata : Metadata = {
     title: "Privacy Policy",
     description: "Read about how we collect, use, and protect your information.",
+    robots:{
+        index:false,
+        follow:true
+    }
 };
 
 export default function PolicyPage() {
