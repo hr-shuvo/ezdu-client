@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const subjectSitemapEntries = subjects.map((subject: Subject) => ({
         url: `${baseUrl}/academy/subjects/${subject._id}`, 
         changeFrequency: 'monthly' as 'monthly', 
-        priority: 0.6,
+        priority: 0.5,
     }));
 
     return [
@@ -33,16 +33,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 1.0,
         },
         {
-            url: `${baseUrl}/academy/quiz`,
-            // lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
             url: `${baseUrl}/academy/qb`,
             // lastModified: new Date(),
             changeFrequency: 'yearly',
             priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/academy/quiz`,
+            // lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.8,
         },
         ...subjectSitemapEntries
 
