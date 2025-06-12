@@ -66,8 +66,9 @@ const AcademyPage = () => {
 
                     <div className="mt-5 flex flex-wrap gap-3">
                         <Button variant="primary">Explore All Chapters</Button>
-                        <Button variant="secondary">Recommended Quizzes</Button>
-                        <Button variant="super">Top Rated Notes</Button>
+                        <Link href={'/academy/quiz'}><Button variant="secondary">Take Quizzes</Button></Link>
+                        <Link href={'/academy/qb'}><Button variant="super">Previous Questions</Button></Link>
+                        
                     </div>
                 </div>
             </div>
@@ -162,13 +163,13 @@ const AcademyPage = () => {
 
                                                                     {/* <Button variant='primaryOutline' size={'xsm'}>tag</Button> */}
 
-                                                                    <Link href={`./academy/c/mcq?s=${item._id}`}><Button variant='superOutline' size={'xsm'}>MCQ</Button></Link>
+                                                                    <Link href={`./c/mcq?s=${item._id}`}><Button variant='superOutline' size={'xsm'}>MCQ</Button></Link>
                                                                     
                                                                     {/* <Button variant='superOutline' size={'xsm'}>Written</Button> */}
-                                                                    <Button variant='secondaryOutline' size={'xsm'}>Board Question</Button>
-                                                                    <Button variant='primaryOutline' size={'xsm'}>Model Test</Button>
-                                                                    <Button variant='superOutline' size={'xsm'}>Quiz</Button>
-
+                                                                    <Link href={`/academy/qb?s=${item._id}`}><Button variant='secondaryOutline' size={'xsm'}>Board Question</Button></Link>
+                                                                    <Link href={`/academy/quiz`}><Button variant='primaryOutline' size={'xsm'}>Model Test</Button></Link>
+                                                                    <Link href={`/academy/quiz?s=${item._id}`}><Button variant='superOutline' size={'xsm'}>Practice & Quiz</Button></Link>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </TableCell>
@@ -176,7 +177,7 @@ const AcademyPage = () => {
                                                         <TableCell>
                                                             <div>
                                                                 <Link href={`./subjects/${item._id}`}>
-                                                                    <InteractiveHoverButton>Read</InteractiveHoverButton>
+                                                                    <Button variant={'primary'} size={'sm'} >Read</Button>
                                                                 </Link>
                                                             </div>
 

@@ -96,10 +96,10 @@ const AcademySubjectPage = () => {
                             </Button>
                         </Link>
 
-                        <Link href={'/academy/qb'}>
-                        <Button variant={'secondary'}>
-                            View More MCQs
-                        </Button>
+                        <Link href={`/academy/qb?s=${subject?._id}`}>
+                            <Button variant={'secondary'}>
+                                View More MCQs
+                            </Button>
                         </Link>
 
                         <Button variant={'super'}>
