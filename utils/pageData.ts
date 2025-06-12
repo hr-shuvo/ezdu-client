@@ -15,6 +15,10 @@ export const pageData: Record<string, { title: string; description: string }> = 
     description:
       "Comprehensive preparation tools for bank jobs, government exams, and more — coming your way soon!",
   },
+  "admission": {
+    title: "University Admission Preparation",
+    description: "We are working hard to make Admission Live. Please keep patient",
+  },
   "bcs-prep": {
     title: "BCS Prep Center",
     description: "Get ready for smart BCS preparation with targeted practice. Launching soon!",
