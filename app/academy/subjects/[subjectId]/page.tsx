@@ -90,12 +90,18 @@ const AcademySubjectPage = () => {
                     </p>
 
                     <div className="mt-5 flex flex-wrap gap-3">
-                        <Button variant={'primary'}>
-                            Take Quiz
-                        </Button>
+                        <Link href={'/academy/quiz'}>
+                            <Button variant={'primary'}>
+                                Take Quiz
+                            </Button>
+                        </Link>
+
+                        <Link href={'/academy/qb'}>
                         <Button variant={'secondary'}>
                             View More MCQs
                         </Button>
+                        </Link>
+
                         <Button variant={'super'}>
                             Download Notes
                         </Button>
@@ -142,7 +148,7 @@ const AcademySubjectPage = () => {
                                             !rowData.children?.length && (
                                                 <div className='flex justify-center gap-3 mt-5'>
 
-                                                    <Link href={`./c/mcq?l=${rowData.key}&s=${subject._id}`}><Button variant='primaryOutline' size={'xsm'}>MCQ</Button></Link>
+                                                    <Link href={`../c/mcq?l=${rowData.key}&s=${subject._id}`}><Button variant='primaryOutline' size={'xsm'}>MCQ</Button></Link>
 
                                                     <Button variant='superOutline' size={'xsm'}>Model Test</Button>
 
@@ -158,13 +164,13 @@ const AcademySubjectPage = () => {
                             {/* <Column field="subTitle" header="Subtitle" /> */}
                             <Column
                                 field="id"
-                                style={{ textAlign: 'end', width:'20%' }}
+                                style={{ textAlign: 'end', width: '20%' }}
                                 body={(rowData) => (
 
                                     <div className="">
                                         {
                                             !rowData.children?.length && (
-                                                <Link href={`./c/${rowData.key}`}>
+                                                <Link href={`../c/${rowData.key}`}>
                                                     <Button>Read</Button>
                                                 </Link>
                                             )

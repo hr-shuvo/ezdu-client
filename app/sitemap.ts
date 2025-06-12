@@ -21,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const subjectSitemapEntries = subjects.map((subject: Subject) => ({
         url: `${baseUrl}/academy/subjects/${subject._id}`, 
-        changeFrequency: 'monthly' as 'monthly', 
+        changeFrequency: 'monthly' as const, 
         priority: 0.5,
     }));
 
