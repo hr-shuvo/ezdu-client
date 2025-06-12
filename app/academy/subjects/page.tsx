@@ -5,7 +5,6 @@ import { useEffect, useState, useTransition } from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { loadAcademicClass } from "../../_services/academy/academyService";
 import { loadAcademicSubject } from "../../_services/academy/academySubjectService";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
