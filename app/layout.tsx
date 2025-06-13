@@ -14,7 +14,7 @@ const font = Nunito({
 export const metadata: Metadata = {
     title: {
         default: "EzDu - Practice for Class 6-8, SSC, HSC, BCS & Govt Job Exams",
-        template: "%s | EzDu"
+        template: "%s - EzDu"
     },
     description: "EzDu is Bangladesh’s smart learning platform for SSC, HSC, school (Class 6-8), and job exam preparation. Practice MCQs, get instant feedback, and track your daily progress – all for free.",
     keywords: [
