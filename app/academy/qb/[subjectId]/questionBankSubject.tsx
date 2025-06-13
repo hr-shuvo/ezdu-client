@@ -62,7 +62,7 @@ const QuestionBankSubject = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {modelTests.map((data: any, index: number) => (
                             <div key={index}>
-                                <Link href={''}>
+                                <Link href={`../mt?s=${subject._id}&i=${data.instituteId}`}>
                                 <Card className="w-full min-h-[110px] p-6 text-sm font-semibold border border-b-4 rounded-xl hover:bg-gray-200 hover:text-gray-900 transition-all">
                                     <CardHeader className="p-0 mb-2">
                                         <h1 className="text-base text-gray-600">{subject.title}</h1>

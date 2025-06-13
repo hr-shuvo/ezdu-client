@@ -1,16 +1,15 @@
-'use client';
-
-import { ComingSoon } from "@/components/comming-soon";
+import AcademyModelTest from "./academy-modeltest";
 
 
 
-const AcademyModelTestPage = () => {
+const AcademyModetTestPage = () => {
+
+
     return (
-        <>
-            <ComingSoon slug="modelTest" />
-
-        </>
-    );
+    <>
+        <AcademyModelTest />
+    </>
+    )
 };
 
-export default AcademyModelTestPage;
+export default AcademyModetTestPage;
