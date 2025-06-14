@@ -49,7 +49,6 @@ export default function Home() {
 
             {/* Feature Highlights */}
             <div className="flex justify-center w-full max-w-[988px] mb-8">
-
                 <FeatureBanner />
             </div>
 

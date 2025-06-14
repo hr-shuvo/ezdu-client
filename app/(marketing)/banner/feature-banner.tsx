@@ -7,19 +7,19 @@ export const FeatureBanner = () => {
                 <div className="bg-indigo-50 rounded-2xl p-6 shadow hover:shadow-md transition">
                     <h3 className="text-lg font-semibold text-indigo-700 mb-2">Curriculum-Aligned</h3>
                     <p className="text-sm text-neutral-600">
-                        Covers national school subjects and job exam topics like BCS, Bank, Primary, and more.
+                        Follows the exact syllabus of Class 6,7,8, SSC, HSC, and other exams 
                     </p>
                 </div>
                 <div className="bg-indigo-50 rounded-2xl p-6 shadow hover:shadow-md transition">
-                    <h3 className="text-lg font-semibold text-indigo-700 mb-2">Gamified Learning</h3>
+                    <h3 className="text-lg font-semibold text-indigo-700 mb-2">You Needed This</h3>
                     <p className="text-sm text-neutral-600">
-                        Earn points, track progress, and compete on leaderboards to stay motivated and consistent.
+                        Provides only the content that’s relevant - no extras, just what’s required to succeed
                     </p>
                 </div>
                 <div className="bg-indigo-50 rounded-2xl p-6 shadow hover:shadow-md transition">
                     <h3 className="text-lg font-semibold text-indigo-700 mb-2">Practice & Analyze</h3>
                     <p className="text-sm text-neutral-600">
-                        Take quizzes, view instant feedback, and analyze your performance with smart stats.
+                        Take quizzes, test your weaknesses, and improve with instant feedback and smart progress tracking.
                     </p>
                 </div>
             </div></>
