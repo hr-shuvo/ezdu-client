@@ -6,6 +6,7 @@ import utc from 'dayjs/plugin/utc';
 import { Button } from "@/components/ui/button";
 import { FilePlus2, MoveLeft, Send } from "lucide-react";
 import { toast } from "sonner";
+import FireBorderBox from "@/components/custom-ui/fire-box";
 
 dayjs.extend(utc);
 
@@ -56,10 +57,22 @@ export const AcademyQuizFinishPage = ({ summary }: Props) => {
                     className={`bg-white p-10 rounded-3xl shadow-xl max-w-4xl w-full text-center transform transition-all duration-700 ease-out 
     ${animate ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
                 >
-                    <h1 className="text-5xl font-bold text-green-600 mb-4">🎉 Congratulations!</h1>
+                    <h1 className="text-5xl font-bold text-green-600 mb-4">
+                        <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 animate-bounce">
+                            {summary?.progress?.streakCount} streak!
+                        </span> 🎉 Congratulations!
+                    </h1>
+
+                    <FireBorderBox >
+                        <p className="text-xl text-gray-700">
+                            You earned <b>{summary?.xp | 0} XP</b>!
+                        </p>
+
+                    </FireBorderBox>
+
                     <p className="text-xl text-gray-700 mb-8">
-                        You’ve successfully completed the quiz. You earned <b>{summary?.progress?.totalXp | 0} XP</b>!
-                    </p>
+                        You’ve successfully completed the quiz.</p>
+
                     <Button variant={'primary'}>
                         <MoveLeft /> Back to Home
                     </Button>
@@ -70,7 +83,7 @@ export const AcademyQuizFinishPage = ({ summary }: Props) => {
                     <div className="flex-1 bg-white p-6 rounded-xl shadow-md">
                         <h2 className="text-2xl font-semibold mb-6">📊 Your XP Progress</h2>
                         <ul className="space-y-3 text-sm">
-                            {summary?.progress?.lastWeekXp.map((stat:any) => (
+                            {summary?.progress?.lastWeekXp.map((stat: any) => (
                                 <li key={stat.date} className="flex justify-between border-b pb-2">
                                     <span>{formatRelativeDate(stat.day)}</span>
                                     <span>{stat.xp.toFixed(1)} XP</span>
