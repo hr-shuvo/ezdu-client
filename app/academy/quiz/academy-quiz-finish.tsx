@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import utc from 'dayjs/plugin/utc';
 import { Button } from "@/components/ui/button";
 import { FilePlus2, MoveLeft, Send } from "lucide-react";
 import { toast } from "sonner";
 
+dayjs.extend(utc);
+
 const formatRelativeDate = (dateStr: string) => {
-    const dayjsDate = dayjs(dateStr);
-    const today = dayjs();
+    const dayjsDate = dayjs.utc(dateStr).local().startOf("day");
+    const today = dayjs().startOf("day");
     const diff = today.diff(dayjsDate, "day");
 
     if (diff === 0) return "Today";
@@ -17,50 +20,16 @@ const formatRelativeDate = (dateStr: string) => {
 };
 
 type Props = {
-    quiz: any
+    summary: any
 };
 
-export const AcademyQuizFinishPage = ({ quiz }: Props) => {
-    const [xp, setXP] = useState(0);
+export const AcademyQuizFinishPage = ({ summary }: Props) => {
     const [feedback, setFeedback] = useState("");
-    const [xpStats, setXPStats] = useState<{ date: string; xp: number }[]>([]);
-    const [totalXP, setTotalXP] = useState(0);
     const [animate, setAnimate] = useState(false);
 
-
-    const calculateXP = () => {
-        
-        if (!quiz || !quiz.questions || !Array.isArray(quiz.questions)) return 0;
-        const correctAnswers = quiz.questions.filter(
-            (q: any) => q.selectedOption?.correct
-        ).length;
-        return correctAnswers * 10;
-    };
-
-    const updateXPStats = async (earnedXP: number) => {
-        const today = dayjs();
-
-        try {
-            const data = {
-                last7Days: [
-                    { date: today.format("YYYY-MM-DD"), xp: 90 },
-                    { date: today.subtract(1, 'day').format("YYYY-MM-DD"), xp: 20 },
-                    { date: today.subtract(2, 'day').format("YYYY-MM-DD"), xp: 70 },
-                    // { date:today.subtract(4, 'day').format("YYYY-MM-DD"), xp: 60 },
-                ],
-                total: 360,
-            };
-            setXPStats(data.last7Days);
-            setTotalXP(data.total + earnedXP);
-        } catch (err: any) {
-            console.error(err?.response?.data?.msg || err.message);
-        }
-    };
+    console.log("summary: ", summary);
 
     useEffect(() => {
-        const earnedXP = calculateXP();
-        setXP(earnedXP);
-        updateXPStats(earnedXP);
 
         setTimeout(() => {
             setAnimate(true);
@@ -89,7 +58,7 @@ export const AcademyQuizFinishPage = ({ quiz }: Props) => {
                 >
                     <h1 className="text-5xl font-bold text-green-600 mb-4">🎉 Congratulations!</h1>
                     <p className="text-xl text-gray-700 mb-8">
-                        You’ve successfully completed the quiz. You earned <b>{xp} XP</b>!
+                        You’ve successfully completed the quiz. You earned <b>{summary?.progress?.totalXp | 0} XP</b>!
                     </p>
                     <Button variant={'primary'}>
                         <MoveLeft /> Back to Home
@@ -101,14 +70,14 @@ export const AcademyQuizFinishPage = ({ quiz }: Props) => {
                     <div className="flex-1 bg-white p-6 rounded-xl shadow-md">
                         <h2 className="text-2xl font-semibold mb-6">📊 Your XP Progress</h2>
                         <ul className="space-y-3 text-sm">
-                            {xpStats.map((stat) => (
+                            {summary?.progress?.lastWeekXp.map((stat:any) => (
                                 <li key={stat.date} className="flex justify-between border-b pb-2">
-                                    <span>{formatRelativeDate(stat.date)}</span>
-                                    <span>{stat.xp} XP</span>
+                                    <span>{formatRelativeDate(stat.day)}</span>
+                                    <span>{stat.xp.toFixed(1)} XP</span>
                                 </li>
                             ))}
                         </ul>
-                        <p className="mt-6 text-green-700 font-semibold text-lg">Total XP: {totalXP}</p>
+                        <p className="mt-6 text-green-700 font-semibold text-lg">Total XP: {summary?.progress.totalXp.toFixed(1)}</p>
                     </div>
 
                     <div className="flex-1 bg-white p-6 rounded-xl shadow-md flex flex-col justify-between">

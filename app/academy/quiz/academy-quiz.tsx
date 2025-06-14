@@ -1,7 +1,7 @@
 'use client';
 
-import { upsertQuiz } from "@/app/_services/academy/academy-quiz-service";
-import { useEffect, useState } from "react";
+import { upsertAcademyQuizXp, upsertQuiz } from "@/app/_services/academy/academy-quiz-service";
+import { useEffect, useState, useTransition } from "react";
 import { AcademyQuizFinishPage } from "./academy-quiz-finish";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -24,32 +24,54 @@ type Props = {
     quiz: Quiz;
 }
 
+let timer: NodeJS.Timeout | null = null;
+
 
 export const AcademyQuiz = ({ quiz }: Props) => {
+    const [isPending, startTransition] = useTransition();
     const [questions, setQuestions] = useState(quiz.questions)
     const [current, setCurrent] = useState(0)
     const [remainingTime, setRemainingTime] = useState(
         Math.max(0, Math.floor((new Date(quiz.end).getTime() - Date.now()) / 1000))
     )
     const [finished, setFinished] = useState(false);
-    // console.log(quiz)
-
+    const [xpSummary, setXpSummary] = useState();
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            const secs = Math.floor(
-                (new Date(quiz.end).getTime() - Date.now()) / 1000
-            )
-            setRemainingTime(Math.max(0, secs))
+        const endTime = new Date(quiz.end).getTime();
 
-            if (secs <= 0) {
-                clearInterval(timer);
-                setFinished(true);
+        timer = setInterval(() => {
+            const secs = Math.floor((endTime - Date.now()) / 1000);
+            setRemainingTime(Math.max(0, secs));
+
+            if (secs <= 0 && !finished) {
+                handleTimerFinish(timer);
+            } else {
+                setRemainingTime(Math.max(0, secs));
             }
-        }, 1000)
+        }, 1000);
 
-        return () => clearInterval(timer)
+        return () => clearInterval(timer!);
     }, [quiz.end])
+
+
+    const handleTimerFinish = async (
+        timer: NodeJS.Timeout | null
+    ) => {
+        clearInterval(timer!);
+        setFinished(true);
+        setRemainingTime(0);
+
+        startTransition(async () => {
+            console.log(quiz._id);
+            const _progress = await upsertAcademyQuizXp(quiz._id);
+            quiz.end = new Date().toISOString();
+
+            await upsertQuiz(quiz);
+            setXpSummary(_progress.data);
+            console.log('progress: ', _progress.data);
+        });
+    };
 
     const handleOptionClick = async (selected: { text: string; correct: boolean }) => {
         const updatedQuestions = [...questions]
@@ -71,13 +93,16 @@ export const AcademyQuiz = ({ quiz }: Props) => {
         return `${m}:${s.toString().padStart(2, "0")}`
     }
 
-    if (finished) {
+    if (finished && !isPending) {
         return (
-            <AcademyQuizFinishPage quiz={quiz} />
+            <AcademyQuizFinishPage summary={xpSummary} />
         )
     }
 
-    const q = questions[current]
+    const q = questions[current] ??
+    {
+        optionList: []
+    };
 
     return (
         <>
@@ -138,7 +163,8 @@ export const AcademyQuiz = ({ quiz }: Props) => {
                                 if (current < questions.length - 1) {
                                     setCurrent((prev) => prev + 1)
                                 } else {
-                                    setFinished(true);
+                                    handleTimerFinish(null);
+
                                     toast.message("Quiz completed!");
                                 }
                             }}

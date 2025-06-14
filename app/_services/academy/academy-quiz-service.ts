@@ -54,3 +54,21 @@ export const upsertQuiz = async (quiz: any) => {
 
 }
 
+export const upsertAcademyQuizXp = async (quizId: any) => {
+    try {
+        const params = {
+            quizId: quizId
+        }
+
+        const response = await httpClient.get("/academy/quiz/xp", {params:params});
+        // console.log('post quiz: ', quiz);
+
+        return response.data;
+
+    } catch (err: any) {
+        console.error(err?.response?.data?.msg);
+        return null;
+    }
+
+}
+

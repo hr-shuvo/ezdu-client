@@ -55,6 +55,7 @@ const AcademyQuizPage = () => {
         startTransition(async () => {
             const _quiz = await loadOrCreateQuize(duration, _lessonIds, type);
             if (_quiz) {
+                console.log("_quiz: ", _quiz)
                 setQuiz(_quiz.data);
                 setQuizView('quiz');
             }
