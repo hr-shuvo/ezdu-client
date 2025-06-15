@@ -1,14 +1,12 @@
-'use client';
 
-import { ComingSoon } from "@/components/comming-soon";
-
+import AdmissionHomePage from "./admission-home";
 
 
-const AdmissionPage= () =>{
-    return(
+
+const AdmissionPage = () => {
+    return (
         <>
-        <ComingSoon slug="admission"/>
-        
+            <AdmissionHomePage />
         </>
     );
 };
