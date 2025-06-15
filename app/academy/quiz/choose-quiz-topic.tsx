@@ -222,7 +222,7 @@ export const ChooseQuizTopic = ({ onClickItem }: Props) => {
 
 
                 <div className="lg:col-span-2 space-y-6">
-                    <StreakCount count={4} xp={2318} />
+                    <StreakCount />
 
                     <SubjectProgress />
 

@@ -161,7 +161,7 @@ const AcademyModelTest = () => {
 
                 <div className='md:w-1/4 w-full pb-10 space-y-6'>
 
-                    <StreakCount count={4} xp={2318} />
+                    <StreakCount />
 
                     <SubjectProgress />
 

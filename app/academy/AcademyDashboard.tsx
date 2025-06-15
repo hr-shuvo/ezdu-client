@@ -76,7 +76,7 @@ const AcademyDashboard = () => {
             <div className="lg:col-span-2 space-y-6">
                 {/* XP & Streak Tracker */}
 
-                <StreakCount count={4} xp={2318} />
+                <StreakCount />
 
 
                 {/* Topic Progress */}
