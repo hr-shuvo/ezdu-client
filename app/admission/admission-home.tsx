@@ -8,9 +8,9 @@ import Link from "next/link";
 
 const AdmissionHomePage = () => {
     const mockPaths = [
-        { name: "Medical", subjects: ["Biology", "Chemistry"] },
-        { name: "University", subjects: ["English", "GK"] },
-        { name: "Engineering", subjects: ["Math", "Physics"] },
+        { name: "Medical", path: 'admission/medical', subjects: ["Biology", "Chemistry"] },
+        { name: "University", path: 'admission/university', subjects: ["English", "GK"] },
+        { name: "Engineering", path: 'admission/engineering', subjects: ["Math", "Physics"] },
     ];
 
     const mockProgress: Record<string, number> = {
@@ -79,13 +79,14 @@ const AdmissionHomePage = () => {
       <div className="space-y-2">
         <h2 className="text-lg font-semibold">Admission Paths</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {mockPaths.map((path) => (
-            <Card key={path.name}>
+          {mockPaths.map((path, index) => (
+            <Link href={path.path} key={index}>
+            <Card key={index}>
               <CardContent className="p-4">
                 <h3 className="text-xl font-bold mb-2">{path.name}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  {path.subjects.map((subj) => (
-                    <li key={subj} className="flex justify-between items-center">
+                  {path.subjects.map((subj, idx) => (
+                    <li key={idx} className="flex justify-between items-center">
                       <span>{subj}</span>
                       <Progress value={mockProgress[subj] || 0} className="w-24" />
                     </li>
@@ -93,6 +94,7 @@ const AdmissionHomePage = () => {
                 </ul>
               </CardContent>
             </Card>
+            </Link>
           ))}
         </div>
       </div>

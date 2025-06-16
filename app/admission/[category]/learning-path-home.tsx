@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useRouter, useParams } from 'next/navigation';
-import { BookOpen, Flag, Lightbulb, ListChecks, Star, Zap } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { useParams } from 'next/navigation';
+import { BookCopy, BookOpen, CheckCircle, Clock, Flag, Lightbulb, ListChecks, Star } from 'lucide-react';
+import Link from 'next/link';
 
 type LearningPath = {
     title: string;
@@ -14,6 +15,10 @@ type LearningPath = {
     lessons: string[],
     whatToExpect: string;
 };
+
+
+
+
 
 const learningPaths: Record<string, LearningPath> = {
     medical: {
@@ -92,11 +97,13 @@ const mockUserProgress: Record<
 };
 
 const LearningPathHome = () => {
-    const router = useRouter();
     const params = useParams();
+    
+    const [userProgress, setUserProgress] = useState<{ xp: number; completedCourses: string[] } | null>(null);
+    const [loading, setLoading] = useState(true);
 
     // Handle category param that might be string or string[]
-    let categoryParam = params.category;
+    const categoryParam = params.category;
 
     let category: string;
     if (Array.isArray(categoryParam)) {
@@ -106,16 +113,7 @@ const LearningPathHome = () => {
     }
 
     const pathKey = category.toLowerCase();
-
-    if (!(pathKey in learningPaths)) {
-        return <p className="p-4 text-center">Learning Path not found.</p>;
-    }
-
-    const pathData = learningPaths[pathKey];
-
-    const [userProgress, setUserProgress] = useState<{ xp: number; completedCourses: string[] } | null>(null);
-    const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
         setLoading(true);
         setUserProgress(null);
@@ -126,20 +124,20 @@ const LearningPathHome = () => {
         }, 600);
     }, [pathKey]);
 
-    function handleStartLearning() {
-        alert(`Starting learning path: ${pathData.title}`);
+
+    if (!(pathKey in learningPaths)) {
+        return <p className="p-4 text-center">Learning Path not found.</p>;
     }
-    function handleResumeLearning() {
-        alert(`Resuming learning in: ${pathData.title}`);
-    }
-    function navigateToPath(path: string) {
-        router.push(`/admission/${path}`);
-    }
+
+    const pathData = learningPaths[pathKey];
+
+
+
+    
 
     return (
 
         <>
-
             <div className='px-6'>
                 <div className="text-center space-y-2">
                     <h1 className="text-4xl font-extrabold text-green-600">{pathData.title}</h1>
@@ -149,8 +147,6 @@ const LearningPathHome = () => {
             </div>
 
             <div className='p-6 grid grid-cols-1 lg:grid-cols-6 gap-6'>
-
-
 
                 <div className='lg:col-span-2 space-y-6'>
                     <div className="space-y-6">
@@ -174,63 +170,13 @@ const LearningPathHome = () => {
                             </CardContent>
                         </Card>
 
-                        {/* Lessons / Topics + Actions */}
-                        <Card>
-                            <CardHeader className="flex flex-row items-center gap-2">
-                                <ListChecks className="text-pink-600" size={20} />
-                                <CardTitle>Lessons & Topics</CardTitle>
-                            </CardHeader>
-                            <CardContent className="space-y-4">
-                                <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                                    {pathData.lessons?.map((lesson: any, i: number) => (
-                                        <li key={i}>{lesson}</li>
-                                    ))}
-                                </ul>
-
-                                <div className="flex flex-wrap gap-3 pt-2">
-                                    {userProgress?.completedCourses.length! > 0 && (
-                                        <Button className="rounded-full bg-green-600 hover:bg-green-700 text-white px-5">
-                                            Continue Learning
-                                        </Button>
-                                    )}
-                                    <Button variant="secondary" className="rounded-full px-5">
-                                        Practice
-                                    </Button>
-                                    <Button variant="secondary" className="rounded-full px-5">
-                                        Take Quiz
-                                    </Button>
-                                    <Button variant="secondary" className="rounded-full px-5">
-                                        Model Test
-                                    </Button>
-                                    <Button variant="secondary" className="rounded-full px-5">
-                                        Previous Questions
-                                    </Button>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-
-                </div>
-
-                <div className='lg:col-span-4 space-y-6'>
-                    <div className="space-y-6">
-                        {/* What to Expect */}
-                        <Card>
-                            <CardHeader className="flex flex-row items-center gap-2">
-                                <Flag className="text-green-600" size={20} />
-                                <CardTitle>What to Expect</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-muted-foreground text-sm">{pathData.whatToExpect}</p>
-                            </CardContent>
-                        </Card>
-
                         {/* Study Tips */}
                         <Card>
                             <CardHeader className="flex flex-row items-center gap-2">
                                 <Lightbulb className="text-yellow-500" size={20} />
                                 <CardTitle>Study Tips</CardTitle>
                             </CardHeader>
+
                             <CardContent>
                                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
                                     {pathData.tips.map((tip, i) => (
@@ -238,7 +184,116 @@ const LearningPathHome = () => {
                                     ))}
                                 </ul>
                             </CardContent>
+
+                            <CardFooter>
+                                <Button className='w-full'>Full Guide</Button>
+
+                            </CardFooter>
                         </Card>
+
+
+                    </div>
+
+                </div>
+
+                <div className='lg:col-span-4 space-y-6'>
+                    <div className="space-y-6">
+                        {/* What to Expect */}
+
+                        <div>
+                            <Card>
+                                <CardHeader className="flex flex-row items-center gap-2">
+                                    <Flag className="text-green-600" size={20} />
+                                    <CardTitle>What to Expect</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <p className="text-muted-foreground text-sm">{pathData.whatToExpect}</p>
+                                </CardContent>
+
+                                <CardFooter>
+                                    <div className="flex gap-2 w-full">
+                                        <Link href={''} className="w-1/2">
+                                            <Button variant="default" className="w-full font-bold h-14 text-lg">
+                                                Practice <Lightbulb className='text-2xl' />
+                                            </Button>
+                                        </Link>
+
+                                        <Link href={''} className="w-1/2">
+                                            <Button variant="default" size="lg" className="w-full font-bold h-14 text-lg">
+                                                Question Bank <BookCopy className='text-4xl' />
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </CardFooter>
+                            </Card>
+
+
+                        </div>
+
+                        <div className="space-y-2">
+                            <h2 className="text-lg font-semibold">Continue Learning</h2>
+                            <Card>
+                                <CardContent className="p-4 flex justify-between items-center">
+                                    <div>
+                                        <p className="font-medium">Biology - Chapter 3 Quiz</p>
+                                        <p className="text-sm text-muted-foreground">Continue where you left off</p>
+                                    </div>
+                                    <Button variant="primary" size="sm">Resume</Button>
+                                </CardContent>
+                            </Card>
+                        </div>
+
+
+                        {/* Lessons / Topics + Actions */}
+                        <Card>
+                            <CardHeader className="flex flex-row items-center gap-2 pb-0">
+                                <ListChecks className="text-pink-600" size={20} />
+                                <CardTitle className="text-lg">Lessons & Topics</CardTitle>
+                            </CardHeader>
+
+                            <CardContent className="space-y-4">
+                                {/* Lessons List */}
+                                <div>
+                                    <div className="space-y-3">
+                                        <h4 className="text-sm font-semibold text-muted-foreground">Lessons Progress</h4>
+
+                                        <div className="flex flex-col space-y-2">
+                                            {pathData.lessons?.map((lesson: any, i: number) => {
+                                                //   const isCompleted = userProgress?.completedLessons?.includes(lesson);
+                                                const isCompleted = i < 3;
+
+                                                return (
+                                                    <div
+                                                        key={i}
+                                                        className={`flex items-center justify-between px-4 py-2 rounded-lg border transition-all
+            ${isCompleted ? "bg-green-50 border-green-300" : "bg-muted border-gray-200"}
+          `}
+                                                    >
+                                                        <div className="flex items-center gap-3">
+                                                            <div className={`rounded-full p-1.5 ${isCompleted ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-500"}`}>
+                                                                {isCompleted ? <CheckCircle size={18} /> : <Clock size={18} />}
+                                                            </div>
+                                                            <span className={`text-sm ${isCompleted ? "text-green-800 font-medium" : "text-muted-foreground"}`}>
+                                                                {lesson}
+                                                            </span>
+                                                        </div>
+                                                        {isCompleted && (
+                                                            <span className="text-xs text-green-700 font-semibold">Completed</span>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </CardContent>
+                        </Card>
+
+
+
+
 
                         {/* Progress */}
                         <Card>

@@ -1,5 +1,4 @@
-import { navItemsAdmission } from "@/app/utils/navItems";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils";
 import Link from "next/link"
 import React from "react";
