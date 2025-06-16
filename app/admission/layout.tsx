@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
-import { Header } from "@/app/academy/header";
 import { Footer } from "@/app/academy/footer";
+import { Header } from "../(marketing)/header";
 
 type Props = {
     children: React.ReactNode
