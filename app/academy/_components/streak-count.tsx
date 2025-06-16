@@ -29,9 +29,9 @@ export const StreakCount = () => {
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <Flame className="text-orange-500" />
-                        <span className="font-semibold text-base">{progress?.StreakCount} দিন স্ট্রিক</span>
+                        <span className={`font-semibold ${!progress?.streakCount || progress?.streakCount == 0 ? 'text-base':'text-base'}`}>{progress?.streakCount | 0} দিন স্ট্রিক</span>
                     </div>
-                    <p className="text-sm">XP: <span className="font-bold">{progress?.totalXp?.toFixed(0)}</span></p>
+                    <p className="text-sm">XP : <span className="font-bold">{progress?.totalXp?.toFixed(0)}</span></p>
                 </div>
 
             </div>
