@@ -4,9 +4,8 @@ import { getAdmissionUnitLearningPath } from "@/app/_services/admission/admissio
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import LearningPath from "./learning-path";
-import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Loading from "@/app/(main)/courses/loading";
 
 type Props = {
     units: any[]
@@ -42,6 +41,10 @@ const ChooseUnit = ({ units }: Props) => {
         setUnitId(id);
 
         router.push(`?${params.toString()}`);
+    }
+
+    if(isPending){
+        return <Loading/>
     }
 
     return (

@@ -5,15 +5,15 @@ export const CourseModule = () => {
     const modules: any[] = [
         
         {
-            title: 'BCS',
+            title: 'Admission',
             subTitle: 'complete preparation',
-            totalCourse: 17,
+            totalCourse: 6,
             duration: 0,
             isPopular: true,
             emoji: '🎓',
         },
         {
-            title: 'Bank Jobs',
+            title: 'Jobs',
             subTitle: 'complete preparation',
             totalCourse: 17,
             duration: 0,
@@ -21,33 +21,33 @@ export const CourseModule = () => {
             emoji: '🏦',
         },
         {
-            title: 'Govment Jobs',
-            subTitle: 'complete preparation',
-            totalCourse: 17,
+            title: 'Quiz',
+            subTitle: 'review & practice',
+            totalCourse: 1,
             duration: 0,
             isPopular: true,
-            emoji: '🏛️',
+            emoji: '❔',
         },
         {
-            title: 'Class 6,7,8',
+            title: 'Class 6-12',
             subTitle: 'complete preparation',
-            totalCourse: 17,
+            totalCourse: 6,
             duration: 0,
             isPopular: true,
             emoji: '📚',
         },
         {
-            title: 'Class 9,10',
+            title: 'SSC',
             subTitle: 'complete preparation',
-            totalCourse: 14,
+            totalCourse: 3,
             duration: 0,
             isPopular: true,
             emoji: '📖',
         },
         {
-            title: 'Class 11,12',
+            title: 'HSC',
             subTitle: 'complete preparation',
-            totalCourse: 16,
+            totalCourse: 3,
             duration: 0,
             isPopular: true,
             emoji: '🎯',
@@ -64,7 +64,7 @@ export const CourseModule = () => {
 
         <div className="w-full mx-auto p-6 bg-white rounded-3xl shadow-md">
             <h2 className="text-2xl font-bold text-indigo-700 mb-6 text-center">
-                Explore Our Courses
+                Explore Our Features
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

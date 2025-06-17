@@ -1,18 +1,11 @@
 'use client';
 
 import { useState, useEffect, useTransition } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useParams } from 'next/navigation';
-import { BookCopy, BookOpen, CheckCircle, Clock, Flag, Lightbulb, ListChecks, Star } from 'lucide-react';
-import Link from 'next/link';
-import { loadAcademicSubject } from '@/app/_services/academy/academySubjectService';
 import { getAdmissionLearningPath } from '@/app/_services/admission/admission-service';
 import LearningPath from './learning-path';
 import Loading from '@/app/(main)/learn/loading';
 import ChooseUnit from './choose-unit';
-
-
 
 
 const LearningPathHome = () => {
