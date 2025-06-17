@@ -16,25 +16,30 @@ const ChooseUnit = ({ units }: Props) => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
-    const [unitId, setUnit] = useState(searchParams.get('s'));
+    const [unitId, setUnitId] = useState(searchParams.get('s'));
 
     const [learningPath, setLearningPath] = useState<any>();
 
     useEffect(() => {
-        if (unitId) {
-            startTransition(async () => {
-                const _path = await getAdmissionUnitLearningPath(unitId!);
-                console.log(_path);
-                setLearningPath(_path);
-            })
-        }
+        const id = searchParams.get('s');
+        setUnitId(id);
+    }, [searchParams]);
 
-    }, [searchParams, unitId])
+
+    useEffect(() => {
+        if (!unitId) return;
+
+        startTransition(async () => {
+            const _path = await getAdmissionUnitLearningPath(unitId);
+            console.log(_path);
+            setLearningPath(_path);
+        });
+    }, [unitId]);
 
     const handleUnitClick = (id: string) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('s', id);
-        setUnit(id);
+        setUnitId(id);
 
         router.push(`?${params.toString()}`);
     }
@@ -46,17 +51,20 @@ const ChooseUnit = ({ units }: Props) => {
                 unitId && learningPath ? (
                     <LearningPath learningPath={learningPath} />
                 ) : (
-                    <div className="flex gap-4">
-                        {
-                            units.map((unit, index) => (
-                                <Button key={index} className='h-auto' onClick={() => handleUnitClick(unit.id)}>
-                                    <div className="p-8 px-12 ">
-                                        <h3 className="text-xl font-bold mb-2">{unit.title}</h3>
-                                    </div>
-                                </Button>
+                    <div className="px-6">
 
-                            ))
-                        }
+                        <div className="flex gap-4">
+                            {
+                                units.map((unit, index) => (
+                                    <Button key={index} className='h-auto' onClick={() => handleUnitClick(unit.id)}>
+                                        <div className="p-8 px-12 ">
+                                            <h3 className="text-xl font-bold mb-2">{unit.title}</h3>
+                                        </div>
+                                    </Button>
+
+                                ))
+                            }
+                        </div>
                     </div>
                 )
             }

@@ -2,37 +2,53 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuL
 import { cn } from "@/lib/utils";
 import Link from "next/link"
 import React from "react";
+import { NavSearchBox } from "./nav-search-box";
 
 export const NavMenu = () => {
     return (
         <>
-            <NavigationMenu>
-                <NavigationMenuList>
-                    <NavigationMenuItem>
-                        <Link href="/academy" legacyBehavior passHref>
-                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                Academy
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem>
+            <div className="w-full px-4 py-2 flex items-center justify-between gap-6">
 
-                    <NavigationMenuItem>
-                        <Link href="/admission" legacyBehavior passHref>
-                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                Admission
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem>
+                <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
+                    <Link href="/">
+                        <h1 className="text-2xl font-extrabold text-sky-400 tracking-wide">
+                            e<span className="text-sky-400">z </span>du
+                        </h1>
+                    </Link>
+                </div>
 
-                    <NavigationMenuItem>
-                        <Link href="/about" legacyBehavior passHref>
-                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                About
-                            </NavigationMenuLink>
-                        </Link>
-                    </NavigationMenuItem>
-                </NavigationMenuList>
-            </NavigationMenu>
+                <div className="flex-1 min-w-[300px] max-w-md">
+                    <NavSearchBox />
+                </div>
+
+                <NavigationMenu>
+                    <NavigationMenuList>
+                        <NavigationMenuItem>
+                            <Link href="/academy" legacyBehavior passHref>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                    Academy
+                                </NavigationMenuLink>
+                            </Link>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <Link href="/admission" legacyBehavior passHref>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                    Admission
+                                </NavigationMenuLink>
+                            </Link>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
+                            <Link href="/about" legacyBehavior passHref>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                    About
+                                </NavigationMenuLink>
+                            </Link>
+                        </NavigationMenuItem>
+                    </NavigationMenuList>
+                </NavigationMenu>
+            </div>
         </>
     )
 };

@@ -1,6 +1,6 @@
 import { Footer } from "../(marketing)/footer";
-import { Header } from "../academy/header";
 import Image from "next/image";
+import { Header } from "../(marketing)/header";
 
 
 type Props = {
