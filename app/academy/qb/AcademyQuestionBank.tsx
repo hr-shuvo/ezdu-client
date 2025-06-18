@@ -10,11 +10,13 @@ import { useEffect, useState, useTransition } from "react";
 import { StreakCount } from "../_components/streak-count";
 import { SubjectProgress } from "../_components/subject-progress";
 import { RecentTest } from "../_components/recent-test";
+import { useSecure } from "@/context/SecureContext";
 
 const AcademyQuestionBank = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [isPending, startTransition] = useTransition();
+    const { isLoggedIn } = useSecure();
 
     const [subjectId, setSubjectId] = useState<any>('');
     const [subjects, setSubjects] = useState<any>([]);
@@ -130,7 +132,11 @@ const AcademyQuestionBank = () => {
 
 
                 <div className="lg:col-span-2 space-y-6">
-                    <StreakCount />
+                    {isLoggedIn && (
+                        <>
+                            <StreakCount />
+                        </>
+                    )}
 
                     <SubjectProgress />
 
