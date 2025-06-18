@@ -1,6 +1,5 @@
 'use client';
 
-
 import { LeaderboardSummary } from "@/components/layout/leaderboard/leaderboard-summary";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpenCheck, Bot, ListChecks, Trophy } from "lucide-react";
@@ -8,11 +7,17 @@ import Link from "next/link";
 import { StreakCount } from "./_components/streak-count";
 import { SubjectProgress } from "./_components/subject-progress";
 import { RecentTest } from "./_components/recent-test";
-
+import { useSecure } from "@/context/SecureContext";
+import { useEffect, useState, useTransition } from "react";
+import { getAcademyProgress } from "../_services/academy/academyProgressService";
+import XpWeeklyChart from "./_components/xp-graph";
 
 
 const AcademyDashboard = () => {
-    
+    const { isLoggedIn } = useSecure();
+    const [isPending, startTransition] = useTransition();
+    const [progress, setProgress] = useState<any>();
+    const [totalWeekXp, setTotalWeekXp] = useState<number>(0);
 
     const recommended = [
         "গণিত - অমৌলিক সংখ্যা",
@@ -26,6 +31,21 @@ const AcademyDashboard = () => {
         { title: "প্রাকটিস প্রশ্ন", icon: ListChecks, color: "bg-[#DAF7DC]", href: "./academy/practice" },
         { title: "প্রশ্নব্যাংক", icon: Bot, color: "bg-[#FFD6D6]", href: "./academy/qb" },
     ];
+
+    useEffect(() => {
+        if (isLoggedIn) {
+
+            startTransition(async () => {
+                const _progress = await getAcademyProgress();
+                // console.log('progress: ', _progress.data);
+                setProgress(_progress.data);
+
+                const _xp = _progress.data.lastWeekXp.reduce((sum: number, item: any) => sum + item.xp, 0);
+                setTotalWeekXp(_xp);
+            })
+        }
+
+    }, []);
 
 
 
@@ -59,6 +79,29 @@ const AcademyDashboard = () => {
                     </CardContent>
                 </Card>
 
+                <Card>
+                    <CardContent>
+                        <div className="py-4">
+                            <div className="flex justify-end mb-4">
+                                <p className="text-xl">week XP : <span className="font-bold">{totalWeekXp.toFixed(0)}</span></p>
+                            </div>
+
+                            <XpWeeklyChart xpData={progress?.lastWeekXp} />
+                        </div>
+
+                        <div className="flex gap-2">
+                            <Link
+                                href="/auth/login"
+                                className="text-indigo-600 font-semibold hover:underline"
+                            >
+                                Login or Sign up to unlock all features!
+                            </Link>
+                            <p>& Track your progress like this</p>
+                        </div>
+
+                    </CardContent>
+                </Card>
+
                 {/* Recommended Subjects */}
                 <Card className="shadow-lg">
                     <CardContent className="p-5">
@@ -75,22 +118,28 @@ const AcademyDashboard = () => {
             {/* Right Side Info Panel */}
             <div className="lg:col-span-2 space-y-6">
                 {/* XP & Streak Tracker */}
-
-                <StreakCount />
-
+                {
+                    isLoggedIn && (
+                        <StreakCount />
+                    )
+                }
 
                 {/* Topic Progress */}
-                <SubjectProgress/>
-                
+                {
+                    isLoggedIn && (
+                        <SubjectProgress />
+                    )
+                }
 
                 <LeaderboardSummary />
 
-                <RecentTest/>
+
+                <RecentTest />
 
 
 
                 {/* Recent Test Results */}
-                
+
             </div>
         </div>
     );
