@@ -45,13 +45,13 @@ const AcademyDashboard = () => {
             })
         }
 
-    }, []);
+    }, [isLoggedIn]);
 
 
 
 
     return (
-        <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
+        <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
             <div className="lg:col-span-4 space-y-6">
 
                 <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
@@ -67,6 +67,35 @@ const AcademyDashboard = () => {
                     ))}
                 </div>
 
+                <Card>
+                    <CardContent>
+                        <div className="py-4">
+                            <div className="flex justify-end mb-4">
+                                <p className="text-xl">week XP : <span className="font-bold">{totalWeekXp.toFixed(0)}</span></p>
+                            </div>
+
+                            <XpWeeklyChart xpData={progress?.lastWeekXp} />
+                        </div>
+
+                        {
+                            !isLoggedIn && (
+                                <>
+                                    <div className="flex gap-2">
+                                        <Link
+                                            href="/auth/login"
+                                            className="text-indigo-600 font-semibold hover:underline"
+                                        >
+                                            Login or Sign up to unlock all features!
+                                        </Link>
+                                        <p>& Track your progress like this</p>
+                                    </div>
+                                </>
+                            )
+                        }
+
+                    </CardContent>
+                </Card>
+
                 {/* Daily Goal */}
                 <Card className="shadow-lg">
                     <CardContent className="p-5">
@@ -79,28 +108,6 @@ const AcademyDashboard = () => {
                     </CardContent>
                 </Card>
 
-                <Card>
-                    <CardContent>
-                        <div className="py-4">
-                            <div className="flex justify-end mb-4">
-                                <p className="text-xl">week XP : <span className="font-bold">{totalWeekXp.toFixed(0)}</span></p>
-                            </div>
-
-                            <XpWeeklyChart xpData={progress?.lastWeekXp} />
-                        </div>
-
-                        <div className="flex gap-2">
-                            <Link
-                                href="/auth/login"
-                                className="text-indigo-600 font-semibold hover:underline"
-                            >
-                                Login or Sign up to unlock all features!
-                            </Link>
-                            <p>& Track your progress like this</p>
-                        </div>
-
-                    </CardContent>
-                </Card>
 
                 {/* Recommended Subjects */}
                 <Card className="shadow-lg">

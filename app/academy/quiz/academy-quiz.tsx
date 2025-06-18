@@ -106,7 +106,7 @@ export const AcademyQuiz = ({ quiz }: Props) => {
 
     return (
         <>
-            <div className="p-6 gap-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
+            <div className="p-6 gap-6">
 
                 <div className="relative max-w-xl mx-auto mt-10 bg-white shadow-xl rounded-2xl p-6 space-y-6 text-gray-800">
                     {/* Countdown in top-right */}

@@ -11,9 +11,11 @@ import { RecentTest } from "../../_components/recent-test";
 import { Clock, ListCheck } from "lucide-react";
 import Link from "next/link";
 import Loading from "@/app/(main)/courses/loading";
+import { useSecure } from "@/context/SecureContext";
 
 const QuestionBankSubject = () => {
     const params = useParams();
+    const { isLoggedIn } = useSecure();
     const [isPending, startTransition] = useTransition();
 
     // const [subjectId, setSubjectId] = useState<string>();
@@ -38,8 +40,8 @@ const QuestionBankSubject = () => {
 
     }, [params]);
 
-    if(isPending){
-        return <Loading/>
+    if (isPending) {
+        return <Loading />
     }
 
 
@@ -56,34 +58,34 @@ const QuestionBankSubject = () => {
                 </div>
             </div>
 
-            <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
+            <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6 ">
 
                 <div className="lg:col-span-4 space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {modelTests.map((data: any, index: number) => (
                             <div key={index}>
                                 <Link href={`../mt?s=${subject._id}&i=${data.instituteId}`}>
-                                <Card className="w-full min-h-[110px] p-6 text-sm font-semibold border border-b-4 rounded-xl hover:bg-gray-200 hover:text-gray-900 transition-all">
-                                    <CardHeader className="p-0 mb-2">
-                                        <h1 className="text-base text-gray-600">{subject.title}</h1>
-                                        <CardTitle className="text-sm font-bold text-black">
-                                            {data.title} - {data.year}
-                                        </CardTitle>
-                                    </CardHeader>
-                                    <CardFooter className="p-0 mt-2 flex items-center gap-4 text-xs">
-                                        <span className="flex items-center gap-1">
-                                            <ListCheck className="text-xs"/>
-                                            {data.mcqCount}
-                                        </span>
-                                        <span className="flex items-center gap-1">
-                                            <Clock  className="text-xs"/>
-                                            {data.mcqCount} min
-                                        </span>
-                                    </CardFooter>
+                                    <Card className="w-full min-h-[110px] p-6 text-sm font-semibold border border-b-4 rounded-xl hover:bg-gray-200 hover:text-gray-900 transition-all">
+                                        <CardHeader className="p-0 mb-2">
+                                            <h1 className="text-base text-gray-600">{subject.title}</h1>
+                                            <CardTitle className="text-sm font-bold text-black">
+                                                {data.title} - {data.year}
+                                            </CardTitle>
+                                        </CardHeader>
+                                        <CardFooter className="p-0 mt-2 flex items-center gap-4 text-xs">
+                                            <span className="flex items-center gap-1">
+                                                <ListCheck className="text-xs" />
+                                                {data.mcqCount}
+                                            </span>
+                                            <span className="flex items-center gap-1">
+                                                <Clock className="text-xs" />
+                                                {data.mcqCount} min
+                                            </span>
+                                        </CardFooter>
 
-                                </Card>
+                                    </Card>
                                 </Link>
-                                
+
                             </div>
                         ))}
                     </div>
@@ -91,7 +93,13 @@ const QuestionBankSubject = () => {
 
 
                 <div className="lg:col-span-2 space-y-6">
-                    <StreakCount />
+                    {
+                        isLoggedIn && (
+                            <>
+                                <StreakCount />
+                            </>
+                        )
+                    }
 
                     <SubjectProgress />
 

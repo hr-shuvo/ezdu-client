@@ -50,7 +50,7 @@ export const AcademyQuizFinishPage = ({ summary }: Props) => {
 
     return (
 
-        <div className="p-6 gap-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
+        <div className="p-6 gap-6">
             <div className="flex flex-col items-center">
 
                 <div

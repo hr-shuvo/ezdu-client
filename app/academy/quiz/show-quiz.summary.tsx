@@ -45,7 +45,7 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
 
 
 
-            <div className="relative py-6 bg-gradient-to-r from-white via-indigo-100 to-white min-h-screen">
+            <div className="relative py-6">
 
                 <div >
 

@@ -112,8 +112,6 @@ const ContentMcqPage = () => {
                         </div>
                     </div>
 
-
-                    {/* bg-gradient-to-r from-white via-indigo-100 to-blue-100 */}
                     <div>
                         <Table className='w-full  [&>tbody>tr:nth-child(even)]:bg-gray-50 border'>
 

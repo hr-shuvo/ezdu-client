@@ -73,7 +73,7 @@ const XpWeeklyLineChart = ({ xpData }: Props) => {
                     data={data}
                     margin={{ right: 30, bottom: 20 }}
                 >
-                    <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                    <CartesianGrid vertical={false} strokeDasharray="7 3" />
 
                     <XAxis
                         dataKey="day"
