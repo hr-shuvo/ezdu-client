@@ -174,7 +174,7 @@ export const ChooseQuizTopic = ({ onClickItem }: Props) => {
                                     <ToggleGroup
                                         variant="primary"
                                         type="multiple"
-                                        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                                        className="grid grid-cols-1 sm:grid-cols-3 gap-4"
                                         onValueChange={handleToggleChange}
                                         value={selectedLessonIds}
                                         disabled={isPending}
@@ -213,7 +213,7 @@ export const ChooseQuizTopic = ({ onClickItem }: Props) => {
                         variant={'secondary'} 
                         size={'lg'} className="w-1/2 font-bold" 
                         onClick={() => onClickItem('summary', selectedLessons)}
-                        disabled={!lessons.length}
+                        disabled={!lessons.length || !selectedLessonIds.length}
                         >Confirm</Button>
                     </div>
 

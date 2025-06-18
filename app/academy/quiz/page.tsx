@@ -6,9 +6,12 @@ import { ShowQuizSummary } from "./show-quiz.summary";
 import { AcademyQuiz } from "./academy-quiz";
 import { getOngoingQuiz, loadOrCreateQuize } from "@/app/_services/academy/academy-quiz-service";
 import Loading from "@/app/(main)/learn/loading";
+import { useSecure } from "@/context/SecureContext";
+import { toast } from "sonner";
 
 
 const AcademyQuizPage = () => {
+    const { isLoggedIn } = useSecure();
     const [isPending, startTransition] = useTransition();
     const [quizView, setQuizView] = useState<'topic' | 'summary' | 'quiz'>('topic');
     const [quiz, setQuiz] = useState();
@@ -17,14 +20,16 @@ const AcademyQuizPage = () => {
     // const [quizType, setQuizType] = useState<"cq" | "mcq">("mcq");
 
     useEffect(() => {
-        startTransition(async () => {
-            const _quiz = await getOngoingQuiz();
-            if (_quiz && _quiz.data) {
-                setQuiz(_quiz.data);
-                setQuizView("quiz");
-            }
-        })
-    }, []);
+        if (isLoggedIn) {
+            startTransition(async () => {
+                const _quiz = await getOngoingQuiz();
+                if (_quiz && _quiz.data) {
+                    setQuiz(_quiz.data);
+                    setQuizView("quiz");
+                }
+            })
+        }
+    }, [isLoggedIn]);
 
     const handleChooseTopicClick = (event: 'summary' | 'cancel', lessons: []) => {
         // console.log("Data from child:", event);
@@ -48,6 +53,10 @@ const AcademyQuizPage = () => {
     }
 
     function handleStartQuizFromSummary(type: "cq" | "mcq", duration: number): void {
+        if(!isLoggedIn){
+            toast.message("You must be logged in")
+            return;
+        }
         // setDuration(duration);
         // setQuizType(type);
         const _lessonIds = selectedLessons.map((lesson: { _id: string }) => lesson._id);
@@ -62,8 +71,8 @@ const AcademyQuizPage = () => {
         });
     }
 
-    if(isPending){
-        return <Loading/>
+    if (isPending) {
+        return <Loading />
     }
 
     return (
@@ -88,8 +97,8 @@ const AcademyQuizPage = () => {
                 }
 
                 {
-                    quizView == 'quiz' && quiz && !isPending &&(
-                        <AcademyQuiz quiz={quiz}/>
+                    quizView == 'quiz' && quiz && !isPending && (
+                        <AcademyQuiz quiz={quiz} />
                     )
                 }
             </div>

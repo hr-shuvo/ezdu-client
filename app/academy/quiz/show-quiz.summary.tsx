@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useSecure } from "@/context/SecureContext";
 import { ArrowLeft, BookOpenText, Flame, Lightbulb, ListChecks } from "lucide-react";
 import { useState } from "react";
 
@@ -10,12 +11,13 @@ import { useState } from "react";
 
 type Props = {
     lessons: any[]
-    onBack: (data:'topic') => void;
-    onStart: (type:"cq" | "mcq", duration:number) => void;
+    onBack: (data: 'topic') => void;
+    onStart: (type: "cq" | "mcq", duration: number) => void;
     onCancel: () => void;
 };
 
 export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) => {
+    const { isLoggedIn } = useSecure();
     const [quizType, setQuizType] = useState<'mcq' | 'cq'>('mcq');
     const [quizDuration, setQuizDuration] = useState<number>(15);
     const durationOptions = [15, 20, 30, 35, 40];
@@ -53,7 +55,7 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
                     <div className="flex justify-between items-center  py-4  mb-4 border-b">
 
                         {/* Back Button */}
-                        <Button variant="ghost" onClick={() =>onBack('topic')} className="flex items-center gap-2 text-blue-500 hover:text-blue-800">
+                        <Button variant="ghost" onClick={() => onBack('topic')} className="flex items-center gap-2 text-blue-500 hover:text-blue-800">
                             <ArrowLeft className="w-6 h-6" />
                             <span className="text-base font-medium">Back</span>
                         </Button>
@@ -137,7 +139,20 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
                 <div className="mt-8">
                     <div className="mt-8 w-full gap-2 flex">
                         <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" onClick={() => onCancel}>Cancel</Button>
-                        <Button variant={'secondary'} size={'lg'} className="w-1/2 font-bold" onClick={() => onStart(quizType, quizDuration)}><Lightbulb /> Start Quiz</Button>
+                        <Button variant={'secondary'} size={'lg'} className="w-1/2 font-bold" onClick={() => onStart(quizType, quizDuration)}>
+                            {
+                                isLoggedIn ? (
+                                    <>
+                                        <Lightbulb /> Start Quiz
+                                    </>
+                                ) : (
+                                    <>
+                                        Please login to <Lightbulb />  Start Quiz
+                                    </>
+
+                                )
+                            }
+                        </Button>
                     </div>
 
                 </div>
