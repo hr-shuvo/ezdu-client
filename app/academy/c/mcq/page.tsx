@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { CheckCircle, Circle, Search } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
@@ -36,9 +37,9 @@ const ContentMcqPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
 
-    useEffect(() => {        
-    const subjectId = searchParams.get('s');
-    const lessonId = searchParams.get('l');
+    useEffect(() => {
+        const subjectId = searchParams.get('s');
+        const lessonId = searchParams.get('l');
 
 
         startTransition(async () => {
@@ -56,15 +57,15 @@ const ContentMcqPage = () => {
 
     }, [useSearchParams]);
 
-    if(isPending){
-        return <Loading/>
+    if (isPending) {
+        return <Loading />
     }
 
 
     return (
         <>
 
-            
+
             <div className="px-6 my-5">
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100">
                     <h1 className="text-3xl font-bold text-blue-800">{subject?.title}</h1>
@@ -88,7 +89,7 @@ const ContentMcqPage = () => {
             </div>
 
 
-            <div className='flex flex-col md:flex-row gap-2 px-6'>
+            <div className='flex flex-col md:flex-row gap-2 px-0 md:px-6'>
 
                 <div className=' md:w-3/4 w-full'>
                     <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between w-full gap-4">
@@ -113,7 +114,7 @@ const ContentMcqPage = () => {
                     </div>
 
                     <div>
-                        <Table className='w-full  [&>tbody>tr:nth-child(even)]:bg-gray-50 border'>
+                        <Table className='w-full border'>
 
                             <TableBody>
                                 {
@@ -126,6 +127,27 @@ const ContentMcqPage = () => {
                                                 <TableCell>
                                                     <Card>
                                                         <CardHeader className="border-b">
+
+                                                            {
+                                                                item.passage && (
+                                                                    <>
+                                                                        <CardTitle>
+                                                                            <h1 className='text-xl'>{item.passage}</h1>
+                                                                        </CardTitle>
+                                                                    </>
+                                                                )
+                                                            }
+                                                            {
+                                                                item.imageUrl && (
+                                                                    <>
+                                                                        <CardTitle className="flex justify-center">
+                                                                            <Image src={item.imageUrl} alt={item.title} height={80} width={100}/>
+                                                                        </CardTitle>
+                                                                    </>
+                                                                )
+                                                            }
+
+
                                                             <CardTitle>
                                                                 <h1 className='text-xl'>{item.question}</h1>
                                                             </CardTitle>
