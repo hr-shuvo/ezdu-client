@@ -11,6 +11,7 @@ import { useSecure } from "@/context/SecureContext";
 import { useEffect, useState, useTransition } from "react";
 import { getAcademyProgress } from "../_services/academy/academyProgressService";
 import XpWeeklyChart from "./_components/xp-graph";
+import Loading from "../(main)/learn/loading";
 
 
 const AcademyDashboard = () => {
@@ -48,6 +49,9 @@ const AcademyDashboard = () => {
     }, [isLoggedIn]);
 
 
+    if(isPending){
+        return <Loading/>
+    }
 
 
     return (
