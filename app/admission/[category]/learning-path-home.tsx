@@ -19,7 +19,7 @@ const LearningPathHome = () => {
     useEffect(() => {
         startTransition(async () => {
             const _path = await getAdmissionLearningPath(category);
-            console.log(_path);
+            // console.log(_path);
             setLearningPath(_path);
         })
     },[params.category])

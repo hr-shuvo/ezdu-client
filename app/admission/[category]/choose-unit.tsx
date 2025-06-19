@@ -15,12 +15,12 @@ const ChooseUnit = ({ units }: Props) => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
-    const [unitId, setUnitId] = useState(searchParams.get('s'));
+    const [unitId, setUnitId] = useState(searchParams.get('unit'));
 
     const [learningPath, setLearningPath] = useState<any>();
 
     useEffect(() => {
-        const id = searchParams.get('s');
+        const id = searchParams.get('unit');
         setUnitId(id);
     }, [searchParams]);
 
@@ -30,14 +30,14 @@ const ChooseUnit = ({ units }: Props) => {
 
         startTransition(async () => {
             const _path = await getAdmissionUnitLearningPath(unitId);
-            console.log(_path);
+            // console.log(_path);
             setLearningPath(_path);
         });
     }, [unitId]);
 
     const handleUnitClick = (id: string) => {
         const params = new URLSearchParams(searchParams.toString());
-        params.set('s', id);
+        params.set('unit', id);
         setUnitId(id);
 
         router.push(`?${params.toString()}`);
@@ -51,7 +51,7 @@ const ChooseUnit = ({ units }: Props) => {
         <>
 
             {
-                unitId && learningPath ? (
+                unitId && learningPath && !isPending ? (
                     <LearningPath learningPath={learningPath} />
                 ) : (
                     <div className="px-6">

@@ -3,139 +3,155 @@
 import { useState, useEffect, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { useParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { BookCopy, BookOpen, CheckCircle, Clock, Flag, Lightbulb, ListChecks, Star } from 'lucide-react';
 import Link from 'next/link';
 import Loading from '@/app/(main)/learn/loading';
+import { loadAcademicLesson } from '@/app/_services/academy/academyLessonService';
 
-type LearningPath = {
-    title: string;
-    description: string;
-    courses: string[];
-    tips: string[];
-    lessons: string[],
-    whatToExpect: string;
-};
+// type LearningPath = {
+//     title: string;
+//     description: string;
+//     tips: string[];
+//     lessons: string[],
+//     whatToExpect: string;
+// };
 
-const learningPaths: Record<string, LearningPath> = {
-    medical: {
-        title: 'Medical Admission Learning Path',
-        description:
-            'Prepare for medical admission exams covering biology, chemistry, anatomy, and more. Build a strong foundation to excel.',
-        courses: ['Anatomy Fundamentals', 'Physiology Basics', 'Biochemistry Overview', 'Pathology Essentials', 'Pharmacology Intro'],
-        tips: [
-            'Study consistently for 1-2 hours daily.',
-            'Practice past papers and quizzes.',
-            'Focus on understanding concepts.',
-            'Join study groups for support.',
-            'Use active recall and spaced repetition.',
-        ],
-        lessons: [
-            'Cell Structure & Function',
-            'Human Digestive System',
-            'Cardiovascular System',
-            'Organic Chemistry Basics',
-            'Drug Action Mechanisms',
-        ],
+// const learningPaths: Record<string, any> = {
+//     medical: {
+//         title: 'Medical Admission Learning Path',
+//         description:
+//             'Prepare for medical admission exams covering biology, chemistry, anatomy, and more. Build a strong foundation to excel.',
+//         tips: [
+//             'Study consistently for 1-2 hours daily.',
+//             'Practice past papers and quizzes.',
+//             'Focus on understanding concepts.',
+//             'Join study groups for support.',
+//             'Use active recall and spaced repetition.',
+//         ],
+//         lessons: [
+//             'Cell Structure & Function',
+//             'Human Digestive System',
+//             'Cardiovascular System',
+//             'Organic Chemistry Basics',
+//             'Drug Action Mechanisms',
+//         ],
 
-        whatToExpect:
-            'Medical admission tests include MCQs on biology, chemistry, and general science. Time management and accuracy are key.',
-    },
-    university: {
-        title: 'University Admission Learning Path',
-        description:
-            'Get ready for university entrance exams in English, General Knowledge, and critical thinking skills.',
-        courses: ['English Grammar', 'Comprehension', 'General Knowledge', 'Logical Reasoning'],
-        tips: [
-            'Read daily newspapers and articles.',
-            'Practice comprehension passages.',
-            'Expand your vocabulary.',
-            'Solve previous year question papers.',
-        ],
-        lessons: [
-            'Tense & Sentence Structure',
-            'Reading Comprehension Practice',
-            'World History & GK',
-            'Logical Puzzle Solving',
-        ],
-        whatToExpect:
-            'Expect English language proficiency tests, GK questions, and reasoning sections in university exams.',
-    },
-    engineering: {
-        title: 'Engineering Admission Learning Path',
-        description:
-            'Prepare for engineering entrance exams focusing on mathematics, physics, and problem-solving skills.',
-        courses: ['Mathematics Foundations', 'Physics Principles', 'Chemistry Basics', 'Problem Solving'],
-        tips: [
-            'Strengthen your fundamentals in math and science.',
-            'Solve numerical problems regularly.',
-            'Use diagrams to visualize problems.',
-            'Attempt mock tests under timed conditions.',
-        ],
-        lessons: [
-            'Algebra & Trigonometry',
-            'Newton’s Laws of Motion',
-            'Thermodynamics Basics',
-            'Organic vs Inorganic Chemistry',
-            'Math Word Problems',
-        ],
-        whatToExpect:
-            'Engineering exams test your analytical skills and conceptual understanding of STEM subjects.',
-    },
-};
-const mockUserProgress: Record<
-    string,
-    { xp: number; completedCourses: string[] }
-> = {
-    medical: { xp: 2300, completedCourses: ['Anatomy Fundamentals', 'Physiology Basics'] },
-    university: { xp: 1250, completedCourses: ['English Grammar'] },
-    engineering: { xp: 900, completedCourses: [] },
-};
+//         whatToExpect:
+//             'Medical admission tests include MCQs on biology, chemistry, and general science. Time management and accuracy are key.',
+//     },
+//     university: {
+//         title: 'University Admission Learning Path',
+//         description:
+//             'Get ready for university entrance exams in English, General Knowledge, and critical thinking skills.',
+
+//         tips: [
+//             'Read daily newspapers and articles.',
+//             'Practice comprehension passages.',
+//             'Expand your vocabulary.',
+//             'Solve previous year question papers.',
+//         ],
+//         lessons: [
+//             'Tense & Sentence Structure',
+//             'Reading Comprehension Practice',
+//             'World History & GK',
+//             'Logical Puzzle Solving',
+//         ],
+//         whatToExpect:
+//             'Expect English language proficiency tests, GK questions, and reasoning sections in university exams.',
+//     },
+//     engineering: {
+//         title: 'Engineering Admission Learning Path',
+//         description:
+//             'Prepare for engineering entrance exams focusing on mathematics, physics, and problem-solving skills.',
+//         tips: [
+//             'Strengthen your fundamentals in math and science.',
+//             'Solve numerical problems regularly.',
+//             'Use diagrams to visualize problems.',
+//             'Attempt mock tests under timed conditions.',
+//         ],
+//         lessons: [
+//             'Algebra & Trigonometry',
+//             'Newton’s Laws of Motion',
+//             'Thermodynamics Basics',
+//             'Organic vs Inorganic Chemistry',
+//             'Math Word Problems',
+//         ],
+//         whatToExpect:
+//             'Engineering exams test your analytical skills and conceptual understanding of STEM subjects.',
+//     },
+// };
+// const mockUserProgress: Record<
+//     string,
+//     { xp: number; completedCourses: string[] }
+// > = {
+//     medical: { xp: 2300, completedCourses: ['Anatomy Fundamentals', 'Physiology Basics'] },
+//     university: { xp: 1250, completedCourses: ['English Grammar'] },
+//     engineering: { xp: 900, completedCourses: [] },
+// };
 
 type Props = {
-    learningPath:any
+    learningPath: any
 }
 
-const LearningPath = ({learningPath}:Props) => {
-    const params = useParams();
+const LearningPath = ({ learningPath }: Props) => {
+    // const params = useParams();
+    const searchParams = useSearchParams();
+    const router = useRouter();
     const [isPending, startTransition] = useTransition();
-    const [userProgress, setUserProgress] = useState<{ xp: number; completedCourses: string[] } | null>(null);
 
-    const category: string = Array.isArray(params.category) ? params.category[0] : params.category!;
-    const pathKey = category.toLowerCase();
+    // const category: string = Array.isArray(params.category) ? params.category[0] : params.category!;
+    // const pathKey = category.toLowerCase();
+
+    // const [unitId, setUnitId] = useState(searchParams.get('unit'));
+    const [subjectId, setSubjectId] = useState(searchParams.get('subject'));
+    const [lessons, setLessons] = useState([]);
+    // const [userProgress, setUserProgress] = useState<{ xp: number; completedCourses: string[] } | null>(null);
 
 
-
-
-    useEffect(() => {
-        // setLoading(true);
-        // setUserProgress(null);
-        
-
-        setTimeout(() => {
-            setUserProgress(mockUserProgress[pathKey] || { xp: 0, completedCourses: [] });
-            // setLoading(false);
-        }, 600);
-    }, [pathKey]);
 
     useEffect(() => {
-        startTransition(async () => {
+        // const _unitId = searchParams.get('unit');
+        // setUnitId(_unitId);
 
-        })
-    }, [])
+        const _subjectId = searchParams.get('subject');
+        console.log(_subjectId);
+    }, [searchParams]);
+
+    useEffect(() => {
+        if (subjectId) {
+            startTransition(async () => {
+                const _lessons = await loadAcademicLesson(1, 100, subjectId, false);
+                setLessons(_lessons.data);
+                console.log(_lessons.data);
+            })
+        }
+        else {
+            setLessons([]);
+        }
+    }, [subjectId])
 
 
-    if (!(pathKey in learningPaths)) {
-        return <p className="p-4 text-center">Learning Path not found.</p>;
+    // if (!(pathKey in learningPaths)) {
+    //     return <p className="p-4 text-center">Learning Path not found.</p>;
+    // }
+
+    // const pathData = learningPaths[pathKey];
+
+    const handleChooseSubject = (subjectId: string) => {
+        setSubjectId(subjectId);
+        console.log(subjectId);
+
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("subject", subjectId);
+        console.log(params);
+
+        router.push(`?${params.toString()}`);
     }
-
-    const pathData = learningPaths[pathKey];
-
 
     if(isPending){
         return <Loading/>
     }
-
 
 
     return (
@@ -143,15 +159,15 @@ const LearningPath = ({learningPath}:Props) => {
 
             <div className='px-6'>
                 <div className="text-center space-y-2">
-                    <h1 className="text-4xl font-extrabold text-green-600">{pathData.title}</h1>
-                    <p className="text-muted-foreground text-base">{pathData.description}</p>
+                    <h1 className="text-4xl font-extrabold text-green-600">{"title"}</h1>
+                    <p className="text-muted-foreground text-base">{"description"}</p>
                 </div>
 
             </div>
 
-            <div className='p-6 grid grid-cols-1 lg:grid-cols-6 gap-6'>
+            <div className='p-6 grid grid-cols-1 md:grid-cols-6 gap-6'>
 
-                <div className='lg:col-span-2 space-y-6'>
+                <div className='md:col-span-2 space-y-6'>
                     <div className="space-y-6">
                         {/* Courses */}
                         <Card>
@@ -161,13 +177,14 @@ const LearningPath = ({learningPath}:Props) => {
                             </CardHeader>
                             <CardContent>
                                 <ul className="space-y-2">
-                                    {learningPath?.subjects?.map((subject: any, index: any) => (
-                                        <li
+                                    {learningPath && learningPath?.subjects?.map((subject: { subjectId: string, title: string }, index: any) => (
+                                        <Button
                                             key={index}
-                                            className="bg-gray-100 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 transition"
+                                            className="w-full text-sm text-gray-700 "
+                                            onClick={() => handleChooseSubject(subject.subjectId)}
                                         >
                                             {subject.title}
-                                        </li>
+                                        </Button>
                                     ))}
                                 </ul>
                             </CardContent>
@@ -182,7 +199,7 @@ const LearningPath = ({learningPath}:Props) => {
 
                             <CardContent>
                                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                                    {pathData.tips.map((tip, i) => (
+                                    {["tips 1", "tips 2"].map((tip: any, i: number) => (
                                         <li key={i}>{tip}</li>
                                     ))}
                                 </ul>
@@ -199,7 +216,7 @@ const LearningPath = ({learningPath}:Props) => {
 
                 </div>
 
-                <div className='lg:col-span-4 space-y-6'>
+                <div className='md:col-span-4 space-y-6'>
                     <div className="space-y-6">
                         {/* What to Expect */}
 
@@ -210,7 +227,7 @@ const LearningPath = ({learningPath}:Props) => {
                                     <CardTitle>What to Expect</CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className="text-muted-foreground text-sm">{pathData.whatToExpect}</p>
+                                    <p className="text-muted-foreground text-sm">{"pathData.whatToExpect"}</p>
                                 </CardContent>
 
                                 <CardFooter>
@@ -255,37 +272,45 @@ const LearningPath = ({learningPath}:Props) => {
                             </CardHeader>
 
                             <CardContent className="space-y-4">
-                                {/* Lessons List */}
                                 <div>
                                     <div className="space-y-3">
                                         <h4 className="text-sm font-semibold text-muted-foreground">Lessons Progress</h4>
 
                                         <div className="flex flex-col space-y-2">
-                                            {pathData.lessons?.map((lesson: any, i: number) => {
-                                                //   const isCompleted = userProgress?.completedLessons?.includes(lesson);
-                                                const isCompleted = i < 3;
+                                            {
+                                                lessons?.map((lesson: any, i: number) => {
+                                                    //   const isCompleted = userProgress?.completedLessons?.includes(lesson);
+                                                    const isCompleted = i < 3;
 
-                                                return (
-                                                    <div
-                                                        key={i}
-                                                        className={`flex items-center justify-between px-4 py-2 rounded-lg border transition-all
-            ${isCompleted ? "bg-green-50 border-green-300" : "bg-muted border-gray-200"}
-          `}
-                                                    >
-                                                        <div className="flex items-center gap-3">
-                                                            <div className={`rounded-full p-1.5 ${isCompleted ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-500"}`}>
-                                                                {isCompleted ? <CheckCircle size={18} /> : <Clock size={18} />}
+                                                    return (
+                                                        <div
+                                                            key={i}
+                                                            className={`flex items-center justify-between px-4 py-2 rounded-lg border transition-all 
+                                                                ${isCompleted ? "bg-green-50 border-green-300" : "bg-muted border-gray-200"}  `} >
+                                                            <div className="flex items-center gap-3">
+                                                                <div className={`rounded-full p-1.5 ${isCompleted ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-500"}`}>
+                                                                    {isCompleted ? <CheckCircle size={18} /> : <Clock size={18} />}
+                                                                </div>
+                                                                <span className={`text-sm ${isCompleted ? "text-green-800 font-medium" : "text-muted-foreground"}`}>
+                                                                    {lesson.title}
+                                                                </span>
                                                             </div>
-                                                            <span className={`text-sm ${isCompleted ? "text-green-800 font-medium" : "text-muted-foreground"}`}>
-                                                                {lesson}
-                                                            </span>
+                                                            {isCompleted ? (
+                                                                <span className="text-xs text-green-700 font-semibold">Completed</span>
+                                                            ) : (
+                                                                <Button
+                                                                    variant="outline"
+                                                                    size="sm"
+                                                                    className="text-xs h-8 px-3 border border-gray-300 rounded-md text-muted-foreground hover:bg-gray-100 hover:border-gray-400 transition-colors"
+                                                                    onClick={() => console.log(`Marking lesson "${lesson.title}" as complete`)}
+                                                                >
+                                                                    Mark as Complete
+                                                                </Button>
+                                                            )}
                                                         </div>
-                                                        {isCompleted && (
-                                                            <span className="text-xs text-green-700 font-semibold">Completed</span>
-                                                        )}
-                                                    </div>
-                                                );
-                                            })}
+                                                    );
+                                                })
+                                            }
                                         </div>
                                     </div>
 
@@ -293,9 +318,6 @@ const LearningPath = ({learningPath}:Props) => {
 
                             </CardContent>
                         </Card>
-
-
-
 
 
                         {/* Progress */}
@@ -309,7 +331,7 @@ const LearningPath = ({learningPath}:Props) => {
                                     <p className="text-muted-foreground">Loading progress...</p>
                                 ) : (
                                     <>
-                                        <p className="text-sm">
+                                        {/* <p className="text-sm">
                                             <strong>XP Earned:</strong> {userProgress?.xp || 0}
                                         </p>
                                         <p className="text-sm font-medium mt-2">Completed Courses:</p>
@@ -321,7 +343,7 @@ const LearningPath = ({learningPath}:Props) => {
                                             </ul>
                                         ) : (
                                             <p className="text-sm text-muted-foreground">No courses completed yet.</p>
-                                        )}
+                                        )} */}
                                     </>
                                 )}
                             </CardContent>
