@@ -48,9 +48,9 @@ export default function Home() {
             </div>
 
             {/* Feature Highlights */}
-            <div className="flex justify-center w-full max-w-[988px] mb-8">
+            {/* <div className="flex justify-center w-full max-w-[988px] mb-8">
                 <FeatureBanner />
-            </div>
+            </div> */}
 
             {/* School Banner */}
             <div className="flex justify-center w-full max-w-[1228px] mb-8">

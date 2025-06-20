@@ -9,20 +9,20 @@ export const SchoolBanner = () => {
 
     return (
         <>
-            <div className="w-full mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="w-full mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {/* Academic Levels Section */}
                 <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300">
                     <CardContent className="p-6 flex flex-col justify-between gap-4">
-                        <h2 className="text-xl font-bold text-indigo-600 text-center">
-                            Class 6–12 Study Materials
+                        <h2 className="text-xl font-bold text-lime-600 text-center">
+                            Academic Study Materials
                         </h2>
 
                         <div className="grid grid-cols-3 gap-4 text-center">
                             {["Class 6–8", "Class 9–10", "Class 11–12"].map((label, i) => (
                                 <Card
                                     key={i}
-                                    className="bg-indigo-50 hover:bg-indigo-100 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition text-indigo-700 font-semibold text-lg"
+                                    className="text-lime-900 bg-gradient-to-br from-white to-lime-50 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg"
                                     onClick={() => redirect('/academy')}
                                 >
                                     {label}
@@ -39,21 +39,21 @@ export const SchoolBanner = () => {
                 </Card>
 
                 {/* Exam Prep Section */}
-                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300">
+                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300  ">
                     <CardContent className="p-6 flex flex-col justify-between gap-4">
-                        <h2 className="text-xl font-bold text-indigo-600 text-center">
-                            SSC & HSC Exam Practice
+                        <h2 className="text-xl font-bold text-sky-600 text-center">
+                            Your Exam Preparation
                         </h2>
 
                         <div className="grid grid-cols-3 gap-4 text-center">
                             {[
                                 { label: "SSC 25" },
                                 { label: "HSC 25,26" },
-                                { label: "MCQ & Quizzes" }
+                                { label: "Admission" }
                             ].map(({ label }, i) => (
                                 <Card
                                     key={i}
-                                    className="bg-pink-50 hover:bg-pink-100 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg text-pink-700"
+                                    className="text-sky-900 bg-gradient-to-br from-white to-sky-100 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg"
                                     onClick={() => redirect('/academy')}
                                 >
                                     {label}
