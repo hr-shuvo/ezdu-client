@@ -26,7 +26,7 @@ type Props = {
 }
 
 const LearningPath = ({ learningPath }: Props) => {
-    const {isLoggedIn} = useSecure();
+    const { isLoggedIn } = useSecure();
     // const params = useParams();
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -35,7 +35,6 @@ const LearningPath = ({ learningPath }: Props) => {
     const [subjectId, setSubjectId] = useState(searchParams.get('subject'));
     const [lessons, setLessons] = useState([]);
     // const [userProgress, setUserProgress] = useState<{ xp: number; completedCourses: string[] } | null>(null);
-
 
     useEffect(() => {
         // const _unitId = searchParams.get('unit');
@@ -81,7 +80,7 @@ const LearningPath = ({ learningPath }: Props) => {
     }
 
     const handleMarkAsCompleteLesson = (lesson: any) => {
-        if(!isLoggedIn){
+        if (!isLoggedIn) {
             toast.warning("Please login for this action");
             return;
         }
@@ -226,14 +225,14 @@ const LearningPath = ({ learningPath }: Props) => {
                                                             key={i}
                                                             className={`flex items-center justify-between px-4 py-2 rounded-lg border transition-all 
                                                                 ${isCompleted ? "bg-green-50 border-green-300" : "bg-muted border-gray-200"}  `} >
-                                                            <div className="flex items-center gap-3">
+                                                            <Link href={`/academy/c/${lesson._id}`} className="flex items-center gap-3">
                                                                 <div className={`rounded-full p-1.5 ${isCompleted ? "bg-green-100 text-green-700" : "bg-gray-200 text-gray-500"}`}>
                                                                     {isCompleted ? <CheckCircle size={18} /> : <Clock size={18} />}
                                                                 </div>
                                                                 <span className={`text-sm ${isCompleted ? "text-green-800 font-medium" : "text-muted-foreground"}`}>
                                                                     {lesson.title}
                                                                 </span>
-                                                            </div>
+                                                            </Link>
                                                             {isCompleted ? (
                                                                 <span className="text-xs text-green-700 font-semibold">Completed</span>
                                                             ) : (
