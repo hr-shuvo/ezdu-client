@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { CourseModule } from "./course-module";
+import { CourseModule } from "./banner/course-module";
 import { CoolMode } from "@/components/magicui/cool-mode";
 import { SchoolBanner } from "@/app/(marketing)/banner/school-banner";
 import { LeaderboardBanner } from "./banner/leaderboard-banner";
