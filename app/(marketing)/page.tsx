@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { CourseModule } from "./banner/course-module";
-import { CoolMode } from "@/components/magicui/cool-mode";
 import { SchoolBanner } from "@/app/(marketing)/banner/school-banner";
 import { LeaderboardBanner } from "./banner/leaderboard-banner";
 import { useSecure } from "@/context/SecureContext";
@@ -32,17 +31,13 @@ export default function Home() {
                     </p>
 
                     {isLoggedIn ? (
-                        <CoolMode>
-                            <Button size="lg" variant="primary" className="w-full" asChild>
-                                <Link href="/academy">Continue Learning</Link>
-                            </Button>
-                        </CoolMode>
+                        <Button size="lg" variant="primary" className="w-full" asChild>
+                            <Link href="/academy">Continue Learning</Link>
+                        </Button>
                     ) : (
-                        <CoolMode>
-                            <Button size="lg" variant="outline" className="w-full" asChild>
-                                <Link href="/auth/login">Get Started</Link>
-                            </Button>
-                        </CoolMode>
+                        <Button size="lg" variant="outline" className="w-full" asChild>
+                            <Link href="/auth/register">Get Started</Link>
+                        </Button>
                     )}
                 </div>
             </div>
@@ -67,7 +62,7 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center w-full  mb-8">
-                <HowItWorksBanner/>
+                <HowItWorksBanner />
             </div>
 
 

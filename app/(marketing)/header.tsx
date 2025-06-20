@@ -6,6 +6,7 @@ import { logout as logoutUser } from "../_services/auth";
 import React from "react";
 import { NavMenu } from "@/components/layout/nav/nav-menu";
 import { useSecure } from "@/context/SecureContext";
+import { NavProfile } from "@/components/layout/nav/nav-profile";
 
 export const Header = () => {
     const { isLoggedIn, logout } = useSecure();
@@ -22,13 +23,13 @@ export const Header = () => {
                 </div> */}
 
                 <div className="z-20">
-                    <NavMenu/>
+                    <NavMenu />
                 </div>
 
                 <div>
                     {isLoggedIn ? (
                         <div>
-                            <Button
+                            {/* <Button
                                 size="sm"
                                 variant="dangerOutline"
                                 className="ms-2"
@@ -40,8 +41,10 @@ export const Header = () => {
                                 }}
                             >
                                 Logout
-                            </Button>
+                            </Button> */}
+                            <NavProfile />
                         </div>
+
                     ) : (
                         <div>
                             <Button
@@ -51,13 +54,14 @@ export const Header = () => {
                             >
                                 <Link href="/auth/login">Login</Link>
                             </Button>
-                            <Button
+
+                            {/* <Button
                                 size="sm"
                                 variant="default"
                                 className="ms-2"
                             >
                                 <Link href="/auth/register">Register</Link>
-                            </Button>
+                            </Button> */}
                         </div>
                     )}
                 </div>
