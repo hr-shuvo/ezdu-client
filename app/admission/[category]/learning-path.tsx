@@ -8,79 +8,10 @@ import { BookCopy, BookOpen, CheckCircle, Clock, Flag, Lightbulb, ListChecks, St
 import Link from 'next/link';
 import Loading from '@/app/(main)/learn/loading';
 import { loadAcademicLesson } from '@/app/_services/academy/academyLessonService';
+import { useSecure } from '@/context/SecureContext';
+import { toast } from 'sonner';
 
-// type LearningPath = {
-//     title: string;
-//     description: string;
-//     tips: string[];
-//     lessons: string[],
-//     whatToExpect: string;
-// };
 
-// const learningPaths: Record<string, any> = {
-//     medical: {
-//         title: 'Medical Admission Learning Path',
-//         description:
-//             'Prepare for medical admission exams covering biology, chemistry, anatomy, and more. Build a strong foundation to excel.',
-//         tips: [
-//             'Study consistently for 1-2 hours daily.',
-//             'Practice past papers and quizzes.',
-//             'Focus on understanding concepts.',
-//             'Join study groups for support.',
-//             'Use active recall and spaced repetition.',
-//         ],
-//         lessons: [
-//             'Cell Structure & Function',
-//             'Human Digestive System',
-//             'Cardiovascular System',
-//             'Organic Chemistry Basics',
-//             'Drug Action Mechanisms',
-//         ],
-
-//         whatToExpect:
-//             'Medical admission tests include MCQs on biology, chemistry, and general science. Time management and accuracy are key.',
-//     },
-//     university: {
-//         title: 'University Admission Learning Path',
-//         description:
-//             'Get ready for university entrance exams in English, General Knowledge, and critical thinking skills.',
-
-//         tips: [
-//             'Read daily newspapers and articles.',
-//             'Practice comprehension passages.',
-//             'Expand your vocabulary.',
-//             'Solve previous year question papers.',
-//         ],
-//         lessons: [
-//             'Tense & Sentence Structure',
-//             'Reading Comprehension Practice',
-//             'World History & GK',
-//             'Logical Puzzle Solving',
-//         ],
-//         whatToExpect:
-//             'Expect English language proficiency tests, GK questions, and reasoning sections in university exams.',
-//     },
-//     engineering: {
-//         title: 'Engineering Admission Learning Path',
-//         description:
-//             'Prepare for engineering entrance exams focusing on mathematics, physics, and problem-solving skills.',
-//         tips: [
-//             'Strengthen your fundamentals in math and science.',
-//             'Solve numerical problems regularly.',
-//             'Use diagrams to visualize problems.',
-//             'Attempt mock tests under timed conditions.',
-//         ],
-//         lessons: [
-//             'Algebra & Trigonometry',
-//             'Newton’s Laws of Motion',
-//             'Thermodynamics Basics',
-//             'Organic vs Inorganic Chemistry',
-//             'Math Word Problems',
-//         ],
-//         whatToExpect:
-//             'Engineering exams test your analytical skills and conceptual understanding of STEM subjects.',
-//     },
-// };
 // const mockUserProgress: Record<
 //     string,
 //     { xp: number; completedCourses: string[] }
@@ -95,19 +26,15 @@ type Props = {
 }
 
 const LearningPath = ({ learningPath }: Props) => {
+    const {isLoggedIn} = useSecure();
     // const params = useParams();
     const searchParams = useSearchParams();
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
 
-    // const category: string = Array.isArray(params.category) ? params.category[0] : params.category!;
-    // const pathKey = category.toLowerCase();
-
-    // const [unitId, setUnitId] = useState(searchParams.get('unit'));
     const [subjectId, setSubjectId] = useState(searchParams.get('subject'));
     const [lessons, setLessons] = useState([]);
     // const [userProgress, setUserProgress] = useState<{ xp: number; completedCourses: string[] } | null>(null);
-
 
 
     useEffect(() => {
@@ -115,7 +42,11 @@ const LearningPath = ({ learningPath }: Props) => {
         // setUnitId(_unitId);
 
         const _subjectId = searchParams.get('subject');
-        console.log(_subjectId);
+        if (!_subjectId && Array.isArray(learningPath.subjects) && learningPath.subjects.length) {
+
+            const _tempSubjectId = learningPath.subjects[0].subjectId;
+            setSubjectId(_tempSubjectId);
+        }
     }, [searchParams]);
 
     useEffect(() => {
@@ -123,7 +54,7 @@ const LearningPath = ({ learningPath }: Props) => {
             startTransition(async () => {
                 const _lessons = await loadAcademicLesson(1, 100, subjectId, false);
                 setLessons(_lessons.data);
-                console.log(_lessons.data);
+                // console.log(_lessons.data);
             })
         }
         else {
@@ -149,8 +80,16 @@ const LearningPath = ({ learningPath }: Props) => {
         router.push(`?${params.toString()}`);
     }
 
-    if(isPending){
-        return <Loading/>
+    const handleMarkAsCompleteLesson = (lesson: any) => {
+        if(!isLoggedIn){
+            toast.warning("Please login for this action");
+            return;
+        }
+        console.log(`Marking lesson "${lesson.title}" as complete`)
+    }
+
+    if (isPending) {
+        return <Loading />
     }
 
 
@@ -159,8 +98,8 @@ const LearningPath = ({ learningPath }: Props) => {
 
             <div className='px-6'>
                 <div className="text-center space-y-2">
-                    <h1 className="text-4xl font-extrabold text-green-600">{"title"}</h1>
-                    <p className="text-muted-foreground text-base">{"description"}</p>
+                    <h1 className="text-4xl font-extrabold text-green-600">{learningPath?.pathTitle}</h1>
+                    <p className="text-muted-foreground text-base">{learningPath?.pathDescription}</p>
                 </div>
 
             </div>
@@ -280,7 +219,7 @@ const LearningPath = ({ learningPath }: Props) => {
                                             {
                                                 lessons?.map((lesson: any, i: number) => {
                                                     //   const isCompleted = userProgress?.completedLessons?.includes(lesson);
-                                                    const isCompleted = i < 3;
+                                                    const isCompleted = i < 3 && isLoggedIn;
 
                                                     return (
                                                         <div
@@ -302,7 +241,7 @@ const LearningPath = ({ learningPath }: Props) => {
                                                                     variant="outline"
                                                                     size="sm"
                                                                     className="text-xs h-8 px-3 border border-gray-300 rounded-md text-muted-foreground hover:bg-gray-100 hover:border-gray-400 transition-colors"
-                                                                    onClick={() => console.log(`Marking lesson "${lesson.title}" as complete`)}
+                                                                    onClick={() => handleMarkAsCompleteLesson(lesson)}
                                                                 >
                                                                     Mark as Complete
                                                                 </Button>

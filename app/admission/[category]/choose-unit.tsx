@@ -30,7 +30,7 @@ const ChooseUnit = ({ units }: Props) => {
 
         startTransition(async () => {
             const _path = await getAdmissionUnitLearningPath(unitId);
-            // console.log(_path);
+            console.log(_path);
             setLearningPath(_path);
         });
     }, [unitId]);
