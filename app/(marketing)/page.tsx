@@ -7,8 +7,8 @@ import { CourseModule } from "./course-module";
 import { CoolMode } from "@/components/magicui/cool-mode";
 import { SchoolBanner } from "@/app/(marketing)/banner/school-banner";
 import { LeaderboardBanner } from "./banner/leaderboard-banner";
-import { FeatureBanner } from "./banner/feature-banner";
 import { useSecure } from "@/context/SecureContext";
+import { HowItWorksBanner } from "./banner/how-it-works-banner";
 
 export default function Home() {
     const { isLoggedIn } = useSecure();
@@ -64,6 +64,10 @@ export default function Home() {
 
             <div className="flex justify-center w-full max-w-[988px] mb-8">
                 <LeaderboardBanner isLoggedIn={isLoggedIn} />
+            </div>
+
+            <div className="flex justify-center w-full  mb-8">
+                <HowItWorksBanner/>
             </div>
 
 
