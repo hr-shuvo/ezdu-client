@@ -28,7 +28,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     try {
         const response = await httpClient.post('/auth/register', values);
 
-        return { success: response.data.msg };
+        return { success: response.data.message };
     } catch (err: any) {
         return { error: err?.response?.data?.msg };
     }
