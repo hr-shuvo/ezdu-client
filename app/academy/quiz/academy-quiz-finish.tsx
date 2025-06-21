@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { FilePlus2, MoveLeft, Send } from "lucide-react";
 import { toast } from "sonner";
 import FireBorderBox from "@/components/custom-ui/fire-box";
+import Link from "next/link";
 
 dayjs.extend(utc);
 
@@ -73,9 +74,12 @@ export const AcademyQuizFinishPage = ({ summary }: Props) => {
                     <p className="text-xl text-gray-700 mb-8">
                         You’ve successfully completed the quiz.</p>
 
-                    <Button variant={'primary'}>
-                        <MoveLeft /> Back to Home
-                    </Button>
+                    <Link href={'/academy'}>
+                        <Button variant={'primary'}>
+                            <MoveLeft /> Back to Home
+                        </Button>
+                    </Link>
+
                 </div>
 
 

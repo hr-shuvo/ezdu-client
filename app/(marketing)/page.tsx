@@ -31,11 +31,11 @@ export default function Home() {
                     </p>
 
                     {isLoggedIn ? (
-                        <Button size="lg" variant="primary" className="w-full" asChild>
+                        <Button size="lg" variant="primary" className="w-1/2" asChild>
                             <Link href="/academy">Continue Learning</Link>
                         </Button>
                     ) : (
-                        <Button size="lg" variant="outline" className="w-full" asChild>
+                        <Button size="lg" variant="outline" className="w-1/2" asChild>
                             <Link href="/auth/register">Get Started</Link>
                         </Button>
                     )}

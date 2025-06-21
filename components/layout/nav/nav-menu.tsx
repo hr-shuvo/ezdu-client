@@ -40,6 +40,14 @@ export const NavMenu = () => {
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
+                            <Link href="/leaderboard" legacyBehavior passHref>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                    Ranking
+                                </NavigationMenuLink>
+                            </Link>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem>
                             <Link href="/about" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                     About
