@@ -2,14 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { logout as logoutUser } from "../_services/auth";
 import React from "react";
 import { NavMenu } from "@/components/layout/nav/nav-menu";
 import { useSecure } from "@/context/SecureContext";
 import { NavProfile } from "@/components/layout/nav/nav-profile";
 
 export const Header = () => {
-    const { isLoggedIn, logout } = useSecure();
+    const { isLoggedIn } = useSecure();
 
     return (
         <header className="h-20 w-full border-b-2 border-slate-200 px-4">
