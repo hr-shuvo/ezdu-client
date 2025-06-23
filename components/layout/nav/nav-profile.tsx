@@ -16,9 +16,8 @@ export const NavProfile = () => {
     return (
         <div className="flex items-center justify-end">
             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger asChild className="w-12">
                     <Button
-                        variant="ghost"
                         className="rounded-full focus:outline-none focus:ring-0 hover:bg-muted px-2 py-1"
                     >
                         <Image

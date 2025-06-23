@@ -6,6 +6,7 @@ import { ExitModal } from "@/components/modals/exit-modal";
 import { HeartsModal } from "@/components/modals/hearts-modal";
 import { PracticeModal } from "@/components/modals/practice-modal";
 import { SecureProvider } from "@/context/SecureContext";
+import { AskSetupProfileModal } from "@/components/modals/ask-setup-profile-modal";
 
 const font = Nunito({
     subsets: ["latin"],
@@ -73,6 +74,7 @@ export default function RootLayout({
                     <ExitModal />
                     <HeartsModal />
                     <PracticeModal />
+                    <AskSetupProfileModal/>
                 </SecureProvider>
 
             </body>
