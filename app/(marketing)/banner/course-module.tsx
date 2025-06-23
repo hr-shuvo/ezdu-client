@@ -13,7 +13,7 @@ export const CourseModule = () => {
             emoji: '🎓',
         },
         {
-            title: 'Jobs',
+            title: 'Question Bank',
             subTitle: 'complete preparation',
             totalCourse: 17,
             duration: 0,

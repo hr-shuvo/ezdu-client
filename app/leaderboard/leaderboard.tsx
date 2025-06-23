@@ -99,14 +99,17 @@ const Leaderboard = () => {
 
             <div>
 
-                <div className=" mx-auto p-6 space-y-6">
-                    <h1 className="text-3xl font-bold text-center mb-4 text-primary">
-                        EzDu Leaderboard
-                    </h1>
-                    <p className="text-center text-muted-foreground">
-                        See how you rank among other learners! This leaderboard tracks your total XP points
-                        earned through quizzes, lessons, and streaks. Top performers get fame and fun rewards!
-                    </p>
+                <div className=" mx-auto px-6 space-y-6">
+                    <div className="text-center my-6">
+                        <h1 className="text-4xl font-extrabold text-primary tracking-tight mb-2">
+                            🏆 EzDu Leaderboard
+                        </h1>
+                        <p className="text-muted-foreground text-base max-w-xl mx-auto">
+                            Compete with fellow learners and climb the ranks! Earn XP from quizzes, lessons, and daily streaks.
+                            Top learners unlock rewards, badges, and bragging rights!
+                        </p>
+                    </div>
+
 
                     <div>
                         <div className="flex overflow-x-auto gap-4 py-4 scrollbar-hide">
@@ -131,7 +134,7 @@ const Leaderboard = () => {
 
             </div>
 
-            <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
+            <div className="px-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
 
 
 
@@ -190,12 +193,12 @@ const Leaderboard = () => {
                     </div>
 
                     <div>
-                        <Card className="bg-gradient-to-br from-orange-50 to-yellow-100 dark:from-orange-900 dark:to-yellow-900 rounded-2xl shadow-xl p-6 space-y-5">
+                        <Card className="bg-gradient-to-br from-white to-yellow-50 rounded-2xl shadow-xl p-6 space-y-5">
                             <h3 className="text-lg font-bold text-orange-900 dark:text-yellow-200 flex items-center gap-2">
                                 🎯 Today’s Missions
                             </h3>
 
-                            <ul className="space-y-3 text-sm text-orange-800 dark:text-yellow-100">
+                            <ul className="space-y-3 text-sm text-orange-800">
                                 <li className="flex items-center gap-3 bg-white/60 dark:bg-zinc-800/40 p-3 rounded-lg shadow-sm hover:bg-white/80 dark:hover:bg-zinc-800 transition-all">
                                     <input type="checkbox" className="accent-orange-500 w-4 h-4" />
                                     <span>✅ Complete <strong>1 Quiz</strong></span>
@@ -218,7 +221,7 @@ const Leaderboard = () => {
                     </div>
 
                     <div>
-                        <Card className="bg-gradient-to-br from-blue-50 to-sky-100 dark:from-sky-900 dark:to-blue-800 rounded-2xl shadow-lg p-6 space-y-4">
+                        <Card className="bg-gradient-to-br from-white to-lime-50 dark:from-sky-900 dark:to-blue-800 rounded-2xl shadow-lg p-6 space-y-4">
                             <h2 className="text-lg font-bold text-blue-900 dark:text-sky-200 flex items-center gap-2">
                                 🧑‍🤝‍🧑 Your Rivals
                             </h2>
