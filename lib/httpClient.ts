@@ -18,7 +18,7 @@ httpClient.interceptors.response.use(
         const status = error.response?.status;
         const message = error.response?.data?.message || error.message;
 
-        console.log(error);
+        console.log('err: ', error);
 
         if (errorHandler) {
             errorHandler(`${status}: ${message}`);

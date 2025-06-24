@@ -3,50 +3,99 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState, useTransition } from 'react';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils'; // optional for styling
 import { useAskSetupProfileModal } from '@/store/use-modal-state';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FaGem } from 'react-icons/fa';
 import { loadAcademicClass } from '@/app/_services/academy/academyService';
+import { getCurrentUser } from '@/services/authService';
+import { updateUser } from '@/app/_services/user-service';
+import { useSecure } from '@/context/SecureContext';
+import { toast } from 'sonner';
 
 
 export const AskSetupProfileModal = () => {
+    const { isLoggedIn, user, setUser } = useSecure();
     const { isOpen, close, open } = useAskSetupProfileModal();
     const [isPending, startTransition] = useTransition();
+    const [showGroup, setShowGroup] = useState(false);
 
     const [isClient, setIsClient] = useState(false);
-    const [userType, setUserType] = useState<'student' | 'job' | ''>('');
+    const [userType, setUserType] = useState<'student' | 'job' | ''>('student');
     const [classLevel, setClassLevel] = useState('');
+    const [group, setGroup] = useState('');
     const [jobTrack, setJobTrack] = useState('');
+    const [currentUser, setCurrentUser] = useState<any>();
 
     const [classes, setClasses] = useState<any[]>([]);
+    const [academicClass, setAcademicClass] = useState<any>();
 
     useEffect(() => {
+        if (user) {
+            setCurrentUser(user);
+        }
+
         setIsClient(true);
-    }, []);
+    }, [user]);
 
     useEffect(() => {
-        open();
-    }, [isClient])
+        if (isLoggedIn && user && !user.userType) {
+            open();
+        }
+    }, [isClient, isLoggedIn, user])
 
     useEffect(() => {
         startTransition(async () => {
             const _classes = await loadAcademicClass(1, 100);
             setClasses(_classes.data);
         })
+    }, [])
 
-    })
+    useEffect(() => {
+        // console.log(classLevel)
+        const _class = classes.find(c => c._id === classLevel);
+        // console.log(_class);
+        setAcademicClass(_class);
+
+        if (_class && _class.groups &&
+            _class.groups.length > 0) {
+            setShowGroup(true)
+        } else {
+            setShowGroup(false);
+        }       
+
+    }, [classLevel])
+
 
     if (!isClient) {
         return null;
     }
 
     const handleSubmit = () => {
-        // You would send this data to backend or Zustand/global state
-        console.log({ userType, classLevel, jobTrack });
-        // close();
+        startTransition(async () => {
+            if (!currentUser) {
+                const _currentUser = await getCurrentUser();
+                // console.log(_currentUser);
+                setCurrentUser(_currentUser);
+            }
+
+            const userType = {
+                category: academicClass.segment,
+                classId: academicClass._id,
+                group: showGroup ? group : "",
+                jobTrack: jobTrack
+            };
+
+            const _newUserData = { ...currentUser, userType: userType }
+
+            const result = await updateUser(_newUserData)
+            if (result.success) {
+                // console.log(result.success);
+                setUser(result.success);
+                toast.success('Congratulations!!! happy learning...')
+            }
+        });
     };
 
     return (
@@ -91,24 +140,61 @@ export const AskSetupProfileModal = () => {
                         </div>
 
                         {userType === 'student' && (
-                            <div>
-                                <Label className="text-base mb-1 block">Which class are you in?</Label>
-                                <Select value={classLevel} onValueChange={setClassLevel}>
-                                    <SelectTrigger className="w-full">
-                                        <SelectValue placeholder="Select class" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        {classes && classes.length > 0 &&
-                                            classes.map((item: any) => (
-                                                <SelectItem key={item._id} value={item._id}>
-                                                    {item.title}
-                                                </SelectItem>
-                                            ))
-                                        }
 
-                                    </SelectContent>
-                                </Select>
-                            </div>
+                            <>
+                                <div>
+
+                                    <div>
+                                        <Label className="text-base mb-1 block">Which class are you in?</Label>
+                                        <Select value={classLevel} onValueChange={setClassLevel}>
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Select class" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {classes && classes.length > 0 &&
+                                                    classes.map((item: any) => (
+                                                        <SelectItem key={item._id} value={item._id}>
+                                                            {item.title}
+                                                        </SelectItem>
+                                                    ))
+                                                }
+
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+
+                                    {
+                                        academicClass && academicClass.groups &&
+                                        academicClass.groups.length > 0 && (
+                                            <>
+
+                                                <div>
+                                                    <Label className="text-base mb-1 block">Which Group are you in?</Label>
+                                                    <Select value={group} onValueChange={setGroup}>
+                                                        <SelectTrigger className="w-full">
+                                                            <SelectValue placeholder="Select class" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            {
+                                                                academicClass.groups.map((item: string) => (
+                                                                    <SelectItem key={item} value={item}>
+                                                                        {item}
+                                                                    </SelectItem>
+                                                                ))
+
+                                                            }
+
+                                                        </SelectContent>
+                                                    </Select>
+                                                </div>
+                                            </>
+                                        )
+
+                                    }
+
+                                </div>
+
+                            </>
                         )}
 
                         {userType === 'job' && (

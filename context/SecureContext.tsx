@@ -12,6 +12,7 @@ type User = {
     email: string;
     role: string;
     location: string;
+    userType: any;
 }
 
 interface SecureContextType {
