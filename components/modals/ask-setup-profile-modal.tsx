@@ -43,6 +43,8 @@ export const AskSetupProfileModal = () => {
         if (isLoggedIn && user && !user.userType) {
             open();
         }
+        
+        // console.log(user)
     }, [isClient, isLoggedIn, user])
 
     useEffect(() => {
@@ -93,6 +95,7 @@ export const AskSetupProfileModal = () => {
             if (result.success) {
                 // console.log(result.success);
                 setUser(result.success);
+                close();
                 toast.success('Congratulations!!! happy learning...')
             }
         });
