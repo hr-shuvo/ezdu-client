@@ -66,7 +66,7 @@ export const AcademyQuizFinishPage = ({ summary }: Props) => {
 
                     <FireBorderBox >
                         <p className="text-xl text-gray-700">
-                            You earned <b>{summary?.xp | 0} XP</b>!
+                            You earned <b>{summary?.xp.toFixed(1) | 0} XP</b>!
                         </p>
 
                     </FireBorderBox>
