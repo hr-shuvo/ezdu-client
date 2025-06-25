@@ -18,6 +18,7 @@ const AcademyQuizPage = () => {
     const [selectedLessons, setSelectedLessons] = useState<[]>([]);
     // const [duration, setDuration] = useState<number>(15);
     // const [quizType, setQuizType] = useState<"cq" | "mcq">("mcq");
+    const [subjectId, setSubjectId] = useState<string>();
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -31,9 +32,10 @@ const AcademyQuizPage = () => {
         }
     }, [isLoggedIn]);
 
-    const handleChooseTopicClick = (event: 'summary' | 'cancel', lessons: []) => {
+    const handleChooseTopicClick = (event: 'summary' | 'cancel', _subjectId:string, lessons: []) => {
         // console.log("Data from child:", event);
-        // console.log('lessons: ', lessons);
+        // console.log('subjectId: ', _subjectId);
+        setSubjectId(_subjectId);
 
         if (event == 'summary') {
             setSelectedLessons(lessons);
@@ -62,9 +64,9 @@ const AcademyQuizPage = () => {
         const _lessonIds = selectedLessons.map((lesson: { _id: string }) => lesson._id);
 
         startTransition(async () => {
-            const _quiz = await loadOrCreateQuize(duration, _lessonIds, type);
+            const _quiz = await loadOrCreateQuize(duration, subjectId!, _lessonIds, type);
             if (_quiz) {
-                console.log("_quiz: ", _quiz)
+                // console.log("_quiz: ", _quiz)
                 setQuiz(_quiz.data);
                 setQuizView('quiz');
             }

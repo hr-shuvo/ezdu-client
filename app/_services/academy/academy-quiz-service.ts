@@ -18,7 +18,7 @@ export const getOngoingQuiz = async () => {
 }
 
 
-export const loadOrCreateQuize = async (duration: number, lessonIds: string[], type: "cq" | "mcq", subjectId?: string) => {
+export const loadOrCreateQuize = async (duration: number,subjectId:string, lessonIds: string[], type: "cq" | "mcq") => {
     try {
 
         const model = {

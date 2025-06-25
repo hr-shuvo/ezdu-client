@@ -10,7 +10,8 @@ import { Flag, MoveLeft, MoveRight } from "lucide-react";
 type Quiz = {
     _id: string
     duration: number
-    end: string
+    end: string,
+    subjectId: string,
     questions: {
         lessonId: string;
         question: string;
@@ -69,7 +70,7 @@ export const AcademyQuiz = ({ quiz }: Props) => {
 
             await upsertQuiz(quiz);
             setXpSummary(_progress.data);
-            console.log('progress: ', _progress.data);
+            // console.log('progress: ', _progress.data);
         });
     };
 
@@ -81,7 +82,7 @@ export const AcademyQuiz = ({ quiz }: Props) => {
         try {
             quiz.questions = updatedQuestions;
             const updatedQuiz = await upsertQuiz(quiz);
-            console.log('fter update: ', updatedQuiz.data);
+            // console.log('after update: ', updatedQuiz.data);
         } catch (err) {
             console.error("Failed to update answer", err)
         }

@@ -13,11 +13,10 @@ import { Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Props = {
-    onClickItem: (data: 'summary' | 'cancel', lessons: []) => void;
+    onClickItem: (data: 'summary' | 'cancel', subjectId:string, lessons: []) => void;
 };
 
 export const ChooseQuizTopic = ({ onClickItem }: Props) => {
-
     const [isPending, startTransition] = useTransition();
 
     const [classId, setClassId] = useState('');
@@ -208,11 +207,11 @@ export const ChooseQuizTopic = ({ onClickItem }: Props) => {
                     </div>
 
                     <div className="mt-8 w-full gap-2 flex">
-                        <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" onClick={() => onClickItem('cancel', [])}>Cancel</Button>
+                        <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" onClick={() => onClickItem('cancel', subjectId, [])}>Cancel</Button>
                         <Button 
                         variant={'secondary'} 
                         size={'lg'} className="w-1/2 font-bold" 
-                        onClick={() => onClickItem('summary', selectedLessons)}
+                        onClick={() => onClickItem('summary', subjectId, selectedLessons)}
                         disabled={!lessons.length || !selectedLessonIds.length}
                         >Confirm</Button>
                     </div>
