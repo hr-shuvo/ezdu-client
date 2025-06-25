@@ -72,3 +72,17 @@ export const upsertAcademyQuizXp = async (quizId: any) => {
 
 }
 
+export const LoadRecentQuiz = async() =>{
+    try {
+        const response = await httpClient.get("/academy/quiz");
+        // console.log('post quiz: ', quiz);
+
+        return response.data;
+
+    } catch (err: any) {
+        console.error(err?.response?.data?.msg);
+        return null;
+    }
+}
+
+

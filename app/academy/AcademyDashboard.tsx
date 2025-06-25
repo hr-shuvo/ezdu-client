@@ -207,25 +207,17 @@ const AcademyDashboard = () => {
                 {/* XP & Streak Tracker */}
                 {
                     isLoggedIn && (
-                        <StreakCount />
-                    )
-                }
+                        <>
+                            <StreakCount />
 
-                {/* Topic Progress */}
-                {
-                    isLoggedIn && (
-                        <SubjectProgress />
+                            <RecentTest />
+
+                            <SubjectProgress />
+                        </>
                     )
                 }
 
                 <LeaderboardSummary />
-
-
-                <RecentTest />
-
-
-
-                {/* Recent Test Results */}
 
             </div>
         </div>
