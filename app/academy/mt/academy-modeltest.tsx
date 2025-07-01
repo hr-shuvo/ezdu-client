@@ -1,7 +1,6 @@
 'use client';
 
 import Loading from "@/app/(main)/courses/loading";
-import { getAcademicModelTest } from "@/app/_services/qb/questionBankService";
 import ADSense from "@/components/Ads/AdSense";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -40,8 +39,8 @@ const AcademyModelTest = () => {
         // setInstituteId(_instituteId!);
 
         startTransition(async () => {
-            // const _modelTest = await getAcademicModelTest(_subjectId!, _instituteId!);
-            // setModelTest(_modelTest.data);
+            // const _modelTest = await getAcademicModelTest(null!);
+            setModelTest(null);
         })
 
     }, [searchParams, router]);

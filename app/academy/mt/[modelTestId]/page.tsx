@@ -10,7 +10,6 @@ import { SubjectProgress } from "../../_components/subject-progress";
 import { RecentTest } from "../../_components/recent-test";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ADSense from "@/components/Ads/AdSense";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -95,7 +94,6 @@ const ModelTest = () => {
                             </Button>
                         </div>
 
-
                         {/* <div className="flex items-center gap-2 whitespace-nowrap">
                             <Switch
                                 id="show-toggle"
@@ -132,7 +130,7 @@ const ModelTest = () => {
                                         <Card>
                                             <CardHeader className="border-b ">
                                                 <CardTitle>
-                                                    <h1 className='text-sm'>{item.question}</h1>
+                                                    <h1 className='text-sm'>{index+1}. {item.question}</h1>
                                                 </CardTitle>
                                             </CardHeader>
 
