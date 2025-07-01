@@ -2,13 +2,24 @@ import { PaginatedList } from "@/app/utils/pagination";
 import httpClient from "@/lib/httpClient";
 
 
-export const loadAcademicModelTest = async (subjectId:string) => {
+export const loadAcademicModelTest = async (page:number, size:number, subjectId:string, instituteId?:string, year?:number) => {
     try {
+        const params: Record<string, any> = {
+            pg: page,
+            sz: size,
+            subjectId:subjectId,
+        };
 
-        const params = {subjectId:subjectId}
+        if(instituteId){
+            params.instituteId = instituteId;
+        }
 
-        const response = await httpClient.get("/academy/qb", {params:params});
-        console.log(response);
+        if(year){
+            params.year = year;
+        }
+
+        const response = await httpClient.get("/academy/qb/modeltest", {params:params});
+        // console.log(response.data);
         return response.data;
 
     } catch (err: any) {
@@ -21,15 +32,15 @@ export const loadAcademicModelTest = async (subjectId:string) => {
     }
 }
 
-export const getAcademicModelTest = async (subjectId:string, instituteId:string): Promise<PaginatedList> => {
+export const getAcademicModelTest = async (modeltestId:string) => {
     try {
 
-        const params = {
-            subjectId:subjectId,
-            instituteId:instituteId
-        }
+        // const params = {
+        //     subjectId:subjectId,
+        //     instituteId:instituteId
+        // }
 
-        const response = await httpClient.get("/academy/qb/mcq", {params:params});
+        const response = await httpClient.get(`/academy/qb/modeltest/${modeltestId}`);
         return response.data;
     } catch (err: any) {
         console.error(
@@ -37,6 +48,6 @@ export const getAcademicModelTest = async (subjectId:string, instituteId:string)
             err?.message ||
             "An unexpected error occurred."
         );
-        return {} as PaginatedList;
+        return null;
     }
 }

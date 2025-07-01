@@ -40,8 +40,8 @@ const AcademyModelTest = () => {
         // setInstituteId(_instituteId!);
 
         startTransition(async () => {
-            const _modelTest = await getAcademicModelTest(_subjectId!, _instituteId!);
-            setModelTest(_modelTest.data);
+            // const _modelTest = await getAcademicModelTest(_subjectId!, _instituteId!);
+            // setModelTest(_modelTest.data);
         })
 
     }, [searchParams, router]);
