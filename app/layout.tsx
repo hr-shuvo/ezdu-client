@@ -65,7 +65,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${font.className} flex flex-col min-h-screen`}>
+            <body className={`${font.className} flex flex-col min-h-screen bg-white text-gray-900`}>
                 <SecureProvider>
                     <main className="flex-grow">
                         {children}

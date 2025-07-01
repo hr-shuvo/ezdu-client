@@ -76,7 +76,7 @@ export const CourseModule = () => {
                     >
                         {/* Popular badge */}
                         {isPopular && (
-                            <span className="absolute top-3 right-3 bg-lime-500 text-white text-xs font-semibold rounded-full px-2 py-1 shadow-md">
+                            <span className="absolute top-3 right-3 bg-lime-700 text-white text-xs font-semibold rounded-full px-2 py-1 shadow-md">
                                 Popular
                             </span>
                         )}

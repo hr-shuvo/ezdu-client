@@ -29,7 +29,7 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
 
             {/* Always visible: Horizontal Leaderboard */}
             <section>
-                <h1 className="text-2xl font-bold text-sky-600 mb-4 text-center">Top Learners Leaderboard</h1>
+                <h1 className="text-2xl font-bold text-sky-800 mb-4 text-center">Top Learners Leaderboard</h1>
                 <div className="flex overflow-x-auto space-x-6 pb-4">
                     {topUsers.map((user, i) => (
                         <Card
@@ -41,11 +41,11 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
                                 {user.avatar ? (
                                     <img src={user.avatar} alt={user.name} className="rounded-full w-12 h-12" />
                                 ) : (
-                                    <FaUserCircle className="text-gray-400 w-12 h-12" />
+                                    <FaUserCircle className="text-gray-700 w-12 h-12" />
                                 )}
                                 <span className="font-semibold text-sky-800 text-center">{user.name}</span>
 
-                                <div className="flex items-center justify-center gap-2 text-sky-600 font-medium">
+                                <div className="flex items-center justify-center gap-2 text-sky-700 font-medium">
                                     <FaGripfire /> 
                                     <span className=""> {user.points} pts</span>
                                 </div>
@@ -57,7 +57,7 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
                 <div className="text-center pt-5">
                     <Link
                         href="/leaderboard"
-                        className="text-sky-600 font-semibold hover:underline flex justify-center items-center gap-1"
+                        className="700 font-semibold hover:underline flex justify-center items-center gap-1"
                     >
                         View Full Leaderboard <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -106,7 +106,7 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
                     <p className="mb-2">Want more personalized features like Daily Challenges?</p>
                     <Link
                         href="/login"
-                        className="text-sky-600 font-semibold hover:underline"
+                        className="text-sky-700 font-semibold hover:underline"
                     >
                         Login or Sign up to unlock all features!
                     </Link>
