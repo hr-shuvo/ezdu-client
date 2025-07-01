@@ -81,7 +81,8 @@ export const AcademyQuiz = ({ quiz }: Props) => {
 
         try {
             quiz.questions = updatedQuestions;
-            const updatedQuiz = await upsertQuiz(quiz);
+            // const updatedQuiz = await upsertQuiz(quiz);
+            await upsertQuiz(quiz);
             // console.log('after update: ', updatedQuiz.data);
         } catch (err) {
             console.error("Failed to update answer", err)

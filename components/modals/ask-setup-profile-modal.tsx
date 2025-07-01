@@ -4,7 +4,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { useEffect, useState, useTransition } from 'react';
 import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils'; // optional for styling
 import { useAskSetupProfileModal } from '@/store/use-modal-state';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FaGem } from 'react-icons/fa';
@@ -13,6 +12,7 @@ import { getCurrentUser } from '@/services/authService';
 import { updateUser } from '@/app/_services/user-service';
 import { useSecure } from '@/context/SecureContext';
 import { toast } from 'sonner';
+import Loading from '@/app/(main)/learn/loading';
 
 
 export const AskSetupProfileModal = () => {
@@ -73,6 +73,16 @@ export const AskSetupProfileModal = () => {
     if (!isClient) {
         return null;
     }
+
+    if(isPending){
+        return (
+            <>
+            <Loading/>
+            </>
+        )
+    }
+
+    
 
     const handleSubmit = () => {
         startTransition(async () => {
