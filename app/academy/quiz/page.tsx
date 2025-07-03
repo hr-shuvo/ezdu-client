@@ -5,7 +5,7 @@ import { ChooseQuizTopic } from "./choose-quiz-topic";
 import { ShowQuizSummary } from "./show-quiz.summary";
 import { AcademyQuiz } from "./academy-quiz";
 import { getOngoingQuiz, loadOrCreateQuize } from "@/app/_services/academy/academy-quiz-service";
-import Loading from "@/app/(main)/learn/loading";
+import Loading from "@/app/(voclift)/learn/loading";
 import { useSecure } from "@/context/SecureContext";
 import { toast } from "sonner";
 

@@ -7,7 +7,7 @@ import { getCurrentUser } from '@/services/authService';
 import { Flame, Star } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState, useTransition } from 'react';
-import Loading from '../../(main)/courses/loading';
+import Loading from '@/app/(voclift)/courses/loading';
 
 const User = {
     name: "Harun Shuvo",

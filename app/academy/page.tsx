@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         siteName: 'EzDu',
         images: [
             {
-                url: 'https://ezduonline.com/images/og-academy.png',
+                url: 'https://ezduonline.com/logo/logo.png',
                 width: 1200,
                 height: 630,
                 alt: 'EzDu Academy',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         title: 'Academy | SSC, HSC, Class 6-8 MCQ/CQ Practice',
         description:
             'Free MCQ practice for SSC, HSC, and Class 6-8 students. Bangladesh board exam preparation based on NCTB books.',
-        images: ['https://ezduonline.com/images/og-academy.png'],
+        images: ['https://ezduonline.com/logo/logo.png'],
     },
     icons: {
         icon: '/favicon.ico',

@@ -11,7 +11,7 @@ import { useSecure } from "@/context/SecureContext";
 import { useEffect, useState, useTransition } from "react";
 import { getAcademyProgress } from "../_services/academy/academyProgressService";
 import XpWeeklyChart from "./_components/xp-graph";
-import Loading from "../(main)/learn/loading";
+import Loading from "@/app/(voclift)/learn/loading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 
@@ -28,7 +28,7 @@ const AcademyDashboard = () => {
     ];
 
     const links = [
-        { title: "Mock / Quiz", icon: Trophy, color: "bg-[#DFF3FD]", href: "./academy/quiz" },
+        { title: "মক / কুইজ ", icon: Trophy, color: "bg-[#DFF3FD]", href: "./academy/quiz" },
         { title: "বই রিভিউ", icon: BookOpenCheck, color: "bg-[#FFF3C7]", href: "./academy/subjects" },
         { title: "প্রাকটিস প্রশ্ন", icon: ListChecks, color: "bg-[#DAF7DC]", href: "./academy/practice" },
         { title: "প্রশ্নব্যাংক", icon: Bot, color: "bg-[#FFD6D6]", href: "./academy/qb" },

@@ -1,6 +1,6 @@
 'use client';
 
-import Loading from "@/app/(main)/courses/loading";
+import Loading from "@/app/(voclift)/courses/loading";
 import { LoadRecentQuiz } from "@/app/_services/academy/academy-quiz-service";
 import { Card, CardContent } from "@/components/ui/card";
 import { useSecure } from "@/context/SecureContext";

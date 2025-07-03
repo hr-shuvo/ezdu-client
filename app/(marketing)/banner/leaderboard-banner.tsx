@@ -54,7 +54,7 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
                         </Card>
                     ))}
                 </div>
-                <div className="text-center pt-5">
+                <div className="text-center py-5">
                     <Link
                         href="/leaderboard"
                         className="700 font-semibold hover:underline flex justify-center items-center gap-1"
@@ -66,7 +66,7 @@ export const LeaderboardBanner = ({ isLoggedIn }: Props) => {
 
             {/* Other Features */}
             {isLoggedIn && (
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-5">
 
                     {/* Daily Challenge */}
                     <Card className="rounded-3xl shadow-md hover:shadow-lg transition duration-300">

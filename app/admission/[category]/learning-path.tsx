@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { useRouter, useSearchParams } from 'next/navigation';
 import { BookCopy, BookOpen, CheckCircle, Clock, Flag, Lightbulb, ListChecks, Star } from 'lucide-react';
 import Link from 'next/link';
-import Loading from '@/app/(main)/learn/loading';
+import Loading from '@/app/(voclift)/learn/loading';
 import { loadAcademicLesson } from '@/app/_services/academy/academyLessonService';
 import { useSecure } from '@/context/SecureContext';
 import { toast } from 'sonner';

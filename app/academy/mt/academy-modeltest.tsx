@@ -1,6 +1,6 @@
 'use client';
 
-import Loading from "@/app/(main)/courses/loading";
+import Loading from "@/app/(voclift)/courses/loading";
 import ADSense from "@/components/Ads/AdSense";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

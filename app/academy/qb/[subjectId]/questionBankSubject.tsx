@@ -10,7 +10,7 @@ import { SubjectProgress } from "../../_components/subject-progress";
 import { RecentTest } from "../../_components/recent-test";
 import { Clock, ListCheck } from "lucide-react";
 import Link from "next/link";
-import Loading from "@/app/(main)/courses/loading";
+import Loading from "@/app/(voclift)/courses/loading";
 import { useSecure } from "@/context/SecureContext";
 
 const QuestionBankSubject = () => {

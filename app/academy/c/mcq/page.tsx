@@ -1,6 +1,6 @@
 'use client';
 
-import Loading from "@/app/(main)/learn/loading";
+import Loading from "@/app/(voclift)/learn/loading";
 import { loadAcademyMcq } from "@/app/_services/academy/academyMcqService";
 import { getAcademicSubject, loadAcademicSubject } from "@/app/_services/academy/academySubjectService";
 import ADSense from "@/components/Ads/AdSense";

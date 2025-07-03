@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import LearningPath from "./learning-path";
 import { Button } from "@/components/ui/button";
-import Loading from "@/app/(main)/courses/loading";
+import Loading from "@/app/(voclift)/courses/loading";
 
 type Props = {
     units: any[]

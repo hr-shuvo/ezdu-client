@@ -12,7 +12,7 @@ import { getCurrentUser } from '@/services/authService';
 import { updateUser } from '@/app/_services/user-service';
 import { useSecure } from '@/context/SecureContext';
 import { toast } from 'sonner';
-import Loading from '@/app/(main)/learn/loading';
+import Loading from '@/app/(voclift)/learn/loading';
 
 
 export const AskSetupProfileModal = () => {

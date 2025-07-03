@@ -1,6 +1,6 @@
 'use client';
 
-import Loading from "@/app/(main)/courses/loading";
+import Loading from "@/app/(voclift)/courses/loading";
 import { loadAcademicLesson } from "@/app/_services/academy/academyLessonService";
 import { getAcademicSubject, loadAcademicSubject } from "@/app/_services/academy/academySubjectService";
 import { Button } from "@/components/ui/button";

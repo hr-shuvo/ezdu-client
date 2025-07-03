@@ -4,7 +4,7 @@ import { useState, useEffect, useTransition } from 'react';
 import { useParams } from 'next/navigation';
 import { getAdmissionLearningPath } from '@/app/_services/admission/admission-service';
 import LearningPath from './learning-path';
-import Loading from '@/app/(main)/learn/loading';
+import Loading from '@/app/(voclift)/learn/loading';
 import ChooseUnit from './choose-unit';
 
 
