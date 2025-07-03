@@ -9,10 +9,10 @@ import { SubjectProgress } from "./_components/subject-progress";
 import { RecentTest } from "./_components/recent-test";
 import { useSecure } from "@/context/SecureContext";
 import { useEffect, useState, useTransition } from "react";
-import { getAcademyProgress } from "../_services/academy/academyProgressService";
 import XpWeeklyChart from "./_components/xp-graph";
 import Loading from "@/app/(voclift)/learn/loading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { getAcademyProgress } from "@/app/_services/academy/academyProgressService";
 
 
 const AcademyDashboard = () => {

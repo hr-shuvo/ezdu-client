@@ -2,14 +2,14 @@
 
 import React, { useEffect, useState, useTransition } from 'react';
 import { LeaderboardCard } from './leaderboard-card';
-import { loadLeaderboard } from '../_services/leaderboard-service';
 import { cn } from '@/lib/utils';
 import XpWeeklyChart from "../academy/_components/xp-graph";
 import { Card } from '@/components/ui/card';
-import { getAcademyProgress } from '../_services/academy/academyProgressService';
 import { useSecure } from '@/context/SecureContext';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { loadLeaderboard } from "@/app/_services/leaderboard-service";
+import { getAcademyProgress } from "@/app/_services/academy/academyProgressService";
 
 const LeaderboardData = [
     {

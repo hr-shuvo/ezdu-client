@@ -5,8 +5,6 @@ import { useEffect, useState, useTransition } from "react";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { loadAcademicClass } from "../../_services/academy/academyService";
-import { loadAcademicSubject } from "../../_services/academy/academySubjectService";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import CustomPagination from "@/components/common/pagination";
 import { Input } from "@/components/ui/input";
@@ -14,6 +12,8 @@ import { Search } from "lucide-react";
 import ADSense from "@/components/Ads/AdSense";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import { loadAcademicClass } from "@/app/_services/academy/academyService";
+import { loadAcademicSubject } from "@/app/_services/academy/academySubjectService";
 
 const AcademyPage = () => {
     const [isPending, startTransition] = useTransition();
