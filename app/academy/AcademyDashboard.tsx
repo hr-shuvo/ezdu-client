@@ -65,7 +65,7 @@ const AcademyDashboard = () => {
                             <Card className={`h-32 ${color} hover:scale-105 transition-transform cursor-pointer shadow-md`}>
                                 <CardContent className="p-4 flex flex-col items-start justify-between h-full">
                                     <Icon className="w-8 h-8 text-gray-700" />
-                                    <h3 className="text-lg font-semibold text-gray-800 mt-2">{title}</h3>
+                                    <h2 className="text-lg font-semibold text-gray-800 mt-2">{title}</h2>
                                 </CardContent>
                             </Card>
                         </Link>

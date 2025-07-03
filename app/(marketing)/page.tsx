@@ -19,7 +19,7 @@ export default function Home() {
             {/* Hero Section */}
             <div className="w-full max-w-[988px] flex flex-col lg:flex-row items-center justify-center p-4 gap-8">
                 <div className="relative w-[280px] h-[280px] lg:w-[380px] lg:h-[380px] mb-8 lg:mb-0">
-                    <Image src="/logo/logo_bgw.gif" alt="Ezdu Logo" fill />
+                    <Image src="/logo/logo.png" alt="Ezdu Logo" fill />
                 </div>
 
                 <div className="flex flex-col items-center text-center gap-y-6">

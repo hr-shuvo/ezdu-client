@@ -8,7 +8,7 @@ import { useSecure } from "@/context/SecureContext";
 import { NavProfile } from "@/components/layout/nav/nav-profile";
 
 export const Header = () => {
-    const { isLoggedIn } = useSecure();
+    const {isLoggedIn} = useSecure();
 
     return (
         <header className="h-20 w-full border-b-2 border-slate-200 px-4">
@@ -22,7 +22,7 @@ export const Header = () => {
                 </div> */}
 
                 <div className="z-20">
-                    <NavMenu />
+                    <NavMenu/>
                 </div>
 
                 <div>
@@ -41,18 +41,21 @@ export const Header = () => {
                             >
                                 Logout
                             </Button> */}
-                            <NavProfile />
+                            <NavProfile/>
                         </div>
 
                     ) : (
                         <div>
-                            <Button
-                                size="sm"
-                                variant="default"
-                                className="ms-2"
-                            >
-                                <Link href="/auth/login">Login</Link>
-                            </Button>
+                            <Link href="/auth/login">
+                                <Button
+                                    size="sm"
+                                    variant="default"
+                                    className="ms-2 px-4 py-2 "
+                                >
+                                    Login
+                                </Button>
+                            </Link>
+
 
                             {/* <Button
                                 size="sm"
