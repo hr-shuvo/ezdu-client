@@ -6,12 +6,12 @@ type Props = {
     children: React.ReactNode
 }
 
-const CommonLayout = ({children}: Props) => {
+const MainLayout = ({children}: Props) => {
     return (
-        <div className='min-h-screen flex flex-col'>
+        <>
+            <Header className='hidden lg:block'/>
 
-            <Header/>
-            <main className='h-full pt-0 lg:px-[256px] bg-gradient-to-r from-white via-sky-50 to-white'>
+            <main className='h-full pt-0 xl:px-[256px] lg:px-[128px] bg-gradient-to-r from-white via-sky-50 to-white'>
                 <div className='h-full mx-auto p-6'>
                     {children}
                 </div>
@@ -19,9 +19,9 @@ const CommonLayout = ({children}: Props) => {
 
             <Footer/>
 
-        </div>
+        </>
     )
 
 };
 
-export default CommonLayout;
+export default MainLayout;

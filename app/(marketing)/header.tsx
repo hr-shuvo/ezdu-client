@@ -6,13 +6,22 @@ import React from "react";
 import { NavMenu } from "@/components/layout/nav/nav-menu";
 import { useSecure } from "@/context/SecureContext";
 import { NavProfile } from "@/components/layout/nav/nav-profile";
+import { cn } from "@/lib/utils";
 
-export const Header = () => {
+
+type Props = {
+    className: React.ReactNode
+};
+
+
+export const Header = ({className}: Props) => {
     const {isLoggedIn} = useSecure();
 
     return (
-        <header className="h-20 w-full border-b-2 border-slate-200 px-4">
-            <div className="2xl:max-w-screen-2xl xl:max-w-screen-xl lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
+        <div className={cn('h-20 w-full border-b-2 border-slate-200 px-4', className)}>
+            <div
+                className="2xl:max-w-screen-2xl xl:max-w-screen-xl lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
+
                 {/* <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
                     <Link href="/">
                         <h1 className="text-2xl font-extrabold text-sky-400 tracking-wide">
@@ -68,6 +77,6 @@ export const Header = () => {
                     )}
                 </div>
             </div>
-        </header>
+        </div>
     );
 };
