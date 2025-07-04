@@ -11,7 +11,7 @@ const CommonLayout = ({children}: Props) => {
         <div className='min-h-screen flex flex-col'>
 
             <Header/>
-            <main className='h-full pt-0 lg:px-[256px] bg-gradient-to-r from-white via-sky-100 to-white'>
+            <main className='h-full pt-0 lg:px-[256px] bg-gradient-to-r from-white via-sky-50 to-white'>
                 <div className='h-full mx-auto p-6'>
                     {children}
                 </div>

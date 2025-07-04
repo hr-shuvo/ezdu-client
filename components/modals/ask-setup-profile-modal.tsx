@@ -103,7 +103,6 @@ export const AskSetupProfileModal = () => {
 
             const result = await updateUser(_newUserData)
             if (result.success) {
-                // console.log(result.success);
                 setUser(result.success);
                 close();
                 toast.success('Congratulations!!! happy learning...')

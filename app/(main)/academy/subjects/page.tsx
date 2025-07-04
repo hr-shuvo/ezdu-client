@@ -14,6 +14,7 @@ import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import { loadAcademicClass } from "@/app/_services/academy/academyService";
 import { loadAcademicSubject } from "@/app/_services/academy/academySubjectService";
+import { SubjectProgress } from "@/app/(main)/academy/_components/subject-progress";
 
 const AcademyPage = () => {
     const [isPending, startTransition] = useTransition();
@@ -56,12 +57,12 @@ const AcademyPage = () => {
     return (
         <>
             <div className="px-6 my-5">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100">
-                    <h1 className="text-3xl font-bold text-blue-800">Subjects</h1>
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-xl p-6 shadow-sm border border-blue-100">
+                    <h1 className="text-3xl font-bold text-sky-800">Academic Subjects</h1>
 
-                    <p className="mt-3 text-gray-700">
+                    <h2 className="mt-3 text-sky-900">
                         Choose a subject to explore chapters, take quizzes, or access curated study materials. Stay consistent and keep learning!
-                    </p>
+                    </h2>
 
                     <div className="mt-5 flex flex-wrap gap-3">
                         <Button variant="primary">Explore All Chapters</Button>
@@ -76,13 +77,13 @@ const AcademyPage = () => {
 
 
             <div className='flex flex-col md:flex-row gap-2 px-6'>
-                <div className='md:w-1/4 w-full p-4 pb-10'>
-
-                    <div className='py-2 text-green-900 text-xl'>
-                        Select Class
-                    </div>
+                <div className='md:w-1/4 w-full p-4 pb-10 space-y-6'>
 
                     <div>
+                        <div className='py-2 text-sky-700 text-xl font-bold'>
+                            Select Class
+                        </div>
+
                         <ToggleGroup
                             variant="primary"
                             type="multiple"
@@ -99,13 +100,17 @@ const AcademyPage = () => {
                                         aria-label={`Toggle ${item._id}`}
                                         className='w-full'
                                     >
-                                        <h1 className='font-bold'>{item.title}</h1>
+                                        <h3 className='font-bold'>{item.title}</h3>
                                     </ToggleGroupItem>
 
                                 ))
                             }
 
                         </ToggleGroup>
+                    </div>
+
+                    <div >
+                        <SubjectProgress/>
                     </div>
 
 
@@ -120,7 +125,12 @@ const AcademyPage = () => {
                     </div>
 
                     <div>
-                        <Table className='w-full  [&>tbody>tr:nth-child(even)]:bg-gray-50'>
+
+                        {/*
+                        [&>tbody>tr:nth-child(even)]:bg-gray-50
+                        */}
+
+                        <Table className='w-full'>
                             {
                                 isPending ? (
                                     <TableBody>
@@ -154,7 +164,7 @@ const AcademyPage = () => {
                                                         <TableCell>
                                                             <div>
                                                                 <div>
-                                                                    <h1 className='text-3xl font-bold'>{item.title}</h1>
+                                                                    <h3 className='text-xl font-bold'>{item.title}</h3>
 
                                                                 </div>
 
