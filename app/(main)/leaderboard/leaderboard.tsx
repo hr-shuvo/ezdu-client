@@ -99,7 +99,7 @@ const Leaderboard = () => {
 
             <div>
 
-                <div className=" mx-auto px-6 space-y-6">
+                <div className="mx-auto lg:px-6 space-y-6">
                     <div className="text-center my-6">
                         <h1 className="text-4xl font-extrabold text-primary tracking-tight mb-2">
                             🏆 EzDu Leaderboard
@@ -134,8 +134,7 @@ const Leaderboard = () => {
 
             </div>
 
-            <div className="px-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
-
+            <div className="lg:px-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
 
 
                 <div className="lg:col-span-4 space-y-6">
@@ -145,7 +144,7 @@ const Leaderboard = () => {
                             <p className="text-center mt-6">Loading leaderboard...</p>
                         ) : (
                             <div className="space-y-3">
-                                {leaderboard.map((user) => (
+                                {leaderboard?.map((user) => (
                                     <LeaderboardCard
                                         key={user.userId}
                                         user={user}
@@ -169,7 +168,7 @@ const Leaderboard = () => {
                     }
                 </div>
 
-                <div className="lg:col-span-2 space-y-6">
+                <div className="lg:col-span-2 space-y-4">
                     <div>
                         <Card className="col-span-2 bg-gradient-to-br from-white to-lime-50 rounded-2xl shadow-xl p-6 space-y-4">
                             <h2 className="text-xl font-bold text-lime-800  flex items-center gap-2">
@@ -207,7 +206,7 @@ const Leaderboard = () => {
                                 <li className="flex items-center gap-3 bg-white/60 dark:bg-zinc-800/40 p-3 rounded-lg shadow-sm hover:bg-white/80 dark:hover:bg-zinc-800 transition-all">
                                     <input type="checkbox" className="accent-orange-500 w-4 h-4" />
                                     <span>🔥 Maintain <strong>Daily Streak</strong></span>
-                                    <span className="ml-auto bg-orange-200 text-orange-800 text-xs px-2 py-1 rounded-full">+10 XP</span>
+                                    <span className="ml-auto bg-orange-200 text-orange-800 text-xs px-2 py-1 rounded-full w-10">+10 XP</span>
                                 </li>
                                 <li className="flex items-center gap-3 bg-white/60 dark:bg-zinc-800/40 p-3 rounded-lg shadow-sm hover:bg-white/80 dark:hover:bg-zinc-800 transition-all">
                                     <input type="checkbox" className="accent-orange-500 w-4 h-4" />
@@ -230,7 +229,7 @@ const Leaderboard = () => {
                                 {/* Rival Above */}
                                 <div className="flex items-center justify-between bg-white dark:bg-slate-800 rounded-lg px-4 py-2 shadow-sm">
                                     <div className="flex items-center gap-3">
-                                        <img src="/rival1.png" className="w-8 h-8 rounded-full" alt="Rival 1" />
+                                        <img src="/mascot.svg" className="w-8 h-8 rounded-full" alt="Rival 1" />
                                         <div>
                                             <p className="text-sm font-medium text-gray-800 dark:text-gray-100">Zara</p>
                                             <p className="text-xs text-muted-foreground">Rank 3 • 153.2 XP</p>
@@ -254,7 +253,7 @@ const Leaderboard = () => {
                                 {/* Rival Below */}
                                 <div className="flex items-center justify-between bg-white dark:bg-slate-800 rounded-lg px-4 py-2 shadow-sm">
                                     <div className="flex items-center gap-3">
-                                        <img src="/rival2.png" className="w-8 h-8 rounded-full" alt="Rival 2" />
+                                        <img src="/mascot.svg" className="w-8 h-8 rounded-full" alt="Rival 2" />
                                         <div>
                                             <p className="text-sm font-medium text-gray-800 dark:text-gray-100">Rifat</p>
                                             <p className="text-xs text-muted-foreground">Rank 5 • 139.7 XP</p>
@@ -271,11 +270,11 @@ const Leaderboard = () => {
                 </div>
             </div>
 
-            <div>
+            <div className='my-4'>
                 <Card>
 
 
-                    <div className="mt-10 p-4  rounded-xl text-sm text-muted-foreground">
+                    <div className="p-4  rounded-xl text-sm text-muted-foreground">
                         <p><strong>Tip:</strong> Keep your streak going and complete daily quizzes to climb up faster! XP is calculated based on accuracy, streaks, and consistency.</p>
                         <p className="mt-2">You earn bonus XP for:</p>
                         <ul className="list-disc ml-6 mt-1">

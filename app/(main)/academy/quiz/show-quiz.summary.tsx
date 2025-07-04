@@ -26,7 +26,7 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
 
     return (
 
-        <div className="px-6 my-5">
+        <div className="lg:px-6 my-5">
 
             <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-2xl p-6 shadow-sm border border-blue-100">
                 <div className="flex items-center gap-4 mb-4">
@@ -38,9 +38,9 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
                 </p>
 
                 <div className="mt-5 flex flex-wrap gap-3">
-                    <Button variant="primary">Explore All Chapters</Button>
-                    <Button variant="secondary">Recommended Quizzes</Button>
-                    <Button variant="super">Top Rated Notes</Button>
+                    <Button variant="primary">Explore All</Button>
+                    <Button variant="secondary"> Quizzes</Button>
+                    <Button variant="super">Top Notes</Button>
                 </div>
 
             </div>
@@ -51,27 +51,29 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
 
                 <div >
 
+                    <div className="flex flex-col sm:flex-row justify-between items-center  py-4  mb-4 border-b gap-4 sm:gap-0">
 
-                    <div className="flex justify-between items-center  py-4  mb-4 border-b">
+                        <div className="flex items-center gap-4 flex-shrink-0">
+                            {/* Back Button */}
+                            <Button variant="ghost" onClick={() => onBack('topic')} className="flex items-center gap-2 text-blue-500 hover:text-blue-800">
+                                <ArrowLeft className="w-6 h-6" />
+                                <span className="text-base font-medium">Back</span>
+                            </Button>
 
-                        {/* Back Button */}
-                        <Button variant="ghost" onClick={() => onBack('topic')} className="flex items-center gap-2 text-blue-500 hover:text-blue-800">
-                            <ArrowLeft className="w-6 h-6" />
-                            <span className="text-base font-medium">Back</span>
-                        </Button>
-
-                        {/* Title */}
-                        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3 justify-center">
-                            <ListChecks className="w-7 h-7 text-blue-500" />
-                            <h2 className="text-2xl font-extrabold tracking-tight text-blue-700">
-                                Your Selected Lessons
-                            </h2>
+                            {/* Title */}
+                            <div className="flex items-center gap-3">
+                                <ListChecks className="w-7 h-7 text-blue-500" />
+                                <h3 className="text-xl font-extrabold tracking-tight text-blue-700">
+                                    Your Selected Lessons
+                                </h3>
+                            </div>
                         </div>
 
+
                         {/* Clock & Select */}
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2 justify-end w-full">
                             {/* Select List for Quiz Type */}
-                            <div className="flex flex-col gap-1 w-[120px]">
+                            <div className="flex flex-col gap-1 w-full md:w-[120px]">
                                 <label className="text-sm font-medium text-blue-800">🎯 Quiz Type</label>
                                 <Select
                                     value={quizType}
@@ -88,7 +90,7 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
                             </div>
 
                             {/* Duration Clock */}
-                            <div className="flex flex-col gap-1 w-40">
+                            <div className="flex flex-col gap-1 w-full md:w-40">
                                 <label className="text-sm font-medium text-blue-800">⏱ Duration (minutes)</label>
                                 <Select
                                     value={quizDuration.toString()}
@@ -137,9 +139,9 @@ export const ShowQuizSummary = ({ lessons, onBack, onStart, onCancel }: Props) =
 
 
                 <div className="mt-8">
-                    <div className="mt-8 w-full gap-2 flex">
-                        <Button variant={'default'} size={'lg'} className="w-1/2 font-bold" onClick={() => onCancel}>Cancel</Button>
-                        <Button variant={'secondary'} size={'lg'} className="w-1/2 font-bold" onClick={() => onStart(quizType, quizDuration)}>
+                    <div className="mt-8 w-full gap-2 flex flex-col md:flex-row">
+                        <Button variant={'default'} size={'lg'} className="w-full md:w-1/2 font-bold" onClick={() => onCancel}>Cancel</Button>
+                        <Button variant={'secondary'} size={'lg'} className="w-full md:w-1/2 font-bold" onClick={() => onStart(quizType, quizDuration)}>
                             {
                                 isLoggedIn ? (
                                     <>

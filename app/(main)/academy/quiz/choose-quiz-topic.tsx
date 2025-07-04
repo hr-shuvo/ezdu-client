@@ -211,7 +211,7 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                                     <ToggleGroup
                                         variant="primary"
                                         type="multiple"
-                                        className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+                                        className="grid grid-cols-2 md:grid-cols-3 gap-4"
                                         onValueChange={handleToggleChange}
                                         value={selectedLessonIds}
                                         disabled={isPending}
@@ -222,7 +222,7 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                                                     key={index}
                                                     value={item._id}
                                                     aria-label={`Toggle ${item._id}`}
-                                                    className="w-full min-h-[120px] p-6 text-lg font-semibold border border-b-4 rounded-xl hover:bg-gray-200 hover:text-gray-900 data-[state=on]:bg-blue-400 data-[state=on]:text-white transition-all"
+                                                    className="w-full lg:min-h-[120px] p-6 text-sm lg:text-lg font-semibold border border-b-4 rounded-xl hover:bg-gray-200 hover:text-gray-900 data-[state=on]:bg-blue-400 data-[state=on]:text-white transition-all"
 
                                                 >
                                                     <h3 className='font-bold'>{item.title}</h3>

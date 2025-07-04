@@ -29,7 +29,8 @@ export const Sidebar = ({className}: Props) =>{
                 <SidebarItem label='Academy' href='/academy' iconSrc='/common/learn.svg'/>
                 <SidebarItem label='Leaderboard' href='/leaderboard' iconSrc='/common/leaderboard.svg'/>
                 {/*<SidebarItem label='Quests' href='/quests' iconSrc='/common/quests.svg'/>*/}
-                {/*<SidebarItem label='Shop' href='/shop' iconSrc='/common/shop.svg'/>*/}
+                {/* <SidebarItem label='Shop' href='/shop' iconSrc='/common/shop.svg'/> */}
+                <SidebarItem label='Login' href='/auth/login' iconSrc='/common/shop.svg'/>
 
             </div>
 
