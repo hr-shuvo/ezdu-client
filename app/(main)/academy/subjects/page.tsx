@@ -56,7 +56,7 @@ const AcademyPage = () => {
 
     return (
         <>
-            <div className="px-6 my-5">
+            <div className="lg:px-6 my-5">
                 <div className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-xl p-6 shadow-sm border border-blue-100">
                     <h1 className="text-3xl font-bold text-sky-800">Academic Subjects</h1>
 

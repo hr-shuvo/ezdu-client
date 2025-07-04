@@ -77,7 +77,7 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
 
     return (
         <>
-            <div className="px-6 my-5">
+            <div className="lg:px-6 my-5">
                 <div
                     className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-2xl p-6 shadow-sm border border-blue-100">
                     {/* Title & Description */}
@@ -120,16 +120,16 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
             </div>
 
 
-            <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
+            <div className="lg:p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
 
-                <div className="lg:col-span-4 space-y-6">
+                <div className="lg:col-span-4 space-y-2">
 
-                    <div className="flex items-center py-4 gap-5">
+                    <div className="flex flex-col sm:flex-row items-center gap-2">
 
                         {
                             !user?.userType?.classId && (
                                 <>
-                                    <div className='flex flex-row gap-2'>
+                                    <div className='flex flex-row gap-2 w-full'>
                                         {/*<Label>Level</Label>*/}
                                         <Select onValueChange={(data) => {
                                             if (data && data !== 'all') {
@@ -138,7 +138,7 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                                                 setClassId(null!);
                                             }
                                         }}>
-                                            <SelectTrigger className={'w-full min-w-[200px]'}>
+                                            <SelectTrigger className={'w-full lg:min-w-[200px]'}>
                                                 <SelectValue placeholder='Choose Class'/>
                                             </SelectTrigger>
 
@@ -154,7 +154,7 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                             )
                         }
 
-                        <div className='flex flex-row gap-2'>
+                        <div className='flex flex-row gap-2 w-full'>
                             {/*<Label>Level</Label>*/}
                             <Select onValueChange={(data) => {
                                 if (data && data !== 'all') {
@@ -163,7 +163,7 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                                     setSubjectId(null!)
                                 }
                             }}>
-                                <SelectTrigger className={'w-full min-w-[200px]'}>
+                                <SelectTrigger className={'w-full lg:min-w-[200px]'}>
                                     <SelectValue placeholder='Choose Subject'/>
                                 </SelectTrigger>
 
@@ -177,10 +177,14 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                             </Select>
                         </div>
 
+
+                    </div>
+
+                    <div>
                         {
                             subjectId && (
                                 <>
-                                    <div className={"font-bold"}>
+                                    <div className={"font-bold min-w-[200px]"}>
                                         {
                                             selectedLessonIds.length > 0 ? (
                                                 <>
@@ -197,7 +201,6 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                                 </>
                             )
                         }
-
                     </div>
 
                     <div className="min-h-[250px] flex items-center justify-center">
@@ -242,12 +245,12 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
 
                     </div>
 
-                    <div className="mt-8 w-full gap-2 flex">
-                        <Button variant={'default'} size={'lg'} className="w-1/2 font-bold"
+                    <div className="mt-8 w-full gap-2 flex flex-col lg:flex-row">
+                        <Button variant={'default'} size={'lg'} className="w-full lg:w-1/2 font-bold"
                                 onClick={() => onClickItem('cancel', subjectId, [])}>Cancel</Button>
                         <Button
                             variant={'secondary'}
-                            size={'lg'} className="w-1/2 font-bold"
+                            size={'lg'} className="w-full lg:w-1/2 font-bold"
                             onClick={() => onClickItem('summary', subjectId, selectedLessons)}
                             disabled={!lessons.length || !selectedLessonIds.length}
                         >Confirm</Button>
@@ -257,7 +260,7 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                 </div>
 
 
-                <div className="lg:col-span-2 space-y-6">
+                <div className="lg:col-span-2 space-y-4">
                     <StreakCount/>
 
                     <SubjectProgress/>

@@ -56,7 +56,7 @@ const AcademyDashboard = () => {
 
 
     return (
-        <div className="p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
+        <div className="lg:p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
             <div className="lg:col-span-4 space-y-6">
 
                 <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">

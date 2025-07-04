@@ -1,6 +1,7 @@
 import React from "react";
 import { Header } from "@/app/(marketing)/header";
 import { Footer } from "@/app/(marketing)/footer";
+import { MobileHeader } from "@/components/layout/mobile-header";
 
 type Props = {
     children: React.ReactNode
@@ -9,9 +10,10 @@ type Props = {
 const MainLayout = ({children}: Props) => {
     return (
         <>
+            <MobileHeader/>
             <Header className='hidden lg:block'/>
 
-            <main className='h-full pt-0 xl:px-[256px] lg:px-[128px] bg-gradient-to-r from-white via-sky-50 to-white'>
+            <main className='h-full xl:px-[256px] lg:px-[128px] pt-[50px] lg:pt-0 bg-gradient-to-r from-white via-sky-50 to-white'>
                 <div className='h-full mx-auto p-6'>
                     {children}
                 </div>
