@@ -12,8 +12,8 @@ export const navItemsAdmission: { title: string; href: string; description: stri
                 "Topic-wise MCQs and theory-based practice tailored to admission syllabi",
         },
         {
-            title: "Past Questions",
-            href: "/admission/pq",
+            title: "Question Bank",
+            href: "/admission/qb",
             description:
                 "Real previous years’ questions with solutions to understand trends and patterns.",
         },
