@@ -103,14 +103,14 @@ const VerifyPage = () => {
 
     return (
         <CardWrapper headerLabel={'Verify Account'} backButtonLabel={'Wrong email? Change it'}
-                     backButtonHref={'/auth/send-verification'}>
+                     backButtonHref={'/auth/login-with-code'}>
 
             <div className="space-y-4">
 
 
                 <FormSuccess message={`Verification sent to ${email}`}/>
 
-                <div className="flex justify-center mt-6">
+                <div className="flex justify-center mt-8">
                     <div className="grid grid-cols-4 gap-2">
                         {otp.map((digit, index) => (
                             <input
@@ -128,7 +128,12 @@ const VerifyPage = () => {
                 </div>
 
                 <div className="flex justify-center mt-4">
-                    <Button variant="default" disabled={otp.includes("")} type='button' onClick={handleVerifyCode}>
+                    <Button
+                        variant={otp.includes("") ? 'default':'primary'}
+                        disabled={otp.includes("")} type='button'
+                        onClick={handleVerifyCode}
+                        className="w-full"
+                    >
                         Verify Code
                     </Button>
 

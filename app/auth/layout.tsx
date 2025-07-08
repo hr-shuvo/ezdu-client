@@ -2,6 +2,7 @@ import { Footer } from "../(marketing)/footer";
 import Image from "next/image";
 import { Header } from "../(marketing)/header";
 import { MobileHeader } from "@/components/layout/mobile-header";
+import { Suspense } from "react";
 
 
 type Props = {
@@ -12,7 +13,8 @@ type Props = {
 const AuthLayout = ({ children }: Props) => {
     return (
         <>
-            <div className="min-h-screen flex flex-col">
+            <Suspense>
+                <div className="min-h-screen flex flex-col">
                 <MobileHeader/>
                 <Header className='hidden lg:block' />
 
@@ -31,6 +33,8 @@ const AuthLayout = ({ children }: Props) => {
             </div>
 
             <Footer />
+
+            </Suspense>
         </>
     );
 };

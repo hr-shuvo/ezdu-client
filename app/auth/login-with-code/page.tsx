@@ -74,8 +74,8 @@ const LoginWithCodePage = () => {
                         )}
                     />
 
-                    <Button type="submit" disabled={isPending}>
-                        Submit
+                    <Button type="submit" variant={'primary'} disabled={isPending}>
+                        Send Verification Code
                     </Button>
                 </form>
             </Form>
