@@ -21,6 +21,7 @@ import { loginUser } from "@/app/_services/auth";
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { useSecure } from "@/context/SecureContext";
+import Link from "next/link";
 
 export const LoginForm = () => {
     const router = useRouter();
@@ -117,14 +118,22 @@ export const LoginForm = () => {
                     <FormError message={error} />
                     <FormSuccess message={success} />
 
-                    <Button
-                        type="submit"
-                        className="w-full"
-                        variant="primary"
-                        disabled={isPending}
-                    >
-                        Login
-                    </Button>
+                    <div className="flex flex-col space-y-2">
+                        <Button
+                            type="submit"
+                            className="w-full"
+                            variant="primary"
+                            disabled={isPending}
+                        >
+                            Login
+                        </Button>
+
+                        <Link href={'/auth/login-with-code'}>
+                            <Button type='button' className={'w-full'}>Login with code</Button>
+                        </Link>
+                    </div>
+
+
                 </form>
             </Form>
         </CardWrapper>

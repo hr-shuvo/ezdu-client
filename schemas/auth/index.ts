@@ -20,3 +20,7 @@ export const RegisterSchema = z.object({
         message:'Password must be at least 4 character'
     })
 });
+
+export const emailFormSchema = z.object({
+    email: z.string().email({ message: "Invalid email address" }),
+});
