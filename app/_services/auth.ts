@@ -30,7 +30,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
         return { success: response.data.message };
     } catch (err: any) {
-        return { error: err?.response?.data?.msg };
+        return { error: err?.response?.data?.message };
     }
 }
 

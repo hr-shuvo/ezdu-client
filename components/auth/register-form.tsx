@@ -27,6 +27,7 @@ export const RegisterForm = () => {
     const [success, setSuccess] = useState<string | undefined>('');
     const [isPending, startTransition] = useTransition();
 
+
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
@@ -43,7 +44,8 @@ export const RegisterForm = () => {
             register(values).then((data) =>{
                 if (data.success) {
                     setSuccess(data.success);
-                    router.push("/auth/login");
+                    console.log(data.success)
+                    router.push(`/auth/verify?email=${values.email}`);
                 } else {
                     setError(data.error);
                 }
