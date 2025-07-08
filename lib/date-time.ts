@@ -13,3 +13,11 @@ export const formatRelativeDate = (dateStr: string) => {
     if (diff === 1) return "Yesterday";
     return `${diff} days ago`;
 };
+
+export const formatDateTime = (date: string | Date): string => {
+    return dayjs(date).format('MMM D, YYYY h:mm A');
+};
+
+export const formatDate = (date: string | Date): string => {
+    return dayjs(date).format('MMM D, YYYY');
+};

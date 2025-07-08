@@ -9,7 +9,7 @@ import { loadCourses } from "@/app/_services/course-services";
 import { getUserProgress } from "@/app/_services/progress-service";
 
 const CoursesPage = () => {
-    const [courses, setCourses] = useState([]);
+    const [courses, setCourses] = useState<any[]>([]);
     const [userProgress, setUserProgress] = useState<any>();
 
     const [currentPage, setCurrentPage] = useState(1);

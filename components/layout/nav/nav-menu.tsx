@@ -1,4 +1,11 @@
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+import {
+    NavigationMenu, NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle
+} from "@/components/ui/navigation-menu"
 import { cn } from "@/lib/utils";
 import Link from "next/link"
 import React from "react";
@@ -48,12 +55,16 @@ export const NavMenu = () => {
                         </NavigationMenuItem>
 
                         <NavigationMenuItem>
-                            <Link href="/about" legacyBehavior passHref>
-                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                    About
-                                </NavigationMenuLink>
-                            </Link>
+                            <NavigationMenuTrigger>More</NavigationMenuTrigger>
+                            <NavigationMenuContent>
+                                <ul className="p-2 md:w-[300px] lg:w-[400px] ">
+                                    <ListItem href="/about" title="About"/>
+                                    <ListItem href="/blog" title="Blog"/>
+                                    <ListItem href="/academy/qb" title="Question Bank"/>
+                                </ul>
+                            </NavigationMenuContent>
                         </NavigationMenuItem>
+
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>

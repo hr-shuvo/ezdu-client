@@ -33,7 +33,7 @@ const LearningPath = ({ learningPath }: Props) => {
     const [isPending, startTransition] = useTransition();
 
     const [subjectId, setSubjectId] = useState(searchParams.get('subject'));
-    const [lessons, setLessons] = useState([]);
+    const [lessons, setLessons] = useState<any[]>([]);
     // const [userProgress, setUserProgress] = useState<{ xp: number; completedCourses: string[] } | null>(null);
 
     useEffect(() => {
