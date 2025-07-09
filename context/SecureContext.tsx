@@ -9,10 +9,12 @@ import { toast } from "sonner";
 type User = {
     _id: string;
     name: string;
+    username: string;
     email: string;
     role: string;
     location: string;
     userType: any;
+    isVerified: boolean;
 }
 
 interface SecureContextType {

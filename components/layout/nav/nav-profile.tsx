@@ -9,6 +9,7 @@ import { LogOut, Settings } from "lucide-react";
 import Image from "next/image";
 import { useSecure } from "@/context/SecureContext";
 import { FaUser } from "react-icons/fa";
+import Link from "next/link";
 
 export const NavProfile = () => {
     const { user, logout } = useSecure();
@@ -32,10 +33,12 @@ export const NavProfile = () => {
 
                 <DropdownMenuContent align="end" className="w-60 space-y-2 p-2 mt-2 shadow-xl border rounded-xl">
                     <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-                        <div className="w-full flex items-center gap-2 items-center">
-                            <FaUser className="text-2xl text-muted-foreground" />
-                            <span className="text-2xl text-bold">{user?.name || 'user'}</span>
-                        </div>
+                        <Link href={`/u/${user?.username}`}>
+                            <div className="w-full flex items-center gap-2 items-center">
+                                <FaUser className="text-2xl text-muted-foreground" />
+                                <span className="text-2xl text-bold">{user?.name || 'user'}</span>
+                            </div>
+                        </Link>
 
 
                     </DropdownMenuItem>
