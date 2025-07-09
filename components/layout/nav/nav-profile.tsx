@@ -22,7 +22,7 @@ export const NavProfile = () => {
                         className="rounded-full focus:outline-none focus:ring-0 hover:bg-muted px-2 py-1"
                     >
                         <Image
-                            src="/mascot.svg"
+                            src="/avater/boy/1.svg" // Default avatar, can be replaced with user avatar
                             alt="Profile"
                             width={32}
                             height={32}

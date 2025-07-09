@@ -29,7 +29,7 @@ export const StreakCount = () => {
 
     return (
         <>
-            <div className="bg-white rounded-xl p-4 shadow-md">
+            <div className="rounded-xl p-4 shadow-md">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <Flame className="text-orange-500" />
