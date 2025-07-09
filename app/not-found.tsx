@@ -22,7 +22,7 @@ export default function NotFound() {
 
             {/* Subtext */}
             <p className="text-gray-700 text-lg max-w-xl mb-8">
-                Looks like the page you're looking for took a break. No worries — let's get you back on track!
+                Looks like the page you&apos;re looking for took a break. No worries — let&apos;s get you back on track!
             </p>
 
             {/* Action button */}
