@@ -3,7 +3,7 @@
 import { useSecure } from "@/context/SecureContext";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Bell, ExternalLink, Info, Settings } from "lucide-react";
+import { ExternalLink, Info, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { MenuItem } from "@/app/(main)/(users)/profile/_components/menu-item";
 

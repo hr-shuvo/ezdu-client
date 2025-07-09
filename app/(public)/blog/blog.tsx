@@ -50,7 +50,7 @@ const BlogPage = async ({trending}: Props) => {
                 <section className='max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center'>
                     {/* Left side text */}
                     <div className='flex flex-col justify-center space-y-4'>
-                        <p className='text-sm text-gray-500 uppercase tracking-wide font-semibold'>
+                        <p className='text-sm text-gray-500 dark:text-gray-200 uppercase tracking-wide font-semibold'>
                             {formatDate(featuredBlog.updatedAt)} &nbsp;&bull;&nbsp; {featuredBlog.author?.name || 'Ezdu Team'}
                         </p>
 
@@ -58,7 +58,7 @@ const BlogPage = async ({trending}: Props) => {
                             {featuredBlog.title}
                         </h1>
 
-                        <p className='text-lg text-gray-700 max-w-xl'>
+                        <p className='text-lg text-gray-700 dark:text-gray-200 max-w-xl'>
                             {featuredBlog.subTitle}
                         </p>
 
@@ -112,7 +112,7 @@ const BlogPage = async ({trending}: Props) => {
                                     <CardTitle
                                         className='text-xl font-semibold hover:text-green-600 cursor-pointer transition duration-300'>{blog.title}</CardTitle>
                                 </CardHeader>
-                                <CardDescription className='text-gray-600 text-sm'>
+                                <CardDescription className='text-gray-600 dark:text-gray-200 text-sm'>
                                     A quick overview of {blog.title.toLowerCase()} and how it can help you on your
                                     language journey.
                                 </CardDescription>
@@ -144,10 +144,10 @@ const BlogPage = async ({trending}: Props) => {
                                     <CardContent className='p-6 flex flex-col justify-center'>
                                         <CardHeader className='p-0 mb-3'>
                                             <CardTitle
-                                                className='text-2xl font-bold text-gray-800 hover:text-green-600 cursor-pointer transition duration-300'>
+                                                className='text-2xl font-bold hover:text-green-600 cursor-pointer transition duration-300'>
                                                 {blog.title}
                                             </CardTitle>
-                                            <CardDescription className='text-gray-500 text-sm flex items-center gap-2'>
+                                            <CardDescription className='text-gray-500 dark:text-gray-100 text-sm flex items-center gap-2'>
                                                 <svg
                                                     className='w-4 h-4 text-green-500'
                                                     fill='none'
@@ -165,7 +165,7 @@ const BlogPage = async ({trending}: Props) => {
                                                 {blog.date} • {blog.author}
                                             </CardDescription>
                                         </CardHeader>
-                                        <p className='text-gray-600 text-base'>
+                                        <p className='text-gray-600 dark:text-gray-200 text-base'>
                                             Explore how {blog.title.toLowerCase()} can impact your daily-learning
                                             success.
                                         </p>
@@ -188,7 +188,8 @@ const BlogPage = async ({trending}: Props) => {
 
 
                 {/* =================== Footer / CTA =================== */}
-                <section className='bg-sky-600 text-white py-12 mt-12 text-center'>
+                <section className="bg-sky-600 text-white py-12 mt-12 text-center dark:bg-sky-700 dark:text-white"
+                >
                     <h2 className='text-3xl font-bold mb-4'>Ready to start your language journey?</h2>
                     <p className='mb-6 max-w-2xl mx-auto'>
                         Join thousands of learners improving their lives through language. Stay updated with our latest

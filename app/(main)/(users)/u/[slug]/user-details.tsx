@@ -33,7 +33,7 @@ const UserDetails = ({userProfile}:Props) =>{
                                     <Image
                                         height={30}
                                         width={30}
-                                        src={userProfile.avatar || "/avater/boy/1.svg" || "/mascot.svg"}
+                                        src={userProfile.avatar || "/avatar/boy/1.svg" || "/mascot.svg"}
                                         alt="Avatar"
                                         className="w-20 h-20 rounded-full border-4 border-lime-400"
                                         priority={true}
