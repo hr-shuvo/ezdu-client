@@ -15,6 +15,7 @@ type User = {
     location: string;
     userType: any;
     isVerified: boolean;
+    avatar: string;
 }
 
 interface SecureContextType {

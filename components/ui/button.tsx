@@ -14,11 +14,18 @@ const buttonVariants = cva(
 
                 default: "bg-white text-black border-slate-200 border-2 border-b-4 active:border-b-2 hover:bg-slate-100 text-slate-900 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700",
 
+                // destructive:
+                //     "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+                // destructiveOutline:
+                //     "bg-white text-destructive hover:bg-destructive/90 hover:text-white border-destructive/20 border-2 border-b-4",
+
                 destructive:
-                    "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+                    "bg-destructive text-destructive-foreground hover:bg-destructive/90 dark:bg-red-600 dark:text-white dark:hover:bg-red-700",
 
                 destructiveOutline:
-                    "bg-white text-destructive hover:bg-destructive/90 hover:text-white border-destructive/20 border-2 border-b-4",
+                    "bg-white text-destructive hover:bg-destructive/90 hover:text-white border-destructive/20 border-2 border-b-4 dark:bg-transparent dark:text-red-400 dark:hover:bg-red-600 dark:hover:text-white dark:border-red-600",
+
+
 
                 // outline:
                 //     "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
@@ -34,8 +41,8 @@ const buttonVariants = cva(
                 //     "bg-sky-400 text-primary-foreground hover:bg-sky-400/90 border-sky-500 border-b-4 active:border-b-0",
                 // primaryOutline: "bg-white text-sky-500 hover:bg-slate-100",
 
-                primary: "bg-sky-400 text-white hover:bg-sky-400/90 border-sky-500 border-b-4 active:border-b-0 dark:bg-sky-600 dark:text-white dark:hover:bg-sky-600/90",
-                primaryOutline: "bg-white text-sky-500 hover:bg-slate-100 dark:bg-zinc-900 dark:text-sky-400 dark:hover:bg-zinc-800",
+                primary: "bg-sky-400 text-white hover:bg-sky-400/90 border-sky-500 border-b-4 active:border-b-0 dark:bg-sky-600 dark:text-white dark:hover:bg-sky-600/90 dark:border-sky-700",
+                primaryOutline: "bg-white text-sky-500 hover:bg-slate-100 border border-sky-200 dark:bg-zinc-900 dark:text-sky-400 dark:hover:bg-zinc-800 dark:border-sky-700",
 
 
                 secondary:
