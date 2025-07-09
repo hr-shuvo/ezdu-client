@@ -28,7 +28,7 @@ const AdmissionHomePage = () => {
 
   return (
     <>
-      <div className="p-6 space-y-6">
+      <div className="space-y-6">
         {/* Heading */}
         <div className="text-center">
           <h1 className="text-3xl font-bold">Admission Preparation</h1>

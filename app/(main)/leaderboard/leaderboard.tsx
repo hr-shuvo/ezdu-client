@@ -101,10 +101,10 @@ const Leaderboard = () => {
 
                 <div className="mx-auto lg:px-6 space-y-6">
                     <div className="text-center my-6">
-                        <h1 className="text-4xl font-extrabold text-primary tracking-tight mb-2">
+                        <h1 className="text-xl lg:text-4xl font-extrabold text-primary tracking-tight mb-2">
                             🏆 EzDu Leaderboard
                         </h1>
-                        <p className="text-muted-foreground text-base max-w-xl mx-auto">
+                        <p className="hidden lg:block text-muted-foreground text-base max-w-xl mx-auto">
                             Compete with fellow learners and climb the ranks! Earn XP from quizzes, lessons, and daily streaks.
                             Top learners unlock rewards, badges, and bragging rights!
                         </p>
