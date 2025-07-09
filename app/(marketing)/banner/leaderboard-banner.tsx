@@ -39,18 +39,18 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
                             className="min-w-[175px] flex-shrink-0 rounded-3xl shadow-md hover:shadow-lg transition duration-300 cursor-defaultdark:bg-[hsl(210,15%,18%)]"
                         >
                             <CardContent className="flex flex-col items-center gap-2 p-6">
-                                <span className="font-bold text-sky-700 dark:text-sky-300 text-lg">{i + 1}</span>
+                                <span className="font-bold text-sky-700 dark:text-white text-lg">{i + 1}</span>
                                 {user.avatar ? (
                                     <img src={user.avatar} alt={user.name} className="rounded-full w-12 h-12"/>
                                 ) : (
                                     <FaUserCircle className="text-gray-700 dark:text-gray-400 w-12 h-12"/>
                                 )}
-                                <span className="font-semibold text-sky-800 dark:text-sky-200 text-center">
+                                <span className="font-semibold text-sky-800 dark:text-white text-center">
           {user.name}
         </span>
 
                                 <div
-                                    className="flex items-center justify-center gap-2 text-sky-700 dark:text-sky-300 font-medium">
+                                    className="flex items-center justify-center gap-2 text-sky-700 dark:text-white font-medium">
                                     <FaGripfire/>
                                     <span>{user.points} pts</span>
                                 </div>
@@ -62,7 +62,7 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
                 <div className="text-center py-5">
                     <Link
                         href="/leaderboard"
-                        className="text-sky-700 dark:text-sky-300 font-semibold hover:underline flex justify-center items-center gap-1"
+                        className="text-sky-700 dark:text-white font-semibold hover:underline flex justify-center items-center gap-1"
                     >
                         View Full Leaderboard <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -127,7 +127,7 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
                     </p>
                     <Link
                         href="/login"
-                        className="text-sky-700 dark:text-sky-300 font-semibold hover:underline"
+                        className="text-sky-700 dark:text-sky-100 font-semibold hover:underline"
                     >
                         Login or Sign up to unlock all features!
                     </Link>

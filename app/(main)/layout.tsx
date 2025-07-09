@@ -13,9 +13,10 @@ const MainLayout = ({children}: Props) => {
             <MobileHeader/>
             <Header className='hidden lg:block'/>
 
-            <main className='h-full xl:px-[120px] lg:px-[98px]  md:px-[68px] pt-[50px] lg:pt-0 bg-gradient-to-r from-white via-sky-50 to-white'>
-                <div className='h-full mx-auto p-2 lg:p-6'>
-                    <VerifyBanner/>
+            <main className='h-full xl:px-[120px] lg:px-[98px] md:px-[68px] pt-[50px] lg:pt-0 bg-gradient-to-r from-white via-sky-50 to-white dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900'>
+                <div className='h-full mx-auto p-2 lg:p-6 dark:text-white'>
+
+                <VerifyBanner/>
                     {children}
                 </div>
             </main>

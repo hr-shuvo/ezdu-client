@@ -147,7 +147,7 @@ const AdmissionHomePage = () => {
           <h2 className="text-lg font-semibold">Tips & Strategies</h2>
           <Card>
             <CardContent className="p-4">
-              <Link href="#" className="text-blue-600 hover:underline">How to prepare for DU English in 15 days</Link>
+              <Link href="#" className="text-sky-700 dark:text-sky-300 hover:underline">How to prepare for DU English in 15 days</Link>
             </CardContent>
           </Card>
         </div>
@@ -162,7 +162,7 @@ const AdmissionHomePage = () => {
 
             <div className="space-y-4 mt-4">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                   ভর্তি পরীক্ষায় সফলতার জন্য কেন এই প্ল্যাটফর্ম?
                 </h1>
               </div>

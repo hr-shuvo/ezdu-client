@@ -28,11 +28,36 @@ const AcademyDashboard = () => {
     ];
 
     const links = [
-        { title: "মক / কুইজ ", icon: Trophy, color: "bg-[#DFF3FD]", href: "./academy/quiz" },
-        { title: "বই রিভিউ", icon: BookOpenCheck, color: "bg-[#FFF3C7]", href: "./academy/subjects" },
-        { title: "প্রাকটিস প্রশ্ন", icon: ListChecks, color: "bg-[#DAF7DC]", href: "./academy/practice" },
-        { title: "প্রশ্নব্যাংক", icon: Bot, color: "bg-[#FFD6D6]", href: "./academy/qb" },
+        {
+            title: "মক / কুইজ ",
+            icon: Trophy,
+            color: "bg-[#DFF3FD]",
+            darkColor: "dark:bg-[#1e3a8a]", // dark blue
+            href: "./academy/quiz",
+        },
+        {
+            title: "বই রিভিউ",
+            icon: BookOpenCheck,
+            color: "bg-[#FFF3C7]",
+            darkColor: "dark:bg-[#92400e]", // dark amber
+            href: "./academy/subjects",
+        },
+        {
+            title: "প্রাকটিস প্রশ্ন",
+            icon: ListChecks,
+            color: "bg-[#DAF7DC]",
+            darkColor: "dark:bg-[#14532d]", // dark green
+            href: "./academy/practice",
+        },
+        {
+            title: "প্রশ্নব্যাংক",
+            icon: Bot,
+            color: "bg-[#FFD6D6]",
+            darkColor: "dark:bg-[#7f1d1d]", // dark red
+            href: "./academy/qb",
+        },
     ];
+
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -60,16 +85,17 @@ const AcademyDashboard = () => {
             <div className="lg:col-span-4 space-y-6">
 
                 <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
-                    {links.map(({ title, icon: Icon, color, href }, index) => (
+                    {links.map(({ title, icon: Icon, color, darkColor, href }, index) => (
                         <Link key={index} href={href}>
-                            <Card className={`h-32 ${color} hover:scale-105 transition-transform cursor-pointer shadow-md`}>
+                            <Card className={`h-32 ${color} ${darkColor} hover:scale-105 transition-transform cursor-pointer shadow-md dark:shadow-slate-800`}>
                                 <CardContent className="p-4 flex flex-col items-start justify-between h-full">
-                                    <Icon className="w-8 h-8 text-gray-700" />
-                                    <h2 className="text-lg font-semibold text-gray-800 mt-2">{title}</h2>
+                                    <Icon className="w-8 h-8 text-gray-700 dark:text-white" />
+                                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white mt-2">{title}</h2>
                                 </CardContent>
                             </Card>
                         </Link>
                     ))}
+
                 </div>
 
                 <Card>
@@ -88,7 +114,7 @@ const AcademyDashboard = () => {
                                     <div className="flex gap-2">
                                         <Link
                                             href="/auth/login"
-                                            className="text-indigo-600 font-semibold hover:underline"
+                                            className="text-sky-700 dark:text-sky-200 font-semibold hover:underline"
                                         >
                                             Login or Sign up to unlock all features!
                                         </Link>
@@ -102,16 +128,21 @@ const AcademyDashboard = () => {
                 </Card>
 
                 {/* Daily Goal */}
-                <Card className="shadow-lg">
+                <Card className="shadow-lg bg-white dark:bg-neutral-800 text-gray-800 dark:text-white">
                     <CardContent className="p-5">
                         <h2 className="text-xl font-bold mb-2">🎯 আজকের লক্ষ্য</h2>
                         <p className="text-base">গণিত অধ্যায়ের ১০টি প্রশ্ন সমাধান করুন এবং ৫০ XP অর্জন করুন!</p>
-                        <div className="mt-3 bg-green-200 h-3 w-full rounded-full">
+
+                        <div className="mt-3 bg-green-200 dark:bg-green-900 h-3 w-full rounded-full">
                             <div className="bg-green-500 h-3 rounded-full" style={{ width: "40%" }}></div>
                         </div>
-                        <p className="text-sm text-right mt-1 text-muted-foreground">40% সম্পন্ন</p>
+
+                        <p className="text-sm text-right mt-1 text-muted-foreground dark:text-gray-400">
+                            40% সম্পন্ন
+                        </p>
                     </CardContent>
                 </Card>
+
 
 
                 {/* Recommended Subjects */}

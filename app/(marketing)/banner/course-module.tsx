@@ -68,7 +68,7 @@ export const CourseModule = () => {
                     <div
                         key={idx}
                         className="cursor-pointer p-6 rounded-xl shadow hover:shadow-lg transition flex flex-col items-center text-center bg-gradient-to-br from-white to-sky-100 relative
-                   dark:text-sky-300 dark:from-zinc-800 dark:to-zinc-900 dark:shadow-zinc-700 dark:hover:shadow-zinc-600"
+                   dark:text-sky-100 dark:from-zinc-800 dark:to-zinc-900 dark:shadow-zinc-700 dark:hover:shadow-zinc-600"
                         onClick={() => {
                         }}
                     >
@@ -80,11 +80,11 @@ export const CourseModule = () => {
           </span>
                         )}
 
-                        <div className="mb-3 text-sky-600 text-5xl dark:text-sky-400">{emoji || '📘'}</div>
+                        <div className="mb-3 text-sky-600 text-5xl dark:text-sky-100">{emoji || '📘'}</div>
 
                         <h3 className="text-xl font-semibold mb-1">{title}</h3>
-                        <p className="text-sky-700 text-sm mb-2 dark:text-sky-300">{subTitle}</p>
-                        <p className="text-sky-900 font-medium dark:text-sky-200">{totalCourse} Courses</p>
+                        <p className="text-sky-700 text-sm mb-2 dark:text-white">{subTitle}</p>
+                        <p className="text-sky-900 font-medium dark:text-white">{totalCourse} Courses</p>
                     </div>
                 ))}
             </div>
