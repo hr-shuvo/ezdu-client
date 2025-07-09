@@ -7,6 +7,7 @@ import { HeartsModal } from "@/components/modals/hearts-modal";
 import { PracticeModal } from "@/components/modals/practice-modal";
 import { SecureProvider } from "@/context/SecureContext";
 import { AskSetupProfileModal } from "@/components/modals/ask-setup-profile-modal";
+import { ThemeProvider } from "@/context/theme-context";
 
 const font = Nunito({
     subsets: ["latin"],
@@ -65,17 +66,20 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${font.className} flex flex-col min-h-screen bg-white text-gray-900`}>
+            <body className={`${font.className} flex flex-col min-h-screen`}>
+            <ThemeProvider>
                 <SecureProvider>
-                    <main className="flex-grow">
-                        {children}
-                    </main>
-                    <Toaster />
-                    <ExitModal />
-                    <HeartsModal />
-                    <PracticeModal />
-                    <AskSetupProfileModal/>
+                        <main className="flex-grow">
+                            {children}
+                        </main>
+                        <Toaster />
+                        <ExitModal />
+                        <HeartsModal />
+                        <PracticeModal />
+                        <AskSetupProfileModal/>
+
                 </SecureProvider>
+            </ThemeProvider>
 
             </body>
         </html>

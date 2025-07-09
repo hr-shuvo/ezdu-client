@@ -18,9 +18,10 @@ export const NavMenu = () => {
 
                 <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
                     <Link href="/">
-                        <h1 className="text-4xl font-extrabold text-sky-700 tracking-wide ">
-                            e<span className="text-sky-700">z </span>du
+                        <h1 className="text-4xl font-extrabold text-sky-700 tracking-wide dark:text-sky-400">
+                            e<span className="text-sky-700 dark:text-sky-300">z </span>du
                         </h1>
+
                     </Link>
                 </div>
 

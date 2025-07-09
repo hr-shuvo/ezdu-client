@@ -12,9 +12,9 @@ export const SchoolBanner = () => {
             <div className="w-full mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-6">
 
                 {/* Academic Levels Section */}
-                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300">
+                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300 dark:bg-zinc-900 dark:shadow-zinc-700">
                     <CardContent className="p-6 flex flex-col justify-between gap-4">
-                        <h2 className="text-xl font-bold text-lime-600 text-center">
+                        <h2 className="text-xl font-bold text-lime-600 text-center dark:text-lime-500">
                             Academic Study Materials
                         </h2>
 
@@ -22,7 +22,7 @@ export const SchoolBanner = () => {
                             {["Class 6–8", "Class 9–10", "Class 11–12"].map((label, i) => (
                                 <Card
                                     key={i}
-                                    className="text-lime-900 bg-gradient-to-br from-white to-lime-50 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg"
+                                    className="text-lime-900 bg-gradient-to-br from-white to-lime-50 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg dark:text-lime-500 dark:from-zinc-800 dark:to-zinc-900 dark:shadow-zinc-700"
                                     onClick={() => redirect('/academy')}
                                 >
                                     {label}
@@ -30,7 +30,7 @@ export const SchoolBanner = () => {
                             ))}
                         </div>
 
-                        <div className="text-center text-green-800 font-medium pt-2">
+                        <div className="text-center text-green-800 font-medium pt-2 dark:text-green-500">
                             <Link href="/academy" className="hover:underline flex justify-center items-center gap-1">
                                 Complete materials and solutions <ArrowRight className="w-4 h-4" />
                             </Link>
@@ -38,10 +38,11 @@ export const SchoolBanner = () => {
                     </CardContent>
                 </Card>
 
+
                 {/* Exam Prep Section */}
-                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300  ">
+                <Card className="rounded-3xl shadow-md hover:shadow-lg transition-all duration-300 dark:bg-zinc-900 dark:shadow-zinc-700">
                     <CardContent className="p-6 flex flex-col justify-between gap-4">
-                        <h2 className="text-xl font-bold text-sky-600 text-center">
+                        <h2 className="text-xl font-bold text-sky-600 text-center dark:text-sky-400">
                             Your Exam Preparation
                         </h2>
 
@@ -53,7 +54,7 @@ export const SchoolBanner = () => {
                             ].map(({ label }, i) => (
                                 <Card
                                     key={i}
-                                    className="text-sky-900 bg-gradient-to-br from-white to-sky-100 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg"
+                                    className="text-sky-900 bg-gradient-to-br from-white to-sky-100 rounded-xl py-6 cursor-pointer shadow-sm hover:shadow-md transition font-semibold text-lg dark:text-sky-300 dark:from-zinc-800 dark:to-zinc-900 dark:shadow-zinc-700"
                                     onClick={() => redirect('/academy')}
                                 >
                                     {label}
@@ -61,13 +62,14 @@ export const SchoolBanner = () => {
                             ))}
                         </div>
 
-                        <div className="text-center text-green-800 font-medium pt-2">
+                        <div className="text-center text-green-800 font-medium pt-2 dark:text-blue-500">
                             <Link href="#" className="hover:underline flex justify-center items-center gap-1">
                                 Effective SSC & HSC Revision <ArrowRight className="w-4 h-4" />
                             </Link>
                         </div>
                     </CardContent>
                 </Card>
+
             </div>
         </>
 

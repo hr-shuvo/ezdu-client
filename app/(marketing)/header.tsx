@@ -7,6 +7,14 @@ import { NavMenu } from "@/components/layout/nav/nav-menu";
 import { useSecure } from "@/context/SecureContext";
 import { NavProfile } from "@/components/layout/nav/nav-profile";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { Moon, Sun } from "lucide-react";
 
 
 type Props = {
@@ -16,25 +24,43 @@ type Props = {
 
 export const Header = ({className}: Props) => {
     const {isLoggedIn} = useSecure();
+    const { setTheme } = useTheme();
 
     return (
-        <div className={cn('h-20 w-full border-b-2 border-slate-200 px-4', className)}>
-            <div
-                className="2xl:max-w-screen-2xl xl:max-w-screen-xl lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
+        <div className={cn('h-20 w-full border-b-2 border-slate-200 dark:border-slate-700 px-4', className)}>
 
-                {/* <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
-                    <Link href="/">
-                        <h1 className="text-2xl font-extrabold text-sky-400 tracking-wide">
-                            e<span className="text-sky-400">z </span>du
-                        </h1>
-                    </Link>
-                </div> */}
+        <div
+                className="2xl:max-w-screen-2xl xl:max-w-screen-xl lg:max-w-screen-lg mx-auto flex items-center justify-between h-full">
 
                 <div className="z-20">
                     <NavMenu/>
+
                 </div>
 
-                <div>
+                <div className='flex items-center gap-2'>
+                    <div>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <Button variant="outline" size="icon">
+                                    <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                                    <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                                    <span className="sr-only">Toggle theme</span>
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuItem onClick={() => setTheme("light")}>
+                                    Light
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                                    Dark
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setTheme("system")}>
+                                    System
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
+
                     {isLoggedIn ? (
                         <div>
                             {/* <Button

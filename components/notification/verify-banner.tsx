@@ -9,7 +9,7 @@ const VerifyBanner = () => {
     const [showBanner, setShowBanner] = useState(true);
     return (
         <>
-            {showBanner && !user?.isVerified && (
+            {showBanner && user && !user?.isVerified && (
                 <div
                     className="p-6 py-3 mb-2 bg-yellow-100 border border-yellow-300 text-yellow-900 rounded-xl  flex items-center justify-between shadow-sm">
                     <div className="flex items-center gap-3">
