@@ -32,20 +32,22 @@ export const NavProfile = () => {
                 </DropdownMenuTrigger>
 
                 <DropdownMenuContent align="end" className="w-60 space-y-2 p-2 mt-2 shadow-xl border rounded-xl">
-                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
+                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" asChild>
                         <Link href={`/u/${user?.username}`}>
-                            <div className="w-full flex items-center gap-2 items-center">
+                            <div className="w-full flex items-center gap-2">
                                 <FaUser className="text-2xl text-muted-foreground" />
                                 <span className="text-2xl text-bold">{user?.name || 'user'}</span>
                             </div>
                         </Link>
-
-
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer">
-                        <Settings className="h-4 w-4 text-muted-foreground" />
-                        <span>সেটিংস</span>
+                    <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" asChild>
+                        <Link href={`/profile/account`}>
+                            <div className="w-full flex items-center gap-2">
+                                <Settings className="h-4 w-4 text-muted-foreground" />
+                                <span>সেটিংস</span>
+                            </div>
+                        </Link>
                     </DropdownMenuItem>
 
                     <DropdownMenuItem
