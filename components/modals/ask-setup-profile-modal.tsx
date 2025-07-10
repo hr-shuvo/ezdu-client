@@ -217,10 +217,10 @@ export const AskSetupProfileModal = () => {
                                         <SelectValue placeholder="Select track" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="bcs">🔥 BCS</SelectItem>
-                                        <SelectItem value="bank">🏦 Bank Job</SelectItem>
-                                        <SelectItem value="govt">🏛️ Govt Job</SelectItem>
-                                        <SelectItem value="general">📘 General Job Prep</SelectItem>
+                                        <SelectItem value="BCS">🔥 BCS</SelectItem>
+                                        <SelectItem value="BANK">🏦 Bank Job</SelectItem>
+                                        <SelectItem value="GOVT">🏛️ Govt Job</SelectItem>
+                                        <SelectItem value="GENERAL">📘 General Job Prep</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>

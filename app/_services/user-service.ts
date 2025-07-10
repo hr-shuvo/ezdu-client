@@ -23,7 +23,7 @@ export const updateUser = async (userData: any) => {
 
         // console.log(response.data)
         if (response.status === 201 || response.status === 200) {
-            return {success: response.data.data};
+            return {success: response.data.user};
         }
         return {error: response?.data?.msg};
     } catch (err: any) {
