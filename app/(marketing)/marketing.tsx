@@ -3,14 +3,18 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { CourseModule } from "./banner/course-module";
-import { SchoolBanner } from "@/app/(marketing)/banner/school-banner";
-import { LeaderboardBanner } from "./banner/leaderboard-banner";
 import { useSecure } from "@/context/SecureContext";
-import { HowItWorksBanner } from "./banner/how-it-works-banner";
+import dynamic from "next/dynamic";
+
+// const FeatureBanner = dynamic(() => import("@/app/(marketing)/banner/feature-banner").then(mod => mod.FeatureBanner));
+const SchoolBanner = dynamic(() => import("./banner/school-banner").then(mod => mod.SchoolBanner), {ssr: false});
+const LeaderboardBanner = dynamic(() => import("./banner/leaderboard-banner").then(mod => mod.LeaderboardBanner), {ssr: false});
+const HowItWorksBanner = dynamic(() => import("./banner/how-it-works-banner").then(mod => mod.HowItWorksBanner), {ssr: false});
+const CourseModule = dynamic(() => import("./banner/course-module").then(mod => mod.CourseModule), {ssr: false});
+
 
 export default function MarketingPage() {
-    const { isLoggedIn } = useSecure();
+    const {isLoggedIn} = useSecure();
 
     return (
 
@@ -19,7 +23,13 @@ export default function MarketingPage() {
             {/* Hero Section */}
             <div className="w-full max-w-[988px] flex flex-col lg:flex-row items-center justify-center p-4 gap-8">
                 <div className="relative w-[280px] h-[280px] lg:w-[380px] lg:h-[380px] mb-8 lg:mb-0">
-                    <Image src="/logo/logo.png" alt="Ezdu Logo" fill sizes={'(max-width: 1024px) 200px, 300px'} priority={true}/>
+                    <Image
+                        src="/logo/logo.svg"
+                        alt="Ezdu Logo"
+                        fill
+                        priority
+                        className="object-contain"
+                    />
                 </div>
 
                 <div className="flex flex-col items-center text-center gap-y-6">
@@ -30,15 +40,16 @@ export default function MarketingPage() {
                         Small steps every day lead to big results
                     </p>
 
-                    {isLoggedIn ? (
-                        <Button size="lg" variant="primary" className="w-1/2" asChild>
-                            <Link href="/academy">Continue Learning</Link>
-                        </Button>
-                    ) : (
-                        <Button size="lg" variant="outline" className="w-1/2" asChild>
-                            <Link href="/auth/register">Create an account</Link>
-                        </Button>
-                    )}
+                    <Button
+                        size="lg"
+                        className="min-w-[220px]"
+                        variant={isLoggedIn ? "primary" : "outline"}
+                        asChild
+                    >
+                        <Link href={isLoggedIn ? "/academy" : "/auth/register"}>
+                            {isLoggedIn ? "Continue Learning" : "Create an account"}
+                        </Link>
+                    </Button>
                 </div>
 
 
@@ -51,26 +62,24 @@ export default function MarketingPage() {
 
             {/* School Banner */}
             <div className="flex justify-center w-full max-w-[1228px] mb-8">
-                <SchoolBanner />
+                <SchoolBanner/>
             </div>
 
             {/* Course Modules */}
             <div className="w-full max-w-[1228px] flex flex-col items-center justify-center p-4">
-                <CourseModule />
+                <CourseModule/>
             </div>
 
             <div className="flex justify-center w-full max-w-[988px] mb-8">
-                <LeaderboardBanner isLoggedIn={isLoggedIn} />
+                <LeaderboardBanner isLoggedIn={isLoggedIn}/>
             </div>
 
             <div className="flex justify-center w-full  mb-8">
-                <HowItWorksBanner />
+                <HowItWorksBanner/>
             </div>
 
 
-
         </div>
-
 
 
     );

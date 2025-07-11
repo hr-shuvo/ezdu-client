@@ -1,7 +1,7 @@
 'use client';
 
-import { FaBrain, FaChartLine } from "react-icons/fa";
-import { LuNotebookPen } from "react-icons/lu";
+
+import { Activity, Brain, NotebookPen } from "lucide-react";
 
 export const HowItWorksBanner = () => {
     return (
@@ -14,9 +14,10 @@ export const HowItWorksBanner = () => {
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {/* Step 1 */}
-                        <div className="bg-white dark:bg-[hsl(210,15%,18%)] rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-indigo-100 dark:border-[hsl(210,15%,30%)]">
+                        <div
+                            className="bg-white dark:bg-[hsl(210,15%,18%)] rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-indigo-100 dark:border-[hsl(210,15%,30%)]">
                             <div className="text-4xl mb-4 flex justify-center">
-                                <LuNotebookPen className="text-4xl text-sky-500" />
+                                <NotebookPen className="text-sky-500" size={42}/>
                             </div>
                             <h3 className="text-xl font-semibold text-sky-700 dark:text-sky-300 mb-2">
                                 ১. তোমার শেখার পথ বেছে নাও
@@ -29,9 +30,10 @@ export const HowItWorksBanner = () => {
                         </div>
 
                         {/* Step 2 */}
-                        <div className="bg-white dark:bg-[hsl(210,15%,18%)] rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-sky-100 dark:border-[hsl(210,15%,30%)]">
+                        <div
+                            className="bg-white dark:bg-[hsl(210,15%,18%)] rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-sky-100 dark:border-[hsl(210,15%,30%)]">
                             <div className="text-4xl mb-4 flex justify-center">
-                                <FaBrain className="text-4xl text-red-500" />
+                                <Brain className="text-red-500" size={42}/>
                             </div>
                             <h3 className="text-xl font-semibold text-sky-700 dark:text-sky-300 mb-2">
                                 ২. শেখো কুইজ ও লেসনের মাধ্যমে
@@ -44,9 +46,10 @@ export const HowItWorksBanner = () => {
                         </div>
 
                         {/* Step 3 */}
-                        <div className="bg-white dark:bg-[hsl(210,15%,18%)] rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-sky-100 dark:border-[hsl(210,15%,30%)]">
+                        <div
+                            className="bg-white dark:bg-[hsl(210,15%,18%)] rounded-2xl p-6 shadow-md hover:shadow-xl transition-all border border-sky-100 dark:border-[hsl(210,15%,30%)]">
                             <div className="text-4xl mb-4 flex justify-center">
-                                <FaChartLine className="text-4xl text-lime-500" />
+                                <Activity className="text-lime-500" size={42}/>
                             </div>
                             <h3 className="text-xl font-semibold text-sky-700 dark:text-sky-300 mb-2">
                                 ৩. অগ্রগতি ট্র্যাক করো

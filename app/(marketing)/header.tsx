@@ -52,24 +52,16 @@ export const Header = ({className}: Props) => {
 
                     ) : (
                         <div>
-                            <Link href="/auth/login">
+                            <Link href="/auth/login" className='sm:py-3'>
                                 <Button
                                     size="sm"
                                     variant="default"
-                                    className="ms-2 px-4 py-2 "
+                                    className="ms-2 min-w-[48px] px-4 py-2 "
                                 >
                                     Login
                                 </Button>
                             </Link>
 
-
-                            {/* <Button
-                                size="sm"
-                                variant="default"
-                                className="ms-2"
-                            >
-                                <Link href="/auth/register">Register</Link>
-                            </Button> */}
                         </div>
                     )}
                 </div>

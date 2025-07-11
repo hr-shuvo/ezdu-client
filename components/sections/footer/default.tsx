@@ -18,7 +18,7 @@ export default function FooterSection() {
             <FooterColumn className="col-span-2 sm:col-span-3 md:col-span-1">
               <div>
                 <Image
-                  src={'/logo/logo.png'}
+                  src={'/logo/logo.svg'}
                   alt="logo"
                   height={42}
                   width={42}

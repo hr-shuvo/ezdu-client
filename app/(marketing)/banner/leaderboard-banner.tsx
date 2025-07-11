@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Flame, UserCircle } from "lucide-react";
 import Link from "next/link";
-import { FaGripfire, FaUserCircle } from "react-icons/fa";
+
 
 interface Props {
     isLoggedIn: boolean;
@@ -43,7 +43,7 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
                                 {user.avatar ? (
                                     <img src={user.avatar} alt={user.name} className="rounded-full w-12 h-12"/>
                                 ) : (
-                                    <FaUserCircle className="text-gray-700 dark:text-gray-400 w-12 h-12"/>
+                                    <UserCircle className="text-gray-700 dark:text-gray-400 w-12 h-12"/>
                                 )}
                                 <span className="font-semibold text-sky-800 dark:text-white text-center">
           {user.name}
@@ -51,7 +51,7 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
 
                                 <div
                                     className="flex items-center justify-center gap-2 text-sky-700 dark:text-white font-medium">
-                                    <FaGripfire/>
+                                    <Flame/>
                                     <span>{user.points} pts</span>
                                 </div>
                             </CardContent>
@@ -64,7 +64,7 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
                         href="/leaderboard"
                         className="text-sky-700 dark:text-white font-semibold hover:underline flex justify-center items-center gap-1"
                     >
-                        View Full Leaderboard <ArrowRight className="w-4 h-4" />
+                        View Full Leaderboard <ArrowRight className="w-4 h-4"/>
                     </Link>
                 </div>
 
@@ -75,7 +75,8 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
                 <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-5">
 
                     {/* Daily Challenge */}
-                    <Card className="rounded-3xl shadow-md hover:shadow-lg transition duration-300 bg-white dark:bg-[hsl(210,15%,18%)]">
+                    <Card
+                        className="rounded-3xl shadow-md hover:shadow-lg transition duration-300 bg-white dark:bg-[hsl(210,15%,18%)]">
                         <CardContent className="p-6 flex flex-col gap-4">
                             <h2 className="text-xl font-bold text-green-600 dark:text-green-400 text-center">
                                 Daily Challenge
@@ -95,7 +96,8 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
 
 
                     {/* Featured Quizzes */}
-                    <Card className="rounded-3xl shadow-md hover:shadow-lg transition duration-300 bg-white dark:bg-[hsl(210,15%,18%)]">
+                    <Card
+                        className="rounded-3xl shadow-md hover:shadow-lg transition duration-300 bg-white dark:bg-[hsl(210,15%,18%)]">
                         <CardContent className="p-6 flex flex-col gap-4">
                             <h2 className="text-xl font-bold text-purple-600 dark:text-purple-400 text-center">
                                 Featured Quizzes

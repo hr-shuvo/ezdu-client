@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { LogOut, Settings } from "lucide-react";
 import Image from "next/image";
 import { useSecure } from "@/context/SecureContext";
-import { FaUser } from "react-icons/fa";
+import { User } from "lucide-react";
 import Link from "next/link";
 
 export const NavProfile = () => {
@@ -35,7 +35,7 @@ export const NavProfile = () => {
                     <DropdownMenuItem className="flex items-center gap-2 cursor-pointer" asChild>
                         <Link href={`/u/${user?.username}`}>
                             <div className="w-full flex items-center gap-2">
-                                <FaUser className="text-2xl text-muted-foreground" />
+                                <User className="text-2xl text-muted-foreground" />
                                 <span className="text-2xl text-bold">{user?.name || 'user'}</span>
                             </div>
                         </Link>
