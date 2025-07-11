@@ -8,7 +8,7 @@ import { PracticeModal } from "@/components/modals/practice-modal";
 import { SecureProvider } from "@/context/SecureContext";
 import { AskSetupProfileModal } from "@/components/modals/ask-setup-profile-modal";
 import { ThemeProvider } from "@/context/theme-context";
-import { SpeedInsights } from "@vercel/speed-insights/vue";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const font = Nunito({
     subsets: ["latin"],
