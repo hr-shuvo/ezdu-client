@@ -8,6 +8,7 @@ import { PracticeModal } from "@/components/modals/practice-modal";
 import { SecureProvider } from "@/context/SecureContext";
 import { AskSetupProfileModal } from "@/components/modals/ask-setup-profile-modal";
 import { ThemeProvider } from "@/context/theme-context";
+import { SpeedInsights } from "@vercel/speed-insights/vue";
 
 const font = Nunito({
     subsets: ["latin"],
@@ -71,6 +72,7 @@ export default function RootLayout({
                 <SecureProvider>
                         <main className="flex-grow">
                             {children}
+                            <SpeedInsights />
                         </main>
                         <Toaster />
                         <ExitModal />
