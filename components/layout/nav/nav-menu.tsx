@@ -31,7 +31,7 @@ export const NavMenu = () => {
 
                 <NavigationMenu>
                     <NavigationMenuList>
-                        <NavigationMenuItem>
+                        <NavigationMenuItem asChild>
                             <Link href="/academy" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                     Academy
@@ -39,7 +39,7 @@ export const NavMenu = () => {
                             </Link>
                         </NavigationMenuItem>
 
-                        <NavigationMenuItem>
+                        <NavigationMenuItem asChild>
                             <Link href="/admission" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                     Admission
@@ -47,7 +47,15 @@ export const NavMenu = () => {
                             </Link>
                         </NavigationMenuItem>
 
-                        <NavigationMenuItem>
+                        <NavigationMenuItem asChild>
+                            <Link href="/forum" legacyBehavior passHref>
+                                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                    Discuss
+                                </NavigationMenuLink>
+                            </Link>
+                        </NavigationMenuItem>
+
+                        <NavigationMenuItem asChild>
                             <Link href="/leaderboard" legacyBehavior passHref>
                                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                                     Ranking
