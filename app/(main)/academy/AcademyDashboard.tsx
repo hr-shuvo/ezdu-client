@@ -84,7 +84,7 @@ const AcademyDashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
             <div className="lg:col-span-4 space-y-6">
 
-                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-4">
                     {links.map(({ title, icon: Icon, color, darkColor, href }, index) => (
                         <Link key={index} href={href}>
                             <Card className={`h-32 ${color} ${darkColor} hover:scale-105 transition-transform cursor-pointer shadow-md dark:shadow-slate-800`}>

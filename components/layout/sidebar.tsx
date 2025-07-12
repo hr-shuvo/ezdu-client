@@ -1,8 +1,11 @@
+'use client';
+
 import React from "react";
 import {cn} from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { SidebarItem } from "./sidebar-item";
+import { NavProfile } from "@/components/layout/nav/nav-profile";
 
 type Props = {
     className: React.ReactNode
@@ -27,9 +30,10 @@ export const Sidebar = ({className}: Props) =>{
 
             <div className='flex flex-col gap-y-2 flex-1'>
                 <SidebarItem label='Academy' href='/academy' iconSrc='/common/learn.svg'/>
+                <SidebarItem label='Admission' href='/admission' iconSrc='/common/learn.svg'/>
+                <SidebarItem label='Quests' href='/quests' iconSrc='/common/quests.svg'/>
+                <SidebarItem label='Discuss' href='/forum' iconSrc='/common/shop.svg'/>
                 <SidebarItem label='Leaderboard' href='/leaderboard' iconSrc='/common/leaderboard.svg'/>
-                {/*<SidebarItem label='Quests' href='/quests' iconSrc='/common/quests.svg'/>*/}
-                {/* <SidebarItem label='Shop' href='/shop' iconSrc='/common/shop.svg'/> */}
                 <SidebarItem label='Login' href='/auth/login' iconSrc='/common/shop.svg'/>
 
             </div>

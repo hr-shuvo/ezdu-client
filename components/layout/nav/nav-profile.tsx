@@ -15,7 +15,7 @@ export const NavProfile = () => {
     const { user, logout } = useSecure();
 
     return (
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end z-20">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild className="w-12">
                     <Button

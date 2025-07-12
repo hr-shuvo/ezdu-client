@@ -28,7 +28,7 @@ const ForumEngagement = () => {
                                 <p className="text-xs text-muted-foreground">{user.xp} XP</p>
                             </div>
                             <Button variant="outline" size="sm" className="text-xs">
-                                <UserPlus className="w-4 h-4 mr-1" /> Follow
+                                <UserPlus className="w-4 h-4 mr-1" /> <span className='hidden xl:block'>Follow</span>
                             </Button>
                         </li>
                     ))}
