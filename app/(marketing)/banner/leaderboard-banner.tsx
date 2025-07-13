@@ -25,25 +25,25 @@ export const LeaderboardBanner = ({isLoggedIn}: Props) => {
     return (
 
 
-        <div className="w-full  mx-auto my-24">
+        <div className="w-full mx-auto my-24 px-2 lg:p-0">
 
             {/* Always visible: Horizontal Leaderboard */}
             <section>
                 <h1 className="text-2xl font-bold text-sky-800 dark:text-sky-300 mb-4 text-center">
                     Top Learners Leaderboard
                 </h1>
-                <div className="flex overflow-x-auto space-x-6 pb-4">
+                <div className="flex overflow-x-auto space-x-2 lg:space-x-6 pb-4">
                     {topUsers.map((user, i) => (
                         <Card
                             key={i}
-                            className="min-w-[175px] flex-shrink-0 rounded-3xl shadow-md hover:shadow-lg transition duration-300 cursor-defaultdark:bg-[hsl(210,15%,18%)]"
+                            className="min-w-[156px] lg:min-w-[175px] flex-shrink-0 rounded-3xl shadow-md hover:shadow-lg transition duration-300 cursor-defaultdark:bg-[hsl(210,15%,18%)]"
                         >
-                            <CardContent className="flex flex-col items-center gap-2 p-6">
+                            <CardContent className="flex flex-col items-center gap-2 p-2 lg:p-6">
                                 <span className="font-bold text-sky-700 dark:text-white text-lg">{i + 1}</span>
                                 {user.avatar ? (
-                                    <img src={user.avatar} alt={user.name} className="rounded-full w-12 h-12"/>
+                                    <img src={user.avatar} alt={user.name} className="rounded-full lg:w-12 lg:h-12"/>
                                 ) : (
-                                    <UserCircle className="text-gray-700 dark:text-gray-400 w-12 h-12"/>
+                                    <UserCircle className="text-gray-700 dark:text-gray-400  lg:w-12 lg:h-12"/>
                                 )}
                                 <span className="font-semibold text-sky-800 dark:text-white text-center">
           {user.name}

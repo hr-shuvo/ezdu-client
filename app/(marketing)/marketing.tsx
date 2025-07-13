@@ -21,8 +21,8 @@ export default function MarketingPage() {
         <div className="w-full flex flex-col items-center">
 
             {/* Hero Section */}
-            <div className="w-full max-w-[988px] flex flex-col lg:flex-row items-center justify-center p-4 gap-8">
-                <div className="relative w-[280px] h-[280px] lg:w-[380px] lg:h-[380px] mb-8 lg:mb-0">
+            <div className="w-full max-w-[988px] flex flex-col lg:flex-row items-center justify-center p-4 gap-4 lg:gap-8">
+                <div className="relative w-[220px] h-[280px] lg:w-[380px] lg:h-[380px] mb-4 lg:mb-0">
                     <Image
                         src="/logo/logo.svg"
                         alt="Ezdu Logo"

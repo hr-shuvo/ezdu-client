@@ -32,7 +32,7 @@ type Props = {
 
 const BlogPage = async ({trending}: Props) => {
     const featuredBlogList  = await loadBlogPost(1, 1, 'FEATURED');
-    const featuredBlog = featuredBlogList.data?.[0] ?? null;
+    const featuredBlog = featuredBlogList.data?.[0] ?? trendingBlogs[0];
 
 
     console.log(featuredBlog);
@@ -51,7 +51,7 @@ const BlogPage = async ({trending}: Props) => {
                     {/* Left side text */}
                     <div className='flex flex-col justify-center space-y-4'>
                         <p className='text-sm text-gray-500 dark:text-gray-200 uppercase tracking-wide font-semibold'>
-                            {formatDate(featuredBlog.updatedAt)} &nbsp;&bull;&nbsp; {featuredBlog.author?.name || 'Ezdu Team'}
+                            {formatDate(featuredBlog?.updatedAt)} &nbsp;&bull;&nbsp; {featuredBlog.author?.name || 'EzDu Team'}
                         </p>
 
                         <h1 className='text-4xl md:text-5xl font-extrabold text-lime-500 leading-tight'>

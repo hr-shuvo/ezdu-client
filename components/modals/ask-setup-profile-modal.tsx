@@ -93,20 +93,26 @@ export const AskSetupProfileModal = () => {
             }
 
             const userType = {
-                category: academicClass.segment,
-                classId: academicClass._id,
+                category: academicClass?.segment,
+                classId: academicClass?._id,
                 group: showGroup ? group : "",
                 jobTrack: jobTrack
             };
 
-            const _newUserData = { ...currentUser, userType: userType }
+            // const _newUserData = { ...currentUser, userType: userType }
+            const _newUserData = { userType: userType }
 
-            const result = await updateUser(_newUserData)
-            if (result.success) {
-                setUser(result.success);
-                close();
-                toast.success('Congratulations!!! happy learning...')
-            }
+            await updateUser(_newUserData).then(result => {
+                if (result.success) {
+                    setUser(result.success);
+                    close();
+                    toast.success('Congratulations!!! happy learning...')
+                }
+                else{
+                    toast.error('Something went wrong, please try again.')
+                }
+            })
+
         });
     };
 

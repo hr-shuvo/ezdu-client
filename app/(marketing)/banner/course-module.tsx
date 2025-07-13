@@ -63,7 +63,7 @@ export const CourseModule = () => {
                 Explore Our Features
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2  lg:grid-cols-3 gap-6">
                 {modules.map(({title, subTitle, totalCourse, isPopular, emoji}, idx) => (
                     <div
                         key={idx}
@@ -75,16 +75,16 @@ export const CourseModule = () => {
                         {/* Popular badge */}
                         {isPopular && (
                             <span
-                                className="absolute top-3 right-3 bg-lime-700 text-white text-xs font-semibold rounded-full px-2 py-1 shadow-md">
+                                className="absolute top-1 lg:top-3 right-1 lg:right-3 bg-lime-700 text-white text-xs lg:font-semibold rounded-full px-2 py-1 shadow-md">
             Popular
           </span>
                         )}
 
-                        <div className="mb-3 text-sky-600 text-5xl dark:text-sky-100">{emoji || '📘'}</div>
+                        <div className="mb-3 text-sky-600 text-2xl lg:text-5xl dark:text-sky-100">{emoji || '📘'}</div>
 
-                        <h3 className="text-xl font-semibold mb-1">{title}</h3>
-                        <p className="text-sky-700 text-sm mb-2 dark:text-white">{subTitle}</p>
-                        <p className="text-sky-900 font-medium dark:text-white">{totalCourse} Courses</p>
+                        <h3 className="lg:text-xl font-semibold mb-1">{title}</h3>
+                        <p className="text-sky-700 text-sm mb-2 dark:text-white hidden lg:block">{subTitle}</p>
+                        <p className="text-sky-900  lg:font-medium dark:text-white">{totalCourse} Courses</p>
                     </div>
                 ))}
             </div>
