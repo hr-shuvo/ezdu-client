@@ -1,43 +1,57 @@
 'use client';
 
-import ForumFilter from "@/app/(main)/forum/forum-filters";
-import { useEffect, useState } from "react";
+import ForumFilter from "@/app/(main)/forum/_components/forum-filters";
+import { useEffect, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import ForumEngagement from "@/app/(main)/forum/forum-engagement";
+import ForumEngagement from "@/app/(main)/forum/_components/forum-engagement";
 import { SlidersHorizontal } from "lucide-react";
 import { useSecure } from "@/context/SecureContext";
 import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import ForumFeed from "@/app/(main)/forum/feed";
+import { loadForums, upsertForum } from "@/app/_services/forum/forum-service";
+import { toast } from "sonner";
 
-const Forum= () => {
+const Forum = () => {
     const {isLoggedIn} = useSecure();
     const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isPending, startTransition] = useTransition();
     const [postBody, setPostBody] = useState('');
 
     const [posts, setPosts] = useState<any[]>([]);
 
 
     useEffect(() => {
-        // Fetch posts from the server or any other source
-        // This is just a placeholder, replace with actual data fetching logic
-        const fetchedPosts = [
-            { id: 1, content: "This is the first post", user: { _id: 'user1'}},
-            { id: 2, content: "This is the second post", user: { _id: 'user2'} },
-            // Add more posts as needed
-        ];
-        setPosts(fetchedPosts);
-    },[]);
+        loadForum();
 
+    }, []);
 
-    function handleChangeBody(value: any) {
-        console.log("Change body set to:", value);
-        setPostBody(value);
+    function loadForum () {
+        startTransition(async () => {
+            const response = await loadForums(1, 50);
+            console.log(response.data);
+            setPosts(response.data);
+        });
     }
 
     function handlePostBody() {
         console.log("Post body set to:", postBody);
+
+        if (postBody.trim() === '') {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('content', postBody);
+
+        startTransition(async () => {
+            const response = await upsertForum(formData);
+            console.log(response);
+            setPostBody('');
+            toast.success('Post shared successfully!');
+
+            loadForum();
+        });
     }
 
     return (
@@ -77,12 +91,12 @@ const Forum= () => {
                                             <div className='flex flex-row gap-4'>
                                                 <div className='w-full my-2'>
                                                     <Textarea
-                                                        disabled={isLoading}
+                                                        disabled={isPending}
                                                         onChange={(e: any) => {
-                                                            handleChangeBody(e.target.value)
+                                                            setPostBody(e.target.value)
                                                         }}
                                                         value={postBody}
-                                                        placeholder='Have a question or idea? Share it with the community!'
+                                                        placeholder='Have a question or idea?'
                                                         className='disabled:opacity-80 peer resize-none w-full ring-0 outline-none text-[20px] '
                                                     >
 
@@ -93,7 +107,9 @@ const Forum= () => {
                                                         <Button
                                                             variant='primary'
                                                             className='rounded-xl px-4 py-2 mr-2 min-w-28'
-                                                            onClick={handlePostBody}>
+                                                            onClick={handlePostBody}
+                                                            disabled={isPending || postBody.trim() === ''}
+                                                        >
                                                             Post
                                                         </Button>
 

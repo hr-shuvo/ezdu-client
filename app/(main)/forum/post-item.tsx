@@ -1,19 +1,22 @@
+'use client';
+
 import { useRouter } from "next/navigation";
 import { useSecure } from "@/context/SecureContext";
 import { toast } from "sonner";
 import Image from "next/image";
-import { formatDate, formatRelativeDate } from "@/lib/date-time";
-import { AiOutlineMessage } from "react-icons/ai";
-import { Bookmark, MessageSquare, Star, ThumbsUp } from "lucide-react";
+import { formatRelativeDate } from "@/lib/date-time";
+import { Bookmark, MessageSquare, Star } from "lucide-react";
 
 interface PostItemProps {
-    data?: any
+    data: any,
+
 }
 
-const PostItem = ({data}: PostItemProps) => {
+const ForumPostItem = ({data}: PostItemProps) => {
     const router = useRouter();
     const {isLoggedIn, user} = useSecure();
 
+    // console.log(data);
 
     const goToUserProfile = (uid: string) => {
         if (uid) {
@@ -66,7 +69,7 @@ const PostItem = ({data}: PostItemProps) => {
             >
                 <div>
                     <Image
-                        src={data?.user?.avatar || 'avatar/boy/1.svg'}
+                        src={data?.user?.avatar || '/avatar/boy/1.svg'}
                         alt="Profile"
                         width={32}
                         height={32}
@@ -86,7 +89,7 @@ const PostItem = ({data}: PostItemProps) => {
                             @{data?.user?.username || 'anonymous'}
                         </span>
 
-                        <span className='text-neutral-500 text-sm'>{formatRelativeDate(data.createdAt)}</span>
+                        <span className='text-neutral-500 text-sm'>{formatRelativeDate(data?.createdAt)}</span>
 
                     </div>
 
@@ -149,4 +152,4 @@ const PostItem = ({data}: PostItemProps) => {
     );
 }
 
-export default PostItem;
+export default ForumPostItem;

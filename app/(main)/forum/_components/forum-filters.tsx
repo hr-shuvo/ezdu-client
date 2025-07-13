@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Sidebar } from "@/components/layout/sidebar";
-import Image from "next/image";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
+
 
 type Props = {
     onFilterChange: (filters: {

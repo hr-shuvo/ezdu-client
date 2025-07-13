@@ -5,7 +5,6 @@ import {cn} from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { SidebarItem } from "./sidebar-item";
-import { NavProfile } from "@/components/layout/nav/nav-profile";
 
 type Props = {
     className: React.ReactNode
