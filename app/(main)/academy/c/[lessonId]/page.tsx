@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
+import { RenderMath } from "@/components/common/render-math";
 
 const AcademyContentDetailsPage = () => {
     const params = useParams();
@@ -41,10 +42,11 @@ const AcademyContentDetailsPage = () => {
         <>
 
             <div className="px-6 my-5">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100">
-                    <h1 className="text-3xl font-bold text-blue-800">{lesson?.title}</h1>
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-xl p-6 shadow-sm border border-blue-100
+                dark:from-gray-800 dark:to-gray-900 dark:border-gray-700 dark:shadow-md">
+                    <h1 className="text-3xl font-bold text-sky-800 dark:text-sky-400">{lesson?.title}</h1>
 
-                    <p className="mt-3 text-gray-700">
+                    <p className="mt-3 text-gray-700 dark:text-sky-300">
                         Ready to test your knowledge? Try the quiz or explore more materials below!
                     </p>
 
@@ -118,17 +120,19 @@ const AcademyContentDetailsPage = () => {
 
                                         <CardContent>
                                             <CardDescription>
-                                                {data.description}
+                                                <RenderMath html={data.description}/>
                                             </CardDescription>
                                         </CardContent>
 
                                         {
                                             data.content && (
                                                 <CardContent>
-                                                    {data.content}
+                                                    <div dangerouslySetInnerHTML={{ __html: data.content }} />
                                                 </CardContent>
+
                                             )
                                         }
+
 
 
                                         {/* <CardContent>

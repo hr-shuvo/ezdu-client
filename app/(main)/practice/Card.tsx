@@ -50,11 +50,11 @@ export const Card = ({
         <div
             onClick={handleClick}
             className={cn(
-                "h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2",
-                selected && "border-sky-300 bg-sky-100 hover:bg-sky-100",
-                selected && status === "correct" && "border-green-300 bg-green-100 hover:bg-green-100",
-                selected && status === "wrong" && "border-rose-300 bg-rose-100 hover:bg-rose-300",
-                disabled && "pointer-events-none hover:bg-white",
+                "h-full border-2 rounded-xl border-b-4 hover:bg-black/5 dark:hover:bg-white/10 p-4 lg:p-6 cursor-pointer active:border-b-2",
+                selected && "border-sky-300 bg-sky-100 hover:bg-sky-100 dark:bg-sky-900 dark:hover:bg-sky-900",
+                selected && status === "correct" && "border-green-300 bg-green-100 hover:bg-green-100 dark:bg-green-900 dark:hover:bg-green-900",
+                selected && status === "wrong" && "border-rose-300 bg-rose-100 hover:bg-rose-100 dark:bg-rose-900 dark:hover:bg-rose-900",
+                disabled && "pointer-events-none hover:bg-white dark:hover:bg-transparent",
                 type === "ASSIST" && "lg:p-3 w-full"
             )}
         >
@@ -71,11 +71,11 @@ export const Card = ({
                     type === "ASSIST" && "flex-row-reverse"
                 )}
             >
-                {type == "ASSIST" && <div/>}
+                {type == "ASSIST" && <div />}
 
                 <p
                     className={cn(
-                        "text-neutral-600 text-sm lg:text-base",
+                        "text-neutral-600 dark:text-neutral-200 text-sm lg:text-base",
                         selected && "text-sky-500",
                         selected && status === "correct" && "text-green-500",
                         selected && status === "wrong" && "text-rose-500"
@@ -86,19 +86,16 @@ export const Card = ({
 
                 <div
                     className={cn(
-                        "lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 lg:text-[15px] text-xs font-semibold",
+                        "lg:w-[30px] lg:h-[30px] w-[20px] h-[20px] border-2 flex items-center justify-center rounded-lg text-neutral-400 dark:text-neutral-300 lg:text-[15px] text-xs font-semibold",
                         selected && "border-sky-300 text-sky-500",
-                        selected &&
-                            status === "correct" &&
-                            "border-gray-300 text-green-500",
-                        selected &&
-                            status === "wrong" &&
-                            "border-rose-300 text-rose-500"
+                        selected && status === "correct" && "border-gray-300 text-green-500",
+                        selected && status === "wrong" && "border-rose-300 text-rose-500"
                     )}
                 >
                     {shortcut}
                 </div>
             </div>
         </div>
+
     );
 };

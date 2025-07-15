@@ -57,21 +57,26 @@ const AcademyPage = () => {
     return (
         <>
             <div className="lg:px-6 my-5">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-xl p-6 shadow-sm border border-blue-100">
-                    <h1 className="text-3xl font-bold text-sky-800">Academic Subjects</h1>
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-xl p-6 shadow-sm border border-blue-100
+                  dark:from-gray-800 dark:to-gray-900 dark:border-gray-700 dark:shadow-md">
+                    <h1 className="text-3xl font-bold text-sky-800 dark:text-sky-400">Academic Subjects</h1>
 
-                    <h2 className="mt-3 text-sky-900">
+                    <h2 className="mt-3 text-sky-900 dark:text-sky-300">
                         Choose a subject to explore chapters, take quizzes, or access curated study materials. Stay consistent and keep learning!
                     </h2>
 
                     <div className="mt-5 flex flex-wrap gap-3">
                         <Button variant="primary">Explore All Chapters</Button>
-                        <Link href={'/academy/quiz'}><Button variant="secondary">Take Quizzes</Button></Link>
-                        <Link href={'/academy/qb'}><Button variant="super">Previous Questions</Button></Link>
-                        
+                        <Link href={'/academy/quiz'}>
+                            <Button variant="secondary">Take Quizzes</Button>
+                        </Link>
+                        <Link href={'/academy/qb'}>
+                            <Button variant="super">Previous Questions</Button>
+                        </Link>
                     </div>
                 </div>
             </div>
+
 
 
 
@@ -80,7 +85,7 @@ const AcademyPage = () => {
                 <div className='md:w-1/4 w-full p-4 pb-10 space-y-6'>
 
                     <div>
-                        <div className='py-2 text-sky-700 text-xl font-bold'>
+                        <div className='py-2 text-sky-700 dark:text-sky-300 text-xl font-bold'>
                             Select Class
                         </div>
 

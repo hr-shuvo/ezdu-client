@@ -45,15 +45,27 @@ const buttonVariants = cva(
                 primaryOutline: "bg-white text-sky-500 hover:bg-slate-100 border border-sky-200 dark:bg-zinc-900 dark:text-sky-400 dark:hover:bg-zinc-800 dark:border-sky-700",
 
 
+                // secondary:
+                //     "bg-green-500 text-primary-foreground hover:bg-green-500/90 border-green-600 border-b-4 active:border-b-0",
+                // secondaryOutline: "bg-white text-green-500 hover:bg-slate-100",
                 secondary:
-                    "bg-green-500 text-primary-foreground hover:bg-green-500/90 border-green-600 border-b-4 active:border-b-0",
-                secondaryOutline: "bg-white text-green-500 hover:bg-slate-100",
+                    "bg-green-500 text-white hover:bg-green-500/90 border-green-600 border-b-4 active:border-b-0 dark:bg-green-600 dark:text-white dark:hover:bg-green-600/90 dark:border-green-700",
+                secondaryOutline: "bg-white text-green-500 hover:bg-slate-100 border border-green-200 dark:bg-zinc-900 dark:text-green-400 dark:hover:bg-zinc-800 dark:border-green-700",
+
+
+
+
+
                 danger:
                     "bg-rose-500 text-primary-foreground hover:bg-rose-500/90 border-rose-600 border-b-4 active:border-b-0",
                 dangerOutline: "bg-white text-rose-500 hover:bg-slate-100",
+                // super:
+                //     "bg-indigo-500 text-primary-foreground hover:bg-indigo-500/90 border-indigo-600 border-b-4 active:border-b-0",
+                // superOutline: "bg-white text-indigo-500 hover:bg-slate-100",
+
                 super:
-                    "bg-indigo-500 text-primary-foreground hover:bg-indigo-500/90 border-indigo-600 border-b-4 active:border-b-0",
-                superOutline: "bg-white text-indigo-500 hover:bg-slate-100",
+                    "bg-indigo-500 text-white hover:bg-indigo-500/90 border-indigo-600 border-b-4 active:border-b-0 dark:bg-indigo-600 dark:text-white dark:hover:bg-indigo-600/90 dark:border-indigo-700",
+                superOutline: "bg-white text-indigo-500 hover:bg-slate-100 border border-indigo-200 dark:bg-zinc-900 dark:text-indigo-400 dark:hover:bg-zinc-800 dark:border-indigo-700",
 
                 sidebar:
                     "bg-transparent text-slate-500 border-2 border-transparent hover:bg-slate-100 transition-none",
