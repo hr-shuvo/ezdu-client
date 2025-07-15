@@ -47,7 +47,7 @@ const AcademyDashboard = () => {
             icon: ListChecks,
             color: "bg-[#DAF7DC]",
             darkColor: "dark:bg-[#14532d]", // dark green
-            href: "./academy/practice",
+            href: "./practice",
         },
         {
             title: "প্রশ্নব্যাংক",

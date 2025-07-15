@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 type Props = {
-    onClickItem: (data: 'start', subjectId: string, selectedLessonIds: string[]) => void;
+    onClickItem: (subjectId: string, selectedLessonIds: string[]) => void;
 };
 
 const ChooseTopic = ({onClickItem}:Props) => {
@@ -229,7 +229,7 @@ const ChooseTopic = ({onClickItem}:Props) => {
                     <Button
                         variant={'secondary'}
                         size={'lg'} className="w-full lg:w-1/2 font-bold"
-                        onClick={() => onClickItem('start', subjectId, selectedLessonIds)}
+                        onClick={() => onClickItem(subjectId, selectedLessonIds)}
                         disabled={!lessons.length || !selectedLessonIds.length}
                     >Confirm</Button>
                 </div>
