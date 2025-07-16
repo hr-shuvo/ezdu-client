@@ -1,5 +1,5 @@
 import httpClient from "@/lib/httpClient";
-import { PaginatedList } from "@/app/utils/pagination";
+import { PaginatedList } from "@/utils/pagination";
 
 
 

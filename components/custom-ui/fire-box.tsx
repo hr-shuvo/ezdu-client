@@ -28,10 +28,13 @@ export default function FireBorderBox({
       </svg>
 
       <div
-        className={cn(
-          "relative z-10 bg-white shadow-xl text-black p-6 font-semibold rounded-md border border-orange-500",
-          className
-        )}
+          className={cn(
+              "relative z-10 p-6 font-semibold rounded-md shadow-xl border",
+              "bg-white text-black border-orange-500",
+              "dark:bg-gray-900 dark:text-gray-100 dark:border-orange-400",
+              className
+          )}
+
       >
         {children}
       </div>

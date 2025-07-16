@@ -1,5 +1,5 @@
 import httpClient from "../../lib/httpClient";
-import { PaginatedList } from "../utils/pagination";
+import { PaginatedList } from "../../utils/pagination";
 
 export const loadCourses = async (page: number, size:number, moduleId?:string): Promise<PaginatedList> => {
   try {

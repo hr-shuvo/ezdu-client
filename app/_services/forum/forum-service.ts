@@ -1,4 +1,4 @@
-import { PaginatedList } from "@/app/utils/pagination";
+import { PaginatedList } from "@/utils/pagination";
 import httpClient from "@/lib/httpClient";
 
 export const loadForums = async (

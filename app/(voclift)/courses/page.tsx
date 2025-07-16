@@ -1,7 +1,7 @@
 'use client';
 
 import { List } from "./list";
-import { PaginatedList } from "@/app/utils/pagination";
+import { PaginatedList } from "@/utils/pagination";
 import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
 import Loading from "./loading";

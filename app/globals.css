@@ -49,7 +49,7 @@ body,
     --background: 210 15% 10%;
     --foreground: 210 40% 98%;
     /*--card: 222.2 84% 4.9%;*/
-    --card: 210 15% 18%;
+    --card: 210 15% 14%;
     --card-foreground: 210 40% 98%;
     /*--popover: 222.2 84% 4.9%;*/
     --popover: 10 15% 18%;
@@ -80,6 +80,9 @@ body,
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+
+
   }
   .theme {
     --animate-background-position-spin: background-position-spin 3000ms infinite alternate;}

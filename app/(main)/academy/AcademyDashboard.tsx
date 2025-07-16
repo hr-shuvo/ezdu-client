@@ -175,7 +175,7 @@ const AcademyDashboard = () => {
                 </Card>
 
                 {/* Daily Goal */}
-                <Card className="shadow-lg bg-white dark:bg-neutral-800 text-gray-800 dark:text-white">
+                <Card className="shadow-lg ">
                     <CardContent className="p-5">
                         <h2 className="text-xl font-bold mb-2">🎯 আজকের লক্ষ্য</h2>
                         <p className="text-base">গণিত অধ্যায়ের ১০টি প্রশ্ন সমাধান করুন এবং ৫০ XP অর্জন করুন!</p>
