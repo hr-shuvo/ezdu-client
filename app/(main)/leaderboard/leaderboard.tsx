@@ -99,14 +99,14 @@ const rivals = [
 const Leaderboard = () => {
     const {isLoggedIn} = useSecure();
     const [leaderboard, setLeaderboard] = useState<any[]>([]);
-    const [isPending, startTrnsition] = useTransition();
+    const [isPending, startTransition] = useTransition();
     const [progress, setProgress] = useState<any>();
 
     useEffect(() => {
         setLeaderboard(LeaderboardData);
-        startTrnsition(async () => {
+        startTransition(async () => {
             const _leaderboard = await loadLeaderboard();
-            // console.log(_leaderboard.data);
+            console.log(_leaderboard.data);
             setLeaderboard(_leaderboard.data);
         })
 
@@ -114,7 +114,7 @@ const Leaderboard = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            startTrnsition(async () => {
+            startTransition(async () => {
                 const _progress = await getAcademyProgress();
                 // console.log(_progress.data)
                 setProgress(_progress.data)

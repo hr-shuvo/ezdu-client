@@ -27,9 +27,10 @@ export const LeaderboardCard = ({ user, isCurrent }: Props) => {
                     {getMedal(user.rank) || user.rank}
                 </div>
                 <Avatar>
-                    <AvatarImage src={user.userImageSrc || '/mascot.svg'} />
-                    <AvatarFallback>{user.userName?.charAt(0) || 'U'}</AvatarFallback>
+                    <AvatarImage src={user.userImageSrc} />
+                    <AvatarFallback>{(user.name?.charAt(0))?.toUpperCase() || 'U'}</AvatarFallback>
                 </Avatar>
+
                 <div className="flex flex-col">
                     <div className="text-md font-semibold">
                         {user.name || 'Unknown User'}

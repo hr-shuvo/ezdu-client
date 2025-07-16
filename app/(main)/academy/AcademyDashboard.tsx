@@ -10,10 +10,10 @@ import { RecentTest } from "./_components/recent-test";
 import { useSecure } from "@/context/SecureContext";
 import { useEffect, useState, useTransition } from "react";
 import XpWeeklyChart from "./_components/xp-graph";
-import Loading from "@/app/(voclift)/learn/loading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { getAcademyProgress } from "@/app/_services/academy/academyProgressService";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 
 const AcademyDashboard = () => {
@@ -76,9 +76,9 @@ const AcademyDashboard = () => {
     }, [isLoggedIn]);
 
 
-    if (isPending) {
-        return <Loading/>
-    }
+    // if (isPending) {
+    //     return <Loading/>
+    // }
 
 
     return (
@@ -87,35 +87,62 @@ const AcademyDashboard = () => {
 
                 <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-4">
                     {links.map(({title, icon: Icon, color, darkColor, href}, index) => (
-                        <Link key={index} href={href}>
-                            <Card
-                                className={`h-32 ${color} ${darkColor} hover:scale-105 transition-transform cursor-pointer shadow-md dark:shadow-slate-800`}>
-                                <CardContent className="p-4 flex flex-col items-start justify-between h-full">
-                                    <Icon className="w-8 h-8 text-gray-700 dark:text-white"/>
-                                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white mt-2">{title}</h2>
-                                </CardContent>
-                            </Card>
-                        </Link>
+                        <>
+                            {
+                                isPending ? (
+                                        <>
+                                            <Skeleton className='p-4 flex flex-col items-start justify-between h-32 '/>
+                                        </>
+                                    )
+                                    : (
+                                        <Link key={index} href={href}>
+                                            <Card
+                                                className={`h-32 ${color} ${darkColor} hover:scale-105 transition-transform cursor-pointer shadow-md dark:shadow-slate-800`}>
+                                                <CardContent
+                                                    className="p-4 flex flex-col items-start justify-between h-full">
+                                                    <Icon className="w-8 h-8 text-gray-700 dark:text-white"/>
+                                                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white mt-2">{title}</h2>
+                                                </CardContent>
+                                            </Card>
+                                        </Link>
+                                    )
+                            }
+
+                        </>
+
                     ))}
 
                 </div>
 
-                <div className="space-y-2">
-                    <h2 className="text-lg font-semibold">Continue Learning</h2>
-                    <Card>
-                        <CardContent className="p-4 flex justify-between items-center">
-                            <div>
-                                <p className="font-medium">{isLoggedIn ? 'Biology - Chapter 3 Quiz' : 'You’re not logged in'}</p>
-                                <p className="text-sm text-muted-foreground">{isLoggedIn ? 'Continue where you left off' : 'Log in to continue learning'}</p>
-                            </div>
-                            <Button variant="primary" size="sm" asChild>
-                                <Link href={isLoggedIn ? "/academy/quiz" : "/auth/login"}>
-                                    {isLoggedIn ? 'Resume' : 'Login to Continue'}
-                                </Link>
-                            </Button>
-                        </CardContent>
-                    </Card>
-                </div>
+                <>
+                    {
+                        isPending ? (
+
+                                <Skeleton className='p-4 flex flex-col items-start justify-between h-20 '/>
+                            )
+                            : (
+                                <div className="space-y-2">
+                                    <h2 className="text-lg font-semibold">Continue Learning</h2>
+                                    <Card>
+                                        <CardContent className="p-4 flex justify-between items-center">
+                                            <div>
+                                                <p className="font-medium">{isLoggedIn ? 'Biology - Chapter 3 Quiz' : 'You’re not logged in'}</p>
+                                                <p className="text-sm text-muted-foreground">{isLoggedIn ? 'Continue where you left off' : 'Log in to continue learning'}</p>
+                                            </div>
+                                            <Button variant="primary" size="sm" asChild>
+                                                <Link href={isLoggedIn ? "/academy/quiz" : "/auth/login"}>
+                                                    {isLoggedIn ? 'Resume' : 'Login to Continue'}
+                                                </Link>
+                                            </Button>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            )
+                    }
+
+
+                </>
+
 
                 <Card>
                     <CardContent>
