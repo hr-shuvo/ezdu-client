@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useTransition } from 'react';
-import { useParams } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { getAdmissionLearningPath } from '@/app/_services/admission/admission-service';
 import LearningPath from './learning-path';
 import Loading from '@/app/(voclift)/learn/loading';
@@ -20,6 +20,9 @@ const LearningPathHome = () => {
         startTransition(async () => {
             const _path = await getAdmissionLearningPath(category);
             // console.log(_path);
+            if(!_path){
+                notFound();
+            }
             setLearningPath(_path);
         })
     },[params.category])
