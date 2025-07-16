@@ -61,9 +61,9 @@ export const Sidebar = ({className}: Props) =>{
                 </div>
 
                 {/* Bottom Item */}
-                <div className="mt-4 mb-8">
+                <div className="mt-4 mb-8 flex flex-col gap-x-2 justify-between">
                     {isLoggedIn ? (
-                        <SidebarItem label="Profile" href="/profile" iconSrc="/common/profile.svg" />
+                        <SidebarItem label="Profile" href="/profile" iconSrc="/avatar/profile.svg" />
                     ) : (
                         <SidebarItem label="Register" href="/auth/register" iconSrc="/common/shop.svg" />
                     )}

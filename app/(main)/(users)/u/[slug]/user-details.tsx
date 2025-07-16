@@ -5,22 +5,25 @@ import Image from "next/image";
 import { useSecure } from "@/context/SecureContext";
 import { formatDate } from "@/lib/date-time";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 type Props = {
     userProfile: any
 }
 
-const UserDetails = ({userProfile}:Props) =>{
+const UserDetails = ({userProfile}: Props) => {
+    const router = useRouter();
     const {user} = useSecure();
 
-    if (!user) {
-        return null;
+    // console.log(user);
+
+    const handleFollow = () => {
+        console.log("user follow");
     }
 
 
-    return(
+    return (
         <>
             <div className='grid grid-cols-1 lg:grid-cols-8 gap-4'>
 
@@ -33,9 +36,9 @@ const UserDetails = ({userProfile}:Props) =>{
                                     <Image
                                         height={30}
                                         width={30}
-                                        src={userProfile.avatar || "/avatar/boy/1.svg" || "/mascot.svg"}
+                                        src={userProfile.avatar || "/avatar/profile.svg"}
                                         alt="Avatar"
-                                        className="w-20 h-20 rounded-full border-4 border-lime-400"
+                                        className="w-20 h-20 rounded-full border-4 "
                                         priority={true}
                                     />
                                     <div className='flex flex-col gap-2'>
@@ -46,8 +49,12 @@ const UserDetails = ({userProfile}:Props) =>{
                                         </div>
 
                                         <div className={'flex items-center gap-4'}>
-                                            <p className="text-muted-foreground">Total XP: <span className="text-lime-500 font-semibold">{userProfile.totalXp | 0}</span></p>
-                                            <p className="text-muted-foreground">Streak: <span className="text-orange-500 font-semibold">{userProfile.currentStreak | 0} days 🔥</span></p>
+                                            <p className="text-muted-foreground">Total XP: <span
+                                                className="text-lime-500 font-semibold">{userProfile.totalXp | 0}</span>
+                                            </p>
+                                            <p className="text-muted-foreground">Streak: <span
+                                                className="text-orange-500 font-semibold">{userProfile.currentStreak | 0} days 🔥</span>
+                                            </p>
 
                                         </div>
 
@@ -55,20 +62,21 @@ const UserDetails = ({userProfile}:Props) =>{
                                 </div>
 
                                 <div className={'flex flex-col gap-4'}>
-                                    <p className="text-sm text-muted-foreground mt-2">Joined on {formatDate(userProfile.createdAt)}</p>
-                                    {
-                                        userProfile._id === user?._id && (
-                                            <>
-                                                <Link href={`/profile`}>
-                                                    <Button className={'w-full'}>Edit Profile</Button>
-                                                </Link>
-                                            </>
-                                        )
-                                    }
+                                    <p className="text-sm text-muted-foreground mt-2">Joined
+                                        on {formatDate(userProfile.createdAt)}</p>
+
+
+                                    <Button className={'w-full'} onClick={() =>
+                                        (userProfile._id === user?._id ? router.push('/profile') : handleFollow())}
+                                    >
+                                        {
+                                            userProfile._id === user?._id ? "Edit Profile" : "Follow"
+                                        }
+                                    </Button>
+
                                 </div>
 
                             </CardHeader>
-
 
                         </Card>
 
@@ -85,7 +93,7 @@ const UserDetails = ({userProfile}:Props) =>{
                         <div className="bg-white dark:bg-zinc-900 shadow-md rounded-2xl p-6">
                             <h3 className="text-lg font-semibold mb-3">🏅 Badges</h3>
                             <div className="flex flex-wrap gap-4">
-                                {userProfile?.badges?.map((badge:any, i:number) => (
+                                {userProfile?.badges?.map((badge: any, i: number) => (
                                     <div
                                         key={i}
                                         className="flex items-center gap-2 px-4 py-2 bg-lime-100 dark:bg-lime-900 text-lime-800 dark:text-lime-200 rounded-xl shadow-sm"
@@ -102,7 +110,7 @@ const UserDetails = ({userProfile}:Props) =>{
                         <div className="bg-white dark:bg-zinc-900 shadow-md rounded-2xl p-6">
                             <h3 className="text-lg font-semibold mb-3">📘 Recent Activity</h3>
                             <ul className="space-y-2">
-                                {userProfile?.recentLessons?.map((lesson:any, i:number) => (
+                                {userProfile?.recentLessons?.map((lesson: any, i: number) => (
                                     <li
                                         key={i}
                                         className="flex justify-between items-center p-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
@@ -115,7 +123,6 @@ const UserDetails = ({userProfile}:Props) =>{
                         </div>
                     </div>
                 </div>
-
 
 
             </div>

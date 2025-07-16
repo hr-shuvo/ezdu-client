@@ -23,7 +23,7 @@ export const RecentTest = () => {
         if (isLoggedIn) {
             startTransition(async () => {
                 const _quizResponse = await LoadRecentQuiz();
-                console.log(_quizResponse.data);
+                // console.log(_quizResponse.data);
                 setRecentQuiz(_quizResponse.data)
             })
         }

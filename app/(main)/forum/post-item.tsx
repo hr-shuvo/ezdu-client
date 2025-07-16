@@ -69,7 +69,7 @@ const ForumPostItem = ({data}: PostItemProps) => {
             >
                 <div>
                     <Image
-                        src={data?.user?.avatar || '/avatar/boy/1.svg'}
+                        src={data?.user?.avatar || '/avatar/profile.svg'}
                         alt="Profile"
                         width={32}
                         height={32}

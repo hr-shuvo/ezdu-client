@@ -29,7 +29,7 @@ const Forum = () => {
     function loadForum () {
         startTransition(async () => {
             const response = await loadForums(1, 50);
-            console.log(response.data);
+            // console.log(response.data);
             setPosts(response.data);
         });
     }

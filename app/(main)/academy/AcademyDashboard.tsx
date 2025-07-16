@@ -13,10 +13,11 @@ import XpWeeklyChart from "./_components/xp-graph";
 import Loading from "@/app/(voclift)/learn/loading";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { getAcademyProgress } from "@/app/_services/academy/academyProgressService";
+import { Button } from "@/components/ui/button";
 
 
 const AcademyDashboard = () => {
-    const { isLoggedIn } = useSecure();
+    const {isLoggedIn} = useSecure();
     const [isPending, startTransition] = useTransition();
     const [progress, setProgress] = useState<any>();
     const [totalWeekXp, setTotalWeekXp] = useState<number>(0);
@@ -76,7 +77,7 @@ const AcademyDashboard = () => {
 
 
     if (isPending) {
-        return <Loading />
+        return <Loading/>
     }
 
 
@@ -85,11 +86,12 @@ const AcademyDashboard = () => {
             <div className="lg:col-span-4 space-y-6">
 
                 <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-4">
-                    {links.map(({ title, icon: Icon, color, darkColor, href }, index) => (
+                    {links.map(({title, icon: Icon, color, darkColor, href}, index) => (
                         <Link key={index} href={href}>
-                            <Card className={`h-32 ${color} ${darkColor} hover:scale-105 transition-transform cursor-pointer shadow-md dark:shadow-slate-800`}>
+                            <Card
+                                className={`h-32 ${color} ${darkColor} hover:scale-105 transition-transform cursor-pointer shadow-md dark:shadow-slate-800`}>
                                 <CardContent className="p-4 flex flex-col items-start justify-between h-full">
-                                    <Icon className="w-8 h-8 text-gray-700 dark:text-white" />
+                                    <Icon className="w-8 h-8 text-gray-700 dark:text-white"/>
                                     <h2 className="text-lg font-semibold text-gray-800 dark:text-white mt-2">{title}</h2>
                                 </CardContent>
                             </Card>
@@ -98,14 +100,32 @@ const AcademyDashboard = () => {
 
                 </div>
 
+                <div className="space-y-2">
+                    <h2 className="text-lg font-semibold">Continue Learning</h2>
+                    <Card>
+                        <CardContent className="p-4 flex justify-between items-center">
+                            <div>
+                                <p className="font-medium">{isLoggedIn ? 'Biology - Chapter 3 Quiz' : 'You’re not logged in'}</p>
+                                <p className="text-sm text-muted-foreground">{isLoggedIn ? 'Continue where you left off' : 'Log in to continue learning'}</p>
+                            </div>
+                            <Button variant="primary" size="sm" asChild>
+                                <Link href={isLoggedIn ? "/academy/quiz" : "/auth/login"}>
+                                    {isLoggedIn ? 'Resume' : 'Login to Continue'}
+                                </Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
+                </div>
+
                 <Card>
                     <CardContent>
                         <div className="py-4">
                             <div className="flex justify-end mb-4">
-                                <p className="text-xl">week XP : <span className="font-bold">{totalWeekXp.toFixed(0)}</span></p>
+                                <p className="text-xl">week XP : <span
+                                    className="font-bold">{totalWeekXp.toFixed(0)}</span></p>
                             </div>
 
-                            <XpWeeklyChart xpData={progress?.lastWeekXp} />
+                            <XpWeeklyChart xpData={progress?.lastWeekXp}/>
                         </div>
 
                         {
@@ -134,7 +154,7 @@ const AcademyDashboard = () => {
                         <p className="text-base">গণিত অধ্যায়ের ১০টি প্রশ্ন সমাধান করুন এবং ৫০ XP অর্জন করুন!</p>
 
                         <div className="mt-3 bg-green-200 dark:bg-green-900 h-3 w-full rounded-full">
-                            <div className="bg-green-500 h-3 rounded-full" style={{ width: "40%" }}></div>
+                            <div className="bg-green-500 h-3 rounded-full" style={{width: "40%"}}></div>
                         </div>
 
                         <p className="text-sm text-right mt-1 text-muted-foreground dark:text-gray-400">
@@ -142,7 +162,6 @@ const AcademyDashboard = () => {
                         </p>
                     </CardContent>
                 </Card>
-
 
 
                 {/* Recommended Subjects */}
@@ -180,7 +199,8 @@ const AcademyDashboard = () => {
                                                 ক্লাস ৬-১০ এর জাতীয় শিক্ষাক্রম অনুযায়ী সাজানো অধ্যায়ভিত্তিক লেসন।
                                             </li>
                                             <li>
-                                                প্রতিটি অধ্যায়ে সহজ ভাষায় ব্যাখ্যা, সংক্ষিপ্ত টিপস এবং উদাহরণসহ ব্যাখ্যা।
+                                                প্রতিটি অধ্যায়ে সহজ ভাষায় ব্যাখ্যা, সংক্ষিপ্ত টিপস এবং উদাহরণসহ
+                                                ব্যাখ্যা।
                                             </li>
                                             <li>
                                                 ছাত্রছাত্রীরা নিজের গতিতে অধ্যায়গুলো পড়তে পারবে।
@@ -190,14 +210,16 @@ const AcademyDashboard = () => {
 
                                 </AccordionItem>
                                 <AccordionItem value={"1"}>
-                                    <AccordionTrigger>নিয়মিত কুইজ ও শেখার অগ্রগতি বুঝে এগিয়ে যাওয়ার সুবিধা</AccordionTrigger>
+                                    <AccordionTrigger>নিয়মিত কুইজ ও শেখার অগ্রগতি বুঝে এগিয়ে যাওয়ার
+                                        সুবিধা</AccordionTrigger>
                                     <AccordionContent>
                                         <ul className="list-disc ps-5 space-y-1 text-sm text-muted-foreground">
                                             <li>
                                                 প্রতিটি অধ্যায়ের শেষে ছোট কুইজ ও মডেল প্রশ্ন, যাতে শেখা যাচাই করা যায়।
                                             </li>
                                             <li>
-                                                শিক্ষার্থী বুঝতে পারে কোন অধ্যায় সে ভালো শিখেছে, আর কোথায় আরও চর্চা প্রয়োজন।
+                                                শিক্ষার্থী বুঝতে পারে কোন অধ্যায় সে ভালো শিখেছে, আর কোথায় আরও চর্চা
+                                                প্রয়োজন।
                                             </li>
                                             <li>
                                                 ব্যক্তিগত ড্যাশবোর্ডে অধ্যায় ও বিষয়ভিত্তিক অগ্রগতি দেখা যায়।
@@ -215,7 +237,8 @@ const AcademyDashboard = () => {
                                                 প্রতিটি শিক্ষার্থীর জন্য তৈরি হয় আলাদা শেখার রোডম্যাপ।
                                             </li>
                                             <li>
-                                                কুইজ, প্র্যাকটিস, ও অধ্যায়ভিত্তিক অগ্রগতি ডেটা বিশ্লেষণ করে ছাত্রকে সঠিক দিকনির্দেশনা দেওয়া হয়
+                                                কুইজ, প্র্যাকটিস, ও অধ্যায়ভিত্তিক অগ্রগতি ডেটা বিশ্লেষণ করে ছাত্রকে সঠিক
+                                                দিকনির্দেশনা দেওয়া হয়
                                             </li>
                                             <li>
                                                 দুর্বল জায়গাগুলো হাইলাইট করে targeted চর্চার সুযোগ তৈরি হয়।
@@ -239,16 +262,16 @@ const AcademyDashboard = () => {
                 {
                     isLoggedIn && (
                         <>
-                            <StreakCount />
+                            <StreakCount/>
 
-                            <RecentTest />
+                            <RecentTest/>
 
-                            <SubjectProgress />
+                            <SubjectProgress/>
                         </>
                     )
                 }
 
-                <LeaderboardSummary />
+                <LeaderboardSummary/>
 
             </div>
         </div>
