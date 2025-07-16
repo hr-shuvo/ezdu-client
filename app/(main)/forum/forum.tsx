@@ -57,14 +57,7 @@ const Forum = () => {
     return (
         <div className="container ">
 
-            <div className='grid grid-cols-5 h-full'>
-
-                <ForumFilter
-                    isMobileOpen={mobileFilterOpen}
-                    onClose={() => setMobileFilterOpen(false)}
-                    onFilterChange={() => {
-                    }}
-                />
+            <div className='grid grid-cols-4 h-full'>
 
                 <div className="lg:hidden fixed right-4 z-50">
                     <Button
@@ -76,7 +69,7 @@ const Forum = () => {
                     </Button>
                 </div>
 
-                <div className='col-span-5 lg:col-span-3 lg:border-x-[1px] border-neutral-200 dark:border-neutral-600'>
+                <div className='col-span-4 lg:col-span-3 '>
                     <div className='flex flex-col'>
                         <div className='flex-1'>
                             <div className='px-2 py-4'>
@@ -152,7 +145,17 @@ const Forum = () => {
 
                 </div>
 
-                <ForumEngagement/>
+                <div className='flex flex-col space-y-2 lg:pl-6'>
+                    <ForumFilter
+                        isMobileOpen={mobileFilterOpen}
+                        onClose={() => setMobileFilterOpen(false)}
+                        onFilterChange={() => {
+                        }}
+                    />
+
+                    <ForumEngagement/>
+                </div>
+
 
 
             </div>

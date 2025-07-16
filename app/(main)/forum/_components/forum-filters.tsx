@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 
 type Props = {
@@ -52,7 +53,7 @@ const ForumFilter: React.FC<Props> = ({onFilterChange, isMobileOpen, onClose}) =
     }, [isMobileOpen, onClose]);
 
     const filterContent = (
-        <div className="space-y-6 px-4 ">
+        <div className="space-y-6">
 
             <div className='pt-4 flex items-center gap-x-3'>
                 <h1 className='text-xl font-extrabold text-sky-400 tracking-wide'>
@@ -114,12 +115,14 @@ const ForumFilter: React.FC<Props> = ({onFilterChange, isMobileOpen, onClose}) =
             </div>
 
             {/* Clear Filters */}
-            <button
+            <Button
+                variant='primaryOutline'
+
                 onClick={clearFilters}
-                className="w-full py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-md font-semibold transition"
+                className="w-full"
             >
                 Clear Filters
-            </button>
+            </Button>
         </div>
     );
 
@@ -135,7 +138,7 @@ const ForumFilter: React.FC<Props> = ({onFilterChange, isMobileOpen, onClose}) =
             {/* Mobile Drawer Filter */}
             {isMobileOpen && (
 
-                <div className='lg:hidden px-6 h-[50px] flex items-center bg-sky-200 border-b fixed top-0 w-full z-50'>
+                <div className='lg:hidden px-2 h-[50px] flex items-center bg-sky-200 border-b fixed top-0 w-full z-50'>
                     <Sheet open={isMobileOpen} onOpenChange={onClose}>
                         <SheetContent  className='z-[100]' side='left'>
                             <SheetTitle></SheetTitle>

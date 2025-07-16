@@ -46,31 +46,32 @@ const AcademyQuestionBank = () => {
     return (
         <>
             <div className="px-6 my-5">
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-200 rounded-2xl p-6 shadow-sm border border-blue-100">
+                <div className="bg-gradient-to-r from-sky-50 to-indigo-200 rounded-2xl p-6 shadow-sm border border-sky-100
+                dark:from-gray-800 dark:to-gray-900 dark:border-gray-700 dark:shadow-md">
                     {/* Title & Description */}
-                    <h1 className="text-3xl font-extrabold text-blue-700">Question Bank</h1>
+                    <h1 className="text-3xl font-extrabold text-sky-700 dark:text-sky-400">Question Bank</h1>
 
-                    <p className="mt-2 text-blue-800 text-base">
+                    <p className="mt-2 text-sky-800 text-base dark:text-sky-300">
                         Choose Subject to Practice – SSC, HSC, Class 6–10
                     </p>
 
                     {/* Duolingo-style Breadcrumb Steps */}
-                    <div className="mt-5 flex flex-wrap items-center gap-3 text-sm font-semibold text-blue-700">
+                    <div className="mt-5 flex flex-wrap items-center gap-3 text-sm font-semibold text-sky-700 dark:text-sky-300">
                         <span className="flex items-center gap-2">
-                            <span className="w-6 h-6 rounded-full bg-blue-400 text-white flex items-center justify-center text-xs font-bold">1</span>
+                            <span className="w-6 h-6 rounded-full bg-sky-400 text-white  flex items-center justify-center text-xs font-bold">1</span>
                             Choose Subject
                         </span>
-                        <span className="text-blue-400">➜</span>
+                        <span className="text-sky-400 ">➜</span>
 
                         <span className="flex items-center gap-2">
-                            <span className="w-6 h-6 rounded-full bg-blue-400 text-white flex items-center justify-center text-xs font-bold">2</span>
+                            <span className="w-6 h-6 rounded-full bg-sky-400 text-white flex items-center justify-center text-xs font-bold">2</span>
                             Select Board
                         </span>
-                        <span className="text-blue-400">➜</span>
+                        <span className="text-sky-400">➜</span>
 
 
                         <span className="flex items-center gap-2">
-                            <span className="w-6 h-6 rounded-full bg-blue-400 text-white flex items-center justify-center text-xs font-bold">4</span>
+                            <span className="w-6 h-6 rounded-full bg-sky-400 text-white flex items-center justify-center text-xs font-bold">4</span>
                             Review Questions
                         </span>
                     </div>
@@ -113,7 +114,7 @@ const AcademyQuestionBank = () => {
                                             key={index}
                                             value={item._id}
                                             aria-label={`Toggle ${item._id}`}
-                                            className="w-full min-h-[110px] p-6 text-lg font-semibold border border-b-4 rounded-xl hover:bg-gray-200 hover:text-gray-900 data-[state=on]:bg-blue-400 data-[state=on]:text-white transition-all"
+                                            className="w-full min-h-[110px] p-6 text-lg font-semibold border border-b-4 rounded-xl hover:bg-gray-200 hover:text-gray-900 data-[state=on]:bg-sky-400 data-[state=on]:text-white transition-all"
 
                                         >
                                             <h1 className='font-bold'>{item.title}</h1>

@@ -67,10 +67,14 @@ const buttonVariants = cva(
                     "bg-indigo-500 text-white hover:bg-indigo-500/90 border-indigo-600 border-b-4 active:border-b-0 dark:bg-indigo-600 dark:text-white dark:hover:bg-indigo-600/90 dark:border-indigo-700",
                 superOutline: "bg-white text-indigo-500 hover:bg-slate-100 border border-indigo-200 dark:bg-zinc-900 dark:text-indigo-400 dark:hover:bg-zinc-800 dark:border-indigo-700",
 
+                // sidebar:
+                //     "bg-transparent text-slate-500 border-2 border-transparent hover:bg-slate-100 transition-none",
+                // sidebarOutline:
+                //     "bg-sky-500/15 text-sky-500 border-sky-300 border-2 hover:bg-sky-500/20 transition-none",
+
                 sidebar:
-                    "bg-transparent text-slate-500 border-2 border-transparent hover:bg-slate-100 transition-none",
-                sidebarOutline:
-                    "bg-sky-500/15 text-sky-500 border-sky-300 border-2 hover:bg-sky-500/20 transition-none",
+                    "bg-transparent text-slate-500 border-2 border-transparent hover:bg-slate-100 transition-none dark:text-slate-400 dark:hover:bg-slate-700",
+                sidebarOutline: "bg-sky-500/15 text-sky-500 border-sky-300 border-2 hover:bg-sky-500/20 transition-none dark:bg-sky-600/15 dark:text-sky-400 dark:border-sky-500 dark:hover:bg-sky-600/20",
 
                 locked:
                     "bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-0",

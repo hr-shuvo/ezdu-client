@@ -12,7 +12,7 @@ const topUsers = [
 const ForumEngagement = () => {
     return (
 
-        <div className='hidden lg:block col-span-1 pl-2'>
+        <div className='hidden lg:block col-span-1 '>
 
             <div className="rounded-xl border  p-4 shadow-sm">
                 <h2 className=" font-semibold mb-3 text-sky-700 dark:text-sky-300 flex items-center gap-2">
