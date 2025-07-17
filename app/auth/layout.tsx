@@ -21,7 +21,7 @@ const AuthLayout = ({ children }: Props) => {
                 <div className="flex-1 flex items-center justify-around bg-gradient-to-r from-white via-indigo-100 to-white dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
                     <div className="hidden lg:block">
                         <div className="relative w-[280px] h-[280px] lg:w-[380px] lg:h-[380px] mb-8 lg:mb-0 z-20">
-                            <Image src="/logo/logo.png"
+                            <Image src="/logo/logo.svg"
                                    alt="Ezdu quiz Logo" fill
                                    sizes={"(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"}
                                    priority={true}

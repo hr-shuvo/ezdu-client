@@ -66,11 +66,11 @@ export const LeaderboardSummary = () => {
                                             >
                                                 <div className={`flex items-center gap-3 `}>
                                                     <Avatar className="w-8 h-8">
-                                                        <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
+                                                        <AvatarFallback>{user?.username?.charAt(0)?.toUpperCase()}</AvatarFallback>
                                                     </Avatar>
                                                     <div>
                                                         <p className="font-medium text-base">
-                                                            #{user.rank} {user.name}
+                                                            #{user.rank} {user.username}
                                                         </p>
                                                         <p className="text-sm text-muted-foreground">XP: {user.totalXp}</p>
                                                     </div>
