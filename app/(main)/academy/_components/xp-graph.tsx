@@ -59,6 +59,8 @@ type Props = {
 const XpWeeklyLineChart = ({ xpData }: Props) => {
     const data = xpData ? formatData(xpData) : formatData(rawXpData);
 
+    // console.log(xpData)
+
     const maxXp = Math.max(...data.map((d) => d.xp), 0);
     const yMax = Math.ceil(maxXp * 1.2 / 10) * 10;
 

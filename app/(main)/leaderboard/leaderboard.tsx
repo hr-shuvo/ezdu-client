@@ -116,8 +116,8 @@ const Leaderboard = () => {
         if (isLoggedIn) {
             startTransition(async () => {
                 const _progress = await getAcademyProgress();
-                console.log(_progress.data)
-                setProgress(_progress.data)
+                // console.log(_progress)
+                setProgress(_progress)
             })
         }
 

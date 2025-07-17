@@ -65,10 +65,10 @@ const AcademyDashboard = () => {
 
             startTransition(async () => {
                 const _progress = await getAcademyProgress();
-                // console.log('progress: ', _progress.data);
-                setProgress(_progress.data);
+                // console.log('progress: ', _progress);
+                setProgress(_progress);
 
-                const _xp = _progress.data?.lastWeekXp.reduce((sum: number, item: any) => sum + item.xp, 0);
+                const _xp = _progress?.lastWeekXp.reduce((sum: number, item: any) => sum + item.xp, 0);
                 setTotalWeekXp(_xp);
             })
         }
