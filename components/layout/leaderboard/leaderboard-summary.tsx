@@ -37,8 +37,8 @@ export const LeaderboardSummary = () => {
 
     useEffect(() => {
         startTransition(async () => {
-            const _leaderboard = await loadLeaderboard();
-            console.log(_leaderboard.data);
+            const _leaderboard = await loadLeaderboard(10);
+            // console.log(_leaderboard.data);
             setLeaderboard(_leaderboard.data);
         })
 

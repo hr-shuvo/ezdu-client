@@ -1,9 +1,15 @@
 import httpClient from "@/lib/httpClient";
 
 
-export const loadLeaderboard = async () => {
+export const loadLeaderboard = async (top?:number) => {
     try {
-        const response = await httpClient.get("/leaderboard");
+        const params :Record<string, any> = {};
+
+        if (top) {
+            params.top = top;
+        }
+
+        const response = await httpClient.get("/leaderboard", { params: params });
 
         return response.data;
 
