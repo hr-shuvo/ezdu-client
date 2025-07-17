@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { toast } from "sonner";
 import { Flame, Star } from "lucide-react";
 import UserDetails from "@/app/(main)/(users)/u/[slug]/user-details";
+import { getAcademyProgress } from "@/app/_services/academy/academyProgressService";
 
 type Props = {
     params: Promise<{
@@ -14,7 +15,8 @@ const UserDetailsPage = async ({ params }:Props) => {
     const { slug } = await params;
 
     const userProfile = await getUserProfile(slug);
-    // console.log(userProfile);
+    const userProgress = await getAcademyProgress(slug);
+
     if(!userProfile){
         toast.error("User profile not found.");
         redirect('/');
@@ -33,7 +35,7 @@ const UserDetailsPage = async ({ params }:Props) => {
     return (
 
         <>
-            <UserDetails userProfile={userProfile}/>
+            <UserDetails userProfile={userProfile} progress={userProgress}/>
 
         </>
     )

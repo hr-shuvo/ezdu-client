@@ -68,7 +68,7 @@ const AcademyDashboard = () => {
                 // console.log('progress: ', _progress.data);
                 setProgress(_progress.data);
 
-                const _xp = _progress.data.lastWeekXp.reduce((sum: number, item: any) => sum + item.xp, 0);
+                const _xp = _progress.data?.lastWeekXp.reduce((sum: number, item: any) => sum + item.xp, 0);
                 setTotalWeekXp(_xp);
             })
         }
@@ -87,7 +87,7 @@ const AcademyDashboard = () => {
 
                 <div className="grid gap-2 md:gap-4 grid-cols-2 md:grid-cols-4">
                     {links.map(({title, icon: Icon, color, darkColor, href}, index) => (
-                        <>
+                        <div key={index}>
                             {
                                 isPending ? (
                                         <>
@@ -95,7 +95,7 @@ const AcademyDashboard = () => {
                                         </>
                                     )
                                     : (
-                                        <Link key={index} href={href}>
+                                        <Link href={href}>
                                             <Card
                                                 className={`h-32 ${color} ${darkColor} hover:scale-105 transition-transform cursor-pointer shadow-md dark:shadow-slate-800`}>
                                                 <CardContent
@@ -108,7 +108,7 @@ const AcademyDashboard = () => {
                                     )
                             }
 
-                        </>
+                        </div>
 
                     ))}
 
@@ -149,7 +149,7 @@ const AcademyDashboard = () => {
                         <div className="py-4">
                             <div className="flex justify-end mb-4">
                                 <p className="text-xl">week XP : <span
-                                    className="font-bold">{totalWeekXp.toFixed(0)}</span></p>
+                                    className="font-bold">{totalWeekXp?.toFixed(0) || 0}</span></p>
                             </div>
 
                             <XpWeeklyChart xpData={progress?.lastWeekXp}/>

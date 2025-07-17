@@ -9,14 +9,15 @@ import { useRouter } from "next/navigation";
 
 
 type Props = {
-    userProfile: any
+    userProfile: any,
+    progress: any
 }
 
-const UserDetails = ({userProfile}: Props) => {
+const UserDetails = ({userProfile, progress}: Props) => {
     const router = useRouter();
     const {user} = useSecure();
 
-    // console.log(user);
+    // console.log(progress);
 
     const handleFollow = () => {
         console.log("user follow");
@@ -50,10 +51,10 @@ const UserDetails = ({userProfile}: Props) => {
 
                                         <div className={'flex items-center gap-4'}>
                                             <p className="text-muted-foreground">Total XP: <span
-                                                className="text-lime-500 font-semibold">{userProfile.totalXp | 0}</span>
+                                                className="text-lime-500 font-semibold">{progress.totalXp | 0}</span>
                                             </p>
                                             <p className="text-muted-foreground">Streak: <span
-                                                className="text-orange-500 font-semibold">{userProfile.currentStreak | 0} days 🔥</span>
+                                                className="text-orange-500 font-semibold">{progress.streakCount | 0} days 🔥</span>
                                             </p>
 
                                         </div>

@@ -106,7 +106,7 @@ const Leaderboard = () => {
         setLeaderboard(LeaderboardData);
         startTransition(async () => {
             const _leaderboard = await loadLeaderboard();
-            console.log(_leaderboard.data);
+            // console.log(_leaderboard.data);
             setLeaderboard(_leaderboard.data);
         })
 
@@ -116,7 +116,7 @@ const Leaderboard = () => {
         if (isLoggedIn) {
             startTransition(async () => {
                 const _progress = await getAcademyProgress();
-                // console.log(_progress.data)
+                console.log(_progress.data)
                 setProgress(_progress.data)
             })
         }

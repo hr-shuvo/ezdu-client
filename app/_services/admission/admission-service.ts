@@ -9,11 +9,11 @@ export const getAdmissionLearningPath = async (category:string) => {
         return response.data;
 
     } catch (err: any) {
-        // console.error(
-        //     err?.response?.data?.msg ||
-        //     err?.message ||
-        //     "An unexpected error occurred."
-        // );
+        console.error(
+            err?.response?.data?.msg ||
+            err?.message ||
+            "An unexpected error occurred."
+        );
         return null;
     }
 }
@@ -24,11 +24,11 @@ export const getAdmissionUnitLearningPath = async (category:string) => {
         return response.data;
 
     } catch (err: any) {
-        // console.error(
-        //     err?.response?.data?.msg ||
-        //     err?.message ||
-        //     "An unexpected error occurred."
-        // );
+        console.error(
+            err?.response?.data?.msg ||
+            err?.message ||
+            "An unexpected error occurred."
+        );
         return null;
     }
 }

@@ -4,10 +4,15 @@ import { PaginatedList } from "@/utils/pagination";
 
 
 
-export const getAcademyProgress = async () => {
-    try {       
+export const getAcademyProgress = async (userId?:string) => {
+    try {
+        const params: any = {};
 
-        const response = await httpClient.get("/users/academy/progress");
+        if(userId){
+            params.userId = userId;
+        }
+
+        const response = await httpClient.get("/users/academy/progress", {params:params});
 
         return response.data;
     } catch (err: any) {

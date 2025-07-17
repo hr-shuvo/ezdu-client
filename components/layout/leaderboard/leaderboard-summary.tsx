@@ -66,7 +66,7 @@ export const LeaderboardSummary = () => {
                                             >
                                                 <div className={`flex items-center gap-3 `}>
                                                     <Avatar className="w-8 h-8">
-                                                        <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                                                        <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>
                                                     </Avatar>
                                                     <div>
                                                         <p className="font-medium text-base">
