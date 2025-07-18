@@ -203,7 +203,7 @@ const AcademyDashboard = () => {
                     </CardContent>
                 </Card>
 
-                <div>
+                <div className='hidden lg:block'>
                     <div>
                         <h2 className="text-xl font-bold mb-4"> আজকের ছোট শুরু, আগামীর বড় সাফল্য</h2>
 

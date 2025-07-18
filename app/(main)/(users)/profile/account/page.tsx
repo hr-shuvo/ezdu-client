@@ -5,6 +5,8 @@ import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getCurrentUser } from "@/services/authService";
 import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
+import { useSecure } from "@/context/SecureContext";
 
 interface AccountField {
     key: string;
@@ -20,6 +22,7 @@ export default function AccountSettings() {
     const [fields, setFields] = useState<AccountField[]>([]);
     const [editingKey, setEditingKey] = useState<string | null>(null);
     const [tempValue, setTempValue] = useState('');
+    const {logout} = useSecure();
 
     useEffect(() => {
         startTransition(async () => {
@@ -130,6 +133,30 @@ export default function AccountSettings() {
                         </section>
                     </div>
 
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader></CardHeader>
+                <CardContent>
+                    <div className='flex flex-col space-y-6'>
+                        <section>
+                            <h2 className="text-2xl font-semibold mb-4">Accounts Activation</h2>
+                            <div className="flex items-center justify-between border px-4 py-2 rounded-md">
+                                <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                                    <LogOut/>
+                                    <span>logout</span>
+                                </div>
+                                <Button size='sm' className={'min-w-28'}
+                                        variant={'destructive'}
+                                        onClick={logout}
+                                >
+                                    Logout
+                                </Button>
+                            </div>
+                        </section>
+
+                    </div>
                 </CardContent>
             </Card>
 

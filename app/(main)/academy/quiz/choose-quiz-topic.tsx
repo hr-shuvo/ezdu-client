@@ -17,6 +17,10 @@ type Props = {
     onClickItem: (data: 'summary' | 'cancel', subjectId: string, lessons: []) => void;
 };
 
+const steps = [
+    'Class', 'Subject', 'Lessons', 'Quiz',
+];
+
 export const ChooseQuizTopic = ({onClickItem}: Props) => {
     const [isPending, startTransition] = useTransition();
     const {user} = useSecure();
@@ -61,7 +65,6 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
         })
     }, [classId]);
 
-
     useEffect(() => {
         if (subjectId && subjectId != "") {
             startTransition(async () => {
@@ -77,53 +80,45 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
 
     return (
         <>
-            <div className="lg:px-6 my-5">
+            <div className="lg:px-6">
                 <div
-                    className="bg-gradient-to-r from-sky-50 to-indigo-200 rounded-2xl p-6 shadow-sm border border-sky-100
+                    className="bg-gradient-to-r from-sky-50 to-indigo-200 rounded-2xl p-4 lg:p-6 shadow-sm border border-sky-100
                     dark:from-gray-800 dark:to-gray-900 dark:border-gray-700 dark:shadow-md">
-                    {/* Title & Description */}
-                    <h1 className="text-3xl font-extrabold text-sky-700 dark:text-sky-300">Let’s Get Quizzing!</h1>
 
-                    <h2 className="mt-2 text-sky-800 text-base dark:text-sky-300">
+                    <h1 className="lg:text-3xl font-extrabold text-sky-700 dark:text-sky-300">Let’s Get Quizzing!</h1>
+
+                    <h2 className="text-xs lg:text-base mt-2 text-sky-800dark:text-sky-300">
                         Pick your class and subject, then choose lessons to unlock your quiz path.
                     </h2>
 
                     {/* Duolingo-style Breadcrumb Steps */}
-                    <div className="mt-5 flex flex-wrap items-center gap-3 text-sm font-semibold text-sky-700 dark:text-sky-300">
-                        <span className="flex items-center gap-2">
-                            <span
-                                className="w-6 h-6 rounded-full bg-sky-400 text-white flex items-center justify-center text-xs font-bold">1</span>
-                            Class
-                        </span>
-                        <span className="text-sky-400">➜</span>
+                    <div
+                        className="mt-5 flex flex-wrap items-center gap-1 lg:gap-3 text-sm font-semibold text-sky-700 dark:text-sky-300">
 
-                        <span className="flex items-center gap-2">
-                            <span
-                                className="w-6 h-6 rounded-full bg-sky-400 text-white flex items-center justify-center text-xs font-bold">2</span>
-                            Subject
-                        </span>
-                        <span className="text-sky-400">➜</span>
+                        {
+                            steps.map((step, index) => (
+                                <>
+                                    {
+                                        index > 0 && (
+                                            <span className="text-sky-400">➜</span>
+                                        )
+                                    }
 
-                        <span className="flex items-center gap-2">
-                            <span
-                                className="w-6 h-6 rounded-full bg-sky-400 text-white flex items-center justify-center text-xs font-bold">3</span>
-                            Lessons
-                        </span>
-                        <span className="text-sky-400">➜</span>
+                                    <span className="flex items-center gap-2">
+                                        <span className="w-4 h-4 lg:w-6 lg:h-6 rounded-full bg-sky-400 text-white flex items-center justify-center text-xs font-bold">{index+1}</span> {step}
+                                    </span>
+                                </>
+                            ))
+                        }
 
-                        <span className="flex items-center gap-2">
-                            <span
-                                className="w-6 h-6 rounded-full bg-sky-400 text-white flex items-center justify-center text-xs font-bold">4</span>
-                            Quiz
-                        </span>
                     </div>
                 </div>
             </div>
 
 
-            <div className="lg:p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
+            <div className="lg:p-6 grid grid-cols-1 lg:grid-cols-6 gap-2 lg:gap-6">
 
-                <div className="lg:col-span-4 space-y-2">
+                <div className="lg:col-span-4 space-y-2 mt-2">
 
                     <div className="flex flex-col sm:flex-row items-center gap-2">
 
@@ -236,8 +231,8 @@ export const ChooseQuizTopic = ({onClickItem}: Props) => {
                                 </div>
                             ) : (
                                 <div
-                                    className="flex items-center gap-6 p-10 bg-sky-50 rounded-2xl shadow-md text-sky-700 text-2xl font-semibold max-w-xl mx-auto">
-                                    <Info className="text-sky-600 w-12 h-12 flex-shrink-0"/>
+                                    className="flex items-center gap-6 p-10 bg-sky-50  dark:bg-gray-900 rounded-2xl shadow-md text-sky-700 dark:text-sky-300 text-2xl font-semibold max-w-xl mx-auto">
+                                    <Info className="text-sky-600 dark:text-sky-300 w-12 h-12 flex-shrink-0"/>
                                     <span>Please choose a subject to continue</span>
                                 </div>
                             )

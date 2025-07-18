@@ -13,6 +13,7 @@ import { updateUser } from '@/app/_services/user-service';
 import { useSecure } from '@/context/SecureContext';
 import { toast } from 'sonner';
 import Loading from '@/app/(voclift)/learn/loading';
+import { Save } from "lucide-react";
 
 
 export const AskSetupProfileModal = () => {
@@ -120,7 +121,7 @@ export const AskSetupProfileModal = () => {
         <>
 
             <Dialog open={isOpen} onOpenChange={close}>
-                <DialogContent className="max-w-4xl rounded-2xl p-8 shadow-xl bg-gradient-to-br from-white to-lime-100">
+                <DialogContent className="max-w-4xl rounded-2xl p-8 shadow-xl ">
                     <DialogHeader>
                         <DialogTitle className="text-2xl font-bold text-center text-primary  flex items-center justify-center gap-2">
                             <FaGem /> Set Up Your Learning Profile
@@ -241,7 +242,7 @@ export const AskSetupProfileModal = () => {
                                 (userType === 'job' && !jobTrack)
                             }
                         >
-                            🚀 Save and Continue
+                            <Save/> Save and Continue
                         </Button>
                     </div>
                 </DialogContent>

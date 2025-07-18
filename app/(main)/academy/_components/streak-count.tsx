@@ -16,7 +16,7 @@ export const StreakCount = () => {
             startTransition(async () => {
                 const _progress = await getAcademyProgress();
                 // console.log('progress: ', _progress);
-                setProgress(_progress.data);
+                setProgress(_progress);
             })
         }
 

@@ -69,7 +69,7 @@ const XpWeeklyLineChart = ({ xpData }: Props) => {
 
 
     return (
-        <div className="w-full h-80">
+        <div className="w-full h-40 lg:h-80">
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                     data={data}
